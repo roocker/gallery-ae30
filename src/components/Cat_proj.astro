@@ -1,0 +1,39 @@
+---
+const { link, titlephoto, alttext, cat, subcat, title, short} = Astro.props; /* imgs, alttexts, shorttext, longttext, */ 
+---
+
+<article> 
+  <figure>
+    <a href={link}>
+    <!-- <a href="#"> <!-- wenn link wird carousel buggy -->
+      <img class="titleimg" src={titlephoto} alt={alttext} draggable="false">
+      <figcaption><span>{cat}</span> -  {title}</figcaption>
+    </a>
+    <p class="description">{subcat}{short}</p>
+  </figure>
+</article>
+
+<style>
+  article, figure {
+    margin: 0;
+  }
+  /* article{ */
+  /*   /* grid-column: 1 / span 2; */ */
+  /*   /* aspect-ratio: 1.5; */ */
+  /*   width: calc(100vw / 3); */
+  /*   background: red; */
+  /*   gap: 0; */
+  /*   height:100%; */
+  /* } */
+  /* figure{ */
+  /*   margin:0; */
+  /*   height: 100%; */
+  /* } */
+  /* figure, a, img{ */
+  /* } */
+  /* img{ */
+  /*   height:100%; */
+  /*   width: 100%; */
+  /*   object-fit: cover; */
+  /* } */
+</style>
