@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { CollectionEntry, getCollection } from 'astro:content'; 
+/* 1. alle projekte sind hier: */
+/* should use astro content collection const posts = (await getCollection('blog')).sort(*/
+
+// create an export async function getStaticPaths() for my astro blog.
+// im working in a file in the folder /src/[cat]/[project].astro
+// i want the route to be mysite.com/category/project
+// all my projects can be imported as objects using:
+//
+// the "project" should equal the "title:" field in my md files. and the category should match the project and is equal to the "category:" field in my md files
+//
+// console.log("Alle Projektseiten die generiert werden sollten:", allProjects);
+
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection('projects');
+  return allProjects.map((proj) => ({
+    params: { project: proj.slug},
+    props: proj,
+  }));
+}
+
+type Props = CollectionEntry<'projects'>;
+const proj = Astro.props;
+const p = proj.data;
+---
+<!--
+// const { title } = Astro.params;
+// const { publishDate } = Astro.params;
+// const { category } = Astro.params;
+// const { subcategory } = Astro.params;
+// const { titlephoto } = Astro.params;
+// const { photos } = Astro.params;
+// const { shorttext } = Astro.params;
+// const { longtext } = Astro.params;
+// const { map } = Astro.params;
+-->
+<Layout title="AE30 - Projekt - work in progress" description="Projekt" image="">
+
+<section class="carousel_big">
+
+  <h1>Das ist das Projekt: "{p.title}" in der Kategorie "{p.category}"</h1>  
+
+</section>
+
+<section class="controls"></section>
+
+
+</Layout>
+

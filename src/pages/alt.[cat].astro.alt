@@ -1,25 +1,34 @@
 ---
-import CatProj from '../../components/Cat_proj.astro';
-import Layout from '../../layouts/Layout.astro';
+import CatProj from '../components/Cat_proj.astro';
+import Layout from '../layouts/Layout.astro';
+import { CollectionEntry, getCollection } from 'astro:content';
 
-export async function getStaticPaths() {
-  const allProjects = await Astro.glob('../../content/projects/*.md'); /* should use astro content collection const posts = (await getCollection('blog')).sort(*/
-  const allCats = [...new Set(allProjects.map((proj)=> proj.frontmatter.category).flat())]
+/* USE TO SORT PROJECTS: .then((collection) => {
+return collection.sort( (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+}); */
 
-  console.log("alle unique Kategorien:", allCats)
+export async function getStaticPaths(){
+  const allProjects = await getCollection('projects');
 
-  return allCats.map((cat) => {
-    const filteredProjects = allProjects.filter((proj) => proj.frontmatter.category.includes(cat));
+  const projsMappedtoCats = new Map();
+
+  allProjects.forEach(proj => {
+    proj.data.category.forEach(cat =>{
+      if (!projMappedToCats.has(cat)) {
+      projMappedToCats.set(cat, new Set());
+      }
+      const projOfCat = projMappedToCats.get(cat);
+      projOfCat.add(proj);
+    });
+  });
+
+  return [...projMappedToCats.entries()].map(([cat, allProjects]) => {
     return {
-    params: { cat },
-    props: { projects: filteredProjects }
-    // #rev reihenfolge? sortierung?
-    }
-  })
-} 
-  const { cat } = Astro.params;
-  const { projects } = Astro.props;
-
+      params: { cat },
+      props: { projects }
+      }
+    });
+  } 
 
 ---
 
@@ -106,20 +115,29 @@ export async function getStaticPaths() {
 <Layout title="AE30 - Kategorie - work in progress" description="Kategorie" image="">
 <!--<section class="subcatmenu"></section> <!-- #rev component? -->
   <!-- categorie titel sollte hier -->
-  <h2>Projekte der Kategorie: {cat}</h2> 
+  <h2>Projekte der Kategorie: {p.category}</h2> 
   <!-- {filteredProjects.map((proj) => <li><a href={proj.url}>{proj.frontmatter.title}</a> - {proj.frontmatter.category}</li>)} -->
 
   <!-- {projects.map((proj) => <li><a href={proj.url}>{proj.frontmatter.title}</a> - {proj.frontmatter.category}</li>)} -->
-  <section id="image-carousel" data-mouse-down-at="0" data-prev-percentage="0"> <!-- start mousedown position = 0 & wenn schon gedraggt data-prev-percentage-->
+  <section id="image-carousel" aria-label="Category Project Carousel" data-mouse-down-at="0" data-prev-percentage="0"> <!-- start mousedown position = 0 & wenn schon gedraggt data-prev-percentage-->
 
-{projects.map((proj) => <CatProj 
+    <CatProj 
+    link={projects.slug} 
+    />
+    <!--
+      title={p.title}
+      cat={p.category}
+      subcat={p.title}
+
+
+    <!-- {projects.map((proj) => <CatProj 
 link={proj.url}{console.log('url:', proj.url)} 
 title={proj.frontmatter.title} 
 cat={proj.frontmatter.category} 
 subcat={proj.frontmatter.subcategory} 
 titlephoto={proj.frontmatter.titlephoto} 
 short={proj.frontmatter.short}
-/>)}
+/>)} -->
 
 
 </section>
