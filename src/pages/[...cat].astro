@@ -141,10 +141,11 @@ https://www.youtube.com/watch?v=z-oexYPY9GY
   <!-- {projects.map((proj) => <li><a href={proj.url}>{proj.data.title}</a> - {proj.data.category}</li>)} -->
   <section id="image-carousel" aria-label="Category Project Carousel" data-mouse-down-at="0" data-prev-percentage="0"> <!-- start mousedown position = 0 & wenn schon gedraggt data-prev-percentage-->
 
+    <!-- link={`${cat}/${proj.slug}`} -->
 
     {proj.map((proj) => 
     <CatProj 
-    link={`${cat}/${proj.slug}`} 
+    link={`../${cat}/${proj.slug}`} 
     title={proj.data.title} 
     cat={proj.data.category} 
     subcat={proj.data.subcategory} 
