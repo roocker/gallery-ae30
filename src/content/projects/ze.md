@@ -1,5 +1,5 @@
 ---
-title: ze
+title: ZE
 publishDate: 23 Apr 2023
 category: kg
 subcategory: asdf,asdfasdfasdffsdaasdf,asaqwer asdfasdf,
