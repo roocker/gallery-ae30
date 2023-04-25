@@ -6,7 +6,6 @@ subcategory: asdf,asdfasdfasdffsdaasdf,asaqwer asdfasdf,
 titleimg:
   img: /media/24.jpg
   alt: asdfdsfds
-  title_img: /media/IMG_20220112_090139.jpg
 fotos:
   - foto: /media/IMG_20220112_085913.jpg
     alt: asdfasdfghhdfgadhgq
