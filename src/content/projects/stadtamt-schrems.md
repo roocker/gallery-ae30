@@ -7,14 +7,14 @@ titleimg:
   img: /media/35.jpg
   alt: fasdfasdf
 fotos:
-  - foto: okok
-    alt: src/content/media/download (1).png
-  - foto: okok
-    alt: src/content/media/download (1).png
-  - foto: okok
-    alt: src/content/media/download (1).png
-  - foto: okok
-    alt: src/content/media/download (1).png
+  - foto: /media/11.jpg
+    alt: okok
+  - foto: /media/12.jpg
+    alt: gokok
+  - foto: /media/13.jpg
+    alt: okok
+  - foto: /media/14.jpg
+    alt: okok
 short: text
 long: langtext schrems
 ---
