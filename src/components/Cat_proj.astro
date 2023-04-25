@@ -9,7 +9,7 @@ const { link, titlephoto, alttext, cat, subcat, title, short} = Astro.props; /* 
       <img class="titleimg" src={titlephoto} alt={alttext} draggable="false">
       <figcaption><span>{cat}</span> -  {title}</figcaption>
     </a>
-    <p class="description">{subcat}{short}</p>
+    <p class="description">{subcat}: {short}</p>
   </figure>
 </article>
 
