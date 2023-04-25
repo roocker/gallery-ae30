@@ -14,7 +14,7 @@ export default defineConfig({
     config: {
       backend: {
         name: 'git-gateway',
-        branch: 'latest'
+        branch: 'master'
       },
       adminPath: '/a',
       /* #rev geht nicht */
