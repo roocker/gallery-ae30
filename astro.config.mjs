@@ -30,9 +30,9 @@ export default defineConfig({
         clean_accents: true,
         sanitize_replacement: "_"
       },
-      site_url: 'http://localhost:3000',
-      display_url: 'http://localhost:3000',
-      logo_url: 'http://localhost:3000/ae30-logo.svg',
+      site_url: 'https://ae30-test.netlify.app',
+      display_url: 'https://ae30-test.netlify.app',
+      logo_url: '/ae30-logo.svg',
       /* #rev looks good doen't work */
       show_preview_links: true,
       disableIdentityWidgetInjection: true,
