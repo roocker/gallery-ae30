@@ -1,0 +1,135 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { CollectionEntry, getCollection } from 'astro:content'; 
+import { Image, Picture } from '@astrojs/image/components';
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection('projects');
+  return allProjects.map((proj) => ({
+  params: { project: proj.slug , cat: proj.data.category },
+    props: proj,
+  }));
+}
+
+type Props = CollectionEntry<'projects'>;
+const proj = Astro.props;
+console.log(proj);
+const p = proj.data;
+---
+<script>
+/* TODO:
+
+   - [ ] control object svgs display: fixed;
+   - [ ] onclick controls translate: 1.5 * 100vh
+*/
+  const carousel = document.getElementById('carousel_big');
+
+carousel.addEventListener('MouseWheel', (event) => {
+  event.preventDefault();
+
+  carousel.scrollBy({
+    left: event.deltaY < 0 ? -30 : 30,
+  });
+});
+
+</script>
+
+<Layout title="AE30 - Projekt - work in progress" description="Projekt" image="">
+
+<div class="hide">
+  <h1>Das ist das Projekt: "{p.title}" in der Kategorie "{p.category}"</h1>  
+  <p>{p.long}</p>
+  <p>{p.subcategory}</p> 
+  <p>{p.titleimg}</p> 
+  <p>{p.photos}</p> 
+  <p>{p.short}</p> 
+  <p>{p.long}</p>
+  <!-- <p>{p.map}</p> -->
+</div>
+
+<section id="carousel_big">
+  <!-- <Picture src={p.titleimg.img} alt={p.titleimg.alt}/> -->
+  <article class="project">
+    <figure>
+      <img class="img titleimg" src={`${p.titleimg.img}`} alt='{p.titlephoto.alttext}' />
+    </figure>
+      {proj.data.fotos.map((img) => <figure><img 
+      src={img.foto} 
+      alt={img.alt} /></figure>)}
+  </article>
+
+</section>
+
+<section class="controls">
+  <a href="#left>"><div class="control left"></div></a>
+  <a href="#right>"><div class="control right"></div></a>
+</section>
+
+</Layout>
+<style>
+  .hide{display: none;}
+  body{
+    /* overflow: hidden; */
+    overflow-y:hidden;
+    overflow-x: scroll;
+  }
+  section#carousel_big{
+    /* margin-top: 150px; */
+    /* width: 100%; */
+    /* height: 100%; */
+    /* z-index: -99; */
+    background: green;
+    /* transform: translate (0%, 50%); */
+    /* border: 4px solid red; */
+  }
+
+  article.project{
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    gap: 0vmin;
+    flex-flow: row;
+    background: red;
+    margin:0;
+    /* width: 100vw; */
+  }
+  figure{
+    background: blue;
+    height:100vh;
+  }
+  figure, img, article{
+    height:100vh;
+    z-index: -99;
+    margin:0;
+    padding: 0;
+    gap: 0;
+  }
+  figure, img{
+    /* height: 20vmin; */
+    /* aspect-ratio: 1.5; */
+    object-fit: cover ;
+    object-position: center center;
+  }
+  .controls{
+    width: 100vw;
+    background: green;
+    /* transform: translate(0, -50vh) ; */
+  }
+  .control{
+    width: 6vmin;
+    height: 6vmin;
+    background: black;
+    transform: rotate(45deg);
+  }
+  .left{
+    position: fixed;
+    left: 4vmin;
+    top: 50%;
+  }
+  .right{
+    position: fixed;
+    right: 4vmin;
+    top: 50%;
+  }
+</style>
