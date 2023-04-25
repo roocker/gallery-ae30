@@ -182,7 +182,7 @@ export default defineConfig({
           widget: 'object',
           label: 'Titelbild',
           fields: [{
-            name: 'title_img',
+            name: 'img',
             widget: 'image',
             label: 'Titelbild'
           }, {
