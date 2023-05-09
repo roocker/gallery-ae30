@@ -1,41 +1,163 @@
 ---
+/*
+TODO:
+- [ ] Collection for Main Menu + 
+- [ ] Pages Collection (Team, Impressum, Etc)
+*/
+
 ---
+<section id="head_navigation">
+  <h1>
+    <a href="/"> 
+      <span>AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus</span>
+      <div class="logo">
+        <img src="/ae30-logo.svg" alt="AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus" />
+      </div>
+    </a>
+  </h1> 
+  <nav>  <!-- Collection Main Menu?!! -->
+    <div class="menue-icons">
+      <button id="close-menu" class="icon-button" type="button" title="Hauptmenü schließen" aria-label="Hauptmenü schließen">
+      <button id="theme-toggle" class="icon-button" type="button" title="Hell-/Dunkel Modus wechseln" aria-label="Hell-/Dunkel Modus wechseln">
+      <!-- <li><a href="#"><object data="/close.svg" alt="x" class="close" type="image/svg+xml"/></a></li> -->
+      <!-- <li><a href="#"><img src="/sun.svg" alt="heller-modus" class="sun" type="image/svg+xml"/></a></li> -->
+      <!-- <li><a href="#"><object data="/moon.svg" alt="dunkler-modus" class="moon" type="image/svg+xml"/></a></li> -->
+    </div>
+    <ul class="menue"> 
+      <!-- <li><a href="#">Filter(Subcategory)</a></li> -->
+      <!-- <li><a href="#">Filter(Year)</a></li> -->
+      <!-- <li><a href="/arge">ARGE</a></li> = LandingPage -->
+      <li><a href="/kg">Kratochwil</a></li>
+      <li><a href="/wp">Waldbauer</a></li>
+      <li><a href="/zk">Zeinitzer</a></li>
+      <li><a href="/archiv">Archiv</a></li>
 
-<h1>
-  <a href="/"> 
-    <span>AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus</span>
-    <img src="/ae30-logo.svg" alt="AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus" />
-  </a>
-</h1>
-
-<nav>
-  <ul>
-    <li><a href="/archiv">Archiv</a></li>
-    <li><a href="/arge">ARGE</a></li>
-    <li><a href="/kg">Kratochwil</a></li>
-    <li><a href="/wp">Waldbauer</a></li>
-    <li><a href="/zk">Zeinitzer</a></li>
-    <li><a href="/team">Team</a></li>
-    <li><a href="/impressum">Impressum</a></li>
-  </ul>
-</nav>
+      <li><a href="/team">Team</a></li>
+      <li><a href="/impressum">Impressum</a></li>
+    </ul>
+  </nav> 
+</section>
 
 <style>
   h1{
-    float: right;
   }
-  h1 span{
-    display: none;
-    color: red;
+  #head_navigation{
+    background: lavender;
+    display: block;
+
+    font-family: var(--fsans2); 
+    text-transform: uppercase;
+  }
+
+  .logo{
+    position: fixed;
+    top: calc(var(--gmodulem) / 2 * -1);
+    right: calc(var(--gmodulem) / 1.5 * -1);
+
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+    /* line-height: calc(var(--gmodulem) / 2 ); */
+
+    width: calc(var(--gmodulem) * 4);
+    height: calc(var(--gmodulem) * 4);
+
+    border-radius: 50%;
+    /* top: calc( 2 * var(--gmodul)); */
+
+    background: var(--cbg);
+    z-index: 2;
+  }
+  @media only screen and (min-width: 64em /* var(--vwS) */ ) { 
+    .logo {
+      /* top: calc(var(--ggapspx) / 4); */
+      /* right: calc(var(--ggapspx) / 2); */
+      width: calc(var(--gmodulem) * 5);
+      height: calc(var(--gmodulem) * 5);
+    }
+    .logo:hover{
+      /* nav: display: inline; */
+    }
+  }
+  img{
+    width: 65%;
+    height: 65%;
+    vertical-align: middle;
+
+    /* object-fit: fill; */
+    /* background: green; */
+
+  }
+  #head_navigation h1 span{
     text-indent: -9999px;
+    display: none;
+  }
+  nav{
+    /* opacity: .3; */
+
+    /* display: none; */
+
+    position: fixed;
+    width: 100%;
+    /* padding-top: calc(var(--gmodulem) ); */
+
+    transform: translate(0, calc(var(--gmodulem) * -4));
+    padding-left: calc(var(--gmodulem) * 1);
+    padding-right: calc(var(--gmodulem) * 1);
+    box-sizing: border-box;
+
+    line-height: calc(var(--fline_height) * 1.5);
+
+    background: var(--cwhite50);
+    backdrop-filter: blur(calc(var(--gmodulpx) / 3));
   }
   ul{
-    display: flex;
-    height: 100%;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: space-between;
     list-style-type: none;
-    gap: var(--gaps);
+    width: 100%;
+    padding: 0;
+  }
+  ul.menue{
+    /* display: flex; */
+    /* gap: var(--ggapsem); */
+    /* background: yellow; */
+
+    text-align: left;
+    justify-content: space-between;
+  }
+  ul.menue li{ 
+    /* background: orange; */
+    /* display: block; */
+    width: 100%;
+    height: 100%;
+  }
+  ul.menue li > a{
+    display: block;
+    color: var(--cgrey);
+    border-bottom: 1px solid rgb(255,255,255,.0);
+
+  }
+  ul.menue li > a:hover{
+    color: var(--cblack);
+    border-bottom: 1px solid var(--cblack);
+    /* text-decoration: underline; */
+  }
+  div.menue-icons{
+    /* background: green; */
+    width: calc(var(--gmodulem) * 10);
+    height: calc(var(--gmodulem) * 3);
+
+    display:flex;
+    justify-content: space-between;
+  }
+  div.menue-icons button{
+    /* background: orange; */
+    width: calc(var(--gmodulem) * 2);
+    color: red;
+    width: 100%;
+    height: 100%;
+  }
+  .close-menu{
+    background: url(/close.svg);
   }
 </style>
