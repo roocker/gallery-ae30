@@ -1,16 +1,46 @@
 ---
+/*
+TODO:
+- [ ] allProjects filter with archived?
+- [ ] how to sort frontpage?
+*/
+
 import Layout from '../layouts/Layout.astro';
-import Testgallery from '../components/Testgallery.astro';
-// import Entry from '../components/Entry.astro';
+import GridProj from '../components/GridProj.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+console.log("OlleProjekte:", allProjects);
 ---
 <Layout title="AE30 - Gallerie - work in progress" description="gallery" image="">
 
-<section class="gallery">
-  <!-- <Entry/> -->
-   <!-- <Testgallery/> -->
+<section id="grid-gallery" aria-label="Gallery Grid Overview">
+  <!-- <Testgallery/> -->
+    <!--  /${proj.slug}`}  -->
+  {allProjects.map((proj) => <GridProj title={proj.data.title} 
+  link={`../${proj.data.category}`}
+  titleimg={proj.data.titleimg.img} 
+  titlealt={proj.data.titleimg.alt} 
+  cat={proj.data.category} 
+  /> )}
 </section>
 </Layout>
 
-<style is:global>
+<style>
+  #grid-gallery{
+    display: grid;
+    grid-template-columns: repeat(var(--gcolnum), 1fr);
+    grid-auto-rows: min-content;
+    align-items: baseline;
+    gap: calc( 0.5 * var(--ggapspx));
+  }
+  @media only screen and (min-width: 64em /* var(--vwS) */) { 
+    #grid-gallery{
+      gap: var(--ggapspx);
+    }
+  }
+  /* #grid-gallery img{
+    max-width: 80vw;
+  } */
 </style>
 

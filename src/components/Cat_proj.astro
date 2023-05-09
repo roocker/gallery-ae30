@@ -6,7 +6,7 @@ const { link, titlephoto, alttext, cat, subcat, title, short} = Astro.props; /* 
   <figure>
     <a href={link}>
     <!-- <a href="#"> <!-- wenn link wird carousel buggy -->
-      <img class="titleimg" src={titlephoto} alt={alttext} draggable="false">
+    <img class="titleimg" src={titlephoto} alt={alttext} draggable="false"/>
       <figcaption><span>{cat}</span> -  {title}</figcaption>
     </a>
     <p class="description">{subcat}: {short}</p>
@@ -17,9 +17,16 @@ const { link, titlephoto, alttext, cat, subcat, title, short} = Astro.props; /* 
   article, figure {
     margin: 0;
   }
+
+  .titleimg{
+    width: 40vmin;
+    height: 56vmin;
+    object-fit: cover;
+    object-position: 100% center;
+  }
   /* article{ */
-  /*   /* grid-column: 1 / span 2; */ */
-  /*   /* aspect-ratio: 1.5; */ */
+  /*   /* grid-column: 1 / span 2; */ 
+  /*   /* aspect-ratio: 1.5; */ 
   /*   width: calc(100vw / 3); */
   /*   background: red; */
   /*   gap: 0; */
