@@ -3,23 +3,20 @@ const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
 ---
 
 <article class="vert">
+  <a href={link}> 
   <figure>
-    <a href={link}> 
       <img class="" src={titleimg} alt={titlealt} /> 
       <figcaption><span>{cat}</span> -  {title}</figcaption>
-    </a> 
   </figure> 
+  </a> 
 </article>
 
 <style>
-  img{
-    /* max-width: 80vw; */
-  }
   article {
     aspect-ratio: 1.5 ; /* #rev fallback! */
     grid-column: span 12;
     grid-row: span 1;
-    background: yellow;
+    /* background: yellow; */
   }
   @media only screen and (min-width: 37.5em/* var(--vwPl) */) {
     article{
@@ -46,18 +43,51 @@ const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
       grid-column: span 1;
     }
   }
-  article, figure, a, img{
-    height:100%;
+  figure, img{
+    height: 100%;
     width: 100%;
   }
+  article, figure, a, img{
+    /* height:100%; */
+    /* width: 100%; */
+  }
   figure{
-    margin: 0; /* #rev irgendwo bekommt figure einen margin? why? */
+    margin: 0; /* #rev irgendwo bekommt figure einen margin? why? ??? */
   }
   img{ /* target img? */
     object-fit: cover; /* maintain aspect ratio */
+    z-index:2;
+  }
+  a figure{
+    background: red; /* #rev warum ist der hier sichtbar bzw geht-úber das grid hinaus?? ists weg weil a vor figure? */
   }
   figcaption{
-    text-indent: -9999px;
+    z-index: 1;
+    /* opacity: .5; */
+
+    font-family: var(--fsans2);
+    /* font-size: .8em; */
+    text-transform: uppercase;
+
+    /* color: var(--cgrey); */
+    background: var(--cwhite30);
+    /* background: orange; */
+    backdrop-filter: blur(2px);
+    /* border-radius: 8px; */
+
+    transform: translate(0, -34px ); /* #rev */
+
+    line-height: 1em;
+    height: 1em ;
+    padding: calc(var(--gmodulem) / 4);
+    /* margin-right: calc(var(--gmodulem) * 2 ); */
+    /* box-sizing: border-box; */
+    /* width: 100%; */
+    /* margin-top: -50px; */
+  }
+  figcaption p{}
+  figcaption span{
+    font-weight: bold;
   }
   .vert{
     /* grid-column: 1 / span 2 !important; */
