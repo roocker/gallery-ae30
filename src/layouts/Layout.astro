@@ -81,6 +81,8 @@ const caccent2 ="#9f1db8";
 const cblack = "#111111";
 const cwhite = "#FFFFFF";
 const cwhite50 = "rgb(255,255,255,.5)";
+const cwhite20 = "rgb(255,255,255,.2)";
+const cwhite30 = "rgb(255,255,255,.3)";
 const cgrey = "#808080"; 
 const cgrey20 = "#DDDDDD"; 
 const cgrey20rgb = "rgb(221,221,221,.8)";
@@ -142,7 +144,7 @@ const cfg = cblack;
 <style is:global define:vars={{ 
   fsans, fsans2, fserif, fserif2, fsize, fline_height, fsize_title, fsize_h2, fsize_h3, fsize_h4,
   gmodul, gmodulpx, gmodulem,gcolnum, ggaps, ggapspx, ggapsem, gmargin, gmarginpx, gmarginem,
-  caccent, caccent2, cblack, cwhite, cwhite50, cgrey, cgrey20, cgrey60,cgrey20rgb, cgrey80, cbg, cfg,
+  caccent, caccent2, cblack, cwhite, cwhite50, cwhite80: cwhite20, cwhite30, cgrey, cgrey20, cgrey60,cgrey20rgb, cgrey80, cbg, cfg,
   vwP, vwPl, vwT, vwS, vwM, vwL, vwTV, vwRetina, }}>
 
   @font-face {
@@ -160,11 +162,11 @@ const cfg = cblack;
     line-height: var(--fline_height);
   }
   a {
-    color: var(--caccent);
+    color: var(--grey80);
     text-decoration: none;
   }
   a:hover{
-    color: var(--caccent2);
+    color: var(--cblack);
     /* border-bottom: 1px solid var(--caccent2); */
   }
   main{

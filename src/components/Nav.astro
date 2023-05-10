@@ -5,20 +5,56 @@ TODO:
 - [ ] Pages Collection (Team, Impressum, Etc)
 */
 
+const {
+ menuToggle = false,
+ } = Astro.props;
 ---
+<script>
+
+  function attachEvent(selector, event, fn) {
+    const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
+    if (matches && matches.length) {
+      matches.forEach((elem) => {
+        elem.addEventListener(event, (e) => fn(e, elem), false);
+      });
+    }
+  }
+
+  window.onload = function(){
+    let lastKnownScrollPosition = window.scrollY;
+
+    attachEvent('[menu-toggle]', 'click', function (_, elem) {
+      // elem.classList.toggle('hidden');
+      document.getElementById('mainnav')?.classList.toggle('hidden');
+    });
+
+    // attachEvent([document], 'scroll', function (){
+    //   lastKnownScrollPosition = window.scrollY;
+    // });
+  }
+</script>
 <section id="head_navigation">
+
+
   <h1>
-    <a href="/"> 
+    <a class="link" menu-toggle>
       <span>AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus</span>
       <div class="logo">
         <img src="/ae30-logo.svg" alt="AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus" />
       </div>
     </a>
   </h1> 
-  <nav>  <!-- Collection Main Menu?!! -->
+
+
+
+  <nav id="mainnav" class="hidden">  <!-- #rev: 1.Collection Main Menu?!! 2.icons menue teil? seo? 3. move after ul (seo!)-->
     <div class="menue-icons">
-      <button id="close-menu" class="icon-button" type="button" title="Hauptmenü schließen" aria-label="Hauptmenü schließen">
-      <button id="theme-toggle" class="icon-button" type="button" title="Hell-/Dunkel Modus wechseln" aria-label="Hell-/Dunkel Modus wechseln">
+      <button id="close-menu" class="icon-button" type="button" title="Hauptmenü schließen" aria-label="Hauptmenü schließen" menu-toggle> Menü Toggle
+        <!-- <object data="/close.svg" class="close_svg" type="image/svg+xml">Menu schließen</object> -->
+      </button>
+      <button id="theme-toggle" class="icon-button" type="button" title="Hell-/Dunkel Modus wechseln" aria-label="Hell-/Dunkel Modus wechseln"> Theme Toggle
+        <!-- <object data="/sun.svg" class="sun_svg" type="image/svg+xml">Hell/Dunkler Modus</object> -->
+      </button>
       <!-- <li><a href="#"><object data="/close.svg" alt="x" class="close" type="image/svg+xml"/></a></li> -->
       <!-- <li><a href="#"><img src="/sun.svg" alt="heller-modus" class="sun" type="image/svg+xml"/></a></li> -->
       <!-- <li><a href="#"><object data="/moon.svg" alt="dunkler-modus" class="moon" type="image/svg+xml"/></a></li> -->
@@ -35,6 +71,11 @@ TODO:
       <li><a href="/team">Team</a></li>
       <li><a href="/impressum">Impressum</a></li>
     </ul>
+    <div class="kontakt">
+      <p>A-1190 Wien, Eroicagasse 30</p>
+      <p>TEL: 01-3180500 / FAX: 37 05 013</p>
+      <p><a href="mailto:office@ae30.at">office@ae30.at</p>
+    </div>
   </nav> 
 </section>
 
@@ -42,7 +83,7 @@ TODO:
   h1{
   }
   #head_navigation{
-    background: lavender;
+    /* background: lavender; */
     display: block;
 
     font-family: var(--fsans2); 
@@ -67,7 +108,7 @@ TODO:
     /* top: calc( 2 * var(--gmodul)); */
 
     background: var(--cbg);
-    z-index: 2;
+    z-index: 4;
   }
   @media only screen and (min-width: 64em /* var(--vwS) */ ) { 
     .logo {
@@ -93,25 +134,32 @@ TODO:
     text-indent: -9999px;
     display: none;
   }
+  nav.hidden{
+    display: none;
+  }
   nav{
-    /* opacity: .3; */
-
-    /* display: none; */
+    /* display: none;  /* toggle here for nav on/off */
 
     position: fixed;
     width: 100%;
     /* padding-top: calc(var(--gmodulem) ); */
 
-    transform: translate(0, calc(var(--gmodulem) * -4));
+    color: var(--cgrey);
+
+    transform: translate(0, calc(var(--gmodulem) * -3));
     padding-left: calc(var(--gmodulem) * 1);
     padding-right: calc(var(--gmodulem) * 1);
     box-sizing: border-box;
 
     line-height: calc(var(--fline_height) * 1.5);
 
+    /* background: lavender; */
     background: var(--cwhite50);
     backdrop-filter: blur(calc(var(--gmodulpx) / 3));
+
+    z-index:3;
   }
+/* TEXT MENU  ---------------------------------*/
   ul{
     list-style-type: none;
     width: 100%;
@@ -142,22 +190,58 @@ TODO:
     border-bottom: 1px solid var(--cblack);
     /* text-decoration: underline; */
   }
+
+
+
+/* TEXT MENU  ---------------------------------*/
+
   div.menue-icons{
     /* background: green; */
+    transform: translate(calc(var(--gmodulem) * -1), 0);
+
     width: calc(var(--gmodulem) * 10);
-    height: calc(var(--gmodulem) * 3);
 
     display:flex;
     justify-content: space-between;
   }
   div.menue-icons button{
-    /* background: orange; */
-    width: calc(var(--gmodulem) * 2);
+  }
+  button{
+    background: none;
+    border: none;
+  }
+  .icon-button{
+    width: calc(var(--gmodulem) * 3);
+    height: calc(var(--gmodulem) * 3);
     color: red;
+
+    /* align-content: top; */
+    /* object-fit: cover; */
+    /* object-position: center center ; */
+    display: block;
+text-indent: -9999px;
+    
+  }
+  .icon-button button object{
     width: 100%;
     height: 100%;
+    /* z-index: 3; */
   }
-  .close-menu{
-    background: url(/close.svg);
+  #close-menu{
+    background: url("/close.svg");
+    color: red;
+  }
+  #theme-toggle{
+    background: url("/sun.svg");
+  }
+  .kontakt{
+    font-family: var(--fsans);
+    font-size: calc(var(--fsize)/1.5);
+    line-height: calc(var(--fline_height)/8); 
+    text-align: right;
+    padding-bottom: var(--gmodulem);
+  }
+  .link:hover{
+    cursor: pointer;
   }
 </style>
