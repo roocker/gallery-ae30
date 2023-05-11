@@ -79,10 +79,14 @@ const gmarginem:string = (gmargin / 16) + "em";
 const caccent = "#5bac30";
 const caccent2 ="#9f1db8";
 const cblack = "#111111";
+const cblack20 = "rgb(1,1,1,.2)";
+const cblack30 = "rgb(1,1,1,.3)";
+const cblack50 = "rgb(1,1,1,.5)";
 const cwhite = "#FFFFFF";
-const cwhite50 = "rgb(255,255,255,.5)";
 const cwhite20 = "rgb(255,255,255,.2)";
 const cwhite30 = "rgb(255,255,255,.3)";
+const cwhite50 = "rgb(255,255,255,.5)";
+const cwhite80 = "rgb(255,255,255,.8)";
 const cgrey = "#808080"; 
 const cgrey20 = "#DDDDDD"; 
 const cgrey20rgb = "rgb(221,221,221,.8)";
@@ -144,7 +148,7 @@ const cfg = cblack;
 <style is:global define:vars={{ 
   fsans, fsans2, fserif, fserif2, fsize, fline_height, fsize_title, fsize_h2, fsize_h3, fsize_h4,
   gmodul, gmodulpx, gmodulem,gcolnum, ggaps, ggapspx, ggapsem, gmargin, gmarginpx, gmarginem,
-  caccent, caccent2, cblack, cwhite, cwhite50, cwhite80: cwhite20, cwhite30, cgrey, cgrey20, cgrey60,cgrey20rgb, cgrey80, cbg, cfg,
+  caccent, caccent2, cblack, cblack20, cblack30, cblack50, cwhite,  cwhite20, cwhite30, cwhite50,cwhite80, cgrey, cgrey20, cgrey60,cgrey20rgb, cgrey80, cbg, cfg,
   vwP, vwPl, vwT, vwS, vwM, vwL, vwTV, vwRetina, }}>
 
   @font-face {
@@ -159,6 +163,7 @@ const cfg = cblack;
     font-family: var(--fsans);
     font-size: var(--fsize);
     background: var(--cbg);
+    /* background: lavender; */
     line-height: var(--fline_height);
   }
   a {
@@ -190,6 +195,16 @@ const cfg = cblack;
       margin-left:  calc( 2 * var(--gmarginem));
       margin-right: calc( 2 * var(--gmarginem));
     }
+  }
+  .link:hover{
+    cursor: pointer;
+    /* cursor: url(l.cur), auto; */
+    /* cursor: url(r.cur), auto; */
+    /* cursor: w-resize; */
+    /* cursor: e-resize; */
+  }
+  .hidden{
+    display:none;
   }
 </style>
 
