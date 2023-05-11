@@ -6,10 +6,17 @@ TODO:
 */
 
 const {
- menuToggle = false,
+ // menuToggle = false, ??? no need?
  } = Astro.props;
 ---
 <script>
+
+/*
+TODO:
+  - [ ] TS need export types ;)
+- [ ] export script to scripts.ts or sth
+
+*/
 
   function attachEvent(selector, event, fn) {
     const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
@@ -28,13 +35,13 @@ const {
       document.getElementById('mainnav')?.classList.toggle('hidden');
     });
 
-    // attachEvent([document], 'scroll', function (){
-    //   lastKnownScrollPosition = window.scrollY;
-    // });
+    /* attachEvent([document], 'scroll', function (){
+      lastKnownScrollPosition = window.scrollY;
+    }); */
   }
 </script>
-<section id="head_navigation">
 
+  <section id="header" aria-label="Header Logo & Navigation">
 
   <h1>
     <a class="link" menu-toggle>
@@ -49,27 +56,38 @@ const {
 
   <nav id="mainnav" class="hidden">  <!-- #rev: 1.Collection Main Menu?!! 2.icons menue teil? seo? 3. move after ul (seo!)-->
     <div class="menue-icons">
-      <button id="close-menu" class="icon-button" type="button" title="Hauptmenü schließen" aria-label="Hauptmenü schließen" menu-toggle> Menü Toggle
-        <!-- <object data="/close.svg" class="close_svg" type="image/svg+xml">Menu schließen</object> -->
+      <button class="button-icon" type="button" title="Hauptmenü schließen" aria-label="Hauptmenü schließen" menu-toggle>
+        <svg class="svg-icon">
+          <use id="icon-close" class="svg-icon-use" xlink:href="/svg.svg#close" />
+        </svg>
+        <!-- Menü Toggle Button -->
       </button>
-      <button id="theme-toggle" class="icon-button" type="button" title="Hell-/Dunkel Modus wechseln" aria-label="Hell-/Dunkel Modus wechseln"> Theme Toggle
-        <!-- <object data="/sun.svg" class="sun_svg" type="image/svg+xml">Hell/Dunkler Modus</object> -->
-      </button>
-      <!-- <li><a href="#"><object data="/close.svg" alt="x" class="close" type="image/svg+xml"/></a></li> -->
-      <!-- <li><a href="#"><img src="/sun.svg" alt="heller-modus" class="sun" type="image/svg+xml"/></a></li> -->
-      <!-- <li><a href="#"><object data="/moon.svg" alt="dunkler-modus" class="moon" type="image/svg+xml"/></a></li> -->
     </div>
+
+      <!--
+      <button class="button-icon" type="button" title="test" aria-label="test" menu-toggle>
+        <svg class="svg-icon">
+          <use id="icon-circle" class="svg-icon-use" xlink:href={`svg.svg#circle`} />
+        </svg>
+      </button>
+      -->
+
+        <!-- Menü Toggle Button -->
+
+      <!-- <button id="theme-toggle" class="icon-button" type="button" title="Hell-/Dunkel Modus wechseln" aria-label="Hell-/Dunkel Modus wechseln"> Theme Toggle Button
+        <!-- <object data="/sun.svg" class="sun_svg" type="image/svg+xml">Hell/Dunkler Modus</object> 
+      </button> -->
     <ul class="menue"> 
       <!-- <li><a href="#">Filter(Subcategory)</a></li> -->
       <!-- <li><a href="#">Filter(Year)</a></li> -->
-      <!-- <li><a href="/arge">ARGE</a></li> = LandingPage -->
+      <li><a href="/">ARGE</a></li> 
       <li><a href="/kg">Kratochwil</a></li>
       <li><a href="/wp">Waldbauer</a></li>
       <li><a href="/zk">Zeinitzer</a></li>
-      <li><a href="/archiv">Archiv</a></li>
 
+      <li><a href="/archiv">Archiv</a></li>
       <li><a href="/team">Team</a></li>
-      <li><a href="/impressum">Impressum</a></li>
+      <!-- <li><a href="/impressum">Impressum</a></li>-->
     </ul>
     <div class="kontakt">
       <p>A-1190 Wien, Eroicagasse 30</p>
@@ -82,7 +100,7 @@ const {
 <style>
   h1{
   }
-  #head_navigation{
+  #header{
     /* background: lavender; */
     display: block;
 
@@ -110,6 +128,21 @@ const {
     background: var(--cbg);
     z-index: 4;
   }
+
+  @keyframes logo-spin{ /* #rev */
+    from {}
+    to{ 
+      transform: rotate(90deg);
+    }
+  }
+
+  .logo:hover{
+    /* transform: rotate(90deg); */
+    animation-name: logo-spin;
+    animation: ease;
+    animation-duration: 2s;
+  }
+
   @media only screen and (min-width: 64em /* var(--vwS) */ ) { 
     .logo {
       /* top: calc(var(--ggapspx) / 4); */
@@ -125,28 +158,29 @@ const {
     width: 65%;
     height: 65%;
     vertical-align: middle;
-
     /* object-fit: fill; */
     /* background: green; */
-
   }
-  #head_navigation h1 span{
+  h1 span{
     text-indent: -9999px;
     display: none;
   }
   nav.hidden{
-    display: none;
+    /* toggle here for nav on/off */
+    /* display: inline;  */
   }
   nav{
-    /* display: none;  /* toggle here for nav on/off */
-
     position: fixed;
+
+    right: 0;
+    top:0;
+
     width: 100%;
+    max-width: 37.5em;
     /* padding-top: calc(var(--gmodulem) ); */
 
     color: var(--cgrey);
 
-    transform: translate(0, calc(var(--gmodulem) * -3));
     padding-left: calc(var(--gmodulem) * 1);
     padding-right: calc(var(--gmodulem) * 1);
     box-sizing: border-box;
@@ -154,86 +188,88 @@ const {
     line-height: calc(var(--fline_height) * 1.5);
 
     /* background: lavender; */
-    background: var(--cwhite50);
+    background: var(--cwhite80);
     backdrop-filter: blur(calc(var(--gmodulpx) / 3));
 
+    border-bottom-left-radius: 3em;
     z-index:3;
   }
+
 /* TEXT MENU  ---------------------------------*/
+
   ul{
     list-style-type: none;
     width: 100%;
     padding: 0;
   }
-  ul.menue{
-    /* display: flex; */
-    /* gap: var(--ggapsem); */
-    /* background: yellow; */
-
-    text-align: left;
-    justify-content: space-between;
-  }
-  ul.menue li{ 
+  ul li{ 
     /* background: orange; */
-    /* display: block; */
-    width: 100%;
-    height: 100%;
+    padding-left: calc(var(--gmodulem)*1);
   }
-  ul.menue li > a{
+  ul li > a{
     display: block;
     color: var(--cgrey);
-    border-bottom: 1px solid rgb(255,255,255,.0);
-
+    /* border-bottom: 1px solid rgb(255,255,255,.0); */
   }
-  ul.menue li > a:hover{
+  ul li > a:hover{
     color: var(--cblack);
-    border-bottom: 1px solid var(--cblack);
+    /* background: white; */
+    /* border-bottom: 1px solid var(--cblack); */
     /* text-decoration: underline; */
   }
 
+/* ICON MENU  ---------------------------------*/
 
-
-/* TEXT MENU  ---------------------------------*/
-
-  div.menue-icons{
+  .menue-icons{
     /* background: green; */
-    transform: translate(calc(var(--gmodulem) * -1), 0);
-
-    width: calc(var(--gmodulem) * 10);
-
-    display:flex;
-    justify-content: space-between;
-  }
-  div.menue-icons button{
+    display: flex;
+    gap: calc(calc(var(--gmodulem) * 3)/2);
+    height: calc(var(--gmodulem) * 3);
+    align-items: center;
   }
   button{
     background: none;
     border: none;
+    padding:0;
   }
-  .icon-button{
-    width: calc(var(--gmodulem) * 3);
-    height: calc(var(--gmodulem) * 3);
-    color: red;
+  button:hover{
+    cursor: pointer;
+  }
+  button.button-icon{
+    /* background: red; */
 
-    /* align-content: top; */
-    /* object-fit: cover; */
-    /* object-position: center center ; */
-    display: block;
-text-indent: -9999px;
-    
+    height: calc(var(--gmodulem)*1);
+    color: var(--cgrey);
   }
-  .icon-button button object{
-    width: 100%;
+  .button-icon:hover{
+    color: var(--cblack);
+  }
+  .svg-icon{
+    /* background: yellow; */
+
     height: 100%;
-    /* z-index: 3; */
+    aspect-ratio: 1;
+
   }
-  #close-menu{
-    background: url("/close.svg");
-    color: red;
+  .svg-icon-use{
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: currentColor;
+    stroke: currentColor;
   }
-  #theme-toggle{
-    background: url("/sun.svg");
+  .svg-icon use{
   }
+  #icon-close{
+    /* background: yellow;  */
+    /* background: url("/close.svg"); */
+  }
+  #icon-theme{
+    /* background: red url("/sun.svg"); */
+  }
+
+/* KONTAKT INFO MENU  ---------------------------------*/
+
   .kontakt{
     font-family: var(--fsans);
     font-size: calc(var(--fsize)/1.5);
@@ -241,7 +277,92 @@ text-indent: -9999px;
     text-align: right;
     padding-bottom: var(--gmodulem);
   }
-  .link:hover{
-    cursor: pointer;
+
+/* Media Queries MENU  ---------------------------------*/
+
+  @media only screen and  (min-width: 32.5em /* var(--vwPl) */) {
+    nav{
+      max-width: 50%;
+      border-bottom-left-radius: 3em;
+    }
   }
+ 
+
+  @media only screen and  (min-width: 48em /* var(--vwT) */) {
+    nav.hidden{
+      display: inline !important;
+    }
+    nav{
+      background: none;
+      /* background: orange; */
+
+      /* max-width: 100%; */
+      /* width: auto; */
+
+      position: absolute;
+      left: 0;
+      /* width: 100%; */
+
+      max-width: calc(100% - calc(var(--gmodulem) * 12));
+      
+
+      padding: 0;
+      margin: 0;
+      margin-left: calc(var(--gmarginem) * 2);
+      /* padding-right: calc(var(--gmarginem) * 10); */
+      border-bottom-left-radius: 0;
+
+      /* padding-right: calc(var(--gmodulem) * 10); */
+    }
+    ul{ 
+      float: right;
+      display: flex;
+      width: auto;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+
+      /* background: yellow; */
+
+      gap: calc(var(--gmodulem)*2);
+      /* justify-content: center; */
+
+      /* text-align: left; */
+      /* align-items: center; */
+
+      /* opacity: .4; */
+    }
+    ul li{
+      /* background: red; */
+      padding: 0;
+
+      /* width: 100%; */
+      /* margin: 0; */
+    }
+    .menue-icons{
+      background: green;
+      display: none;
+    }
+     #icon-close{
+       display: none; 
+    }
+     .kontakt{
+       display: none;
+     }
+  }
+  @media only screen and  (min-width: 64em /* var(--vwS) */) {
+    nav{
+      height: calc(var(--gmodulem)*4);
+      /* background: blue; */
+      line-height: calc(var(--fline_height) * 2);
+      max-width: calc(100% - calc(var(--gmodulem) * 14));
+    }
+    ul{
+      display: flex;
+    }
+  }
+  @media only screen and  (min-width: 48em /* var(--vwT) */) {
+  nav{
+  }
+
 </style>
