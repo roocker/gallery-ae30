@@ -2,8 +2,11 @@
 /* 
 TODO
 - [ ] figcaption visual bug when text wrap
+- [ ] forced to use aspect ratio Picture!? Hochformat Bilder! fix: 
+https://github.com/ecomplus/cloud-commerce/commit/3da9bb2831c1f110497993e2f1c7fd1598f6b56b
 */
 import { Picture } from '@astrojs/image/components';
+// import { getAspectRatio } from '@@sf/ssr/image';
 const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
 ---
 
@@ -15,20 +18,18 @@ const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
         src={titleimg}
         alt={titlealt}
         position="center"
-        widths={[600]}
+        widths={[1024, 600, 500, 420, 128]} 
+        sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (max-width: 420px) 420px, 128px"
+        aspectRatio="3:2"
         class=""
-        loading="eager"
+        loading="lazy"
         decoding="async"
         /><!-- #rev 128px risky! --> 
-        <!-- widths={[1024, 600, 500, 420, 128]} 
-          sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (max-width: 420px) 420px, 128px" -->
       <figcaption><span>{cat}</span> -  {title}</figcaption>
   </figure> 
   </a> 
 </article>
 <style>
-  /*aspectRatio="3:2"*/
-  /* sizes="(max-width: 768px) 600px, (max-width: 1024px) 500px ,(max-width: 1920px) 420px, (min-width: 2560px) 1024px, 128px" */
   article {
     aspect-ratio: 1.5 ; /* #rev fallback! */
     grid-column: span 12;
