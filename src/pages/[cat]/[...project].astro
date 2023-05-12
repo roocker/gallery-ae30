@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { CollectionEntry, getCollection } from 'astro:content'; 
+import { Picture } from '@astrojs/image/components';
 
 export async function getStaticPaths() {
   const allProjects = await getCollection('projects');
@@ -35,7 +36,7 @@ carousel.addEventListener('MouseWheel', (event) => {
 
   <Layout title={`AE30 - ${p.title} - work in progress`} description= {`${p.cat}/${p.title}`}image="">
 
-<div class="hide">
+<div class="hidden">
   <h1>Das ist das Projekt: "{p.title}" in der Kategorie "{p.category}"</h1>  
   <p>{p.long}</p>
   <p>{p.subcategory}</p> 
@@ -46,17 +47,39 @@ carousel.addEventListener('MouseWheel', (event) => {
   <!-- <p>{p.map}</p> -->
 </div>
 
-<section id="carousel_big">
-  <!-- <Picture src={p.titleimg.img} alt={p.titleimg.alt}/> -->
+<section class="project-presentation">
   <article class="project">
     <figure>
-      <img class="img titleimg" src={`${p.titleimg.img}`} alt='{p.titlephoto.alttext}' />
+       <Picture 
+        src={p.titleimg.img}
+        alt={p.titleimg.alt}
+        position="center"
+        widths={[1024, 600, 500, 420, 128]} 
+        sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (max-width: 420px) 420px, 128px"
+        aspectRatio="3:2"
+        class=""
+        loading="lazy"
+        decoding="async"
+        />
     </figure>
-      {proj.data.fotos.map((img) => <figure><img 
-      src={img.foto} 
-      alt={img.alt} /></figure>)}
-  </article>
+    <figcaption><span>{p.category}</span> -  {p.title}</figcaption>
 
+    {proj.data.fotos.map((img) => <figure>
+    <Picture 
+      src={img.foto} 
+      alt={img.alt} 
+      position="center"
+      widths={[1440]}
+      sizes="1440px"
+      aspectRatio="3:2"
+      class=""
+      loading="lazy"
+      decoding="async"
+      />
+    </figure>
+    
+    <figcaption><span>{p.category}</span> -  {p.title}</figcaption>)}
+  </article>
 </section>
 
 <section class="controls">
@@ -66,13 +89,12 @@ carousel.addEventListener('MouseWheel', (event) => {
 
 </Layout>
 <style>
-  .hide{display: none;}
   body{
     /* overflow: hidden; */
-    overflow-y:hidden;
-    overflow-x: scroll;
+    /* overflow-y:hidden; */
+    /* overflow-x: scroll; */
   }
-  section#carousel_big{
+  section#project-presentation{
     /* margin-top: 150px; */
     /* width: 100%; */
     /* height: 100%; */
@@ -95,10 +117,10 @@ carousel.addEventListener('MouseWheel', (event) => {
   }
   figure{
     background: blue;
-    height:100vh;
+    width:100vw;
   }
   figure, img, article{
-    height:100vh;
+    width:100vw;
     z-index: -99;
     margin:0;
     padding: 0;
@@ -114,6 +136,9 @@ carousel.addEventListener('MouseWheel', (event) => {
     width: 100vw;
     background: green;
     /* transform: translate(0, -50vh) ; */
+  }
+  figcaption{
+    display: none;
   }
   .control{
     width: 6vmin;
