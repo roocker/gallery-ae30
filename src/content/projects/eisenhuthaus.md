@@ -6,6 +6,13 @@ subcategory: Sanierung
 titleimg:
   img: /media/29.jpg
   alt: Eisenhuthaus
+fotos:
+  - foto: /media/10.jpg
+    alt: 1.zwischengeschoss
+  - foto: /media/8.jpg
+    alt: haustechnik ebene
+  - foto: /media/9.jpg
+    alt: test
 short: text
 long: text
 ---
