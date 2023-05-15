@@ -1,4 +1,9 @@
 ---
+/*
+TODO:
+- [ ] main = wrapper?
+
+*/
 import '../styles/normalize.css';
 import Nav from '../components/Nav.astro';
 
@@ -105,7 +110,7 @@ const cfg = cblack;
     <!-- Global Metadata -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/ae30-logo.svg" />
     <meta name="generator" content={Astro.generator} />
 
     <!-- Canonical URL -->
@@ -131,8 +136,6 @@ const cfg = cblack;
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
   </head>
-
-
   <body>
     <main>
       <!-- <p>{ggapspx} , {ggapsem} , {gmargin}</p> -->
@@ -159,6 +162,7 @@ const cfg = cblack;
     font-display: swap;
   }
   body{
+
     color: var(--cfg);
     font-family: var(--fsans);
     font-size: var(--fsize);
@@ -174,10 +178,7 @@ const cfg = cblack;
     color: var(--cblack);
     /* border-bottom: 1px solid var(--caccent2); */
   }
-  main{
-    /* width: 100%; */
-    /* background: yellow; */
-  }
+  main{ }
   .wrapper{
     margin-top: calc(var(--gmodulem) * 3);
     /* background: green ; */
@@ -206,5 +207,6 @@ const cfg = cblack;
   .hidden{
     display:none;
   }
+  figure{margin:0;} /* #rev irgendwo bekommt figure einen margin? why? ??? */
 </style>
 

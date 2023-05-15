@@ -228,5 +228,8 @@ export default defineConfig({
       }]
     },
     previewStyles: ['/src/styles/preview.css']
-  }), mdx(), sitemap(), image()]
+    }),  
+    image({
+      serviceEntryPoint: '@astrojs/image/sharp'
+    }), mdx(), sitemap()]
 });

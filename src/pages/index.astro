@@ -10,19 +10,21 @@ import GridProj from '../components/GridProj.astro';
 import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
-console.log("OlleProjekte:", allProjects);
+// console.log("OlleProjekte:", allProjects);
 ---
 <Layout title="AE30 - Gallerie - work in progress" description="gallery" image="">
 
 <section id="grid-gallery" aria-label="Gallery Grid Overview">
   <!-- <Testgallery/> -->
     <!--  /${proj.slug}`}  -->
-  {allProjects.map((proj) => <GridProj title={proj.data.title} 
-  link={`../${proj.data.category}`}
-  titleimg={proj.data.titleimg.img} 
-  titlealt={proj.data.titleimg.alt} 
-  cat={proj.data.category} 
-  /> )}
+    {allProjects.map((proj) => 
+    <GridProj 
+    title={proj.data.title} 
+    link={`../${proj.data.category}`}
+    titleimg={proj.data.titleimg.img} 
+    titlealt={proj.data.titleimg.alt} 
+    cat={proj.data.category} 
+    /> )}
 </section>
 </Layout>
 
