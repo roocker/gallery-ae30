@@ -2,10 +2,10 @@
 title: ZE
 publishDate: 23 Apr 2023
 category: kg
-subcategory: asdf,asdfasdfasdffsdaasdf,asaqwer asdfasdf,
+subcategory: Universität, Öffentlich, Labor
 titleimg:
   img: /media/24.jpg
-  alt: asdfdsfds
+  alt: Alttext Title Bild - Rendering
 fotos:
   - foto: /media/IMG_20220112_085913.jpg
     alt: asdfasdfghhdfgadhgq

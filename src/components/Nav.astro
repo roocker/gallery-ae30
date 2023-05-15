@@ -2,7 +2,9 @@
 /*
 TODO:
 - [ ] Collection for Main Menu + 
-- [ ] Pages Collection (Team, Impressum, Etc)
+- [ ] Collection Pages (Team, Impressum, Etc) + Auto generate
+- [ ] #bug: v: "über uns" doesnt wrap correclty
+- [ ] Logo: when Menu open = link to home / 
 */
 
 const {
@@ -80,12 +82,15 @@ TODO:
     <ul class="menue"> 
       <!-- <li><a href="#">Filter(Subcategory)</a></li> -->
       <!-- <li><a href="#">Filter(Year)</a></li> -->
+      <li><a href="/kg/ze">Test</a></li>
+      <li><hr/></li>
       <li><a href="/">ARGE</a></li> 
       <li><a href="/kg">Kratochwil</a></li>
       <li><a href="/wp">Waldbauer</a></li>
       <li><a href="/zk">Zeinitzer</a></li>
-
+      <li><hr/></li>
       <li><a href="/archiv">Archiv</a></li>
+      <li><a href="/about">Über uns</a></li>
       <li><a href="/team">Team</a></li>
       <!-- <li><a href="/impressum">Impressum</a></li>-->
     </ul>
@@ -99,11 +104,14 @@ TODO:
 
 <style>
   h1{
+    margin: 0 !important;
   }
+  hr{
+    /* border: 0.5px solid var(--cgrey); */
+  } 
   #header{
     /* background: lavender; */
-    display: block;
-
+    /* display: block; */
     font-family: var(--fsans2); 
     text-transform: uppercase;
   }
@@ -292,6 +300,7 @@ TODO:
     nav.hidden{
       display: inline !important;
     }
+    nav hr{display: none;}
     nav{
       background: none;
       backdrop-filter: unset;
