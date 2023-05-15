@@ -1,7 +1,17 @@
 ---
+/* TODO:
+
+- [ ] wenn keine Bilder (nicht Titel) dann tut map fehlschlagen, also muss da ein if irgendwas her, oder wir forcen bilder!
+- [ ] ?onclick controls translate: 1.5 * 100vh
+
+NICE-TO-HAVE:
+- [ ] Fallback when JS is disabled!
+- [ ] custom Layouts & export to DIN A3 etc...
+
+*/
 import Layout from '../../layouts/Layout.astro';
 import { CollectionEntry, getCollection } from 'astro:content'; 
-import { Picture } from '@astrojs/image/components';
+import { Image, Picture } from '@astrojs/image/components';
 
 export async function getStaticPaths() {
   const allProjects = await getCollection('projects');
@@ -15,26 +25,14 @@ type Props = CollectionEntry<'projects'>;
 const proj = Astro.props;
 console.log(proj);
 const p = proj.data;
+// Pictures Aspect Ratio
+const width = 3;
+const height = 2;
 ---
 <script>
-/* TODO:
-
-   - [ ] control object svgs display: fixed;
-   - [ ] onclick controls translate: 1.5 * 100vh
-*/
-  const carousel = document.getElementById('carousel_big');
-
-carousel.addEventListener('MouseWheel', (event) => {
-  event.preventDefault();
-
-  carousel.scrollBy({
-    left: event.deltaY < 0 ? -30 : 30,
-  });
-});
-
 </script>
 
-  <Layout title={`AE30 - ${p.title} - work in progress`} description= {`${p.cat}/${p.title}`}image="">
+  <Layout title={`AE30 - ${p.title} - work in progress`} description= {`${p.category}/${p.title}`}image="">
 
 <div class="hidden">
   <h1>Das ist das Projekt: "{p.title}" in der Kategorie "{p.category}"</h1>  
@@ -44,105 +42,158 @@ carousel.addEventListener('MouseWheel', (event) => {
   <p>{p.photos}</p> 
   <p>{p.short}</p> 
   <p>{p.long}</p>
-  <!-- <p>{p.map}</p> -->
 </div>
 
-<section class="project-presentation">
+<section class="project_presentation" aria-label="Projekt Presentation">
   <article class="project">
-    <figure>
-       <Picture 
-        src={p.titleimg.img}
-        alt={p.titleimg.alt}
-        position="center"
-        widths={[1024, 600, 500, 420, 128]} 
-        sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (max-width: 420px) 420px, 128px"
-        aspectRatio="3:2"
-        class=""
-        loading="lazy"
-        decoding="async"
-        />
-    </figure>
-    <figcaption><span>{p.category}</span> -  {p.title}</figcaption>
+    <section class="pictures">
 
-    {proj.data.fotos.map((img) => <figure>
-    <Picture 
-      src={img.foto} 
-      alt={img.alt} 
-      position="center"
-      widths={[1440]}
-      sizes="1440px"
-      aspectRatio="3:2"
-      class=""
-      loading="lazy"
-      decoding="async"
-      />
-    </figure>
-    
-    <figcaption><span>{p.category}</span> -  {p.title}</figcaption>)}
+      <figure class="img_title">
+        <picture>
+          <img src="/media/21.jpg" />
+        </picture>
+        <figcaption>test</figcaption>
+      </figure>
+
+      <!--
+      <figure class="img_title">
+        <Picture 
+          src={p.titleimg.img}
+          alt={p.titleimg.alt}
+          widths={[1024, 600, 500, 420, 128]} 
+          sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (max-width: 420px) 420px, 128px"
+          aspectRatio={`${width}:${height}`}
+          background={`white`}
+          position="attention"
+          fit="cover"
+          loading="lazy"
+          decoding="async"
+          class=""
+          />
+      </figure>
+      <figcaption>{p.titleimg.alt}</figcaption>
+
+      <!--
+      {proj.data.fotos.map((img) => 
+      <figure class="img">
+        <Picture 
+          src={img.foto} 
+          alt={img.alt} 
+          widths={[1440]}
+          sizes="1440px"
+          background={`white`}
+          aspectRatio={`${width}:${height}`}
+          position="attention"
+          fit="cover"
+          loading="lazy"
+          decoding="async"
+          class=""
+          />
+      </figure>
+
+      <figcaption>{img.alt}</figcaption>)} 
+      -->
+    </section>
+
+    <section class="plans"></section>
+    <section class="texts"></section>
+    <div class="slideshow_left control left"></div>
+    <div class="slideshow_right control right"></div>
   </article>
 </section>
 
-<section class="controls">
-  <a href="#left>"><div class="control left"></div></a>
-  <a href="#right>"><div class="control right"></div></a>
+<section class="footer_controls">
+  <span class="cat">{p.category}</span>
+  <span class="title">{p.title}</span>
+  <button class="" name="Toggle Text">Text Toggle</button>
+  <span class="page_counter">1/4</span>
+  <button class="" name="Toggle Plans">Plans Toggle</button>
 </section>
 
+<!--
+syntaktisch mag ich das hier gar nicht?!:
+<a href="#left>"><div class="control left"></div></a>
+<a href="#right>"><div class="control right"></div></a>
+-->
+
 </Layout>
+
+<style is:global>
+  .wrapper{
+    margin: 0 !important;
+    background: lightblue !important;
+  }
+</style>
+
 <style>
   body{
-    /* overflow: hidden; */
-    /* overflow-y:hidden; */
-    /* overflow-x: scroll; */
   }
-  section#project-presentation{
-    /* margin-top: 150px; */
-    /* width: 100%; */
-    /* height: 100%; */
-    /* z-index: -99; */
-    background: green;
-    /* transform: translate (0%, 50%); */
-    /* border: 4px solid red; */
+  .project_presentation{
+    padding: 0;
+    margin: 0;
+    /* background: green; */
+    display: flex;
+    min-height: 100vh;
+    align-items: center; /* center vertically flexbox */
+    justify-content: center; /* center horizontally flex */
+    /* justify-items: center; */
+
+    /* display: grid; */
   }
 
-  article.project{
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    gap: 0vmin;
-    flex-flow: row;
-    background: red;
-    margin:0;
-    /* width: 100vw; */
+  article.project{ 
+    /* background: lightblue;  */
   }
+
+  article .pictures{}
+  article .plans{}
+  article .texts{}
   figure{
-    background: blue;
-    width:100vw;
+   background: red;
+   margin: 0 auto;
+   height: 100%;
+   max-width: 100%;
   }
-  figure, img, article{
-    width:100vw;
-    z-index: -99;
-    margin:0;
-    padding: 0;
-    gap: 0;
+  figure picture{
+   margin: 0 !important;
+   padding: 0 !important;
   }
-  figure, img{
-    /* height: 20vmin; */
-    /* aspect-ratio: 1.5; */
-    object-fit: cover ;
-    object-position: center center;
-  }
-  .controls{
-    width: 100vw;
-    background: green;
-    /* transform: translate(0, -50vh) ; */
+  figure img{
+   max-width: 100%;
+   max-height: 100vh;
+   display: block; /*image is vertically aligned at base line which leaves some space below??*/
+
   }
   figcaption{
+    background: yellow;
     display: none;
+    text-indent: -9999px;
+  }
+
+/* FOOTER CONTROLS  ----------------------------*/
+
+
+  .footer_controls{
+    /* display: none; */
+    font-family: var(--fsans2);
+    position: fixed;
+    bottom: 0;
+
+    width: 100%;
+    height: calc(var(--gmodulem)*3);
+    background: grey;
+    /* opacity: .5; */
+    text-align: center;
+  }
+  .footer_controls button{
+    height: 100%;
+  }
+  .footer_controls > {
+    backdrop-filter: blur(2px);
   }
   .control{
-    width: 6vmin;
-    height: 6vmin;
+    width: 4vmin;
+    height: 4vmin;
     background: black;
     transform: rotate(45deg);
   }
@@ -156,4 +207,5 @@ carousel.addEventListener('MouseWheel', (event) => {
     right: 4vmin;
     top: 50%;
   }
+  .
 </style>

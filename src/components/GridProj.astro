@@ -2,12 +2,19 @@
 /* 
 TODO
 - [ ] figcaption visual bug when text wrap
-- [ ] forced to use aspect ratio Picture!? Hochformat Bilder! fix: 
-https://github.com/ecomplus/cloud-commerce/commit/3da9bb2831c1f110497993e2f1c7fd1598f6b56b
+- [ ] Picture crop/resize position from CMS / Collection as optional attrib!
+https://docs.astro.build/en/guides/integrations-guide/image/#picture-
+https://sharp.pixelplumbing.com/api-resize
+- [ ] sharp image operation (color correction?)
+
 */
 import { Picture } from '@astrojs/image/components';
 // import { getAspectRatio } from '@@sf/ssr/image';
 const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
+
+// Pictures Aspect Ratio
+const width = 3;
+const height = 2;
 ---
 
 <article class="vert">
@@ -17,13 +24,15 @@ const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
       <Picture 
         src={titleimg}
         alt={titlealt}
-        position="center"
         widths={[1024, 600, 500, 420, 128]} 
-        sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (max-width: 420px) 420px, 128px"
-        aspectRatio="3:2"
-        class=""
+        sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (min-width: 420px) 420px, 420px"
+        aspectRatio={`${width}:${height}`}
+        background={`white`}
+        position="attention"
+        fit="cover"
         loading="lazy"
         decoding="async"
+        class=""
         /><!-- #rev 128px risky! --> 
       <figcaption><span>{cat}</span> -  {title}</figcaption>
   </figure> 
@@ -68,9 +77,6 @@ const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
   article, figure, a, img{
     /* height:100%; */
     /* width: 100%; */
-  }
-  figure{
-    margin: 0; /* #rev irgendwo bekommt figure einen margin? why? ??? */
   }
   img{ /* target img? */
     object-fit: cover; /* maintain aspect ratio */
