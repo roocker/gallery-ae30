@@ -1,0 +1,17 @@
+/* 
+TODO
+- [ ] rethink how to position Modal
+*/
+.modal_div{
+  position: fixed;
+  top: 20%;
+  /* i dont like how this is centered */
+  left: 50%;
+  transform: translate(-50%, 0);
+  padding: 1em;
+  margin: 0;
+  width: 100%;
+  max-width: 37.5em;
+  background: var(--cwhite);
+  background: lavender;
+}

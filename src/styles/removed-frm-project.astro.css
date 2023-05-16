@@ -1,0 +1,44 @@
+body{
+}
+.project_presentation{
+  padding: 0;
+  margin: 0;
+  /* background: green; */
+  display: flex;
+  min-height: 100vh;
+  align-items: center; /* center vertically flexbox */
+  justify-content: center; /* center horizontally flex */
+  /* justify-items: center; */
+
+  /* display: grid; */
+}
+
+article.project{ 
+  /* background: lightblue;  */
+}
+
+article .pictures{}
+article .plans{}
+article .texts{}
+figure{
+ background: red;
+ margin: 0 auto;
+ height: 100%;
+ max-width: 100%;
+}
+figure picture{
+ margin: 0 !important;
+ padding: 0 !important;
+}
+figure img{
+ max-width: 100%;
+ max-height: 100vh;
+ display: block; /*image is vertically aligned at base line which leaves some space below??*/
+
+}
+figcaption{
+  background: yellow;
+  display: none;
+  text-indent: -9999px;
+}
+*/
