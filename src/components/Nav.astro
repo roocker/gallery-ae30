@@ -1,46 +1,23 @@
 ---
 /*
 TODO:
+- [ ] Mobile Landscape: /nav braucht min-width or sth. media query fixen
+
 - [ ] Collection for Main Menu + 
 - [ ] Collection Pages (Team, Impressum, Etc) + Auto generate
 - [ ] #bug: v: "über uns" doesnt wrap correclty
-- [ ] Logo: when Menu open = link to home / 
+- [ ] Logo: Mobile/Tablet: when Menu open = link to home / (double click home???)
+- [ ] Logo: or when 1024px media query 
+- [ ] Scroll Open Menu if Browserheight too low?
 */
+import BasicScripts from "../components/basicScripts.astro";
 
 const {
  // menuToggle = false, ??? no need?
  } = Astro.props;
 ---
+<BasicScripts />
 <script>
-
-/*
-TODO:
-  - [ ] TS need export types ;)
-- [ ] export script to scripts.ts or sth
-
-*/
-
-  function attachEvent(selector, event, fn) {
-    const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
-    if (matches && matches.length) {
-      matches.forEach((elem) => {
-        elem.addEventListener(event, (e) => fn(e, elem), false);
-      });
-    }
-  }
-
-  window.onload = function(){
-    let lastKnownScrollPosition = window.scrollY;
-
-    attachEvent('[menu-toggle]', 'click', function (_, elem) {
-      // elem.classList.toggle('hidden');
-      document.getElementById('mainnav')?.classList.toggle('hidden');
-    });
-
-    /* attachEvent([document], 'scroll', function (){
-      lastKnownScrollPosition = window.scrollY;
-    }); */
-  }
 </script>
 
   <section id="header" aria-label="Header Logo & Navigation">
@@ -82,6 +59,7 @@ TODO:
     <ul class="menue"> 
       <!-- <li><a href="#">Filter(Subcategory)</a></li> -->
       <!-- <li><a href="#">Filter(Year)</a></li> -->
+      <li><a href="/admin">Admin</a></li>
       <li><a href="/kg/ze">Test</a></li>
       <li><hr/></li>
       <li><a href="/">ARGE</a></li> 

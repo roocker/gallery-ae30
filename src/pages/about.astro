@@ -1,9 +1,36 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Slideshow from "../components/Slideshow.jsx";
+import Counter from "../components/Counter.jsx";
+import "../styles/slideshow.css";
+
+
+const slideshow_images = [
+  '/media/1.jpg', 
+  '/media/2.jpg',
+  '/media/3.jpg',
+  '/media/4.jpg'
+]
+
+const slideshow_titles = [
+  "1", "2", "3", "4"
+]
+
 ---
 <Layout title="about" description="about descr." image="/media/13.jpg">
-<section class="container about" aria-label="about">
+<section class="project_presentation container about" aria-label="about">
+
+  <Slideshow images={slideshow_images} titles={slideshow_titles} client:load >
+  <span slot="proj_title">About test gallery</span>
+  </Slideshow>
+
+  <Counter />
+  <!--
   <img src="/media/13.jpg" alt="header"/>
+  -->
+
 </section>
 
 </Layout>
+<style>
+</style>

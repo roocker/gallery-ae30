@@ -1,8 +1,7 @@
 ---
 /* TODO:
+- [ ] Mobile Landscape: /projekte wierd height behaviour vgl. Handy nicht chromium!!!
 
-- [ ] wenn keine Bilder (nicht Titel) dann tut map fehlschlagen, also muss da ein if irgendwas her, oder wir forcen bilder!
-- [ ] ?onclick controls translate: 1.5 * 100vh
 
 NICE-TO-HAVE:
 - [ ] Fallback when JS is disabled!
@@ -12,6 +11,10 @@ NICE-TO-HAVE:
 import Layout from '../../layouts/Layout.astro';
 import { CollectionEntry, getCollection } from 'astro:content'; 
 import { Image, Picture } from '@astrojs/image/components';
+import BasicScripts from '../../components/basicScripts.astro';
+import Slideshow from '../../components/Slideshow';
+import Modal from '../../components/Modal';
+
 
 export async function getStaticPaths() {
   const allProjects = await getCollection('projects');
@@ -23,156 +26,110 @@ export async function getStaticPaths() {
 
 type Props = CollectionEntry<'projects'>;
 const proj = Astro.props;
-console.log(proj);
+// console.log(proj);
 const p = proj.data;
+
 // Pictures Aspect Ratio
 const width = 3;
 const height = 2;
+
+const slideshow_pictures = [p.titleimg.img].concat(p.fotos.map((img) => img.foto));
+
+const slideshow_pictures_alts = [p.titleimg.alt].concat(p.fotos.map((img) => img.alt));
+
+/* 
+const slideshow_plans = [];
+const slideshow_plans_alts = []; 
+*/
+
+let slideshow_images = slideshow_pictures // or slideshow_plans
+let slideshow_alts = slideshow_pictures_alts // or slideshow_plans_alts
+
+console.log(slideshow_images);
+console.log(slideshow_alts);
 ---
+<BasicScripts />
 <script>
 </script>
 
   <Layout title={`AE30 - ${p.title} - work in progress`} description= {`${p.category}/${p.title}`}image="">
 
-<div class="hidden">
-  <h1>Das ist das Projekt: "{p.title}" in der Kategorie "{p.category}"</h1>  
-  <p>{p.long}</p>
-  <p>{p.subcategory}</p> 
-  <p>{p.titleimg}</p> 
-  <p>{p.photos}</p> 
-  <p>{p.short}</p> 
-  <p>{p.long}</p>
-</div>
+  <section class="project_presentation" aria-label={`Projekt ${p.title} Presentation`}>
+    <article class="project">
 
-<section class="project_presentation" aria-label="Projekt Presentation">
-  <article class="project">
-    <section class="pictures">
+      <Slideshow images={slideshow_images} titles={slideshow_alts} client:load>
+      </Slideshow>
+      
+      
+      <Modal client:load >
+      <span slot="proj_title">{p.title}</span>
+      <!-- optionale Werte condition abfrage notw? -->
+      
+      <!-- 
+      <ul slot="kennwerte">
+      <p>
+      {p.category}
+      {p.subcategory} 
+      {p.category}
+      
 
-      <figure class="img_title">
-        <picture>
-          <img src="/media/21.jpg" />
-        </picture>
-        <figcaption>test</figcaption>
-      </figure>
-
-      <!--
-      <figure class="img_title">
-        <Picture 
-          src={p.titleimg.img}
-          alt={p.titleimg.alt}
-          widths={[1024, 600, 500, 420, 128]} 
-          sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (max-width: 420px) 420px, 128px"
-          aspectRatio={`${width}:${height}`}
-          background={`white`}
-          position="attention"
-          fit="cover"
-          loading="lazy"
-          decoding="async"
-          class=""
-          />
-      </figure>
-      <figcaption>{p.titleimg.alt}</figcaption>
-
-      <!--
-      {proj.data.fotos.map((img) => 
-      <figure class="img">
-        <Picture 
-          src={img.foto} 
-          alt={img.alt} 
-          widths={[1440]}
-          sizes="1440px"
-          background={`white`}
-          aspectRatio={`${width}:${height}`}
-          position="attention"
-          fit="cover"
-          loading="lazy"
-          decoding="async"
-          class=""
-          />
-      </figure>
-
-      <figcaption>{img.alt}</figcaption>)} 
+      </p>
+        <li>{p.char.typ}</li>
+        <li>{p.char.nfl}</li>
+        <li>{p.char.ri}</li>
+        <li>{p.char.kosten}</li>
+      </ul>
       -->
+ 
+
+      </Modal>
+
+    </article>
+
+    <section class="footer_controls" aria-label="Plankopf Footer Controls">
+      <span class="cat">{p.category} - </span>
+      <span class="title">{p.title}</span>
+      <button class="" name="Toggle Text">Text Toggle</button>
+      <span class="page_counter">1/4</span>
+      <button class="" name="Toggle Plans">Plans Toggle</button>
     </section>
 
-    <section class="plans"></section>
-    <section class="texts"></section>
-    <div class="slideshow_left control left"></div>
-    <div class="slideshow_right control right"></div>
-  </article>
-</section>
+  </section>
+  </Layout>
 
-<section class="footer_controls">
-  <span class="cat">{p.category}</span>
-  <span class="title">{p.title}</span>
-  <button class="" name="Toggle Text">Text Toggle</button>
-  <span class="page_counter">1/4</span>
-  <button class="" name="Toggle Plans">Plans Toggle</button>
-</section>
-
-<!--
-syntaktisch mag ich das hier gar nicht?!:
-<a href="#left>"><div class="control left"></div></a>
-<a href="#right>"><div class="control right"></div></a>
--->
-
-</Layout>
+  <!--+++++++++++++++++++++++++++ -->
 
 <style is:global>
   .wrapper{
     margin: 0 !important;
-    background: lightblue !important;
+    /* background: lightblue !important; */
   }
+  .slideshow_div{}
 </style>
 
 <style>
-  body{
-  }
-  .project_presentation{
-    padding: 0;
-    margin: 0;
-    /* background: green; */
-    display: flex;
-    min-height: 100vh;
-    align-items: center; /* center vertically flexbox */
-    justify-content: center; /* center horizontally flex */
-    /* justify-items: center; */
 
-    /* display: grid; */
+  article.project{
+    background: green;
   }
+.project_presentation{
+  /* background: green; */
+  min-height: 100vh;
 
-  article.project{ 
-    /* background: lightblue;  */
-  }
+  display: flex;
+  align-items: center; /* center vertically flexbox */
+  justify-content: center; /* center horizontally flex */
 
-  article .pictures{}
-  article .plans{}
-  article .texts{}
-  figure{
-   background: red;
-   margin: 0 auto;
-   height: 100%;
-   max-width: 100%;
-  }
-  figure picture{
-   margin: 0 !important;
-   padding: 0 !important;
-  }
-  figure img{
-   max-width: 100%;
-   max-height: 100vh;
-   display: block; /*image is vertically aligned at base line which leaves some space below??*/
+  overflow: hidden;
+}
+article.project{ 
+  /* background: lightblue;  */
+}
 
-  }
-  figcaption{
-    background: yellow;
-    display: none;
-    text-indent: -9999px;
-  }
-
+article .pictures{}
+article .plans{}
+article .texts{}
 /* FOOTER CONTROLS  ----------------------------*/
-
-
   .footer_controls{
     /* display: none; */
     font-family: var(--fsans2);
@@ -191,21 +148,5 @@ syntaktisch mag ich das hier gar nicht?!:
   .footer_controls > {
     backdrop-filter: blur(2px);
   }
-  .control{
-    width: 4vmin;
-    height: 4vmin;
-    background: black;
-    transform: rotate(45deg);
-  }
-  .left{
-    position: fixed;
-    left: 4vmin;
-    top: 50%;
-  }
-  .right{
-    position: fixed;
-    right: 4vmin;
-    top: 50%;
-  }
-  .
+
 </style>

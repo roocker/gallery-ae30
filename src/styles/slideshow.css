@@ -1,0 +1,56 @@
+/* 
+TODO:
+- [ ] ensure that positioning is done somewhere else (.astro file style)
+- [ ] custom arrow icons
+- [ ] /*background: 50% 50% url(icon_left); need displayed icon for mobile version! */
+
+
+ */
+figure{
+  /* background: red; */
+  margin: 0 auto;
+  height: 100%;
+  max-height: 100vh;
+  max-width: 100%;
+}
+figure picture{
+  margin: 0 !important;
+  padding: 0 !important;
+}
+figure img{
+  max-width: 100%;
+  max-height: 100vh;
+  display: block; /*image is vertically aligned at base line which leaves some space below??*/
+
+}
+figcaption{
+  /* background: yellow; */
+  /* display: none; */
+  /* text-indent: -9999px; */
+}
+button{ }
+button.slideshow_btn{
+  border: none;
+  text-indent: -9999px;
+
+  /* opacity: 0.2; */
+  opacity: 0;
+
+  position: absolute;
+  top: 0;
+  /* background: var(--cblack); */
+  width: 50%;
+  height: 100%;
+}
+.btn_prev{
+  left: 0;
+  background: purple;
+  cursor: w-resize; /* #rev custom arrow icons */
+  /*background: 50% 50% url(icon_left); need displayed icon for mobile version! */
+}
+.btn_next{
+  right: 0;
+  background: pink;
+  cursor: e-resize; /* #rev custom arrow icons */
+  /*background: 50% 50% url(icon_left); need displayed icon for mobile version! */
+}
