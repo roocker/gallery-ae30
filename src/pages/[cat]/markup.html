@@ -1,0 +1,107 @@
+
+       <figure class="img_title">
+          <img 
+          src={p.titleimg.img}
+          alt={p.titleimg.alt}
+          />
+          <figcaption>{p.titleimg.alt}</figcaption>
+        </figure>
+
+          {p.fotos.map((img) => 
+          <figure class="img_fotos">
+          <img 
+          src={img.foto}
+          alt={img.alt}
+          /> 
+          <figcaption>{p.fotos.alt}</figcaption>
+        </figure>)}
+
+
+
+<div class="hidden">
+  <h1>Das ist das Projekt: "{p.title}" in der Kategorie "{p.category}"</h1>  
+  <p>{p.long}</p>
+  <p>{p.subcategory}</p> 
+  <p>{p.titleimg}</p> 
+  <p>{p.photos}</p> 
+  <p>{p.short}</p> 
+  <p>{p.long}</p>
+</div>
+
+<!--
+<section class="project_presentation" aria-label="Projekt Presentation">
+  <article class="project">
+    <section class="pictures">
+
+      <figure class="img_title">
+        <picture>
+          <img src="/media/21.jpg" />
+        </picture>
+        <figcaption>test</figcaption>
+      </figure>
+-->
+
+      <!--
+      <figure class="img_title">
+        <Picture 
+          src={p.titleimg.img}
+          alt={p.titleimg.alt}
+          widths={[1024, 600, 500, 420, 128]} 
+          sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (max-width: 420px) 420px, 128px"
+          aspectRatio={`${width}:${height}`}
+          background={`white`}
+          position="attention"
+          fit="cover"
+          loading="lazy"
+          decoding="async"
+          class=""
+          />
+          <figcaption>{p.titleimg.alt}</figcaption>
+      </figure>
+
+      <!--
+      {proj.data.fotos.map((img) => 
+      <figure class="img">
+        <Picture 
+          src={img.foto} 
+          alt={img.alt} 
+          widths={[1440]}
+          sizes="1440px"
+          background={`white`}
+          aspectRatio={`${width}:${height}`}
+          position="attention"
+          fit="cover"
+          loading="lazy"
+          decoding="async"
+          class=""
+          />
+      <figcaption>{img.alt}</figcaption>
+
+      </figure>
+
+      )} 
+      -->
+    </section>
+    <!--
+    <section class="plans"></section>
+    <section class="texts"></section>
+    <div class="slideshow_left control left"></div>
+    <div class="slideshow_right control right"></div>
+  </article>
+</section>_fotos
+
+<section class="footer_controls">
+  <span class="cat">{p.category}</span>
+  <span class="title">{p.title}</span>
+  <button class="" name="Toggle Text">Text Toggle</button>
+  <span class="page_counter">1/4</span>
+  <button class="" name="Toggle Plans">Plans Toggle</button>
+</section>
+    -->
+
+<!--
+syntaktisch mag ich das hier gar nicht?!:
+<a href="#left>"><div class="control left"></div></a>
+<a href="#right>"><div class="control right"></div></a>
+-->
+

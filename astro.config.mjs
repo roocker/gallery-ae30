@@ -1,12 +1,18 @@
+/* 
+TODO
+- [ ]  Collection: rename titleimg.alt titleimg.uberschrift? Titlebild Überschrift
+- [ ]  Collection: rename fotos.foto img und uberschrift analog title.img
+
+  */
 import { defineConfig } from 'astro/config';
 import NetlifyCMS from 'astro-netlify-cms';
 // import { de } from 'netlify-cms-locales';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import image from "@astrojs/image";
+import react from "@astrojs/react";
+
 // CMS.registerLocale('de', de);
-
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ae30.at',
@@ -228,8 +234,7 @@ export default defineConfig({
       }]
     },
     previewStyles: ['/src/styles/preview.css']
-    }),  
-    image({
-      serviceEntryPoint: '@astrojs/image/sharp'
-    }), mdx(), sitemap()]
+  }), image({
+    serviceEntryPoint: '@astrojs/image/sharp'
+  }), mdx(), sitemap(), react()]
 });

@@ -1,0 +1,31 @@
+---
+/*
+TODO:
+- [ ] TS need export types ;)
+- [x] export script to scripts.ts or sth
+
+*/
+---
+<script is:inline>
+  function attachEvent(selector, event, fn) {
+    const matches = typeof selector === 'string' ? document.querySelectorAll(selector) : selector;
+    if (matches && matches.length) {
+      matches.forEach((elem) => {
+        elem.addEventListener(event, (e) => fn(e, elem), false);
+      });
+    }
+  }
+
+window.onload = function(){
+  let lastKnownScrollPosition = window.scrollY;
+
+  attachEvent('[menu-toggle]', 'click', function (_, elem) {
+    // elem.classList.toggle('hidden');
+    document.getElementById('mainnav')?.classList.toggle('hidden');
+  });
+
+  /* attachEvent([document], 'scroll', function (){
+    lastKnownScrollPosition = window.scrollY;
+  }); */
+}
+</script>
