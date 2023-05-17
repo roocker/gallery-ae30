@@ -1,5 +1,5 @@
 ---
-title: ZE
+title: Technische Universität Wien - Bauteil ZE
 publishDate: 23 Apr 2023
 category: kg
 subcategory: Universität, Öffentlich, Labor
