@@ -2,31 +2,60 @@
 TODO:
 - [ ] ensure that positioning is done somewhere else (.astro file style)
 - [ ] custom arrow icons
-- [ ] /*background: 50% 50% url(icon_left); need displayed icon for mobile version! */
-
-
+- [ ] /*background: 50% 50% url(icon_left); need displayed icon for mobile version!
  */
+
+.slideshow_div{
+  overflow: hidden;
+}
+
 figure{
-  /* background: red; */
-  margin: 0 auto;
+  margin: 0;
+  padding: 0;
   height: 100%;
   max-height: 100vh;
+  /* max-height: calc(100vh - 6em); */
   max-width: 100%;
+  /* background: green; */
+  overflow:hidden;
 }
 figure picture{
   margin: 0 !important;
   padding: 0 !important;
+  background: blue;
 }
 figure img{
   max-width: 100%;
   max-height: 100vh;
+  /* max-height: calc(100vh - 6em); */
   display: block; /*image is vertically aligned at base line which leaves some space below??*/
+  background: red;
 
 }
 figcaption{
-  /* background: yellow; */
-  /* display: none; */
-  /* text-indent: -9999px; */
+
+    z-index: 1;
+    font-family: var(--fsans2);
+    font-size: .8em;
+    text-align: center;
+
+    color: var(--cwhite);
+
+    backdrop-filter: blur(1px);
+    display: inline-flex;
+
+    justify-self: center;
+    justify-content: center;
+    align-self: center;
+
+   transform: translate(0, -3em ); /* #rev */ 
+   border-radius: 1em;
+
+    line-height: 1em;
+    height: 1em ;
+    margin-left: calc(var(--gmodulem) );
+    padding: 0.5em;
+
 }
 button{ }
 button.slideshow_btn{

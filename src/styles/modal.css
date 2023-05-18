@@ -2,9 +2,9 @@
 TODO
 - [ ] rethink how to position Modal
 */
-.modal_div{
+#textmodal{
   position: fixed;
-  top: 20%;
+  bottom: calc(var(--gmodulem)*4);
   /* i dont like how this is centered */
   left: 50%;
   transform: translate(-50%, 0);
@@ -12,6 +12,70 @@ TODO
   margin: 0;
   width: 100%;
   max-width: 37.5em;
+  box-sizing: border-box;
+  max-height: 80vh;
+  overflow-y: auto;
   background: var(--cwhite);
-  background: lavender;
+  /* background: lavender; */
 }
+/* Text styles------------------- */
+h2{
+  /* font-size: 1.2em; */
+  line-height: 1em;
+  margin: 0;
+  font-family: var(--fsans2);
+}
+
+dl{
+  font-size: .8em;
+  font-family: var(--fsans2);
+  /* line-height: calc(var(--fline_height) / 2); */
+  line-height: 1.2rem;
+}
+dt{
+  float: left;
+  padding-right: 2em;
+
+  display: none;
+  text-indent: -9999px;
+}
+dd{
+  margin: 0;
+}
+
+#textmodal ul{
+  font-family: var(--fsans2);
+  list-style: none;
+  padding: 0;
+
+}
+#textmodal ul li span{
+  text-transform: uppercase;
+  padding-right: 3em;
+  font-weight: bold;
+}
+
+
+/* ------------------- */
+
+button.modal_btn{
+  border: none;
+  background: none;
+  height: calc(var(--gmodulem) * 1);
+  padding: 0;
+  position: absolute;
+  top: var(--gmodulem) ;
+  right: var(--gmodulem) ;
+}
+button.modal_btn:hover{
+  cursor: pointer;
+}
+.svg-icon{
+  /* background: yellow; */
+  height: 100%;
+  aspect-ratio: 1;
+
+}
+.modal_btn{
+}
+
