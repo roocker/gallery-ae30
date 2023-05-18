@@ -10,13 +10,16 @@ TODO
 - [ ] image preloading! --> index?!
 - [ ] need to set index to current index for page reload!?
 
+- [ ] Keyboard support prev/next arrow keys and J/K
 - [ ] Mouse Click and drag left/right =  prev/next
 - [ ] Touch swipe left right? = prev/next
 
 - [ ] simplify next/prevSlide funcitons into one funciton
 
 - [ ] Zoomed View on Click or on Click Button Zoom ?!
+- [ ] button markup type title aria-label SEO
 */
+
 import "../styles/slideshow.css";
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -120,5 +123,5 @@ function Slideshow(props) {
     </div>
   )
 }
+// <p class="reactcomp">{props.proj_title} - cool aber unnötig</p>
 export default Slideshow
-  // <p class="reactcomp">{props.proj_title} - cool aber unnötig</p>

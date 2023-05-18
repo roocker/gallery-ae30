@@ -11,17 +11,18 @@ TODO:
 - [ ] Scroll Open Menu if Browserheight too low?
 */
 import BasicScripts from "../components/basicScripts.astro";
+import Logo from "../components/Logo";
 
 const {
  // menuToggle = false, ??? no need?
  } = Astro.props;
 ---
 <BasicScripts />
-<script>
-</script>
+ <script>
+ </script>
 
   <section id="header" aria-label="Header Logo & Navigation">
-
+    <!--
   <h1>
     <a class="link" menu-toggle>
       <span>AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus</span>
@@ -30,8 +31,10 @@ const {
       </div>
     </a>
   </h1> 
+  <h1><a menu-toggle><span>temp</span><div class="logo">temp</div></a></h1>
+    -->
 
-
+    <Logo/>
 
   <nav id="mainnav" class="hidden">  <!-- #rev: 1.Collection Main Menu?!! 2.icons menue teil? seo? 3. move after ul (seo!)-->
     <div class="menue-icons">
@@ -39,14 +42,14 @@ const {
         <svg class="svg-icon">
           <use id="icon-close" class="svg-icon-use" xlink:href="/svg.svg#close" />
         </svg>
-        <!-- Menü Toggle Button -->
       </button>
+      <!-- Menü Toggle Button -->
     </div>
 
       <!--
       <button class="button-icon" type="button" title="test" aria-label="test" menu-toggle>
         <svg class="svg-icon">
-          <use id="icon-circle" class="svg-icon-use" xlink:href={`svg.svg#circle`} />
+          <use id="icon-circle" class="svg-icon-use" xlink:href={`svg.svg#circle`} />nav
         </svg>
       </button>
       -->
@@ -72,11 +75,11 @@ const {
       <li><a href="/team">Team</a></li>
       <!-- <li><a href="/impressum">Impressum</a></li>-->
     </ul>
-    <div class="kontakt">
+    <adress class="kontakt">
       <p>A-1190 Wien, Eroicagasse 30</p>
       <p>TEL: 01-3180500 / FAX: 37 05 013</p>
       <p><a href="mailto:office@ae30.at">office@ae30.at</p>
-    </div>
+    </adress>
   </nav> 
 </section>
 
@@ -175,7 +178,7 @@ const {
 
     /* background: lavender; */
     background: var(--cwhite80);
-    backdrop-filter: blur(calc(var(--gmodulpx) / 3));
+    /* backdrop-filter: blur(calc(var(--gmodulpx) / 3)); */
 
     border-bottom-left-radius: 3em;
     z-index:3;
@@ -228,7 +231,7 @@ const {
     color: var(--cgrey);
   }
   .button-icon:hover{
-    color: var(--cblack);
+   color: var(--cblack);
   }
   .svg-icon{
     /* background: yellow; */
@@ -236,13 +239,6 @@ const {
     height: 100%;
     aspect-ratio: 1;
 
-  }
-  .svg-icon-use{
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: currentColor;
-    stroke: currentColor;
   }
   .svg-icon use{
   }

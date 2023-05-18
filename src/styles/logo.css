@@ -1,0 +1,34 @@
+  h1{
+    margin: 0 !important;
+    background: red;
+  }
+
+  .logo{
+    position: fixed;
+    top: 0;
+    right: 0;
+    top: calc(var(--gmodulem) / 2 * -1);
+    right: calc(var(--gmodulem) / 1.5 * -1);
+
+    display: flex;
+    justify-content: center;
+    align-items:center;
+
+    /* line-height: calc(var(--gmodulem) / 2 ); */
+
+    width: calc(var(--gmodulem) * 4);
+    height: calc(var(--gmodulem) * 4);
+
+    border-radius: 50%;
+    /* top: calc( 2 * var(--gmodul)); */
+
+    background: var(--cbg);
+    z-index: 4;
+  }
+
+  .logo:hover{
+    /* transform: rotate(90deg); */
+    animation-name: logo-spin;
+    animation: ease;
+    animation-duration: 2s;
+  }

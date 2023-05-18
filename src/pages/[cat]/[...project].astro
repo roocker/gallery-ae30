@@ -13,7 +13,8 @@ import { CollectionEntry, getCollection } from 'astro:content';
 import { Image, Picture } from '@astrojs/image/components';
 import BasicScripts from '../../components/basicScripts.astro';
 import Slideshow from '../../components/Slideshow';
-import Modal from '../../components/Modal';
+import TextModal from '../../components/TextModal';
+import React from 'react';
 
 
 export async function getStaticPaths() {
@@ -57,12 +58,21 @@ console.log(slideshow_alts);
   <section class="project_presentation" aria-label={`Projekt ${p.title} Presentation`}>
     <article class="project">
 
-      <Slideshow images={slideshow_images} titles={slideshow_alts} client:load>
+      <Slideshow client:load images={slideshow_images} titles={slideshow_alts} >
       </Slideshow>
       
       
-      <Modal client:load >
-      <span slot="proj_title">{p.title}</span>
+      <TextModal client:load
+      title={p.title}
+      slug={proj.slug}
+      category={p.category}
+      subcategory={p.subcategory}
+      short={p.short}
+      id={proj.id}
+      collection={proj.collection}
+      body={proj.body}
+      />
+      <!-- <span slot="proj_title">{p.title}</span> -->
       <!-- optionale Werte condition abfrage notw? -->
       
       <!-- 
@@ -74,22 +84,20 @@ console.log(slideshow_alts);
       
 
       </p>
-        <li>{p.char.typ}</li>
-        <li>{p.char.nfl}</li>
-        <li>{p.char.ri}</li>
-        <li>{p.char.kosten}</li>
+        <li>{p.val.nfl}</li>
+        <li>{p.val.typ}</li>
+        <li>{p.val.ri}</li>
+        <li>{p.val.kosten}</li>
       </ul>
+      </TextModal>
       -->
- 
 
-      </Modal>
 
     </article>
-
     <section class="footer_controls" aria-label="Plankopf Footer Controls">
       <span class="cat">{p.category} - </span>
       <span class="title">{p.title}</span>
-      <button class="" name="Toggle Text">Text Toggle</button>
+      <button class="" title="Toggle Text" type="button" tm-toggle>Text Toggle</button>
       <span class="page_counter">1/4</span>
       <button class="" name="Toggle Plans">Plans Toggle</button>
     </section>
@@ -109,9 +117,6 @@ console.log(slideshow_alts);
 
 <style>
 
-  article.project{
-    background: green;
-  }
 .project_presentation{
   /* background: green; */
   min-height: 100vh;
@@ -120,9 +125,9 @@ console.log(slideshow_alts);
   align-items: center; /* center vertically flexbox */
   justify-content: center; /* center horizontally flex */
 
-  overflow: hidden;
 }
 article.project{ 
+  overflow: hidden;
   /* background: lightblue;  */
 }
 
@@ -139,7 +144,7 @@ article .texts{}
     width: 100%;
     height: calc(var(--gmodulem)*3);
     background: grey;
-    /* opacity: .5; */
+    opacity: .5;
     text-align: center;
   }
   .footer_controls button{

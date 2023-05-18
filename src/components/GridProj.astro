@@ -34,7 +34,7 @@ const height = 2;
         decoding="async"
         class=""
         /><!-- #rev 128px risky! --> 
-      <figcaption><span>{cat}</span> -  {title}</figcaption>
+        <figcaption><!--<span>{cat}</span> -  -->{title}</figcaption>
   </figure> 
   </a> 
 </article>
@@ -89,22 +89,24 @@ const height = 2;
   figcaption{
     z-index: 1;
     /* opacity: .5; */
-
     font-family: var(--fsans2);
-    /* font-size: .8em; */
-    text-transform: uppercase;
-
-    /* color: var(--cgrey); */
-    background: var(--cwhite30);
-    /* background: orange; */
-    backdrop-filter: blur(2px);
+    font-size: .8em;
+    text-align: left;
+    /* text-transform: uppercase; */
+    color: var(--cwhite);
+    /* background: var(--cwhite30); */
+    backdrop-filter: blur(1px);
+    display: inline-flex;
     /* border-radius: 8px; */
 
-    transform: translate(0, -34px ); /* #rev */
+    transform: translate(0, -3em ); /* #rev */
 
     line-height: 1em;
     height: 1em ;
-    padding: calc(var(--gmodulem) / 4);
+    margin-left: 0.5em;
+    padding: 0.5em;
+
+   border-radius: 1em;
     /* margin-right: calc(var(--gmodulem) * 2 ); */
     /* box-sizing: border-box; */
     /* width: 100%; */
@@ -124,7 +126,7 @@ const height = 2;
       display:none;
     }
     article a:hover figure > figcaption{
-      display:block;
+      display:inline-flex;
     }
 
   }
