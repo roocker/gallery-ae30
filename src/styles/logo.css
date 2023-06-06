@@ -2,33 +2,43 @@
     margin: 0 !important;
     background: red;
   }
+  h1 span{
+    text-indent: -9999px;
+    display: none;
+  }
 
-  .logo{
+  svg.logo{
     position: fixed;
-    top: 0;
-    right: 0;
-    top: calc(var(--gmodulem) / 2 * -1);
-    right: calc(var(--gmodulem) / 1.5 * -1);
+    top: -0.5em;
+    right: -0.5em;
 
     display: flex;
     justify-content: center;
     align-items:center;
 
-    /* line-height: calc(var(--gmodulem) / 2 ); */
-
-    width: calc(var(--gmodulem) * 4);
-    height: calc(var(--gmodulem) * 4);
+    width: 4em;
+    height: 4em;
 
     border-radius: 50%;
-    /* top: calc( 2 * var(--gmodul)); */
-
-    background: var(--cbg);
+    background: var(--cgrey);
     z-index: 4;
+
+    color: white;
   }
 
-  .logo:hover{
-    /* transform: rotate(90deg); */
-    animation-name: logo-spin;
-    animation: ease;
-    animation-duration: 2s;
+  .svg-logo-use{
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: currentColor;
+    stroke: currentColor;
   }
+  /* #1c1d1d */
+
+  use#use_logo{
+    /* width: 65%; */
+    /* height: 65%; */
+    background: green;
+    vertical-align: middle;
+  }
+
