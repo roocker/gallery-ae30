@@ -34,11 +34,11 @@ const {
   <h1><a menu-toggle><span>temp</span><div class="logo">temp</div></a></h1>
     -->
 
-    <Logo/>
+    <Logo client:load/>
 
-    <svg class="logo">
-      <use id="use_logo" class="svg-logo-use" href="/logo.svg" />
-    </svg>
+    <!-- <svg class="logo"> -->
+    <!--   <use id="use_logo" class="svg-logo-use" href="/ae30-logo.svg" /> -->
+    <!-- </svg> -->
 
 
   <nav id="mainnav" class="hidden">  <!-- #rev: 1.Collection Main Menu?!! 2.icons menue teil? seo? 3. move after ul (seo!)-->
@@ -53,7 +53,7 @@ const {
 
       <!--
       <button class="button-icon" type="button" title="test" aria-label="test" menu-toggle>
-        <svg class="svg-icon">
+        <!-- <svg class="svg-icon"> 
           <use id="icon-circle" class="svg-icon-use" xlink:href={`svg.svg#circle`} />nav
         </svg>
       </button>
@@ -64,6 +64,7 @@ const {
       <!-- <button id="theme-toggle" class="icon-button" type="button" title="Hell-/Dunkel Modus wechseln" aria-label="Hell-/Dunkel Modus wechseln"> Theme Toggle Button
         <!-- <object data="/sun.svg" class="sun_svg" type="image/svg+xml">Hell/Dunkler Modus</object> 
       </button> -->
+
     <ul class="menue"> 
       <!-- <li><a href="#">Filter(Subcategory)</a></li> -->
       <!-- <li><a href="#">Filter(Year)</a></li> -->
