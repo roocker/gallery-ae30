@@ -1,13 +1,12 @@
   h1{
     margin: 0 !important;
-    background: red;
+    background: green;
   }
   h1 span{
     text-indent: -9999px;
     display: none;
   }
-
-  svg.logo{
+  h1 a{
     position: fixed;
     top: -0.5em;
     right: -0.5em;
@@ -20,25 +19,52 @@
     height: 4em;
 
     border-radius: 50%;
-    background: var(--cgrey);
+    background: var(--cwhite);
+    /* background: red; */
     z-index: 4;
+    
+  }
+  .logo{
+    color: var(--cblack);
 
-    color: white;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    width: 65%;
+    height: 65%;
+
+    /* border-radius: 50%; */
+    /* background: blue; */
+  }
+  .lg{
+    transform: translate(4px,4px) scale(.25);
+
+/* width: 50%; */
+/* height: 50%; */
   }
 
+.lpath  {
+  /* transform: ; */
+}
   .svg-logo-use{
-    stroke-width: 1.5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    fill: currentColor;
-    stroke: currentColor;
-  }
-  /* #1c1d1d */
+    stroke-width: calc(5 * 1.25);
+    stroke-linecap: miter;
+    stroke-linejoin: miter;
+    stroke-dasharray: none;
+    paint-order: fill;
+    stroke-align: inset;
 
-  use#use_logo{
-    /* width: 65%; */
-    /* height: 65%; */
-    background: green;
-    vertical-align: middle;
+    fill: currentColor;
+    stroke: var(--cblack);
+    }
+
+  .logo_div{
+    background: red;
+    z-index: 10;
   }
+ use#use_logo{
+  }
+
+  /* #1c1d1d */
 
