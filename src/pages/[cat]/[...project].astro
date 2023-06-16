@@ -14,6 +14,7 @@ import { Image, Picture } from '@astrojs/image/components';
 import BasicScripts from '../../components/basicScripts.astro';
 import Slideshow from '../../components/Slideshow';
 import TextModal from '../../components/TextModal';
+import Modal from '../../components/Modal.astro';
 import React from 'react';
 
 
@@ -61,8 +62,9 @@ console.log(slideshow_alts);
       <Slideshow client:load images={slideshow_images} titles={slideshow_alts} >
       </Slideshow>
       
-      
-      <TextModal client:load
+
+<!--
+      <Modal client:load
       title={p.title}
       slug={proj.slug}
       category={p.category}
@@ -72,6 +74,19 @@ console.log(slideshow_alts);
       collection={proj.collection}
       body={proj.body}
       />
+      -->
+
+      <!--<TextModal client:load
+      title={p.title}
+      slug={proj.slug}
+      category={p.category}
+      subcategory={p.subcategory}
+      short={p.short}
+      id={proj.id}
+      collection={proj.collection}
+      body={proj.body}
+      />-->
+
       <!-- <span slot="proj_title">{p.title}</span> -->
       <!-- optionale Werte condition abfrage notw? -->
       
@@ -97,7 +112,46 @@ console.log(slideshow_alts);
     <section class="footer_controls" aria-label="Plankopf Footer Controls">
       <span class="cat">{p.category} - </span>
       <span class="title">{p.title}</span>
-      <button class="" title="Toggle Text" type="button" tm-toggle>Text Toggle</button>
+
+
+
+      <Modal id="dialog" open="Text toggle" >
+      <div slot="text_modal">
+
+        <h2>{p.title}</h2>
+        <dl className="textmodal_ul">
+          <dt>Jahr:</dt><dd>2018 - 2022</dd>
+          <dt>NFL:</dt><dd>3000m²</dd>
+          <dt>Typ:</dt><dd>Neubau, Erweiterung</dd>
+          <dt>Tags:</dt><dd>{p.subcategory}</dd>
+        </dl>
+        <details open>
+          <summary>Kennwerte</summary>
+          <p>
+          id: {proj.id} <br/>
+          slug: {proj.slug} <br/>
+          collection: {proj.collection} <br/>
+
+          </p>
+        </details>
+        <p>{p.short}</p>
+        <p><a href="#">mehr...</a></p>
+
+        <p>
+        {proj.body}
+        </p>
+      </div>
+      <button slot="close" className="modal_btn btn_close" type="button" title="Text Pop-up schließen" aria-label="Text Pop-up schließen">
+        <svg className="svg-icon">
+          <use id="icon-close" className="svg-icon-use" href="/svg.svg#close" />
+        </svg>
+      </button>
+      <!-- <button slot="close">Close modal</button> -->
+      </Modal>
+
+
+
+      <button class="" title="Toggle Text" type="button" tm-toggle>nix</button>
       <span class="page_counter">1/4</span>
       <button class="" name="Toggle Plans">Plans Toggle</button>
     </section>
@@ -153,5 +207,64 @@ article .texts{}
   .footer_controls > {
     backdrop-filter: blur(2px);
   }
+/* Modal Styles ----------------- */
+  
 
+
+#textmodal ul{
+  font-family: var(--fsans2);
+  list-style: none;
+  padding: 0;
+
+}
+#textmodal ul li span{
+  text-transform: uppercase;
+  padding-right: 3em;
+  font-weight: bold;
+}
+  /* Text styles------------------- */
+h2{
+  /* font-size: 1.2em; */
+  line-height: 1em;
+  margin: 0;
+  font-family: var(--fsans2);
+}
+
+dl{
+  font-size: .8em;
+  font-family: var(--fsans2);
+  /* line-height: calc(var(--fline_height) / 2); */
+  line-height: 1.2rem;
+}
+dt{
+  float: left;
+  padding-right: 2em;
+
+  display: none;
+  text-indent: -9999px;
+}
+dd{
+  margin: 0;
+}
+
+button.modal_btn{
+  border: none;
+  background: none;
+  height: calc(var(--gmodulem) * 1);
+  padding: 0;
+  position: absolute;
+  top: var(--gmodulem) ;
+  right: var(--gmodulem) ;
+}
+button.modal_btn:hover{
+  cursor: pointer;
+}
+.svg-icon{
+  /* background: yellow; */
+  height: 100%;
+  aspect-ratio: 1;
+
+}
+.modal_btn{
+}
 </style>
