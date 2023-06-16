@@ -9,7 +9,11 @@ import { motion } from 'framer-motion';
 
 const animation_variants = {
   i: {y: -100, opacity: 0, },
-  a: { y: 0, opacity: 1, },
+  a: { y: 0, opacity: 1, 
+    transition: {
+      y: {duration: 1,},
+    },
+  },
   e: {y: 100, opacity: 0, },
 }
 

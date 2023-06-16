@@ -4,19 +4,49 @@ import {AnimatePresence, motion} from 'framer-motion';
 
 const rotate_variants = {
   i:  { 
-    rotate: -360,
-    originX: 0.30,
-    originY: 0.30,
+    rotate: 0,
+    opacity: .8,
   },
   a: (i) => {
-    const delay = 1 + i * 0.5;
+    const delay = i * 0.5;
     return {
-    rotate: 0,
-    transition: { rotate: { delay, duration: .5} },
+    rotate: 360,
+    opacity: .8,
+    originX: "50%",
+    originY: "52%",
+    transition: {
+      rotate: { 
+        delay,
+        duration: .2,
+        type: "spring",
+        stiffness: 250,
+        damping: 10,
+      } },
     }
   },
-  f: { 
-    rotate: -360,
+  t: { 
+    rotate: [null, 360],
+    transition: { 
+      rotate: { 
+        duration: .2,
+        type: "spring",
+        stiffness: 250,
+        damping: 10,
+      } },
+  },
+  h: {
+    opacity: 1,
+    rotate: [ null, 10, -10 , 0],
+    transition: {
+      duration: .2,
+      type: "spring",
+      stiffness: 250,
+      bounce: 1,
+        // damping: 10,
+    }
+  },
+  e: {
+    opacity: 0,
   }
 }
 
@@ -31,18 +61,24 @@ const path_variants = {
     const delay = 1 + i * 0.5;
     return {
     opacity: 1,
-    pathLength: 1,
+    pathLength: [null , 1, 0],
     color:"#000",
     transition: {
-      color: { delay, duration: 1.5,},
-      pathLength: { delay, duration: 1.5, type: "spring"},
+      color: {
+        delay,
+        duration: 1.5,
+      },
+      pathLength: {
+        delay,
+        duration: 1.5,
+        type: "spring",
+        stiffness: 250,
+      },
       }
     }
   },
     e:{
-      color: "#ff0000",
       pathLength:0,
-
     }
   }
 
@@ -56,9 +92,12 @@ function Logo (){
 <AnimatePresence>
       <motion.svg
       className="logo svg-logo-use"
-      custom={6}
+      custom={7}
       variants={rotate_variants}
-    whileFocus="f"
+      whileTap="t"
+      whileHover="h"
+      onHoverEnd="i"
+      whileDrag="h"
       initial="i"
       animate="a"
       exit="e" 
