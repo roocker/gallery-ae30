@@ -7,6 +7,7 @@ TODO:
 
 .slideshow_div{
   overflow: hidden;
+  /* background: red; */
 }
 
 figure{
@@ -29,7 +30,7 @@ figure img{
   max-height: 100vh;
   /* max-height: calc(100vh - 6em); */
   display: block; /*image is vertically aligned at base line which leaves some space below??*/
-  background: red;
+  /* background: orange; */
 
 }
 figcaption{
@@ -62,28 +63,38 @@ button.slideshow_btn{
   border: none;
   text-indent: -9999px;
 
-  opacity: 0;
-  opacity: 0.2;
+  /* opacity: 0; */
+  /* opacity: 0.8; */
 
+/* naughty positioning!!! */
+  position: fixed;
+  top: 50%;
 
-  position: absolute;
-  top: 0;
   /* background: var(--cblack); */
-  width: 50%;
-  height: auto;
+  width: 8em;
+  height: 8em;
 
-  padding: 25% 0 0 25%;
   z-index: 0 !important; 
+  color: var(--cwhite);
+  fill: currentColor;
+
+
+    box-shadow: 0 0 1em 0 black;
 }
+
 .btn_prev{
   left: 0;
-  background: purple;
   cursor: w-resize; /* #rev custom arrow icons */
-  /*background: 50% 50% url(icon_left); need displayed icon for mobile version! */
+  background: 100% 50% url("/arrow.svg") no-repeat;
+  /* background-color: purple; */
+  transform: translate(-25%, 0%) rotate(180deg) scale(.5);
+  background-blend-mode: darken;
+
 }
 .btn_next{
   right: 0;
-  background: pink;
   cursor: e-resize; /* #rev custom arrow icons */
-  /*background: 50% 50% url(icon_left); need displayed icon for mobile version! */
+  background: 100% 50% url("/arrow.svg") no-repeat;
+  /* background-color: pink; */
+  transform: translate(25%, 0%) rotate(0) scale(.5);
 }

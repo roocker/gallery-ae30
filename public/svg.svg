@@ -17,6 +17,10 @@
       <ellipse cx="50" cy="50" rx="50" ry="50" />
     </symbol>
 
+    <symbol id="arrow" viewBox"0 0 128 128">
+      <path d="M -28.4001 1185.33 L -17.3786 1174.25 L 46.2682 1238.25 L -17.3786 1302.25 L -28.4001 1291.17 L 24.2253 1238.25 Z" />
+   <symbol> 
+
   </defs>
 </svg>
 <!-- stroke-linecap="round" stroke-linejoin="round" -->
