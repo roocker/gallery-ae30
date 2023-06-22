@@ -88,7 +88,7 @@ function Logo (){
   return (
     <h1>
     <span>AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus</span>
-      <a className="link">
+      <a className="link" onClick="menuToggle">
 <AnimatePresence>
       <motion.svg
       className="logo svg-logo-use"
