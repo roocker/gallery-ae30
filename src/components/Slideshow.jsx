@@ -101,6 +101,7 @@ function Slideshow(props) {
     <AnimatePresence initial={false} custom={direction}>
       <figure className="slideshow_fig">
 
+
         <motion.img
         className="slideshow_img"
         variants={animation_variants}
@@ -114,14 +115,18 @@ function Slideshow(props) {
         /> 
 
         <figcaption>{props.titles[index]}</figcaption>
-      </figure>
-    </AnimatePresence>
 
       <button className="slideshow_btn btn_prev" onClick={prevSlide} > ◀️ vorheriges Bild </button>
       <button className="slideshow_btn btn_next" onClick={nextSlide} > ▶️ nächstes Bild </button>
+
+      </figure>
+    </AnimatePresence>
+
 
     </div>
   )
 }
 // <p class="reactcomp">{props.proj_title} - cool aber unnötig</p>
+  // <map name="clickable">
+  // <are shape="rect" 
 export default Slideshow

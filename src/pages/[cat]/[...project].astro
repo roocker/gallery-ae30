@@ -13,10 +13,8 @@ import { CollectionEntry, getCollection } from 'astro:content';
 import { Image, Picture } from '@astrojs/image/components';
 import BasicScripts from '../../components/basicScripts.astro';
 import Slideshow from '../../components/Slideshow';
-import TextModal from '../../components/TextModal';
-import Modal from '../../components/Modal.astro';
-import React from 'react';
-
+import TextBlockModal from '../../components/Modal.jsx';
+import ModalBtn from '../../components/ModalBtn.jsx';
 
 export async function getStaticPaths() {
   const allProjects = await getCollection('projects');
@@ -49,19 +47,19 @@ let slideshow_alts = slideshow_pictures_alts // or slideshow_plans_alts
 
 console.log(slideshow_images);
 console.log(slideshow_alts);
+
+const tbmToggle="open";
 ---
 <BasicScripts />
-<script>
-</script>
 
   <Layout title={`AE30 - ${p.title} - work in progress`} description= {`${p.category}/${p.title}`}image="">
 
   <section class="project_presentation" aria-label={`Projekt ${p.title} Presentation`}>
     <article class="project">
 
-      <Slideshow client:load images={slideshow_images} titles={slideshow_alts} >
-      </Slideshow>
-      
+      <Slideshow client:load images={slideshow_images} titles={slideshow_alts} />
+
+
 
 <!--
       <Modal client:load
@@ -76,7 +74,10 @@ console.log(slideshow_alts);
       />
       -->
 
-      <!--<TextModal client:load
+
+
+      <!--
+      <TextModal client:load
       title={p.title}
       slug={proj.slug}
       category={p.category}
@@ -85,7 +86,9 @@ console.log(slideshow_alts);
       id={proj.id}
       collection={proj.collection}
       body={proj.body}
-      />-->
+      />
+      -->
+
 
       <!-- <span slot="proj_title">{p.title}</span> -->
       <!-- optionale Werte condition abfrage notw? -->
@@ -109,15 +112,18 @@ console.log(slideshow_alts);
 
 
     </article>
+
+
+
     <section class="footer_controls" aria-label="Plankopf Footer Controls">
       <span class="cat">{p.category} - </span>
       <span class="title">{p.title}</span>
 
 
-
-      <Modal id="dialog" open="Text toggle" >
+      <!-- worked with Modal.astro -->
+      <!--
+      <Modal id="dialog" open="Text toggle" client:load>
       <div slot="text_modal">
-
         <h2>{p.title}</h2>
         <dl className="textmodal_ul">
           <dt>Jahr:</dt><dd>2018 - 2022</dd>
@@ -137,23 +143,40 @@ console.log(slideshow_alts);
         <p>{p.short}</p>
         <p><a href="#">mehr...</a></p>
 
-        <p>
-        {proj.body}
-        </p>
+        <p> {proj.body} </p>
       </div>
-      <button slot="close" className="modal_btn btn_close" type="button" title="Text Pop-up schließen" aria-label="Text Pop-up schließen">
-        <svg className="svg-icon">
-          <use id="icon-close" className="svg-icon-use" href="/svg.svg#close" />
+
+      <button slot="close" class="modal_btn btn_close" title="Text Pop-up schließen" aria-label="Text Pop-up schließen">
+        <svg class="svg-icon">
+          <use id="icon-close" class="svg-icon-use" href="/svg.svg#close" />
         </svg>
       </button>
-      <!-- <button slot="close">Close modal</button> -->
       </Modal>
 
+      -->
+
+      <ModalBtn client:load/>
 
 
-      <button class="" title="Toggle Text" type="button" tm-toggle>nix</button>
+
+      <TextBlockModal client:load open={tbmToggle}>
+        <div slot="text">
+          <h2>{p.title}</h2>
+          <p>{proj.body}</p>
+        </div>
+      </TextBlockModal>
+
+      <!--
+      <button class="" title="Toggle Text" type="button" onclick="nix" >
+        Text un-/sichtbar
+      </button>
+      -->
+
       <span class="page_counter">1/4</span>
-      <button class="" name="Toggle Plans">Plans Toggle</button>
+
+      <button class="" name="Toggle Plans">
+        Pläne un-/sichtbar
+      </button>
     </section>
 
   </section>

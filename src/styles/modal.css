@@ -1,81 +1,78 @@
-/* 
-TODO
-- [ ] rethink how to position Modal
-*/
-#textmodal{
-  position: fixed;
-  bottom: calc(var(--gmodulem)*4);
-  /* i dont like how this is centered */
-  left: 50%;
-  transform: translate(-50%, 0);
-  padding: 1em;
-  margin: 0;
+.backdrop{
+  position: absolute;
+  top:0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #2233aae1;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+
+.modal{
+  width: clamp(50%, 700px, 90%);
+  height: min(50% 300px);
+
+  margin: auto;
+  padding: 0 2rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: white;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+  .modal_open_btn{
+    height: 100%;
+  }
+  .test{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background: red;
+  }
+
+dialog {
+  border: none !important;
+
   width: 100%;
   max-width: 37.5em;
-  box-sizing: border-box;
+  /* bottom: -5vh; */
+  margin-bottom: 3em;
   max-height: 80vh;
-  overflow-y: auto;
-  background: var(--cwhite);
-  /* background: lavender; */
-}
-/* Text styles------------------- */
-h2{
-  /* font-size: 1.2em; */
-  line-height: 1em;
-  margin: 0;
-  font-family: var(--fsans2);
-}
+  text-align: left;
 
-dl{
-  font-size: .8em;
-  font-family: var(--fsans2);
-  /* line-height: calc(var(--fline_height) / 2); */
-  line-height: 1.2rem;
-}
-dt{
-  float: left;
-  padding-right: 2em;
-
-  display: none;
-  text-indent: -9999px;
-}
-dd{
-  margin: 0;
-}
-
-#textmodal ul{
-  font-family: var(--fsans2);
-  list-style: none;
-  padding: 0;
+  background: var(--cwhite80);
+  backdrop-filter: blur(5px);
 
 }
-#textmodal ul li span{
-  text-transform: uppercase;
-  padding-right: 3em;
-  font-weight: bold;
-}
+  dialog::backdrop{
+    background: none;
+  }
 
 
-/* ------------------- */
+/* Media Queries ------------------- */
 
-button.modal_btn{
-  border: none;
-  background: none;
-  height: calc(var(--gmodulem) * 1);
-  padding: 0;
-  position: absolute;
-  top: var(--gmodulem) ;
-  right: var(--gmodulem) ;
-}
-button.modal_btn:hover{
-  cursor: pointer;
-}
-.svg-icon{
-  /* background: yellow; */
-  height: 100%;
-  aspect-ratio: 1;
-
-}
-.modal_btn{
-}
+  @media only screen and (min-width: 85.375em /* var(--vwM) */) { 
+    dialog {
+      margin-right: calc(50vw + 4em);
+    }
+  }
 
