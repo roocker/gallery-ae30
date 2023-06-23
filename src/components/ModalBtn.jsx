@@ -1,30 +1,11 @@
-import { useState } from 'react';
-// import {motion} from "framer-motion";
+import { useStore } from '@nanostores/react';
+import { modalOpen } from '../states.jsx';
 
-import TextBlockModal from './Modal';
+export default function ModalBtn({ BtnName }) {
+  const isOpen = useStore(modalOpen);
+  const toggleModal = () => modalOpen.set(!isOpen);
 
+  console.log('ModBtn:',isOpen);
 
-function ModalBTN(){
-  // const text = props.text;
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const close = () => setModalOpen(false);
-  const open = () => setModalOpen(true);
-
-  return(
-    <div>
-    <button
-    className="save-button"
-    onClick={() => (modalOpen ? close() : open())}
-    >
-    Launch Modal
-    </button>
-
-    {modalOpen && <TextBlockModal modalOpen={modalOpen} handleClose={close} />}
-
-    </div>
-  )
+  return <button onClick={toggleModal} className="modal_toggle_btn">{BtnName}</button>;
 }
-export default ModalBTN;
-
-
