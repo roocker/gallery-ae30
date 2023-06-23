@@ -54,7 +54,7 @@ const path_variants = {
   i: { 
     opacity:0,
     pathLength:0,
-    color:"#fff"
+    color:"var(--cwhite)"
 
   },
   a: (i) => {
@@ -62,7 +62,7 @@ const path_variants = {
     return {
     opacity: 1,
     pathLength: [null , 1, 0],
-    color:"#000",
+    color:"var(--cblack)",
     transition: {
       color: {
         delay,
@@ -82,13 +82,17 @@ const path_variants = {
     }
   }
 
-
+// onClick="menuToggle"
 
 function Logo (){
+ const toggleMenu = () => {
+    document.getElementById('mainnav')?.classList.toggle('hidden');
+  }; 
+
   return (
     <h1>
     <span>AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus</span>
-      <a className="link" onClick="menuToggle">
+      <a className="link" onClick={toggleMenu}>
 <AnimatePresence>
       <motion.svg
       className="logo svg-logo-use"
