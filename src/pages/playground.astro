@@ -1,15 +1,29 @@
 ---
 import ModalBtn from '../components/ModalBtn.jsx'
 import TextBlockModal from '../components/TextBlockModal.jsx'
+import BasicScripts from '../components/basicScripts.astro';
+import Layout from '../layouts/Layout.astro'
 
 
 ---
 <!-- <Modalbtn client:load text="testtesteste"/> -->
+<BasicScripts />
 
-<ModalBtn BtnName="toggle" client:load />
+<Layout title={`AE30 - work in progress`} description="" image="">
+
+<a href="" menu-toggle>menu</a>
+
+  <ModalBtn BtnName="toggle" client:load />
 
 
-<TextBlockModal client:load>
-<h2>the modal content</h2>
- <p>Lorem ipsum dolor sit amet</p> 
-</TextBlockModal>
+  <TextBlockModal client:load>
+  <h2>the modal content</h2>
+  <p>Lorem ipsum dolor sit amet</p> 
+  </TextBlockModal>
+</Layout>
+
+<style>
+  body{
+    background: lavender;
+  }
+</style>

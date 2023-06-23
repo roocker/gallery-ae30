@@ -1,11 +1,28 @@
 import { useStore } from '@nanostores/react';
 import { modalOpen } from '../states.jsx';
+import '../styles/btn.css'
 
-export default function ModalBtn({ BtnName }) {
+function ModalBtn({ children }) {
   const isOpen = useStore(modalOpen);
-  const toggleModal = () => modalOpen.set(!isOpen);
+  const toggleModal = () => {
+    modalOpen.set(!isOpen);
+    // console.log('toggleModal is called and "isOpen":',isOpen);
+  }
 
-  console.log('ModBtn:',isOpen);
+  return (
+    console.log(children.props.value),
+    <button
+      onClick={toggleModal}
+      className="btn modal_toggle_btn"
+      title={children.props.value}
+      >
+    <svg className="btn_svg">
+      <use className="btn_use" href="/svg.svg#text"/>
+    </svg>
 
-  return <button onClick={toggleModal} className="modal_toggle_btn">{BtnName}</button>;
+    </button>
+  );
 }
+
+
+export default ModalBtn;

@@ -1,3 +1,104 @@
+/*
+ 
+ 
+ 
+ 
+  wird nicht benutzt!
+
+ */
+
+
+/* ------------------------------------------------ */
+/* from Nav.astro */
+/* ------------------------------------------------ */
+/* Media Queries MENU  ---------------------------------*/
+
+  @media only screen and  (min-width: 32.5em /* var(--vwPl) */) {
+    nav{
+      max-width: 50%;
+      border-bottom-left-radius: 3em;
+    }
+  }
+ 
+
+  @media only screen and  (min-width: 48em /* var(--vwT) */) {
+    nav.hidden{
+      display: inline !important;
+    }
+    nav hr{display: none;}
+    nav{
+      background: none;
+      backdrop-filter: unset;
+      /* background: orange; */
+
+      /* max-width: 100%; */
+      /* width: auto; */
+
+      position: absolute;
+      left: 0;
+      /* width: 100%; */
+
+      max-width: calc(100% - calc(var(--gmodulem) * 12));
+      
+
+      padding: 0;
+      margin: 0;
+      margin-left: calc(var(--gmarginem) * 2);
+      /* padding-right: calc(var(--gmarginem) * 10); */
+      border-bottom-left-radius: 0;
+
+      /* padding-right: calc(var(--gmodulem) * 10); */
+    }
+    ul{ 
+      float: right;
+      display: flex;
+      width: auto;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+
+      /* background: yellow; */
+
+      gap: calc(var(--gmodulem)*2);
+      /* justify-content: center; */
+
+      /* text-align: left; */
+      /* align-items: center; */
+
+      /* opacity: .4; */
+    }
+    ul li{
+      /* background: red; */
+      padding: 0;
+
+      /* width: 100%; */
+      /* margin: 0; */
+    }
+    .menue-icons{
+      background: green;
+      display: none;
+    }
+     #icon-close{
+       display: none; 
+    }
+     .kontakt{
+       display: none;
+     }
+  }
+  @media only screen and  (min-width: 64em /* var(--vwS) */) {
+    nav{
+      height: calc(var(--gmodulem)*4);
+      /* background: blue; */
+      line-height: calc(var(--fline_height) * 2);
+      max-width: calc(100% - calc(var(--gmodulem) * 14));
+    }
+    ul{
+      display: flex;
+    }
+  }
+  @media only screen and  (min-width: 48em /* var(--vwT) */) {
+  nav{
+  }
 /* ------------------------------------------------ */
 /* layout */
 /* ------------------------------------------------ */

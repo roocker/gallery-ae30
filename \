@@ -17,32 +17,26 @@ const slideUp = {
       duration: 0.1,
       type: "spring",
       damping: 25,
-      stiffness: 400,
+      stiffness: 500,
     },
   },
   e: {
-    y: "100vh",
+    y: "-100vh",
     opacity: 0,
     transition: {
-      duration: .2,
+      duration: 0.1,
       type: "spring",
       damping: 25,
-      stiffness: 400,
+      stiffness: 500,
     },
   },
 }
 
 function TextBlockModal({ children, fLmodal }) {
-
   const isOpen = useStore(modalOpen);
-  // console.log ('TextBlockModal at start and "isOpen":', isOpen);
-  const handleClose = () => {
-   modalOpen.set(!isOpen);
-    // console.log('TextBlockModal is called and "isOpen":', isOpen);
-  };
+  const handleClose = () => modalOpen.set(false);
 
-  
-  // console.log('TextBlModal:', isOpen);
+  console.log('TextBlModal:', isOpen);
 
 // event listener for Esc 
   useEffect(() => {
@@ -60,18 +54,12 @@ function TextBlockModal({ children, fLmodal }) {
 
   // return HTML
 
-
-
-    // framerLogger(fLmodal)
-  return (
+  return isOpen ? (
     <AnimatePresence 
-    initial={true}
+    inital={true}
     exitBeforeEnter={true}
-    onExitComplete={() => {
-      console.log('Modal exit animation completed');
-    }}
+    onExitComplete={() => framerLogger(fLmodal)}
     >
-    {isOpen && (
     <Backdrop onClick={handleClose}>
       <motion.div
         className="content"
@@ -80,23 +68,13 @@ function TextBlockModal({ children, fLmodal }) {
         initial="i"
         animate="a"
         exit="e"
-        >
-    {children} 
-<button
-      className="modal_close_btn" 
-      onClick={handleClose}>
-        <svg className="svg-icon">
-          <use id="icon-close" className="svg-icon-use" href="/svg.svg#close" />
-      </svg>
-      </button>
-
-     
+        >{children} 
+    // CLOSE Btn!!!
       </motion.div>
 
     </Backdrop>
-    )}
     </AnimatePresence>
-  ) ;
+  ) : null;
 }
 
 export default TextBlockModal;

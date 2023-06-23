@@ -6,7 +6,7 @@
   width: 100%;
 
   display: flex;
-  align-items: end;
+  align-items: center;
   justify-content: center;
   overflow: hidden;
 
@@ -25,11 +25,30 @@
   /* color: white; */
 
   background: var(--cwhite40);
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(1px);
   /* background: green; */
 
 }
-  .modal_toggle_btn{
-    height: 100%;
-  }
+button.modal_close_btn{
+  border: none;
+  background: none;
+  height: calc(var(--gmodulem) * 1);
+  padding: 0;
+  position: absolute;
+  top: var(--gmodulem) ;
+  right: var(--gmodulem) ;
+    color: var(--cgrey);
+}
+
+button.modal_close_btn:hover{
+  cursor: pointer;
+    color: var(--cblack);
+}
+
+.svg-icon{
+  /* background: yellow; */
+  /* height: 100%; */
+  aspect-ratio: 1;
+
+}
 

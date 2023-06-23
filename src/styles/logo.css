@@ -19,14 +19,20 @@
     height: 4em;
 
     border-radius: 50%;
-    background: var(--cwhite);
+    /* dark mode */
+    background: var(--cwhite60);  
+    /* light mode */
+    /* background: var(--cgrey);   */
     /* background: red; */
     z-index: 4;
-    box-shadow: 0 0 .5em 0 lightgrey;
-    
+    /* box-shadow: 0 0 .5em 0 lightgrey; */
+
   }
   .logo{
-    color: var(--cblack);
+    /* dark mode */
+    color: var(--cblack); 
+    /* light mode */
+    /* color: var(--cwhite); */
 
     outline: none;
     display: flex;
