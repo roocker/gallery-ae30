@@ -47,6 +47,8 @@ let slideshow_alts = slideshow_pictures_alts // or slideshow_plans_alts
 
 console.log(slideshow_images);
 console.log(slideshow_alts);
+
+const tbmToggle="open";
 ---
 <BasicScripts />
 
@@ -58,12 +60,79 @@ console.log(slideshow_alts);
       <Slideshow client:load images={slideshow_images} titles={slideshow_alts} />
 
 
-      <!-- <ModalBtn BtnName="Text ein-/ausblenden" client:load/> -->
+      <ModalBtn BtnName="Text ein-/ausblenden" client:load/>
 
       <TextBlockModal client:load >
+          <h2>{p.title}</h2>
+          <p>{proj.body}</p>
+      </TextBlockModal>
 
+
+<!--
+      <Modal client:load
+      title={p.title}
+      slug={proj.slug}
+      category={p.category}
+      subcategory={p.subcategory}
+      short={p.short}
+      id={proj.id}
+      collection={proj.collection}
+      body={proj.body}
+      />
+      -->
+
+
+
+      <!--
+      <TextModal client:load
+      title={p.title}
+      slug={proj.slug}
+      category={p.category}
+      subcategory={p.subcategory}
+      short={p.short}
+      id={proj.id}
+      collection={proj.collection}
+      body={proj.body}
+      />
+      -->
+
+
+      <!-- <span slot="proj_title">{p.title}</span> -->
+      <!-- optionale Werte condition abfrage notw? -->
+      
+      <!-- 
+      <ul slot="kennwerte">
+      <p>
+      {p.category}
+      {p.subcategory} 
+      {p.category}
+      
+
+      </p>
+        <li>{p.val.nfl}</li>
+        <li>{p.val.typ}</li>
+        <li>{p.val.ri}</li>
+        <li>{p.val.kosten}</li>
+      </ul>
+      </TextModal>
+      -->
+
+
+    </article>
+
+
+
+    <section class="footer_controls" aria-label="Plankopf Footer Controls">
+      <span class="cat">{p.category} - </span>
+      <span class="title">{p.title}</span>
+
+
+      <!-- worked with Modal.astro -->
+      <!--
+      <Modal id="dialog" open="Text toggle" client:load>
+      <div slot="text_modal">
         <h2>{p.title}</h2>
-        <dl class="textmodal_ul">
+        <dl className="textmodal_ul">
           <dt>Jahr:</dt><dd>2018 - 2022</dd>
           <dt>NFL:</dt><dd>3000m²</dd>
           <dt>Typ:</dt><dd>Neubau, Erweiterung</dd>
@@ -82,22 +151,24 @@ console.log(slideshow_alts);
         <p><a href="#">mehr...</a></p>
 
         <p> {proj.body} </p>
+      </div>
 
-      </TextBlockModal>
+      <button slot="close" class="modal_btn btn_close" title="Text Pop-up schließen" aria-label="Text Pop-up schließen">
+        <svg class="svg-icon">
+          <use id="icon-close" class="svg-icon-use" href="/svg.svg#close" />
+        </svg>
+      </button>
+      </Modal>
 
+      -->
 
-    </article>
+      <!--
+      <button class="" title="Toggle Text" type="button" onclick="nix" >
+        Text un-/sichtbar
+      </button>
+      -->
 
-
-
-    <section class="footer_controls" aria-label="Plankopf Footer Controls">
-      <span class="cat">{p.category} - </span>
-      <span class="title">{p.title}</span>
-
-
-
-      <ModalBtn class="btn" BtnName="Text ein-/ausblenden" client:load/>
-
+      <ModalBtn BtnName="Text ein-/ausblenden" client:load/>
       <span class="page_counter">1/4</span>
 
       <button class="" name="Toggle Plans">
@@ -150,20 +221,32 @@ article .texts{}
     opacity: .5;
     text-align: center;
   }
-  .footer_controls button, .btn{
+  .footer_controls button{
     height: 100%;
   }
   .footer_controls > {
     backdrop-filter: blur(2px);
   }
 /* Modal Styles ----------------- */
+  
 
-  /* Modal Text styles------------------- */
+
+#textmodal ul{
+  font-family: var(--fsans2);
+  list-style: none;
+  padding: 0;
+
+}
+#textmodal ul li span{
+  text-transform: uppercase;
+  padding-right: 3em;
+  font-weight: bold;
+}
+  /* Text styles------------------- */
 h2{
   /* font-size: 1.2em; */
   line-height: 1em;
-  text-transform: uppercase;
-  /* margin: 0; */
+  margin: 0;
   font-family: var(--fsans2);
 }
 
@@ -184,7 +267,7 @@ dd{
   margin: 0;
 }
 
-button.modal_close_btn{
+button.modal_btn{
   border: none;
   background: none;
   height: calc(var(--gmodulem) * 1);
@@ -193,8 +276,7 @@ button.modal_close_btn{
   top: var(--gmodulem) ;
   right: var(--gmodulem) ;
 }
-
-button.modal_close_btn:hover{
+button.modal_btn:hover{
   cursor: pointer;
 }
 .svg-icon{
@@ -202,5 +284,7 @@ button.modal_close_btn:hover{
   height: 100%;
   aspect-ratio: 1;
 
+}
+.modal_btn{
 }
 </style>

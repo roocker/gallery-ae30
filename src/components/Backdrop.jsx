@@ -1,38 +1,24 @@
-import {motion} from "framer-motion";
+import React from 'react';
+import { motion } from 'framer-motion';
 import '../styles/modal.css';
 
-const backdrop_variants = {
-  i: {
-    opacity: 0,
-  },
-  a: {
-    opacity: 1,
-    transition: {
-      opacity: {
-        duration: 1,
-      }
-    }
-  },
-  e: {
-    opacity: 0
-  }
+const backdropVariants = {
+  visible: { opacity: 1 },
+  hidden: { opacity: 0 },
+};
 
-}
-
-const Backdrop = ({ children, onClick }) => {
-  return(
+export default function Backdrop({ children, onClick }) {
+  return (
     <motion.div
       className="backdrop"
       onClick={onClick}
-      variants={backdrop_variants}
-      initial="i"
-      animate="a"
-      exit="e"
+      variants={backdropVariants}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
     >
-    {children}
-
-  </motion.div>
+      {children}
+    </motion.div>
   );
+}
 
-};
-export default Backdrop;

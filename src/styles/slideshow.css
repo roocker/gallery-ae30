@@ -79,7 +79,7 @@ button.slideshow_btn{
   fill: currentColor;
 
 
-    box-shadow: 0 0 1em 0 black;
+    /* box-shadow: 0 0 1em 0 black; */
 }
 
 .btn_prev{
