@@ -34,7 +34,7 @@ const {
   <h1><a menu-toggle><span>temp</span><div class="logo">temp</div></a></h1>
     -->
 
-    <Logo client:load menu-toggle/>
+    <Logo client:load/>
 
     <!-- <svg class="logo"> -->
     <!--   <use id="use_logo" class="svg-logo-use" href="/ae30-logo.svg" /> -->
@@ -77,7 +77,7 @@ const {
       <li><a href="/zk">Zeinitzer</a></li>
       <li><hr/></li>
       <li><a href="/archiv">Archiv</a></li>
-      <li><a href="/about">Über uns</a></li>
+      <li><a href="/about">About</a></li>
       <li><a href="/team">Team</a></li>
       <!-- <li><a href="/impressum">Impressum</a></li>-->
     </ul>
@@ -124,19 +124,7 @@ const {
     z-index: 4;
   }
 
-  @keyframes logo-spin{ /* #rev */
-    from {}
-    to{ 
-      transform: rotate(90deg);
-    }
-  }
 
-  .logo:hover{
-    /* transform: rotate(90deg); */
-    animation-name: logo-spin;
-    animation: ease;
-    animation-duration: 2s;
-  }
 
   @media only screen and (min-width: 64em /* var(--vwS) */ ) { 
     .logo {
@@ -172,6 +160,7 @@ const {
 
     width: 100%;
     max-width: 37.5em;
+    min-widht: 16em;
     /* padding-top: calc(var(--gmodulem) ); */
 
     color: var(--cgrey);
@@ -184,7 +173,7 @@ const {
 
     /* background: lavender; */
     background: var(--cwhite80);
-    /* backdrop-filter: blur(calc(var(--gmodulpx) / 3)); */
+    backdrop-filter: blur(3px);
 
     border-bottom-left-radius: 3em;
     z-index:3;
@@ -266,93 +255,5 @@ const {
     padding-bottom: var(--gmodulem);
   }
 
-/* Media Queries MENU  ---------------------------------*/
-
-  @media only screen and  (min-width: 32.5em /* var(--vwPl) */) {
-    nav{
-      max-width: 50%;
-      border-bottom-left-radius: 3em;
-    }
-  }
- 
-
-  @media only screen and  (min-width: 48em /* var(--vwT) */) {
-    nav.hidden{
-      display: inline !important;
-    }
-    nav hr{display: none;}
-    nav{
-      background: none;
-      backdrop-filter: unset;
-      /* background: orange; */
-
-      /* max-width: 100%; */
-      /* width: auto; */
-
-      position: absolute;
-      left: 0;
-      /* width: 100%; */
-
-      max-width: calc(100% - calc(var(--gmodulem) * 12));
-      
-
-      padding: 0;
-      margin: 0;
-      margin-left: calc(var(--gmarginem) * 2);
-      /* padding-right: calc(var(--gmarginem) * 10); */
-      border-bottom-left-radius: 0;
-
-      /* padding-right: calc(var(--gmodulem) * 10); */
-    }
-    ul{ 
-      float: right;
-      display: flex;
-      width: auto;
-      height: 100%;
-      margin: 0;
-      padding: 0;
-
-      /* background: yellow; */
-
-      gap: calc(var(--gmodulem)*2);
-      /* justify-content: center; */
-
-      /* text-align: left; */
-      /* align-items: center; */
-
-      /* opacity: .4; */
-    }
-    ul li{
-      /* background: red; */
-      padding: 0;
-
-      /* width: 100%; */
-      /* margin: 0; */
-    }
-    .menue-icons{
-      background: green;
-      display: none;
-    }
-     #icon-close{
-       display: none; 
-    }
-     .kontakt{
-       display: none;
-     }
-  }
-  @media only screen and  (min-width: 64em /* var(--vwS) */) {
-    nav{
-      height: calc(var(--gmodulem)*4);
-      /* background: blue; */
-      line-height: calc(var(--fline_height) * 2);
-      max-width: calc(100% - calc(var(--gmodulem) * 14));
-    }
-    ul{
-      display: flex;
-    }
-  }
-  @media only screen and  (min-width: 48em /* var(--vwT) */) {
-  nav{
-  }
 
 </style>

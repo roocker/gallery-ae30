@@ -13,8 +13,11 @@ import { CollectionEntry, getCollection } from 'astro:content';
 import { Image, Picture } from '@astrojs/image/components';
 import BasicScripts from '../../components/basicScripts.astro';
 import Slideshow from '../../components/Slideshow';
-import TextBlockModal from '../../components/TextBlockModal.jsx';
-import ModalBtn from '../../components/ModalBtn.jsx';
+import TextBlockModal from '../../components/TextBlockModal';
+import ModalBtn from '../../components/ModalBtn';
+import PlanBtn from '../../components/PlanBtn';
+import SlideshowCounter from '../../components/SlideshowCounter';
+
 
 export async function getStaticPaths() {
   const allProjects = await getCollection('projects');
@@ -34,19 +37,18 @@ const width = 3;
 const height = 2;
 
 const slideshow_pictures = [p.titleimg.img].concat(p.fotos.map((img) => img.foto));
-
 const slideshow_pictures_alts = [p.titleimg.alt].concat(p.fotos.map((img) => img.alt));
 
-/* 
-const slideshow_plans = [];
-const slideshow_plans_alts = []; 
-*/
+const slideshow_plans = p.plans.map((plan) => plan.plan);
+const slideshow_plans_alts = p.plans.map((plan) => plan.alt);
 
-let slideshow_images = slideshow_pictures // or slideshow_plans
-let slideshow_alts = slideshow_pictures_alts // or slideshow_plans_alts
+// let slideshow_images = slideshow_plans // or slideshow_plans
+// let slideshow_alts = slideshow_plans_alts // or slideshow_plans_alts
 
-console.log(slideshow_images);
-console.log(slideshow_alts);
+
+// console.log(slideshow_images);
+// console.log(slideshow_alts);
+
 ---
 <BasicScripts />
 
@@ -55,7 +57,7 @@ console.log(slideshow_alts);
   <section class="project_presentation" aria-label={`Projekt ${p.title} Presentation`}>
     <article class="project">
 
-      <Slideshow client:load images={slideshow_images} titles={slideshow_alts} />
+      <Slideshow client:load pictures={slideshow_pictures} pictureTitles={slideshow_pictures_alts} plans={slideshow_plans} planTitles={slideshow_plans_alts} />
 
 
       <!-- <ModalBtn BtnName="Text ein-/ausblenden" client:load/> -->
@@ -65,7 +67,7 @@ console.log(slideshow_alts);
         <h2>{p.title}</h2>
         <dl class="textmodal_ul">
           <dt>Jahr:</dt><dd>2018 - 2022</dd>
-          <dt>NFL:</dt><dd>3000m²</dd>
+          <dt>NFL:</dt><dd>3090m²</dd>
           <dt>Typ:</dt><dd>Neubau, Erweiterung</dd>
           <dt>Tags:</dt><dd>{p.subcategory}</dd>
         </dl>
@@ -90,19 +92,28 @@ console.log(slideshow_alts);
 
 
 
+    <!-- <span class="cat">{p.category} - </span> -->
+
     <section class="footer_controls" aria-label="Plankopf Footer Controls">
-      <span class="cat">{p.category} - </span>
-      <span class="title">{p.title}</span>
+      <div class="footer_line f1">
+        <h3 class="footer_title">{p.title}</h3>
+      </div>
+
+      <div class="footer_line f3">
+        <!-- <SlideshowBtnP client:load>Vorheriges Bild</ModalBtn> -->
+        <ModalBtn client:load>Text ein-/ausblenden</ModalBtn>
+        <!-- <PauseBtn client:load>Slideshow pausieren</PauseBtn> -->
+        <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>
+        <!-- <SlideshowBtnN client:load>Nächstes Bild</ModalBtn> -->
+      </div>
+
+      <div class="footer_line f2">
+        <SlideshowCounter client:load/>
+      </div>
 
 
 
-      <ModalBtn class="btn" BtnName="Text ein-/ausblenden" client:load/>
 
-      <span class="page_counter">1/4</span>
-
-      <button class="" name="Toggle Plans">
-        Pläne un-/sichtbar
-      </button>
     </section>
 
   </section>
@@ -139,29 +150,44 @@ article .plans{}
 article .texts{}
 /* FOOTER CONTROLS  ----------------------------*/
   .footer_controls{
-    /* display: none; */
-    font-family: var(--fsans2);
+    font-family: var(--fsans3);
     position: fixed;
-    bottom: 0;
+    bottom: 1em;
 
     width: 100%;
-    height: calc(var(--gmodulem)*3);
-    background: grey;
-    opacity: .5;
+    height: 9em;
+    line-height: 3em;
+
+    /* background: grey; */
     text-align: center;
+
+
   }
-  .footer_controls button, .btn{
-    height: 100%;
+  /* .f1{ background: red; } */
+  /* .f2{ background: orange; } */
+  /* .f3{ background: yellow; } */
+  .footer_line{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 3em;
   }
-  .footer_controls > {
-    backdrop-filter: blur(2px);
+  h3.footer_title{
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    line-height: auto;
+    line-height: 3em;
+    font-size: 1em;
+    font-weight: 100;
   }
+
 /* Modal Styles ----------------- */
 
   /* Modal Text styles------------------- */
 h2{
   /* font-size: 1.2em; */
-  line-height: 1em;
+  /* line-height: 1em; */
   text-transform: uppercase;
   /* margin: 0; */
   font-family: var(--fsans2);
@@ -184,23 +210,6 @@ dd{
   margin: 0;
 }
 
-button.modal_close_btn{
-  border: none;
-  background: none;
-  height: calc(var(--gmodulem) * 1);
-  padding: 0;
-  position: absolute;
-  top: var(--gmodulem) ;
-  right: var(--gmodulem) ;
-}
 
-button.modal_close_btn:hover{
-  cursor: pointer;
-}
-.svg-icon{
-  /* background: yellow; */
-  height: 100%;
-  aspect-ratio: 1;
 
-}
 </style>

@@ -216,7 +216,24 @@ export default defineConfig({
             label: 'Alternativ Text',
             hint: 'Bildtitel sind wichtig für Suchmaschinen & wenn das Bild nicht geladen werden kann!'
           }]
-        }, {
+        },
+        {
+          name: 'plans',
+          widget: 'list',
+          required: false,
+          fields: [{
+            name: 'plan',
+            widget: 'image',
+            label: 'Plan',
+            required: false
+          }, {
+            name: 'alt',
+            widget: 'string',
+            label: 'Alternativ Text',
+            hint: 'Bild/Plantitel sind wichtig für Suchmaschinen & wenn das Bild nicht geladen werden kann!'
+          }]
+        },
+          {
           name: 'short',
           widget: 'markdown',
           label: 'Kurztext',

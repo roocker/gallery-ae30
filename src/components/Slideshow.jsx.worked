@@ -68,18 +68,16 @@ function Slideshow(props) {
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState(0)
 
-const toggle = useStore(toggleSlideshow)
 
-let images = toggle ? props.pictures : props.plans;
-  console.log(props.pictures);
-let alts = toggle ? props.picturesTitles : props.plansTitles;
-  ;
+// let images = toggle ? props.slideshow_pictures : props.slideshow_plans;
+// let alts = toggle ? props.slideshow_pictures_alts : props. slideshow_plans_alts;
+
 
   const slideshowIndex = (newIndex) => {
     slideshow_index.set(newIndex +1); 
   };
   const slideShowLengh = () => {
-    slideshow_length.set(images.length);
+    slideshow_length.set(props.pictures.length);
   }
   useEffect(() => {
 
@@ -92,7 +90,7 @@ let alts = toggle ? props.picturesTitles : props.plansTitles;
   // #rev should only be one function
  function nextSlide(){
   setDirection(1)
-  if(index === images.length -1){
+  if(index === props.pictures.length -1){
     slideshowIndex(0);
     setIndex(0)
   } else {
@@ -104,14 +102,13 @@ let alts = toggle ? props.picturesTitles : props.plansTitles;
 function prevSlide(){
   setDirection(-1)
   if(index === 0){
-    slideshowIndex(images.length -1);
-    setIndex(images.length -1)
+    slideshowIndex(props.pictures.length -1);
+    setIndex(props.pictures.length -1)
   } else {
     slideshowIndex(index - 1);
     setIndex(index - 1);
   }
 }
-
   return (
     <div className="slideshow_div">
 
@@ -128,13 +125,13 @@ function prevSlide(){
     initial="i"
     animate="a"
     exit="e"
-    key={images[index]}
+    key={props.pictures[index]}
     custom={direction}
-    src={images[index]}
-    alt={alts[index]} 
+    src={props.pictures[index]}
+    alt={props.pictureTitles[index]} 
     /> 
 
-    <figcaption>{alts[index]}</figcaption>
+    <figcaption>{props.pictureTitles[index]}</figcaption>
 
     <button className="slideshow_btn btn_prev" onClick={prevSlide} > ◀️ vorheriges Bild </button>
     <button className="slideshow_btn btn_next" onClick={nextSlide} > ▶️ nächstes Bild </button>
@@ -146,4 +143,7 @@ function prevSlide(){
     </div>
   )
 }
+// <p class="reactcomp">{props.proj_title} - cool aber unnötig</p>
+  // <map name="clickable">
+  // <are shape="rect" 
 export default Slideshow

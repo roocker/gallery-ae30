@@ -13,6 +13,13 @@ fotos:
     alt: Foto vgl Übersicht Rendering
   - foto: /media/IMG_20220112_090306.jpg
     alt: Foto Treppen Haupteingang West
+plans:
+  - plan: /media/1.jpg
+    alt: Grundriss EG
+  - plan: /media/2.jpg
+    alt: Querschnitt
+  - plan: /media/3.jpg
+    alt: Detail
 short: "Zur Entlastung der Laborflächen des ATI (Atominstitut) und zur Aufnahme der Universitären Service Einrichtung für Transmissionselektronenmikroskopie (USTEM) entsteht am Areal Stadionallee ein neues Institutsgebäude."
 long: asdfasdf
 ---
