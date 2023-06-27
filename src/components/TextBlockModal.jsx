@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react';
-import { modalOpen } from '../states.jsx';
+import { stateModal } from '../states.jsx';
 import Backdrop from './Backdrop.jsx';
 import '../styles/modal.css';
 import { useEffect } from 'react';
@@ -32,14 +32,41 @@ const slideUp = {
   },
 }
 
+
+
 function TextBlockModal({ children, fLmodal }) {
 
-  const isOpen = useStore(modalOpen);
-  // console.log ('TextBlockModal at start and "isOpen":', isOpen);
-  const handleClose = () => {
-   modalOpen.set(!isOpen);
-    // console.log('TextBlockModal is called and "isOpen":', isOpen);
+useEffect (() => {
+
+  const handleKeyDown = (event) => {
+    switch(event.key) {
+      case 't':
+        handleToggle();
+        break;
+      default:
+        break;
+    }
+  }
+
+  document.addEventListener('keydown', handleKeyDown);
+  return () => {
+    document.removeEventListener('keydown', handleKeyDown);
   };
+});
+
+  const isOpen = useStore(stateModal);
+  // console.log ('TextBlockModal at start and "isOpen":', isOpen);
+
+  const handleToggle = () => {
+    stateModal.set(!isOpen);
+  }
+  const handleOpen = () => {
+    stateModal.set(true);
+  }
+const handleClose = () => {
+  stateModal.set(false);
+  // console.log('TextBlockModal is called and "isOpen":', isOpen);
+};
 
   
   // console.log('TextBlModal:', isOpen);
