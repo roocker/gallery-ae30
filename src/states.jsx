@@ -1,31 +1,46 @@
 import { atom } from 'nanostores';
 
-export const modalOpen = atom(false);
-// export const img_plan_toggle = atom(false);
+export const stateModal = atom(false);
 
 export const slideshow_index = atom(1);
 export const slideshow_length = atom(1);
 
-export const toggleSlideshow = atom(() => {
-  let toggle = true;
-  function setToggle(value) {
-    toggle = value;
-    toggleSlideshow.set(toggle);
+
+/* export const togglePlayback = atom(() => {
+  let pptoggle = false;
+  function setPPtoggle(value) {
+    togglePlayback.set(value);
   }
-  toggleSlideshow.setToggle = setToggle;
-});
+  togglePlayback.setPPtoggle = setPPtoggle;
+}); */
+
+export const stateSlideshow = atom(false);
+export const statePlayback = atom(false);
+
+/* export const toggleSlideshow = atom(() => {
+  let stoggle = false;
+  function setStoggle(value) {
+    toggleSlideshow.set(value);
+  }
+}); */
+
 
 // Should use unsubscribe or comment out later!
-modalOpen.subscribe((newValue) => {
-  console.log('States: modalOpen updated:', newValue);
+stateModal.subscribe((newValue) => {
+  console.log('States: stateModal updated:', newValue);
 })
 
 slideshow_index.subscribe((newValue) => {
   console.log('States: slideshow_index updated:', newValue);
-})
+});
 slideshow_length.subscribe((newValue) => {
   console.log('States: slideshow_length updated:', newValue);
-})
-toggleSlideshow.subscribe((newValue) => {
-  console.log('States: toggleSlideshow updated:', newValue);
-})
+});
+
+stateSlideshow.subscribe((newValue) => {
+  console.log('States: Slideshow updated (true = fotos , false = plans):', newValue);
+});
+
+statePlayback.subscribe((newValue) => {
+  console.log('States: Playback updated:', newValue);
+});

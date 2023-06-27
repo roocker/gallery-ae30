@@ -29,7 +29,7 @@ figure picture{
   padding: 0 !important;
   background: blue;
 }
-figure img{
+figure img.slideshow_img{
   /* fullscreen or no fullscreen */
   /* min-width: 100%; */
   max-width: 100%;
@@ -43,6 +43,11 @@ figure img{
   /* background: orange; */
 
 }
+img.slideshow_plan{
+  min-height: auto !important;
+  max-height: 75vh;
+}
+
 figcaption{
 
     z-index: 1;
