@@ -1,16 +1,16 @@
 import { useStore } from '@nanostores/react';
-import { modalOpen } from '../states.jsx';
+import { stateModal } from '../states.jsx';
 import '../styles/btn.css'
 
 function ModalBtn({ children }) {
-  const isOpen = useStore(modalOpen);
+  const isOpen = useStore(stateModal);
   const toggleModal = () => {
-    modalOpen.set(!isOpen);
+    stateModal.set(!isOpen);
     // console.log('toggleModal is called and "isOpen":',isOpen);
   }
 
   return (
-    console.log(children.props.value),
+    // console.log(children.props.value),
     <button
       onClick={toggleModal}
       className="btn modal_toggle_btn"

@@ -1,24 +1,25 @@
 import { useStore } from '@nanostores/react';
-import { stateSlideshow } from '../states';
+import { statePlayback } from '../states';
 import '../styles/btn.css'
 
-function PlanBtn({ children }) {
+function PlaybackBtn({ children }) {
 
   // const [toggle, setToggle] = useStore(stateSlideshow);
-  const sToggle = useStore(stateSlideshow);
+  const pToggle = useStore(statePlayback);
   const setToggle = () => {
-    stateSlideshow.set(!sToggle)
+    statePlayback.set(!pToggle)
   }
 
   return (
     // console.log(children.props.value),
+    // {`${pToggle ? 'an' : 'aus'}`}
     <button
       onClick={setToggle}
       className="btn modal_toggle_btn"
       title={children.props.value}
       >
     <svg className="btn_svg">
-      <use className="btn_use" href="/svg.svg#plans"/>
+      <use className="btn_use" href={!pToggle ? "/svg.svg#play" : "/svg.svg#pause"}/>
     </svg>
 
     </button>
@@ -26,4 +27,4 @@ function PlanBtn({ children }) {
 }
 
 
-export default PlanBtn;
+export default PlaybackBtn;

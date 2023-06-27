@@ -21,12 +21,11 @@ TODO
 */
 
 import "../styles/slideshow.css";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { useStore } from '@nanostores/react';
-import { slideshow_index, slideshow_length, toggleSlideshow } from '../states.jsx';
-
+import { slideshow_index, slideshow_length, stateSlideshow, statePlayback  } from '../states.jsx';
 
 
 
@@ -68,49 +67,124 @@ function Slideshow(props) {
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState(0)
 
-const toggle = useStore(toggleSlideshow)
+  //Toggle for Autoplayback
+  // const ppToggle = useStore(statePlayback)
 
-let images = toggle ? props.pictures : props.plans;
-  console.log(props.pictures);
-let alts = toggle ? props.picturesTitles : props.plansTitles;
+  //Toggle for Images/Plans
+  const sToggle = useStore(stateSlideshow);
+  const setSlidesToggle = () => {
+    console.log('toggleSlides being used in slideshow')
+    stateSlideshow.set(!sToggle);
+  }
+
+  let images = sToggle ? props.pictures : props.plans;
+  console.log("slideshow images used: ", `${sToggle? 'pictures (true)' : 'plans (false)'}`);
+  let alts = sToggle ? props.pictureTitles : props.planTitles;
   ;
-
+  
+  // export current Index and Image Array lengh for counter
   const slideshowIndex = (newIndex) => {
     slideshow_index.set(newIndex +1); 
   };
   const slideShowLengh = () => {
     slideshow_length.set(images.length);
   }
+
+  // auto Playback
+  const playback = useStore(statePlayback);
+  const setPlayback = () => {
+    statePlayback.set(!playback)
+  }
+
+  const autoPlayRef = useRef();
+
+  useEffect(() => {
+    autoPlayRef.current = nextSlide
+  })
+
+  /* useEffect(() => {
+   if (playback) {
+    const interval = setInterval(autoPlayRef.current, props.autoPlayInterval * 1000)
+   };
+  }) */
+
+
+  /* useEffect(() => {
+    let interval;
+    if (playback) {
+      interval = setInterval(() => {
+        console.log('1sec ist um next');
+      }, 1000 );
+    }
+    return () => {
+      clearInterval(interval);
+    }
+  }, [playback]); */
+
+
+  // need to run slideShowLengh here bc error, then keybaord shortcuts
+
+  useEffect(() => {
+    slideShowLengh();
+  },) 
+
+  // Keyboard Hotkeys/Shortcuts 
   useEffect(() => {
 
-  slideShowLengh();
+    const handleKeyDown = (event) => {
+      switch(event.key) {
+        case 'ArrowLeft':
+        case 'h':
+          prevSlide();
+          break;
+        case 'ArrowRight':
+        case 'l':
+          nextSlide();
+          break;
+          // somehow only sets to false 
+        case 'p':
+          setSlidesToggle();
+          break;
+        case 'Space':
+          setPlayback();
+          break;
+        default:
+          break;
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  },);
 
-  })
 
 
 
   // #rev should only be one function
- function nextSlide(){
-  setDirection(1)
-  if(index === images.length -1){
-    slideshowIndex(0);
-    setIndex(0)
-  } else {
-    slideshowIndex(index + 1);
-    setIndex(index + 1);
+  function nextSlide(){
+    setDirection(1)
+    console.log('nextSlide')
+    if(index === images.length -1){
+      slideshowIndex(0);
+      setIndex(0)
+    } else {
+      slideshowIndex(index + 1);
+      setIndex(index + 1);
+    }
   }
-}
 
-function prevSlide(){
-  setDirection(-1)
-  if(index === 0){
-    slideshowIndex(images.length -1);
-    setIndex(images.length -1)
-  } else {
-    slideshowIndex(index - 1);
-    setIndex(index - 1);
+  function prevSlide(){
+    setDirection(-1)
+    console.log('prevSlide')
+    if(index === 0){
+      slideshowIndex(images.length -1);
+      setIndex(images.length -1)
+    } else {
+      slideshowIndex(index - 1);
+      setIndex(index - 1);
+    }
   }
-}
 
   return (
     <div className="slideshow_div">
@@ -121,9 +195,8 @@ function prevSlide(){
     >
     <figure className="slideshow_fig">
 
-
     <motion.img
-    className="slideshow_img"
+    className={`slideshow_img ${!sToggle ? 'slideshow_plan' : ''}`} 
     variants={animation_variants}
     initial="i"
     animate="a"
@@ -141,8 +214,6 @@ function prevSlide(){
 
     </figure>
     </AnimatePresence>
-
-
     </div>
   )
 }
