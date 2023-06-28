@@ -60,6 +60,7 @@
     stroke-linejoin: miter;
     stroke-dasharray: none;
     paint-order: fill;
+  /* should be in CSS soonish  */
     stroke-align: inset;
 
     fill: currentColor;

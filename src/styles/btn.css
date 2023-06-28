@@ -36,3 +36,7 @@ use.btn_use{
   transform: translate(0,0);
   background: blue;
 }
+
+.btn_arrowL{
+  transform: rotate(180deg) !important;
+}

@@ -16,6 +16,8 @@ import Slideshow from '../../components/Slideshow';
 import TextBlockModal from '../../components/TextBlockModal';
 import ModalBtn from '../../components/ModalBtn';
 import PlanBtn from '../../components/PlanBtn';
+import SlideshowNextBtn from '../../components/SlideshowNextBtn';
+import SlideshowPrevBtn from '../../components/SlideshowPrevBtn';
 import PlaybackBtn from '../../components/PlaybackBtn';
 import SlideshowCounter from '../../components/SlideshowCounter';
 
@@ -58,12 +60,13 @@ const slideshow_plans_alts = p.plans.map((plan) => plan.alt);
   <section class="project_presentation" aria-label={`Projekt ${p.title} Presentation`}>
     <article class="project">
 
-      <Slideshow client:load
+      <Slideshow
+      client:load
       pictures={slideshow_pictures}
       pictureTitles={slideshow_pictures_alts}
       plans={slideshow_plans}
       planTitles={slideshow_plans_alts}
-      autoPlaytime={5}
+      autoPlayInterval={5}
       />
 
 
@@ -107,11 +110,11 @@ const slideshow_plans_alts = p.plans.map((plan) => plan.alt);
       </div>
 
       <div class="footer_line f3">
-        <!-- <SlideshowBtnP client:load>Vorheriges Bild</ModalBtn> -->
+        <SlideshowPrevBtn client:load>Vorheriges Bild</SlideshowPrevBtn>
         <ModalBtn client:load>Text ein-/ausblenden</ModalBtn>
-        <PlaybackBtn client:load>Slideshow pausieren</PauseBtn>
+        <PlaybackBtn client:load>Slideshow pausieren</PlaybackBtn>
         <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>
-        <!-- <SlideshowBtnN client:load>Nächstes Bild</ModalBtn> -->
+        <SlideshowNextBtn client:load>Nächstes Bild</SlideshowNextBtn>
       </div>
 
       <div class="footer_line f2">
