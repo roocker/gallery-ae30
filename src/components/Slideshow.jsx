@@ -160,7 +160,6 @@ function Slideshow(props) {
 
 
 
-
   // #rev should only be one function
   function nextSlide(){
     setDirection(1)
@@ -217,4 +216,7 @@ function Slideshow(props) {
     </div>
   )
 }
+
+// export { nextSlide, prevSlide };
+
 export default Slideshow
