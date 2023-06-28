@@ -25,7 +25,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { useStore } from '@nanostores/react';
-import { slideshow_length, stateSlideshow, statePlayback, stateSlideshowIndex, stateSlideshowDirection  } from '../states.jsx';
+import { slideshow_index, slideshow_length, stateSlideshow, statePlayback  } from '../states.jsx';
 
 
 
@@ -64,12 +64,11 @@ const animation_variants = {
 
 function Slideshow(props) {
 
-  // const [index, setIndex] = useState(0)
-  // const [direction, setDirection] = useState(0)
+  const [index, setIndex] = useState(0)
+  const [direction, setDirection] = useState(0)
 
-  const index = useStore(stateSlideshowIndex)
-  const direction = useStore(stateSlideshowDirection)
-
+  //Toggle for Autoplayback
+  // const ppToggle = useStore(statePlayback)
 
   //Toggle for Images/Plans
   const sToggle = useStore(stateSlideshow);
@@ -84,19 +83,49 @@ function Slideshow(props) {
   ;
   
   // export current Index and Image Array lengh for counter
+  const slideshowIndex = (newIndex) => {
+    slideshow_index.set(newIndex +1); 
+  };
   const slideShowLengh = () => {
     slideshow_length.set(images.length);
   }
 
-  slideShowLengh();
+  // auto Playback
+  const playback = useStore(statePlayback);
+  const setPlayback = () => {
+    statePlayback.set(!playback)
+  }
+
+  const autoPlayRef = useRef();
+
+  useEffect(() => {
+    autoPlayRef.current = nextSlide
+  })
+
+  /* useEffect(() => {
+   if (playback) {
+    const interval = setInterval(autoPlayRef.current, props.autoPlayInterval * 1000)
+   };
+  }) */
+
+
+  /* useEffect(() => {
+    let interval;
+    if (playback) {
+      interval = setInterval(() => {
+        console.log('1sec ist um next');
+      }, 1000 );
+    }
+    return () => {
+      clearInterval(interval);
+    }
+  }, [playback]); */
+
 
   // need to run slideShowLengh here bc error, then keybaord shortcuts
 
-  
   useEffect(() => {
-    const footerControls = document.querySelector(".controls");
-    footerControls.style.color = sToggle ?  'var(--cwhite)' : 'var(--cgrey)';
-    console.log('halloooooooooooooooooooooooooooo', footerControls);
+    slideShowLengh();
   },) 
 
   // Keyboard Hotkeys/Shortcuts 
@@ -115,7 +144,6 @@ function Slideshow(props) {
           // somehow only sets to false 
         case 'p':
           setSlidesToggle();
-          stateSlideshowIndex.set(0);
           break;
         case 'Space':
           setPlayback();
@@ -134,23 +162,26 @@ function Slideshow(props) {
 
   // #rev should only be one function
   function nextSlide(){
-    stateSlideshowDirection.set(1)
+    setDirection(1)
     console.log('nextSlide')
-    console.log('images.length:', images.length -1, 'slideshowlength', slideshow_length)
     if(index === images.length -1){
-      stateSlideshowIndex.set(0)
+      slideshowIndex(0);
+      setIndex(0)
     } else {
-      stateSlideshowIndex.set(index + 1);
+      slideshowIndex(index + 1);
+      setIndex(index + 1);
     }
   }
 
   function prevSlide(){
-    stateSlideshowDirection.set(-1)
+    setDirection(-1)
     console.log('prevSlide')
     if(index === 0){
-      stateSlideshowIndex.set(images.length -1)
+      slideshowIndex(images.length -1);
+      setIndex(images.length -1)
     } else {
-      stateSlideshowIndex.set(index - 1);
+      slideshowIndex(index - 1);
+      setIndex(index - 1);
     }
   }
 
@@ -186,11 +217,5 @@ function Slideshow(props) {
   )
 }
 
-function SlideshowNextBtn (props) {
-  const { nextSlide } = props;
-  return <button onClick={nextSlide}>Next</button>;
-}
-
-export { SlideshowNextBtn, };
 
 export default Slideshow;
