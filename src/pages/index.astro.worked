@@ -17,20 +17,14 @@ const allProjects = await getCollection('projects');
 <section id="grid-gallery" aria-label="Gallery Grid Overview">
   <!-- <Testgallery/> -->
     <!--  /${proj.slug}`}  -->
-
-    <GridProj projects={allProjects}  client:only />
-
-    <!--
     {allProjects.map((proj) => 
     <GridProj 
     title={proj.data.title} 
-    link={`../${proj.data.category}/${proj.slug}`}
+    link={`../${proj.data.category}`}
     titleimg={proj.data.titleimg.img} 
     titlealt={proj.data.titleimg.alt} 
     cat={proj.data.category} 
     /> )}
-    -->
-
 </section>
 </Layout>
 
