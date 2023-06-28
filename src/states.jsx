@@ -14,7 +14,7 @@ export const slideshow_length = atom(1);
   togglePlayback.setPPtoggle = setPPtoggle;
 }); */
 
-export const stateSlideshow = atom(false);
+export const stateSlideshow = atom(true);
 export const statePlayback = atom(false);
 
 /* export const toggleSlideshow = atom(() => {
