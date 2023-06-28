@@ -18,7 +18,7 @@ TODO
 */
 
 import "../styles/slideshow.css";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState, useEffect, useRef, } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { useStore } from '@nanostores/react';
@@ -58,9 +58,6 @@ const animation_variants = {
 }
 
 function Slideshow(props) {
-
-  // const [index, setIndex] = useState(0)
-  // const [direction, setDirection] = useState(0)
 
   const index = useStore(stateSlideshowIndex)
   const direction = useStore(stateSlideshowDirection)
@@ -144,6 +141,28 @@ function Slideshow(props) {
     };
   }, [props.autoPlayInterval, pToggle])
 
+  // Swipe touch events: 
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null); 
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) nextSlide();
+    if (isRightSwipe) prevSlide();
+  };
+
 
   // #rev should only be one function
   function nextSlide(){
@@ -168,13 +187,21 @@ function Slideshow(props) {
   }
 
   return (
-    <div className="slideshow_div">
+    <div
+    className="slideshow_div"
+    >
 
     <AnimatePresence 
     initial={false}
     custom={direction}
     >
-    <figure className="slideshow_fig">
+    <figure className="slideshow_fig"
+
+    onTouchStart={onTouchStart}
+    onTouchMove={onTouchMove}
+    onTouchEnd={onTouchEnd}
+
+    >
 
     <motion.img
     className={`slideshow_img ${!sToggle ? 'slideshow_plan' : ''}`} 
@@ -208,12 +235,5 @@ function Slideshow(props) {
     </div>
   )
 }
-
-function SlideshowNextBtn (props) {
-  const { nextSlide } = props;
-  return <button onClick={nextSlide}>Next</button>;
-}
-
-export { SlideshowNextBtn, };
 
 export default Slideshow;
