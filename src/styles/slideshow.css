@@ -4,7 +4,10 @@ TODO:
 - [ ] custom arrow icons
 - [ ] /*background: 50% 50% url(icon_left); need displayed icon for mobile version!
  */
-
+main{
+  overflow:hidden;
+  overscroll-behavior: auto; /* default */
+}
 .slideshow_div{
   overflow: hidden;
   /* background: red; */
@@ -14,7 +17,7 @@ figure{
   margin: 0;
   padding: 0;
   height: 100%;
-  max-height: 100vh;
+  max-height: 100lvh;
   /* max-height: calc(100vh - 6em); */
   max-width: 100%;
   /* background: green; */
@@ -34,7 +37,7 @@ figure img.slideshow_img{
   /* min-width: 100%; */
   max-width: 100%;
 
-  min-height: 100vh;
+  min-height: 100lvh;
   object-fit: cover;
   object-position: 50% 50%;
 
@@ -79,8 +82,8 @@ button.slideshow_btn{
   border: none;
   text-indent: -9999px;
 
-  /* opacity: 0; */
-  /* opacity: 0.8; */
+  opacity: 0.2;
+  /* opacity: 0.4; */
 
 /* naughty positioning!!! */
   position: fixed;
@@ -104,7 +107,6 @@ button.slideshow_btn{
   background: 100% 50% url("/arrow.svg") no-repeat;
   /* background-color: purple; */
   transform: translate(-25%, 0%) rotate(180deg) scale(.5);
-  background-blend-mode: darken;
 
 }
 .btn_next{
