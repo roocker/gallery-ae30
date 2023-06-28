@@ -11,15 +11,14 @@ NICE-TO-HAVE:
 import Layout from '../../layouts/Layout.astro';
 import { CollectionEntry, getCollection } from 'astro:content'; 
 import { Image, Picture } from '@astrojs/image/components';
-import BasicScripts from '../../components/basicScripts.astro';
-import Slideshow from '../../components/Slideshow';
+// import BasicScripts from '../../components/basicScripts.astro';
 import TextBlockModal from '../../components/TextBlockModal';
 import ModalBtn from '../../components/ModalBtn';
 import PlanBtn from '../../components/PlanBtn';
-import SlideshowNextBtn from '../../components/SlideshowNextBtn';
-import SlideshowPrevBtn from '../../components/SlideshowPrevBtn';
-import PlaybackBtn from '../../components/PlaybackBtn';
+import Slideshow from '../../components/Slideshow';
+import SlideshowBtn from '../../components/SlideshowBtn';
 import SlideshowCounter from '../../components/SlideshowCounter';
+import PlaybackBtn from '../../components/PlaybackBtn';
 
 
 export async function getStaticPaths() {
@@ -53,7 +52,8 @@ const slideshow_plans_alts = p.plans.map((plan) => plan.alt);
 // console.log(slideshow_alts);
 
 ---
-<BasicScripts />
+
+<!-- <BasicScripts /> -->
 
   <Layout title={`AE30 - ${p.title} - work in progress`} description= {`${p.category}/${p.title}`}image="">
 
@@ -104,22 +104,24 @@ const slideshow_plans_alts = p.plans.map((plan) => plan.alt);
 
     <!-- <span class="cat">{p.category} - </span> -->
 
-    <section class="footer_controls" aria-label="Plankopf Footer Controls">
+
+    <section class="controls" aria-label="Plankopf Footer Controls">
       <div class="footer_line f1">
         <h3 class="footer_title">{p.title}</h3>
-      </div>
-
-      <div class="footer_line f3">
-        <SlideshowPrevBtn client:load>Vorheriges Bild</SlideshowPrevBtn>
-        <ModalBtn client:load>Text ein-/ausblenden</ModalBtn>
-        <PlaybackBtn client:load>Slideshow pausieren</PlaybackBtn>
-        <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>
-        <SlideshowNextBtn client:load>Nächstes Bild</SlideshowNextBtn>
       </div>
 
       <div class="footer_line f2">
         <SlideshowCounter client:load/>
       </div>
+
+      <div class="footer_line f3">
+        <SlideshowBtn dir="prev" client:load>Vorheriges Bild</SlideshowBtn>
+        <ModalBtn client:load>Text ein-/ausblenden</ModalBtn>
+        <PlaybackBtn client:load>Slideshow pausieren</PlaybackBtn>
+        <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>
+        <SlideshowBtn dir="next" client:load>Nächstes Bild</SlideshowBtn>
+      </div>
+
 
 
 
@@ -159,42 +161,48 @@ article .pictures{}
 article .plans{}
 article .texts{}
 /* FOOTER CONTROLS  ----------------------------*/
-  .footer_controls{
-    font-family: var(--fsans3);
-    position: fixed;
-    bottom: 1em;
 
-    width: 100%;
-    height: 9em;
-    line-height: 3em;
+.controls{
+/*  document.querySelector(".controls"); in Slideshow controls color */
+  font-family: var(--fsans3);
+  position: fixed;
+  bottom: 1em;
 
-    /* background: grey; */
-    text-align: center;
+  height: 9em;
+  line-height: 3em;
 
+  /* color: var(--cgrey); */
+  text-align: center;
 
-  }
+  /* background: grey; */
+
+  /* width: 100%; */
+
+}
   /* .f1{ background: red; } */
   /* .f2{ background: orange; } */
   /* .f3{ background: yellow; } */
-  .footer_line{
-    margin: 0;
-    padding: 0;
-    border: 0;
-    height: 3em;
-  }
-  h3.footer_title{
-    margin: 0 !important;
-    padding: 0 !important;
-    border: 0 !important;
-    line-height: auto;
-    line-height: 3em;
-    font-size: 1em;
-    font-weight: 100;
-  }
+.footer_line{
+  height: 3em;
+  /* color: white; */
+  backdrop-filter: blur(2px);
+  /* background: blue; */
+  /* border-bottom: 1px red solid; */
+}
+h3.footer_title{
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  line-height: auto;
+  line-height: 3em;
+  font-size: 1em;
+  font-weight: 100;
+}
 
 /* Modal Styles ----------------- */
 
-  /* Modal Text styles------------------- */
+/* Modal Text styles------------------- */
+
 h2{
   /* font-size: 1.2em; */
   /* line-height: 1em; */

@@ -6,7 +6,7 @@ button.btn{
   border: none;
 
   border-radius: 50%;
-  background: var(--cwhite60);
+  background: var(--cwhite20);
 
   backdrop-filter: blur(2px);
   color: var(--cgrey);
