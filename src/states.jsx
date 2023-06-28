@@ -1,28 +1,18 @@
 import { atom } from 'nanostores';
 
+
+// Modal
 export const stateModal = atom(false);
 
-export const slideshow_index = atom(1);
+// Slideshow
+
+export const stateSlideshowIndex = atom(0);
+export const stateSlideshowDirection = atom(0);
+
 export const slideshow_length = atom(1);
-
-
-/* export const togglePlayback = atom(() => {
-  let pptoggle = false;
-  function setPPtoggle(value) {
-    togglePlayback.set(value);
-  }
-  togglePlayback.setPPtoggle = setPPtoggle;
-}); */
 
 export const stateSlideshow = atom(true);
 export const statePlayback = atom(false);
-
-/* export const toggleSlideshow = atom(() => {
-  let stoggle = false;
-  function setStoggle(value) {
-    toggleSlideshow.set(value);
-  }
-}); */
 
 
 // Should use unsubscribe or comment out later!
@@ -30,8 +20,9 @@ stateModal.subscribe((newValue) => {
   console.log('States: stateModal updated:', newValue);
 })
 
-slideshow_index.subscribe((newValue) => {
-  console.log('States: slideshow_index updated:', newValue);
+
+stateSlideshowIndex.subscribe((newValue) => {
+  console.log('States: SlideshowIndex updated:', newValue);
 });
 slideshow_length.subscribe((newValue) => {
   console.log('States: slideshow_length updated:', newValue);
