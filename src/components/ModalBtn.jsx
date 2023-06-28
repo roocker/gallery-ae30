@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react';
-import { stateModal } from '../states.jsx';
+import { stateModal, statePlayback } from '../states.jsx';
 import '../styles/btn.css'
 
 function ModalBtn({ children }) {
@@ -7,6 +7,11 @@ function ModalBtn({ children }) {
   const toggleModal = () => {
     stateModal.set(!isOpen);
     // console.log('toggleModal is called and "isOpen":',isOpen);
+  }
+
+  const pToggle = useStore(statePlayback);
+  const togglePlayback = () => {
+    statePlayback.set(!pToggle)
   }
 
   return (

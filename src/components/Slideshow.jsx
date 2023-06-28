@@ -6,18 +6,15 @@ TODO
 
 - [x] animate it 
 
-
 - [ ] image preloading! --> index?!
 - [ ] need to set index to current index for page reload!?
 
-- [ ] Keyboard support prev/next arrow keys and J/K
 - [ ] Mouse Click and drag left/right =  prev/next
 - [ ] Touch swipe left right? = prev/next
 
 - [ ] simplify next/prevSlide funcitons into one funciton
 
 - [ ] Zoomed View on Click or on Click Button Zoom ?!
-- [ ] button markup type title aria-label SEO
 */
 
 import "../styles/slideshow.css";
@@ -26,8 +23,6 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 import { useStore } from '@nanostores/react';
 import { slideshow_length, stateSlideshow, statePlayback, stateSlideshowIndex, stateSlideshowDirection  } from '../states.jsx';
-
-
 
 const animation_variants = {
   i: direction =>  { 
@@ -70,7 +65,6 @@ function Slideshow(props) {
   const index = useStore(stateSlideshowIndex)
   const direction = useStore(stateSlideshowDirection)
 
-
   //Toggle for Images/Plans
   const sToggle = useStore(stateSlideshow);
   const setSlidesToggle = () => {
@@ -82,24 +76,20 @@ function Slideshow(props) {
   console.log("slideshow images used: ", `${sToggle? 'pictures (true)' : 'plans (false)'}`);
   let alts = sToggle ? props.pictureTitles : props.planTitles;
   ;
-  
+
   // export current Index and Image Array lengh for counter
   const slideShowLengh = () => {
     slideshow_length.set(images.length);
   }
-
   slideShowLengh();
 
-  // need to run slideShowLengh here bc error, then keybaord shortcuts
-
-  
+  // change Controls color on Plan/Picture Toggle
   useEffect(() => {
     const footerControls = document.querySelector(".controls");
     footerControls.style.color = sToggle ?  'var(--cwhite)' : 'var(--cgrey)';
-    console.log('halloooooooooooooooooooooooooooo', footerControls);
   },) 
 
-  // Keyboard Hotkeys/Shortcuts 
+  // Keyboard Hotkeys/Shortcuts
   useEffect(() => {
 
     const handleKeyDown = (event) => {
@@ -117,8 +107,9 @@ function Slideshow(props) {
           setSlidesToggle();
           stateSlideshowIndex.set(0);
           break;
-        case 'Space':
-          setPlayback();
+        case ' ':
+        case 'w':
+          togglePlayback();
           break;
         default:
           break;
@@ -130,6 +121,28 @@ function Slideshow(props) {
     };
   },);
 
+  // Auto Playback 
+
+  const pToggle = useStore(statePlayback);
+  const togglePlayback = () => {
+    statePlayback.set(!pToggle);
+  }
+
+  const autoPlayRef = useRef();
+
+  useEffect(() => {
+    autoPlayRef.current = nextSlide;
+  })
+
+  useEffect(() => {
+    const play = () => {
+      autoPlayRef.current()
+    }
+    if(props.autoPlayInterval > 0 && pToggle){
+      const interval = setInterval(play, props.autoPlayInterval * 1000);
+      return () => clearInterval(interval);
+    };
+  }, [props.autoPlayInterval, pToggle])
 
 
   // #rev should only be one function
@@ -174,6 +187,16 @@ function Slideshow(props) {
     src={images[index]}
     alt={alts[index]} 
     /> 
+
+    <img
+    className="hidden"
+    src={images[index-1]}
+    />
+
+    <img
+    className="hidden"
+    src={images[index+1]}
+    />
 
     <figcaption>{alts[index]}</figcaption>
 
