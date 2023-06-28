@@ -1,5 +1,5 @@
 import '../styles/logo.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
 
 const rotate_variants = {
@@ -85,6 +85,26 @@ const path_variants = {
 // onClick="menuToggle"
 
 function Logo (){
+
+  // Keyboard Hotkeys/Shortcuts
+  useEffect(() => {
+
+    const handleKeyDown = (event) => {
+      switch(event.key) {
+        case 'm':
+          toggleMenu();
+          break;
+        default:
+          break;
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  },);
+
+
  const toggleMenu = () => {
     document.getElementById('mainnav')?.classList.toggle('hidden');
   }; 

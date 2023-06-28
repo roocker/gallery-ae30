@@ -7,11 +7,11 @@ export const stateModal = atom(false);
 // Slideshow
 
 export const stateSlideshowIndex = atom(0);
+export const slideshow_length = atom(1);
 export const stateSlideshowDirection = atom(0);
 
-export const slideshow_length = atom(1);
-
 export const stateSlideshow = atom(true);
+// #rev default value should control via CMS
 export const statePlayback = atom(false);
 
 
@@ -19,7 +19,6 @@ export const statePlayback = atom(false);
 stateModal.subscribe((newValue) => {
   console.log('States: stateModal updated:', newValue);
 })
-
 
 stateSlideshowIndex.subscribe((newValue) => {
   console.log('States: SlideshowIndex updated:', newValue);
