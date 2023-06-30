@@ -2,26 +2,29 @@
   position: absolute;
   left: 0;
   top: 0;
-  height: 100%;
+  /* height: 100%; */
+  min-height: 100lvh;
   width: 100%;
 
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: end;
   overflow: hidden;
+
+  backdrop-filter: blur(2px);
 
   /* background: #2233aa33; */
 }
 
 .content{
-  width: clamp(50%, 37.5em, 90%);
+  width: clamp(50%, calc(37.5em + 4em), 90%);
   /* height: max(80vh); */
-  max-height: 70vh;
+  max-height: 100lvh;
   overflow: auto;
 
-  margin-bottom: 3em;
 
-  padding: 0 2em;
+  padding: 2em;
+  box-sizing: border-box;
   /* color: white; */
 
   background: var(--cwhite60);
