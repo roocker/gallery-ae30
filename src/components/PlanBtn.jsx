@@ -1,14 +1,16 @@
 import { useStore } from '@nanostores/react';
-import { stateSlideshow,  stateSlideshowIndex} from '../states';
+import { stateSlideshow,  stateSlideshowIndex, stateSlideshowZoom} from '../states';
 import '../styles/btn.css'
 
 function PlanBtn({ children }) {
 
   // const [toggle, setToggle] = useStore(stateSlideshow);
+  const zToggle = useStore(stateSlideshowZoom);
   const sToggle = useStore(stateSlideshow);
   const setToggle = () => {
     stateSlideshow.set(!sToggle);
     stateSlideshowIndex.set(0);
+    stateSlideshowZoom.set(false);
   }
 
   return (

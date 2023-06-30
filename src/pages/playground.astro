@@ -2,28 +2,78 @@
 import ModalBtn from '../components/ModalBtn.jsx'
 import TextBlockModal from '../components/TextBlockModal.jsx'
 import BasicScripts from '../components/basicScripts.astro';
+import Slideshow from '../components/Slideshow.jsx'
 import Layout from '../layouts/Layout.astro'
 
+const slideshow_pictures = [
+'/media/1.jpg',
+'/media/2.jpg',
+'/media/3.jpg',
+'/media/4.jpg',
+'/media/5.jpg',
+]
+const slideshow_plans = [
+'/media/6.jpg',
+'/media/7.jpg',
+'/media/8.jpg',
+'/media/9.jpg',
+'/media/10.jpg',
+]
+const slideshow_pictures_alts = [
+'/media/1.jpg',
+'/media/2.jpg',
+'/media/3.jpg',
+'/media/4.jpg',
+'/media/5.jpg',
+]
+const slideshow_plans_alts = [
 
+'/media/6.jpg',
+'/media/7.jpg',
+'/media/8.jpg',
+'/media/9.jpg',
+'/media/10.jpg',
+
+]
 ---
-<!-- <Modalbtn client:load text="testtesteste"/> -->
-<BasicScripts />
-
 <Layout title={`AE30 - work in progress`} description="" image="">
 
-<a href="" menu-toggle>menu</a>
+<section class="project_presentation" aria-label={`Projekt  Presentation`}>
+  <article class="project">
+    <div class="slideshow_div" >
+      <figure class="slideshow_fig" >
+        <Slideshow
+        client:load
+        pictures={slideshow_pictures}
+        pictureTitles={slideshow_pictures_alts}
+        plans={slideshow_plans}
+        planTitles={slideshow_plans_alts}
+        autoPlayInterval={5} 
+        />
 
-  <ModalBtn BtnName="toggle" client:load />
+      </figure>
+    </div>
+
+  </article>
+</section>
 
 
-  <TextBlockModal client:load>
-  <h2>the modal content</h2>
-  <p>Lorem ipsum dolor sit amet</p> 
-  </TextBlockModal>
+
+
 </Layout>
 
 <style>
   body{
     background: lavender;
   }
+.project_presentation{
+    /* background: green; */
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center; /* center vertically flexbox */
+    justify-content: center; /* center horizontally flex */
+
+  }
+
 </style>

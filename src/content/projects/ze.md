@@ -1,5 +1,5 @@
 ---
-title: Technische Universität Wien - Bauteil ZE
+title: TU Wien - Bauteil ZE
 publishDate: 23 Apr 2023
 category: kg
 subcategory: Universität, Öffentlich, Labor
@@ -7,6 +7,18 @@ titleimg:
   img: /media/24.jpg
   alt: Alttext Title Bild - Rendering
 fotos:
+  - foto: /media/IMG_20220112_085913.jpg
+    alt: Foto Westansicht
+  - foto: /media/IMG_20220112_085958.jpg
+    alt: Foto vgl Übersicht Rendering
+  - foto: /media/IMG_20220112_090306.jpg
+    alt: Foto Treppen Haupteingang West
+  - foto: /media/IMG_20220112_085913.jpg
+    alt: Foto Westansicht
+  - foto: /media/IMG_20220112_085958.jpg
+    alt: Foto vgl Übersicht Rendering
+  - foto: /media/IMG_20220112_090306.jpg
+    alt: Foto Treppen Haupteingang West
   - foto: /media/IMG_20220112_085913.jpg
     alt: Foto Westansicht
   - foto: /media/IMG_20220112_085958.jpg
