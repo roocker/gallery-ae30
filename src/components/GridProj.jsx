@@ -71,7 +71,7 @@ function GridProj (props) {
         },
       },
       z2:{
-        scale: 10,
+        // scale: 10,
         transition: {
           type: 'spring', stiffness: 100, damping: 20,
         },

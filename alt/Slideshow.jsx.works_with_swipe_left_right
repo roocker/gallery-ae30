@@ -19,54 +19,65 @@ TODO
 
 import "../styles/slideshow.css";
 import React, { useState, useEffect, useRef, } from 'react';
-import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
+import { AnimatePresence, motion, useDragControls } from 'framer-motion';
 
 import { useStore } from '@nanostores/react';
 import { slideshow_length, stateSlideshow, statePlayback, stateSlideshowIndex, stateSlideshowDirection, slideshowCurrentAlt, slideshowAutoPlayInterval, stateSlideshowZoom } from '../states.jsx';
 
-const slideanimation = {
-  enter: (direction) =>  { 
+const animation_variants = {
+  i: direction =>  { 
+    //test if direction > 0 dann 1000 sonst -1000
     return{
       x: direction > 0 ? 1000 : -1000,
-      zIndex: 2,
       opacity: 0,
-    };
+      // scale: 0.5,
+    }
   },
-  center: {
-    zIndex: 1,
+  a: {
     x: 0,
     opacity: 1,
+    z:0,
+    // scale: 1,
+    transition: {
+      // height: { type: 'tween', duration: 1, ease: "easeInOut" },
+      x: { type: 'spring', stiffness: 100, damping: 15 },
+      opacity: {duration: 0.2 }
+    },
+    // transition: 'ease-in',
   },
-  exit: (direction) => {
+  e: direction => {
+    console.log(direction);
     return{
-      zIndex: 0,
-      x: direction < 0 ? 1000 : -1000,
+      z: 0,
+      x: direction > 0 ? -1000 : 1000,
       opacity: 0,
-    };
+      // scale: 0.5,
+      transition: {
+        x: { type: 'spring', stiffness: 100, damping: 15 },
+        opacity: {duration: 0.2 }
+      },
+      // transition: 'ease-in',
+    }
   },
 }
 
 const animation_zoom = {
   i:{
-    minHeight: "0vh",
-    minWidth: "0vw",
-    transition: { type: 'spring', stiffness: 100, damping: 15 },
+    scale: 1,
   },
   a:{
-    minHeight: "100vh", 
-    minWidth: "100vw", 
+    scale: 3.2, 
     transition: { type: 'spring', stiffness: 100, damping: 15 },
   },
+  e:{
+    scale:1,
+  }
 }
 
-
 function Slideshow(props) {
-  
+
   const index = useStore(stateSlideshowIndex)
   const direction = useStore(stateSlideshowDirection)
-
-    /* const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1) */
 
   //Toggle for Images/Plans
   const sToggle = useStore(stateSlideshow);
@@ -78,15 +89,12 @@ function Slideshow(props) {
   let images = sToggle ? props.pictures : props.plans;
   let alts = sToggle ? props.pictureTitles : props.planTitles;
   ;
-  
-  // console.log("images to work with", images)
 
   //Toggle for Zoom
   const zToggle = useStore(stateSlideshowZoom);
   const setZoomToggle = () => {
     stateSlideshowZoom.set(!zToggle);
   }
-
   // change Controls color on Plan/Picture Toggle
   useEffect(() => {
     const footerControls = document.querySelector(".controls");
@@ -100,10 +108,8 @@ function Slideshow(props) {
     slideshowCurrentAlt.set(alts[index]);
     slideshowAutoPlayInterval.set(props.autoPlayInterval);
     // console.log(interval)
-
-      }
-      exportToStates();
-  
+  }
+  exportToStates();
 
   // Keyboard Hotkeys/Shortcuts
   useEffect(() => {
@@ -164,8 +170,29 @@ function Slideshow(props) {
     };
   }, [props.autoPlayInterval, pToggle])
 
+  // Swipe touch events: 
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
 
-  // Next- & Prev Slide functions
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null); 
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+  const onTouchEnd = (event) => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) nextSlide(event);
+    if (isRightSwipe) prevSlide(event);
+  };
+
+
   // #rev should only be one function
   function nextSlide(event){
     event.stopPropagation();
@@ -187,78 +214,69 @@ function Slideshow(props) {
     }
   }
 
-  // Zoom Drag
-
-  /* const img = document.querySelector('.slideshow_img');
-  maxDelta = window.innerWidth; */
-
-    const zoomDragDown = (e) => {
-      console.log('zoomDraaaaag')
-      if (e instanceof MouseEvent) {
-        const downXval = e.clientX;
-        console.log("x:",downXval)
-      }
-    }
-  const zoomDragMove = (e) =>{
-    
-      console.log('zoomMooove')
-    if (e instanceof MouseEvent) {
-      const moveXval = e.clientX;
-      console.log("x:", moveXval)
-    }
-  }
-
-  console.log('index:', index, 'direction:', direction)
-    
+// const controls = useDragControls()
   return (
-    <>
-    <AnimatePresence initial={false} custom={direction}> 
+    <AnimatePresence 
+    initial={false}
+    custom={direction}
+    >
+    <div
+    className="slideshow_div"
+    >
+
+
     <motion.figure
     className={`slideshow_fig ${!zToggle ?'slidshow_fig_zoomed_out' : ''}`}
+    onTouchStart={onTouchStart}
+    onTouchMove={onTouchMove}
+    onTouchEnd={onTouchEnd}
+
+    variants={animation_variants}
+    initial="i"
+    animate="a"
+    exit="e"
 
     key={images[index]}
-    variants={slideanimation}
     custom={direction}
-
-    initial="enter"
-    animate="center"
-    exit="exit"
-    transition={{
-      x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.2 }
-    }}
-
-    onAnimationStart={ () => console.log("figure animation started", "index:", index, "direction:", direction)}
-    onAnimationComplete={ () => console.log("figure animation completed", "index:",index)}
     >
 
     <motion.img
-    className="slideshow_img" 
-
-    src={images[index]}
-    alt={alts[index]} 
-    onClick={setZoomToggle}
+    className={`slideshow_img ${!sToggle ? '' : ''} ${!zToggle ?'zoom_out' : ''}`} 
 
     variants={animation_zoom}
     animate={zToggle ? "a" : "i"}
-    initial={zToggle ? "a" : "i"}
+    initial="i"
     exit="e"
-    onAnimationComplete={ () => console.log("img animation completed")}
 
+    onClick={setZoomToggle}
 
+    drag={zToggle ? true : false}
+    dragSnapToOrigin={true}
+    dragConstraints={{top: 100 , right: 100, left: 100, bottom: 100}}
 
+    src={images[index]}
+    alt={alts[index]} 
     draggable={false}
     /> 
 
+    <img
+    className="hidden"
+    src={images[index-1]}
+    />
+
+    <img
+    className="hidden"
+    src={images[index+1]}
+    />
 
     <figcaption>{alts[index]}</figcaption>
-    </motion.figure>
-    </AnimatePresence>
 
     <button className="slideshow_btn btn_prev" onClick={prevSlide}> ◀️ vorheriges Bild </button>
     <button className="slideshow_btn btn_next" onClick={nextSlide} > ▶️ nächstes Bild </button>
 
-    </>
+    </motion.figure>
+    </div>
+    </AnimatePresence>
   )
 }
 

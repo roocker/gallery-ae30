@@ -24,49 +24,45 @@ import { AnimatePresence, motion, useAnimationControls } from 'framer-motion';
 import { useStore } from '@nanostores/react';
 import { slideshow_length, stateSlideshow, statePlayback, stateSlideshowIndex, stateSlideshowDirection, slideshowCurrentAlt, slideshowAutoPlayInterval, stateSlideshowZoom } from '../states.jsx';
 
-const slideanimation = {
-  enter: (direction) =>  { 
-    return{
+const animation_variants = {
+ enter: (direction) => {
+    return {
       x: direction > 0 ? 1000 : -1000,
-      zIndex: 2,
-      opacity: 0,
+      opacity: 1
     };
   },
   center: {
     zIndex: 1,
     x: 0,
-    opacity: 1,
+    opacity: 1
   },
   exit: (direction) => {
-    return{
+    return {
       zIndex: 0,
       x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
+      opacity: 1
     };
-  },
-}
+  }
+};
 
-const animation_zoom = {
-  i:{
+/* const animation_zoom = {
+  zoomi:{
     minHeight: "0vh",
     minWidth: "0vw",
     transition: { type: 'spring', stiffness: 100, damping: 15 },
   },
-  a:{
+  zooma:{
     minHeight: "100vh", 
     minWidth: "100vw", 
     transition: { type: 'spring', stiffness: 100, damping: 15 },
   },
-}
+} */
 
 
 function Slideshow(props) {
   
   const index = useStore(stateSlideshowIndex)
   const direction = useStore(stateSlideshowDirection)
-
-    /* const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1) */
 
   //Toggle for Images/Plans
   const sToggle = useStore(stateSlideshow);
@@ -100,10 +96,8 @@ function Slideshow(props) {
     slideshowCurrentAlt.set(alts[index]);
     slideshowAutoPlayInterval.set(props.autoPlayInterval);
     // console.log(interval)
-
-      }
-      exportToStates();
-  
+  }
+  exportToStates();
 
   // Keyboard Hotkeys/Shortcuts
   useEffect(() => {
@@ -208,57 +202,47 @@ function Slideshow(props) {
     }
   }
 
-  console.log('index:', index, 'direction:', direction)
+ /*  const animation_swap_controller = useAnimationControls();
+  useEffect(() => {
+
+    animation_swap_controller.start("i");
+    setTimeout(() => {
+      animation_swap_controller.start("a");
+    }, 0);
+  }, [sToggle]); */
+
+    console.log('right before return images[index]', images[index], index)
     
   return (
     <>
-    <AnimatePresence initial={false} custom={direction}> 
-    <motion.figure
-    className={`slideshow_fig ${!zToggle ?'slidshow_fig_zoomed_out' : ''}`}
-
-    key={images[index]}
-    variants={slideanimation}
+    <AnimatePresence initial={true} custom={direction}> 
+    <motion.img
+    key={index}
+    src={images[index]}
     custom={direction}
-
+    variants={animation_variants}
     initial="enter"
     animate="center"
     exit="exit"
     transition={{
-      x: { type: "spring", stiffness: 300, damping: 30 },
-        opacity: { duration: 0.2 }
+      x: { type: "spring", stiffness: 500, damping: 50 },
+        opacity: { duration: 0.2 },
     }}
-
-    onAnimationStart={ () => console.log("figure animation started", "index:", index, "direction:", direction)}
-    onAnimationComplete={ () => console.log("figure animation completed", "index:",index)}
-    >
-
-    <motion.img
-    className="slideshow_img" 
-
-    src={images[index]}
-    alt={alts[index]} 
-    onClick={setZoomToggle}
-
-    variants={animation_zoom}
-    animate={zToggle ? "a" : "i"}
-    initial={zToggle ? "a" : "i"}
-    exit="e"
+    onAnimationStart={ () => console.log("img animation started")}
     onAnimationComplete={ () => console.log("img animation completed")}
-
-
-
+    alt={alts[index]} 
     draggable={false}
+    className="slideshow_img"
     /> 
-
+    </AnimatePresence>
 
     <figcaption>{alts[index]}</figcaption>
-    </motion.figure>
-    </AnimatePresence>
 
     <button className="slideshow_btn btn_prev" onClick={prevSlide}> ◀️ vorheriges Bild </button>
     <button className="slideshow_btn btn_next" onClick={nextSlide} > ▶️ nächstes Bild </button>
-
     </>
+
+    
   )
 }
 

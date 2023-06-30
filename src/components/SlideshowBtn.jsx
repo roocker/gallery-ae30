@@ -2,7 +2,7 @@ import { useStore } from '@nanostores/react';
 import { stateSlideshowIndex, stateSlideshowDirection, slideshow_length   } from '../states';
 import '../styles/btn.css'
 
-function SlideshowNextBtn({ dir, children }) {
+function SlideshowBtn({ dir, children }) {
 
   const index = useStore(stateSlideshowIndex)
   const direction = useStore(stateSlideshowDirection)
@@ -40,4 +40,4 @@ function SlideshowNextBtn({ dir, children }) {
   );
 }
 
-export default SlideshowNextBtn;
+export default SlideshowBtn;
