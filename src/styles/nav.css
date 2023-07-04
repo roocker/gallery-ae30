@@ -1,0 +1,138 @@
+.backdrop{
+justify-content: left !important;
+align-items: start !important;
+
+background: lavender;
+opacity: .1;
+
+}
+  @media only screen and (min-width: 51em /* var(--vwS) */ ) { 
+    .backdrop{
+      display: none;
+    }
+  }
+
+/* Nav------------------------------------- */
+  hr{
+    /* border: 0.5px solid var(--cgrey); */
+  } 
+
+
+  nav{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    color: var(--cgrey);
+
+    padding-left: 1em;
+    padding-right: 1em;
+    box-sizing: border-box;
+
+    /* line-height: 2em; */
+
+    background: var(--cwhite80);
+    /* background: lavender; */
+    backdrop-filter: blur(3px);
+
+    /* border-bottom-left-radius: 3em; */
+    z-index:3;
+
+    transform: translateY(-100%);
+    animation: slideDown 0.2s ease-in-out forwards;
+  }
+  .menue_hidden{
+    animation: slideUp 0.2s ease-in-out forwards;
+  }
+  @keyframes slideDown{
+    0% {transform: translateY(-100%);}
+    40% {transform: translateY(0%);}
+    80% {transform: translateY(-5%);}
+    100% {transform: translateY(0%);}
+  }
+
+  @keyframes slideUp{
+    0% {transform: translateY(0%);}
+    100% {transform: translateY(-100%);}
+  }
+/* TEXT MENU  ---------------------------------*/
+
+  ul{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    line-height: 3em;
+
+    list-style-type: none;
+    width: 100%;
+    padding-left: calc(var(--gmodulem)*1);
+    box-sizing: border-box;
+
+    /* background: green; */
+
+  }
+  ul li{ 
+    /* background: orange; */
+  }
+  ul li > a{
+    /* display: block; */
+    color: var(--cgrey);
+    /* border-bottom: 1px solid rgb(255,255,255,.0); */
+  }
+  ul li > a:hover{
+    color: var(--cblack);
+    /* background: white; */
+    /* border-bottom: 1px solid var(--cblack); */
+    /* text-decoration: underline; */
+  }
+
+
+/* KONTAKT INFO MENU  ---------------------------------*/
+
+  .kontakt{
+    font-family: var(--fsans);
+    font-size: calc(var(--fsize)/1.5);
+    line-height: calc(var(--fline_height)/8); 
+    text-align: right;
+    padding-bottom: var(--gmodulem);
+  }
+
+  @media only screen and (min-width: 51em /* var(--vwS) */ ) { 
+    nav{
+      flex-direction: row;
+    }
+    hr{
+      display:none;
+    }
+    ul{
+      flex-direction: row;
+      padding-right: 8em;
+      padding-left: 2em;
+      /* box-sizing: border-box; */
+      justify-content: center;
+      gap: 2em;
+
+    }
+    ul li{
+      /* padding: 0; */
+
+    }
+    .kontakt{
+      text-indent: -9999px;
+      display: none;
+    }
+
+  }
+
+  @media only screen and (min-width: 64em /* var(--vwS) */ ) { 
+    nav{
+      /* padding-left: .5em; */
+    }
+    .menue-icons{
+      height: 4em;
+    }
+    ul{
+      line-height: 4em;
+    }
+  }
