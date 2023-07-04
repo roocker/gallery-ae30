@@ -106,15 +106,14 @@ function Logo (){
 
 
  const toggleMenu = () => {
-   const nav = document.getElementById('mainnav');
-   nav.classList.toggle('menue_hidden'),
-    // document.getElementById('mainnav')?.classList.toggle('hidden');
-   nav.animate(
+   /* const nav = document.getElementById('mainnav');
+   nav.classList.toggle('menue_hidden'), */
+    document.getElementById('mainnav')?.classList.toggle('menue_hidden');
+   /* nav.animate(
      {top: 200, display: block},
      {duration: 1200, fill: "forwards"}
 
-   )
-
+   ) */
   }; 
 
   return (

@@ -43,76 +43,121 @@ export default defineConfig({
       show_preview_links: true,
       disableIdentityWidgetInjection: true,
       // COLLECTION
-      collections: [{
-        name: 'settings',
-        label: 'Einstellungen',
-        description: 'Allgmeine Website Einstellungen. NUR MIT VORSICHT ÄNDERN',
-        comment: 'NUR MIT VORSICHT ÄNDERN / EDIT ONLY WITH CARE',
-        // folder: 'content/settings/',
-        create: false,
-        delete: false,
-        editor: {
-          preview: false
+      collections: [
+        {
+          name: 'settings',
+          label: 'Einstellungen',
+          description: 'Allgmeine Website Einstellungen. NUR MIT VORSICHT ÄNDERN',
+          comment: 'NUR MIT VORSICHT ÄNDERN / EDIT ONLY WITH CARE',
+          // folder: 'content/settings/',
+          create: true,
+          delete: false,
+          editor: {
+            preview: false
+          },
+          folder: 'src/content/settings/',
+          // #rev müsste geschachtelt sein und dann nur file: '/content/settings/set.yml',
+          // https://github.com/decaporg/decap-cms/blob/master/dev-test/config.yml 
+          //https://cms-demo.netlify.com/#/collections/settings
+          fields: [
+            {
+              name: 'title',
+              label: 'titel',
+              hint: 'hint'
+            },
+            {
+              name: 'site-title',
+              widget: 'string',
+              label: 'HAUPT TITEL',
+              comment: 'NUR MIT SORGFALT ÄNDERN! (weißt du was du tust?)'
+            },
+            {
+              name: 'description',
+              widget: 'string',
+              label: 'Seitenbeschreibung'
+            },
+            {
+              name: 'menu',
+              label: 'Hauptmenü',
+              widget: 'list',
+              fields: [
+                {
+                  name: 'itemname',
+                  widget: 'string',
+                  label: 'itemname'
+                },
+                {
+                  name: 'url',
+                  widget: 'string',
+                  label: 'URL'
+                }
+              ]
+            }
+          ]},
+
+        {
+          name: 'pages',
+          label: 'Seiten',
+          description: 'Seiten wie Über uns, Kontakt, Impressum',
+          folder: 'src/content/pages',
+          create: true,
+          delete: true,
+          fields: [
+            {
+              name: 'title',
+              label: 'Titel',
+              widget: 'string',
+            },
+            {
+              name: 'template',
+              label: 'Design Template',
+              widget: 'select',
+              multiple: false,
+              options: ["team", "about", "impressum", "sonstiges"],
+            },
+            {
+              name: 'content',
+              label: 'Inhalt',
+              widget: 'markdown',
+            }
+          ]
         },
-        folder: 'src/content/settings/',
-        // #rev müsste geschachtelt sein und dann nur file: '/content/settings/set.yml',
-        // https://github.com/decaporg/decap-cms/blob/master/dev-test/config.yml 
-        //https://cms-demo.netlify.com/#/collections/settings
-        fields: [{
-          name: 'title',
-          widget: 'string',
-          label: 'HAUPT TITEL',
-          comment: 'NUR MIT SORGFALT ÄNDERN! (weißt du was du tust?)'
-        }, {
-          name: 'description',
-          widget: 'string',
-          label: 'Seitenbeschreibung'
-        }, {
-          name: 'Hauptmenu',
-          widget: 'string',
-          label: 'Haupt Menü'
-        }, {
-          name: 'max_project_count',
-          widget: 'string',
-          label: 'Anzahl Projekte Galerie (Frontpage)'
-        }, {
-          name: 'Links',
-          widget: 'string',
-          label: 'Links'
-        }, {
-          name: 'theme',
-          widget: 'boolean',
-          label: 'Theme - Hell / Dunkel',
-          required: false
-        }]
-      }, {
-        name: 'categories',
-        label: 'Haupt-Kategorien',
-        description: 'Haupt Kategorien Erstellen. Achtung! Kategorien können nicht gelöscht werden (benötigt anpassen aller Projekte an Änderungen)',
-        folder: 'src/content/cat',
-        create: true,
-        delete: false,
-        editor: {
-          preview: false
+
+        {
+          name: 'categories',
+          label: 'Haupt-Kategorien',
+          description: 'Haupt Kategorien Erstellen. Achtung! Kategorien können nicht gelöscht werden (benötigt anpassen aller Projekte an Änderungen)',
+          folder: 'src/content/cat',
+          create: true,
+          delete: false,
+          editor: {
+            preview: false
+          },
+          fields: [
+            {
+              name: 'title',
+              widget: 'string',
+              label: 'Kategorie Name'
+            },
+            {
+              name: 'short',
+              widget: 'string',
+              label: 'Kurzname'
+            },
+            {
+              name: 'url',
+              widget: 'string',
+              label: 'Kategorie URL'
+            },
+            {
+              name: 'description',
+              widget: 'string',
+              label: 'Beschreibung'
+            }
+          ]
         },
-        fields: [{
-          name: 'title',
-          widget: 'string',
-          label: 'Kategorie Name'
-        }, {
-          name: 'short',
-          widget: 'string',
-          label: 'Kurzname'
-        }, {
-          name: 'url',
-          widget: 'string',
-          label: 'Kategorie URL'
-        }, {
-          name: 'description',
-          widget: 'string',
-          label: 'Beschreibung'
-        }]
-      }, {
+
+        {
         name: 'subcategories',
         label: 'Unter-Kategorien',
         description: 'Unter Kategorien',
