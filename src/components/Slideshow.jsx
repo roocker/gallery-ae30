@@ -65,9 +65,6 @@ function Slideshow(props) {
   const index = useStore(stateSlideshowIndex)
   const direction = useStore(stateSlideshowDirection)
 
-    /* const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1) */
-
   //Toggle for Images/Plans
   const sToggle = useStore(stateSlideshow);
   const setSlidesToggle = () => {
@@ -95,6 +92,7 @@ function Slideshow(props) {
   }, [sToggle, zToggle]) 
 
   // export current States for counter etc.
+    useEffect(() => {
   const exportToStates = () => {
     slideshow_length.set(images.length);
     slideshowCurrentAlt.set(alts[index]);
@@ -103,6 +101,7 @@ function Slideshow(props) {
 
       }
       exportToStates();
+    }, [images], [index])
   
 
   // Keyboard Hotkeys/Shortcuts
@@ -216,7 +215,7 @@ function Slideshow(props) {
     <motion.figure
     className={`slideshow_fig ${!zToggle ?'slidshow_fig_zoomed_out' : ''}`}
 
-    key={images[index]}
+    key={index}
     variants={slideanimation}
     custom={direction}
 
@@ -235,6 +234,7 @@ function Slideshow(props) {
     <motion.img
     className="slideshow_img" 
 
+    key={index}
     src={images[index]}
     alt={alts[index]} 
     onClick={setZoomToggle}

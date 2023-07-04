@@ -4,6 +4,7 @@ import TextBlockModal from '../components/TextBlockModal.jsx'
 import BasicScripts from '../components/basicScripts.astro';
 import Slideshow from '../components/Slideshow.jsx'
 import Layout from '../layouts/Layout.astro'
+import NewSlideshow from '../components/NewSlideshow';
 
 const slideshow_pictures = [
 '/media/1.jpg',
@@ -42,7 +43,7 @@ const slideshow_plans_alts = [
   <article class="project">
     <div class="slideshow_div" >
       <figure class="slideshow_fig" >
-        <Slideshow
+        <NewSlideshow
         client:load
         pictures={slideshow_pictures}
         pictureTitles={slideshow_pictures_alts}
