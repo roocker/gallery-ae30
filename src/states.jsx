@@ -19,7 +19,11 @@ export const slideshowAutoPlayInterval = atom();
 
 
 // Should use unsubscribe or comment out later!
-stateModal.subscribe((newValue) => {
+/*
+  slideshowCurrentAlt.subscribe((newValue) => {
+  console.log('States: currentAlt updated:', newValue);
+})
+ stateModal.subscribe((newValue) => {
   console.log('States: stateModal updated:', newValue);
 })
 
@@ -39,4 +43,4 @@ statePlayback.subscribe((newValue) => {
 });
 stateSlideshowZoom.subscribe((newValue) => {
   console.log('States: SlideshowZoom updated:', newValue);
-});
+}); */
