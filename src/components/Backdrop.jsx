@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import '../styles/modal.css';
+import '../styles/nav.css'
 
 const backdropVariants = {
   i: { opacity: 0 },
