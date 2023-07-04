@@ -41,7 +41,7 @@ const {
     <!-- </svg> -->
 
 
-  <nav id="mainnav" class="hidden">  <!-- #rev: 1.Collection Main Menu?!! 2.icons menue teil? seo? 3. move after ul (seo!)-->
+  <nav id="mainnav" class="menue_hidden">  <!-- #rev: 1.Collection Main Menu?!! 2.icons menue teil? seo? 3. move after ul (seo!)-->
     <div class="menue-icons">
       <button class="button-icon" type="button" title="Hauptmenü schließen" aria-label="Hauptmenü schließen" menu-toggle>
         <svg class="svg-icon">
@@ -88,6 +88,11 @@ const {
     </adress>
   </nav> 
 </section>
+<style is:global>
+  body{
+    background: lavender !important;
+  }
+</style>
 
 <style>
   h1{
@@ -97,33 +102,9 @@ const {
     /* border: 0.5px solid var(--cgrey); */
   } 
   #header{
-    /* background: lavender; */
-    /* display: block; */
     font-family: var(--fsans2); 
     text-transform: uppercase;
   }
-
-  .logo{
-    position: fixed;
-    top: calc(var(--gmodulem) / 2 * -1);
-    right: calc(var(--gmodulem) / 1.5 * -1);
-
-    display: flex;
-    justify-content: center;
-    align-items:center;
-
-    /* line-height: calc(var(--gmodulem) / 2 ); */
-
-    width: calc(var(--gmodulem) * 4);
-    height: calc(var(--gmodulem) * 4);
-
-    border-radius: 50%;
-    /* top: calc( 2 * var(--gmodul)); */
-
-    background: var(--cbg);
-    z-index: 4;
-  }
-
 
 
   @media only screen and (min-width: 64em /* var(--vwS) */ ) { 
@@ -152,11 +133,14 @@ const {
     /* toggle here for nav on/off */
     /* display: inline;  */
   }
+  .menue_hidden{
+display: none;
+  }
   nav{
     position: fixed;
 
     right: 0;
-    top:0;
+    top: 100px;
 
     width: 100%;
     max-width: 37.5em;

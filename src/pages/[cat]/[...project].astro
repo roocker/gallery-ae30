@@ -14,7 +14,9 @@ import { CollectionEntry, getCollection } from 'astro:content';
 import { Image, Picture } from '@astrojs/image/components';
 // import BasicScripts from '../../components/basicScripts.astro';
 import TextBlockModal from '../../components/TextBlockModal';
+import SSfigure from '../../components/SSfigure';
 import Slideshow from '../../components/Slideshow';
+import NewSlideshow from '../../components/NewSlideshow';
 import SlideshowCounter from '../../components/SlideshowCounter';
 import SlideshowAlt from '../../components/SlideshowAlt';
 import ModalBtn from '../../components/ModalBtn';
@@ -62,7 +64,15 @@ const slideshow_plans_alts = p.plans.map((plan) => plan.alt);
 <section class="project_presentation" aria-label={`Projekt ${p.title} Presentation`}>
   <article class="project">
 
-
+    <SSfigure
+    client:only
+    pictures={slideshow_pictures}
+    pictureTitles={slideshow_pictures_alts}
+    plans={slideshow_plans}
+    planTitles={slideshow_plans_alts}
+    autoPlayInterval={4} 
+    />
+    <!--
     <Slideshow
     client:load
     pictures={slideshow_pictures}
@@ -71,6 +81,15 @@ const slideshow_plans_alts = p.plans.map((plan) => plan.alt);
     planTitles={slideshow_plans_alts}
     autoPlayInterval={4} 
     />
+    -->
+
+    <!--
+    <NewSlideshow
+    client:load
+    pictures={slideshow_pictures}
+    />
+    -->
+
     <!-- <ModalBtn BtnName="Text ein-/ausblenden" client:load/> -->
 
     <TextBlockModal client:load>
@@ -160,7 +179,7 @@ const slideshow_plans_alts = p.plans.map((plan) => plan.alt);
   }
   article.project{ 
     overflow: hidden;
-    background: lightblue; 
+    /* background: lightblue;  */
   }
 
   article .pictures{}
