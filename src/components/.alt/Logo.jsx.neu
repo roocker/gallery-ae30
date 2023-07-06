@@ -1,50 +1,47 @@
 import '../styles/logo.css';
 import React, { useEffect } from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
-import { useStore } from '@nanostores/react';
-import { stateMainNav } from '../states';
 
 const rotate_variants = {
   i:  { 
-    rotate: 360,
+    rotate: 0,
     opacity: .8,
   },
   a: (i) => {
     const delay = i * 0.5;
     return {
-      rotate:  0,
-      opacity: .8,
-      originX: "50%",
-      originY: "52%",
-      transition: {
-        rotate: { 
-          delay,
-          type: "spring",
-          stiffness: 250,
-          damping: 10,
-        },
-        opacity:{
-          duration: .2,
-        }
-      },
-    }
-  },
-  /* t: { 
-    rotate: [null, 360 ],
-  }, */
-  h: {
-    opacity: 1,
-    scale: 1.05,
-    rotate: [null, -10, 10, 0],
+    rotate: 360,
+    opacity: .8,
+    originX: "50%",
+    originY: "52%",
     transition: {
-      opacity: {
-        duration: .2,
-      },
-      spring: {
+      rotate: { 
+        delay,
         type: "spring",
         stiffness: 250,
         damping: 10,
-      }
+      } },
+    }
+  },
+  t: { 
+    rotate: [null, 360],
+    transition: { 
+      rotate: { 
+        type: "spring",
+        stiffness: 250,
+        damping: 10,
+      } },
+  },
+  h: {
+    opacity: 1,
+    // rotate: 10,
+    rotate: [ null, 10, -10 , null],
+    transition:{
+      rotate: {
+        type: "spring",
+        stiffness: 250,
+        damping: 10,
+      },
     }
   },
   e: {
@@ -63,7 +60,7 @@ const path_variants = {
     const delay = 1 + i * 0.5;
     return {
     opacity: 1,
-    pathLength: [null , 1, 0],
+    pathLength: [null, 1, 0],
     fill:"var(--cgrey)",
     transition: {
       fill: {
@@ -87,9 +84,34 @@ const path_variants = {
 
 function Logo (){
 
-  const tMenu = useStore(stateMainNav);
+  // Keyboard Hotkeys/Shortcuts
+  useEffect(() => {
+
+    const handleKeyDown = (event) => {
+      switch(event.key) {
+        case 'm':
+          toggleMenu();
+          break;
+        default:
+          break;
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  },);
+
+
  const toggleMenu = () => {
-   stateMainNav.set(!tMenu)
+   /* const nav = document.getElementById('mainnav');
+   nav.classList.toggle('menue_hidden'), */
+    document.getElementById('mainnav')?.classList.toggle('menue_hidden');
+   /* nav.animate(
+     {top: 200, display: block},
+     {duration: 1200, fill: "forwards"}
+
+   ) */
   }; 
 
   return (
@@ -100,10 +122,11 @@ function Logo (){
     <motion.svg
     className="logo svg-logo-use"
     custom={7}
-    key={7}
+    // key={toggleMenu}
     variants={rotate_variants}
-    whileTap="i"
+    whileTap="t"
     whileHover="h"
+    // onHoverEnd="i"
     whileDrag="h"
     initial="i"
     animate="a"

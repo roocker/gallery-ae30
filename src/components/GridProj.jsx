@@ -37,23 +37,25 @@ function GridProj (props) {
     const maxR = 270;
 
     const randomX = Math.random() * (max-min) + min;
-    console.log(randomX);
+    // console.log(randomX);
     const randomY = Math.random() * (max-min) + min;
-    console.log(randomY);
+    // console.log(randomY);
     const randomR = Math.random() * (maxR-minR) + minR;
-    console.log(randomR);
+    // console.log(randomR);
     const randomS = Math.random() ; 
-    console.log(randomS);
+    // console.log(randomS);
 
     const shuffle = {
       i: {
         x: randomX,
         y: randomY,
-        rotate: randomR
+        rotate: randomR,
+        scale: .8,
       },
       a: {
         x: 0,
         y: 0,
+        scale: 1,
         rotate: 0,
         transition: {
           type: 'spring', stiffness: 100, damping: 20,
@@ -71,7 +73,9 @@ function GridProj (props) {
         },
       },
       z2:{
-        // scale: 10,
+        scale: 7,
+        originY: "50%",
+        originX: "50%",
         transition: {
           type: 'spring', stiffness: 100, damping: 20,
         },

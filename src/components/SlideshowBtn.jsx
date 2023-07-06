@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react';
-import { stateSlideshowIndex, stateSlideshowDirection, slideshow_length   } from '../states';
+import { stateSlideshowIndex, stateSlideshowDirection, slideshow_length, stateModal } from '../states';
 import '../styles/btn.css'
 
 function SlideshowBtn({ dir, children }) {
@@ -7,6 +7,7 @@ function SlideshowBtn({ dir, children }) {
   const index = useStore(stateSlideshowIndex)
   const direction = useStore(stateSlideshowDirection)
   const numberOFimages = useStore(slideshow_length)
+  const modalopen = useStore(stateModal)
 
   function nextSlide(){
     stateSlideshowDirection.set(1)
@@ -14,6 +15,10 @@ function SlideshowBtn({ dir, children }) {
       stateSlideshowIndex.set(0)
     } else {
       stateSlideshowIndex.set(index + 1);
+      if(modalopen){
+        stateModal.set(false)
+      }
+
     }
   }
 
@@ -23,6 +28,9 @@ function SlideshowBtn({ dir, children }) {
       stateSlideshowIndex.set(numberOFimages -1)
     } else {
       stateSlideshowIndex.set(index - 1);
+      if(modalopen){
+        stateModal.set(false)
+      }
     }
   }
 

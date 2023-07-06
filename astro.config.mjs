@@ -16,7 +16,9 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ae30.at',
-  integrations: [NetlifyCMS({
+  integrations: [
+// SETTINGS -----------------------------------------------
+    NetlifyCMS({
     config: {
       backend: {
         name: 'git-gateway',
@@ -42,59 +44,123 @@ export default defineConfig({
       /* #rev looks good doen't work */
       show_preview_links: true,
       disableIdentityWidgetInjection: true,
-      // COLLECTION
+        
+          // https://github.com/decaporg/decap-cms/blob/master/dev-test/config.yml 
+          //https://cms-demo.netlify.com/#/collections/settings
+        //
+// COLLECTIONS  -----------------------------------------------
       collections: [
+
+// SETTINGS  -----------------------------------------------
         {
           name: 'settings',
           label: 'Einstellungen',
           description: 'Allgmeine Website Einstellungen. NUR MIT VORSICHT ÄNDERN',
           comment: 'NUR MIT VORSICHT ÄNDERN / EDIT ONLY WITH CARE',
-          // folder: 'content/settings/',
-          create: true,
+          create: false,
           delete: false,
-          editor: {
-            preview: false
-          },
           folder: 'src/content/settings/',
-          // #rev müsste geschachtelt sein und dann nur file: '/content/settings/set.yml',
-          // https://github.com/decaporg/decap-cms/blob/master/dev-test/config.yml 
-          //https://cms-demo.netlify.com/#/collections/settings
+          editor: { preview: false },
           fields: [
-            {
+            /* {
               name: 'title',
-              label: 'titel',
-              hint: 'hint'
-            },
+              label: 'Einstellungen Titel',
+              comment: 'NUR MIT SORGFALT ÄNDERN!',
+              default: 'SETTINGS',
+            }, */
             {
               name: 'site-title',
+              label: 'Website Titel',
               widget: 'string',
-              label: 'HAUPT TITEL',
-              comment: 'NUR MIT SORGFALT ÄNDERN! (weißt du was du tust?)'
+              hint: "zb AE30 - Atelier Eroicagasse",
             },
             {
               name: 'description',
+              label: 'Seitenbeschreibung',
               widget: 'string',
-              label: 'Seitenbeschreibung'
             },
             {
-              name: 'menu',
+              name: 'main_menu',
               label: 'Hauptmenü',
-              widget: 'list',
+              widget: 'object',
               fields: [
                 {
-                  name: 'itemname',
-                  widget: 'string',
-                  label: 'itemname'
+                  name: 'menu_cats',
+                  label: 'Hauptmenü Kategorien',
+                  widget: 'list',
+                  fields: [ 
+                    {
+                      name: 'menu_item_cat',
+                      label: 'Hauptmenü Kategories Link',
+                      widget: 'relation',
+                      collection: 'categories',
+                      // multiple: true,
+                      search_fields:["title"],
+                      value_field: "short",
+                      display_fields:["title"]
+                    },
+                    {
+                      name: 'menue_item_cat_name',
+                      label: 'Hauptmenü Kategorie Name',
+                      widget: 'string'
+                    }
+                  ]
                 },
                 {
-                  name: 'url',
-                  widget: 'string',
-                  label: 'URL'
+                  name: 'menu_pages',
+                  label: 'Hauptmenü Pages',
+                  widget: 'list',
+                  fields: [ 
+                    {
+                      name: 'menu_item_pages',
+                      label: 'Pages',
+                      widget: 'relation',
+                      collection: 'pages',
+                      // multiple: true,
+                      search_fields:["title"],
+                      value_field: "{{slug}}",
+                      display_fields:["title"]
+                    },
+                    {
+                      name: 'menue_item_pages_name',
+                      label: 'Hauptmenü Pages Name',
+                      widget: 'string'
+                    },
+                  ]
+                },
+                {
+                  name: 'menu_projects',
+                  label: 'Hauptmenü Projekte',
+                  widget: 'list',
+                  fields: [ 
+                    {
+                      name: 'menu_item_projects',
+                      label: 'Hauptmenü Projekte',
+                      widget: 'relation',
+                      collection: 'projects',
+                      // multiple: true,
+                      search_fields:["title"],
+                      value_field: "{{slug}}",
+                      display_fields:["title"]
+                    },
+                    {
+                      name: 'menue_item_projects_name',
+                      label: 'Hauptmenü Projekte Name',
+                      widget: 'string'
+                    },
+                  ]
                 }
               ]
-            }
-          ]},
+            },
+            {
+              name: 'index_amount',
+              label: 'Anzahl Projekte Startseite',
+              widget: 'number',
+            },
+          ]
+        },
 
+// PAGES  -----------------------------------------------
         {
           name: 'pages',
           label: 'Seiten',
@@ -123,6 +189,7 @@ export default defineConfig({
           ]
         },
 
+// CATEGORIES  -----------------------------------------------
         {
           name: 'categories',
           label: 'Haupt-Kategorien',
@@ -157,35 +224,11 @@ export default defineConfig({
           ]
         },
 
+
+
+// PROJECTS  -----------------------------------------------
+
         {
-        name: 'subcategories',
-        label: 'Unter-Kategorien',
-        description: 'Unter Kategorien',
-        folder: 'src/content/cat/sub',
-        create: true,
-        delete: false,
-        editor: {
-          preview: false
-        },
-        fields: [{
-          name: 'title',
-          widget: 'string',
-          label: 'Unter-Kategorie Name'
-        }, {
-          name: 'url',
-          widget: 'string',
-          label: 'Unter-Kategorie URL'
-        }, {
-          name: 'main category',
-          widget: 'string',
-          label: 'Eltern Kategorie'
-        }, /* #rev select from category*/
-        {
-          name: 'description',
-          widget: 'string',
-          label: 'Beschreibung'
-        }]
-      }, {
         name: 'projects',
         label: 'Projekte',
         description: 'Projekte anlegen, löschen und verwalten',
@@ -293,7 +336,16 @@ export default defineConfig({
           label: 'Karte',
           required: false
         }]
-      }]
+      }
+
+
+
+
+      ] //collection ENDE
+
+
+
+
     },
     previewStyles: ['/src/styles/preview.css']
   }), image({

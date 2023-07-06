@@ -93,14 +93,13 @@ const handleClose = () => {
   return (
     <AnimatePresence 
     initial={true}
-    mode="wait"
+    exitBeforeEnter={true}
     onExitComplete={() => {
       console.log('Modal exit animation completed');
     }}
     >
     {isOpen && (
-    <Backdrop classname="backdrop_modal" onClick={handleClose}>
-      <section className="modal_content">
+    <Backdrop onClick={handleClose}>
       <motion.div
         className="content"
         onClick={(e) => e.stopPropagation()}
@@ -120,7 +119,6 @@ const handleClose = () => {
 
      
       </motion.div>
-      </section>
 
     </Backdrop>
     )}
