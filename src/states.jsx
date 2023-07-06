@@ -1,5 +1,6 @@
 import { atom } from 'nanostores';
 
+export const stateMainNav = atom(false);
 
 // Modal
 export const stateModal = atom(false);
@@ -19,6 +20,9 @@ export const slideshowAutoPlayInterval = atom();
 
 
 // Should use unsubscribe or comment out later!
+ stateMainNav.subscribe((newValue) => {
+  console.log('States: stateMainNav updated:', newValue);
+})
 /*
   slideshowCurrentAlt.subscribe((newValue) => {
   console.log('States: currentAlt updated:', newValue);

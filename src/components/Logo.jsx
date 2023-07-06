@@ -1,48 +1,50 @@
 import '../styles/logo.css';
 import React, { useEffect } from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
+import { useStore } from '@nanostores/react';
+import { stateMainNav } from '../states';
 
 const rotate_variants = {
   i:  { 
-    rotate: 0,
+    rotate: 360,
     opacity: .8,
   },
   a: (i) => {
     const delay = i * 0.5;
     return {
-    rotate: 360,
-    opacity: .8,
-    originX: "50%",
-    originY: "52%",
-    transition: {
-      rotate: { 
-        delay,
-        duration: .2,
-        type: "spring",
-        stiffness: 250,
-        damping: 10,
-      } },
+      rotate:  0,
+      opacity: .8,
+      originX: "50%",
+      originY: "52%",
+      transition: {
+        rotate: { 
+          delay,
+          type: "spring",
+          stiffness: 250,
+          damping: 10,
+        },
+        opacity:{
+          duration: .2,
+        }
+      },
     }
   },
-  t: { 
-    rotate: [null, 360],
-    transition: { 
-      rotate: { 
+  /* t: { 
+    rotate: [null, 360 ],
+  }, */
+  h: {
+    opacity: 1,
+    scale: 1.05,
+    rotate: [null, -10, 10, 0],
+    transition: {
+      opacity: {
         duration: .2,
+      },
+      spring: {
         type: "spring",
         stiffness: 250,
         damping: 10,
-      } },
-  },
-  h: {
-    opacity: 1,
-    rotate: [ null, 10, -10 , 0],
-    transition: {
-      duration: .2,
-      type: "spring",
-      stiffness: 250,
-      bounce: 1,
-        // damping: 10,
+      }
     }
   },
   e: {
@@ -54,7 +56,7 @@ const path_variants = {
   i: { 
     opacity:0,
     pathLength:0,
-    color:"var(--cwhite)"
+    fill:"var(--cwhite)"
 
   },
   a: (i) => {
@@ -62,17 +64,16 @@ const path_variants = {
     return {
     opacity: 1,
     pathLength: [null , 1, 0],
-    color:"var(--cblack)",
+    fill:"var(--cgrey)",
     transition: {
-      color: {
+      fill: {
         delay,
-        duration: 1.5,
+        duration: 2,
       },
       pathLength: {
         delay,
         duration: 1.5,
-        type: "spring",
-        stiffness: 250,
+        type: "tween",
       },
       }
     }
@@ -86,34 +87,9 @@ const path_variants = {
 
 function Logo (){
 
-  // Keyboard Hotkeys/Shortcuts
-  useEffect(() => {
-
-    const handleKeyDown = (event) => {
-      switch(event.key) {
-        case 'm':
-          toggleMenu();
-          break;
-        default:
-          break;
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  },);
-
-
+  const tMenu = useStore(stateMainNav);
  const toggleMenu = () => {
-   /* const nav = document.getElementById('mainnav');
-   nav.classList.toggle('menue_hidden'), */
-    document.getElementById('mainnav')?.classList.toggle('menue_hidden');
-   /* nav.animate(
-     {top: 200, display: block},
-     {duration: 1200, fill: "forwards"}
-
-   ) */
+   stateMainNav.set(!tMenu)
   }; 
 
   return (
@@ -124,10 +100,10 @@ function Logo (){
     <motion.svg
     className="logo svg-logo-use"
     custom={7}
+    key={7}
     variants={rotate_variants}
-    whileTap="t"
+    whileTap="i"
     whileHover="h"
-    onHoverEnd="i"
     whileDrag="h"
     initial="i"
     animate="a"
@@ -147,7 +123,7 @@ function Logo (){
 
     <motion.path
     className="lpath E"
-    custom={1.5}
+    custom={2}
     variants={path_variants}
     initial="i"
     animate="a"
@@ -157,7 +133,7 @@ function Logo (){
 
     <motion.path
     className="lpath 3"
-    custom={2.5}
+    custom={3}
     variants={path_variants}
     initial="i"
     animate="a"

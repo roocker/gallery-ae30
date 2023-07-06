@@ -1,0 +1,19 @@
+---
+# NUR MIT SORGFALT ÄNDERN!
+title: Einstellungen
+site-title: AE30 - Atelier Eroicagasse
+description: AE30 - Atelier Eroicagasse 30 - ARGE Kratochwil Waldbauer Zeinitzer
+main_menu:
+  menu_cats:
+    - menu_item_cat: ARGE
+    - menu_item_cat: Kratochwil Gerhard
+    - menu_item_cat: Waldbauer Peter
+    - menu_item_cat: Zeinitzer Klaus
+  menu_pages:
+    - menu_item_pages: Über uns
+    - menu_item_pages: Team
+    - menu_item_pages: Impressum
+  menu_projects:
+    - menu_item_projects: TU Wien - Bauteil ZE
+    - menu_item_projects: TU Wien - Bauteil OB
+---

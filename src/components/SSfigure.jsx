@@ -4,7 +4,7 @@ import { useStore } from '@nanostores/react';
 import SSimg from  '../components/SSimg'
 import "../styles/slideshow.css";
 
-import { slideshow_length, stateSlideshow, statePlayback, stateSlideshowIndex, stateSlideshowDirection, slideshowCurrentAlt, slideshowAutoPlayInterval, stateSlideshowZoom } from '../states.jsx';
+import { slideshow_length, stateSlideshow, statePlayback, stateSlideshowIndex, stateSlideshowDirection, slideshowCurrentAlt, slideshowAutoPlayInterval, stateSlideshowZoom, stateModal } from '../states.jsx';
 
 
 function SSfigure(props) {
@@ -43,7 +43,7 @@ function SSfigure(props) {
   const animate_slide = {
     i: (direction) => {
       return{
-        // zIndex:2,
+        zIndex:0,
         x: direction > 0 ? 1000 : -1000, 
         opacity: 0,
       };
@@ -88,10 +88,12 @@ function SSfigure(props) {
   }
 
   // change Controls color on Plan/Picture Toggle
-  useEffect(() => {
+ // const zModal = useStore(stateModal);
+   useEffect(() => {
     const footerControls = document.querySelector(".controls");
     footerControls.style.color = sToggle ?  'var(--cwhite)' : 'var(--cgrey)';
     footerControls.style.color = zToggle && sToggle ?  'var(--cwhite)' : 'var(--cgrey)';
+    // footerControls.style.color = zModal ? 'var(--cgrey)' : 'var(--cwhite)';
   }, [sToggle, zToggle]) 
 
   // Slider Functions 
@@ -185,7 +187,7 @@ function SSfigure(props) {
     <>
     <motion.figure
     className="slideshow_fig"
-    variants={animate_stoggle}
+    // variants={animate_stoggle}
     key={sToggle}
     initial="i"
     animate="a"
@@ -202,7 +204,6 @@ function SSfigure(props) {
     animate="a"
     exit="e"
     >
-
     <SSimg
     images={images}
     index={index}
@@ -210,7 +211,6 @@ function SSfigure(props) {
     zoom={zToggle}
     onClick={setZoomToggle}
     />
-
     </motion.div>
 
     </AnimatePresence>

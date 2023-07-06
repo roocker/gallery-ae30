@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import '../styles/modal.css';
-import '../styles/nav.css'
+import '../styles/backdrop.css'
 
 const backdropVariants = {
   i: { opacity: 0 },
@@ -9,10 +8,10 @@ const backdropVariants = {
   e: { opacity: 0 },
 };
 
-export default function Backdrop({ children, onClick, bdlabel }) {
+export default function Backdrop({ children, onClick, classname }) {
   return (
     <motion.div
-      className="backdrop"
+      className={`backdrop ${classname}`}
       onClick={onClick}
       variants={backdropVariants}
       initial="i"
