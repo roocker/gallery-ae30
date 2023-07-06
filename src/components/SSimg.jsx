@@ -3,16 +3,16 @@ import "../styles/slideshow.css";
 
 const animation_zoom = {
   i:{
-    minHeight: "0vh",
-    minWidth: "0vw",
+    minHeight: "0lvh",
+    minWidth: "0lvw",
   },
   a:{
-    minHeight: "100vh", 
-    minWidth: "100vw", 
+    minHeight: "100lvh", 
+    minWidth: "100lvw", 
   },
   e:{
-    minHeight: "0vh",
-    minWidth: "0vw",
+    minHeight: "0lvh",
+    minWidth: "0lvw",
   }
 }
 
@@ -41,9 +41,9 @@ function SSimg ( props ) {
 
   const img = document.getElementById('img');
   
-  console.log(img)
+  // console.log(img)
   const zoomDragUp = () =>{
-    console.log("up", img.dataset.downX)
+    // console.log("up", img.dataset.downX)
     img.dataset.downX = 0;
     img.dataset.prevPercentage = img.dataset.downX;
   }
@@ -51,7 +51,7 @@ function SSimg ( props ) {
       props.onClick();
       if (e.nativeEvent instanceof MouseEvent) {
         img.dataset.downX = e.clientX;
-        console.log("zoomDragDown x:",img.dataset.downX)
+        // console.log("zoomDragDown x:",img.dataset.downX)
       }
     }
   const zoomDragMove = (e) =>{
@@ -70,7 +70,6 @@ function SSimg ( props ) {
   }
 
   return(
-    // <div class="img">
     <AnimatePresence initial={true}>
     <motion.img
     className=""
@@ -92,8 +91,6 @@ function SSimg ( props ) {
 
     />
     </AnimatePresence>
-    // </div>
-
   )
 
 }

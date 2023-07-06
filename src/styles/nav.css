@@ -1,17 +1,18 @@
-.backdrop{
-justify-content: left !important;
-align-items: start !important;
 
-background: lavender;
-opacity: .1;
+.backdrop_menue{
+  align-items: start;
+  z-index:9;
+
 
 }
   @media only screen and (min-width: 51em /* var(--vwS) */ ) { 
-    .backdrop{
-      display: none;
+    .backdrop_menue{
+      height: 3em;
+      min-height: auto;
+      /* background: red; */
+
     }
   }
-
 /* Nav------------------------------------- */
   hr{
     /* border: 0.5px solid var(--cgrey); */
@@ -20,6 +21,8 @@ opacity: .1;
 
   nav{
     position: fixed;
+    top: 0;
+    right:0;
     display: flex;
     flex-direction: column;
 
@@ -37,7 +40,7 @@ opacity: .1;
     backdrop-filter: blur(3px);
 
     /* border-bottom-left-radius: 3em; */
-    z-index:3;
+    z-index:4;
 
     transform: translateY(-100%);
     animation: slideDown 0.2s ease-in-out forwards;
@@ -56,6 +59,59 @@ opacity: .1;
     0% {transform: translateY(0%);}
     100% {transform: translateY(-100%);}
   }
+
+
+/* Icons ---------------------------------------- */
+
+
+.menue-icons{
+    /* background: green; */
+    display: flex;
+    gap: calc(calc(var(--gmodulem) * 3)/2);
+    height: 3em;
+    align-items: center;
+  }
+  button{
+    background: none;
+    border: none;
+    padding:0;
+  }
+  button:hover{
+    cursor: pointer;
+  }
+  button.button-icon{
+    /* background: red; */
+
+    height: calc(var(--gmodulem)*1);
+    color: var(--cgrey);
+  }
+  .button-icon:hover{
+   color: var(--cblack);
+  }
+  .svg-icon{
+    /* background: yellow; */
+    height: 100%;
+    aspect-ratio: 1;
+
+  }
+  .svg-icon use{
+    stroke-width: 1em;
+    color:
+  }
+  #icon-close{
+    /* background: yellow;  */
+    /* background: url("/close.svg"); */
+  }
+  #icon-theme{
+    /* background: red url("/sun.svg"); */
+  }
+  #header{
+    font-family: var(--fsans2); 
+    text-transform: uppercase;
+  }
+
+
+
 /* TEXT MENU  ---------------------------------*/
 
   ul{
@@ -73,11 +129,13 @@ opacity: .1;
 
   }
   ul li{ 
+    /* width: 100%; */
     /* background: orange; */
   }
   ul li > a{
-    /* display: block; */
+    display: block;
     color: var(--cgrey);
+    /* background: red; */
     /* border-bottom: 1px solid rgb(255,255,255,.0); */
   }
   ul li > a:hover{
@@ -98,6 +156,7 @@ opacity: .1;
     padding-bottom: var(--gmodulem);
   }
 
+/* MEDIA QUERIES  ---------------------------------*/
   @media only screen and (min-width: 51em /* var(--vwS) */ ) { 
     nav{
       flex-direction: row;
@@ -134,5 +193,9 @@ opacity: .1;
     }
     ul{
       line-height: 4em;
+    }
+    .backdrop_menue{
+      height: 4em;
+      min-height: auto;
     }
   }

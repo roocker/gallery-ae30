@@ -1,37 +1,42 @@
-.backdrop{
-  z-index: 3;
-  position: absolute;
-  left: 0;
-  top: 0;
-  /* height: 100%; */
-  min-height: 100lvh;
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
+.backdrop_modal{
   align-items: end;
-  overflow: hidden;
 
-  backdrop-filter: blur(2px);
+}
+.modal_content{
+  z-index: 4;
+  width: clamp(25em , calc(37.5em + 2em), 100%);
+  backdrop-filter: blur(1px);
+  background: var(--cwhite60);
 
-  /* background: #2233aa33; */
+  max-height: calc(100lvh - 8em);
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  /* background: green; */
 }
 
 .content{
-  width: clamp(50%, calc(37.5em + 4em), 90%);
-  /* height: max(80vh); */
-  max-height: 100lvh;
   overflow: auto;
-
-
   padding: 2em;
+  width: 100%;
   box-sizing: border-box;
-  /* color: white; */
 
-  background: var(--cwhite60);
-  backdrop-filter: blur(1px);
-  /* background: green; */
+  margin-bottom: 12em;
 
+  /* background: red;   */
+
+}
+/* Hacky way to target mobile browsers? */
+@media screen and (max-width: 600px) and (-webkit-min-device-pixel-ratio: 0) {
+  .content{
+    margin-bottom: calc(12em + calc(100lvh - 100svh));
+  }
+}
+@media only screen and (min-width: 48em/* var(--vwT) */) {
+.content{
+  margin-bottom: 8em;
+}
 }
 button.modal_close_btn{
   border: none;
@@ -41,7 +46,7 @@ button.modal_close_btn{
   position: absolute;
   top: var(--gmodulem) ;
   right: var(--gmodulem) ;
-    color: var(--cgrey);
+  color: var(--cgrey);
 }
 
 button.modal_close_btn:hover{
