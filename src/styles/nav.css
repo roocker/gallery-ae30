@@ -1,13 +1,13 @@
 
 .backdrop_menue{
   align-items: start;
-  z-index:9;
+  z-index:9 !important;
 
 
 }
   @media only screen and (min-width: 51em /* var(--vwS) */ ) { 
     .backdrop_menue{
-      height: 3em;
+      height: 3em !important;
       min-height: auto;
       /* background: red; */
 
@@ -160,6 +160,7 @@
   @media only screen and (min-width: 51em /* var(--vwS) */ ) { 
     nav{
       flex-direction: row;
+    
     }
     hr{
       display:none;
@@ -181,6 +182,9 @@
       text-indent: -9999px;
       display: none;
     }
+    .menue_hidden{
+    /* transform: translateY(0%); */
+    }
 
   }
 
@@ -195,7 +199,7 @@
       line-height: 4em;
     }
     .backdrop_menue{
-      height: 4em;
+      height: 4em !important;
       min-height: auto;
     }
   }
