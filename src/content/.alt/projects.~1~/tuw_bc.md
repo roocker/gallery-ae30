@@ -1,18 +1,23 @@
 ---
-title: Eisenhuthaus
-title_l: Eisenhuthaus
+title: tuw bc
+title_l: TU Wien - Bauteil BC
+title_zzl: Lehartrakt
 publishDate: 08 May 2023
-category: wp
+category: kg
 proejct_keys:
   year: "2023"
   year2: "2023"
-  area: "1000"
+  area: "10000"
   tags:
     - Öffentlich
-    - Ausstellungsraum
+    - Labor
+    - lernen
+    - arbeiten
+    - Büro
+    - Universität
 titleimg:
-  img: /media/29.jpg
-  alt: Eisenhuthaus
+  img: /media/37.jpg
+  alt: test
 fotos:
   - foto: /media/10.jpg
     alt: 1.zwischengeschoss
@@ -20,7 +25,7 @@ fotos:
     alt: haustechnik ebene
   - foto: /media/9.jpg
     alt: test
-short: text
-long: text
-subcategory: Sanierung
+short: test
+long: test
+subcategory: TU Wien, Universität
 ---

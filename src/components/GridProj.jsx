@@ -7,9 +7,11 @@ https://sharp.pixelplumbing.com/api-resize
 - [ ] sharp image operation (color correction?)
 
 */
+import { useStore } from '@nanostores/react';
 import '../styles/grid.css';
 import { AnimatePresence, motion} from "framer-motion";
-
+import { stateSelectedCat, indeciesToCullCats as indeciesToNotCullCats } from '../states';
+import { useEffect } from 'react';
 // import { Picture } from '@astrojs/image/components';
 // const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
 
@@ -18,11 +20,34 @@ const width = 3;
 const height = 2;
 
 function GridProj (props) {
-  const allProjects = props.projects;
-  let completedAnimations = 0;
-  const totalAnimations = allProjects.length;
 
-  return allProjects.map((proj, index) => {
+   const selProjs = useStore(stateSelectedCat);
+  const indeciesToNotCull = useStore(indeciesToNotCullCats)
+  const allProjs = props.projects;
+
+  let projs = [];
+
+  
+useEffect(() => {
+  console.log(selProjs, "indeciesToNotCull",indeciesToNotCull)
+  const projs = indeciesToNotCull ? allProjs.filter(
+    (index) => !indeciesToNotCull.includes(index)
+  ) : allProjs;
+
+  console.log("projs !!!!", projs);
+}, [indeciesToNotCull]);
+  
+
+
+
+
+
+  let completedAnimations = 0;
+  const totalAnimations = projs.length;
+
+  return projs.map((proj, index) => {
+
+  console.log(proj, index);
 
     let smaller;
     const vh = window.innerHeight;
@@ -82,21 +107,13 @@ function GridProj (props) {
       },
     }; 
 
-    // console.log(allProjects);
-
-    console.log(
-      "IAS",
-      "title:", proj.data.title,
-      "slug:", proj.slug,
-      "titleimg:", proj.data.titleimg.img,
-      "titlealt:", proj.data.titleimg.alt,
-      "cat:", proj.data.category,
-    )
-  
+    
+let i = 0;
 
   return (
       <motion.article
       variants={shuffle}
+    key={index}
       initial="i"
       animate="a"
       exit="e"
@@ -123,16 +140,16 @@ function GridProj (props) {
 
       widths={[1024, 600, 500, 420, 128]} 
       sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (min-width: 420px) 420px, 420px"
-      aspectRatio={`${width}:${height}`}
+      // aspectRatio={`${width}:${height}`}
       background={`white`}
       position="attention"
       fit="cover"
       loading="lazy"
       decoding="async"
-      class=""
+      className=""
       />
 
-      <figcaption>{proj.data.title}</figcaption>
+      <figcaption>{index} {proj.data.title}</figcaption>
       </figure> 
       </AnimatePresence>
       </a> 

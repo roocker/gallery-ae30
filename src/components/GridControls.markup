@@ -1,0 +1,23 @@
+
+      <button />
+
+      <button type="">prev</button>
+
+      <form id="searchForm">
+      <input type="text" id="searchInput" placeholder="Search..."/>
+      <button type="submit">Search</button>
+      </form>
+
+...
+
+
+      <select className="select_typ">
+      <option value="all">Typologie</option>
+      </select>
+
+      <select className="select_year">
+      <option value="all">Jahr</option>
+      </select>
+
+
+      <button type="">next</button>

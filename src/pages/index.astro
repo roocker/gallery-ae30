@@ -6,7 +6,8 @@ TODO:
 */
 
 import Layout from '../layouts/Layout.astro';
-import GridProj from '../components/GridProj.jsx';
+import GridProj from '../components/GridProj';
+import GridControls from '../components/GridControls';
 import { getCollection } from 'astro:content';
 
 const allProjects = await getCollection('projects');
@@ -18,14 +19,21 @@ const allProjects = await getCollection('projects');
   <!-- <Testgallery/> -->
     <!--  /${proj.slug}`}  -->
 
-    <GridProj projects={allProjects}  client:only />
 
-    <!--
+    <GridProj
+    client:only
+    projects={allProjects}
+    />
 
-      <GridControls />
+      <GridControls
+      client:load
+      defaultCat="Kategorie"
+      defaultTag={0}
+      defaultYear={0}
+      defaultSize={0}
+      />
 
 
-    -->
 
     <!--
     {allProjects.map((proj) => 

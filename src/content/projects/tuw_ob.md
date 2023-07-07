@@ -1,10 +1,19 @@
 ---
-title: 'TU Wien - Bauteil OB'
+title: tuw ob
+title_l: TU Wien - Bauteil OB
+title_zzl: Science Center / Halle 227
 publishDate: 22 Apr 2023
-category: kg
-subcategory: tuw, labor, universität
-titleimg: 
-  img:  /media/11.jpg
+category: arge
+proejct_keys:
+  year: "2023"
+  year2: "2023"
+  area: "9000"
+  tags:
+    - Öffentlich
+    - Labor
+    - Universität
+titleimg:
+  img: /media/11.jpg
   alt: TU Wien Bauteil OB, Halle 227 - Ansicht
 fotos:
   - foto: /media/10.jpg
@@ -20,6 +29,8 @@ plans:
     alt: Schnitt
   - plan: /media/15.jpg
     alt: Detail
-short: test
+short: kurzfassung
 long: text 227.
+subcategory: tuw, labor, universität
 ---
+wie? jajaja langtext

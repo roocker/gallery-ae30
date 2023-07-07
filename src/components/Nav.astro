@@ -68,7 +68,7 @@ const allMenuNames = [...menuCatsName, ...menuPagesName, ... menuProjectsName];
      <Logo client:load/>
 
      <MainNav
-     client:load
+     client:only
      menu_urls={allMenuURLs}
      menu_names={allMenuNames} />
 

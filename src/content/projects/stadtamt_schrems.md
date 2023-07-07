@@ -1,9 +1,17 @@
 ---
 title: Stadtamt Schrems
+title_l: Stadtamt Schrems
 publishDate: 22 Apr 2023
 category: zk
-subcategory: öffentlich
-titleimg: 
+proejct_keys:
+  year: "2023"
+  year2: "2023"
+  area: "2000"
+  tags:
+    - Öffentlich
+    - arbeiten
+    - Außenraum
+titleimg:
   img: /media/35.jpg
   alt: fasdfasdf
 fotos:
@@ -17,4 +25,5 @@ fotos:
     alt: okok
 short: text
 long: langtext schrems
+subcategory: öffentlich
 ---

@@ -1,18 +1,17 @@
 ---
-title: Eisenhuthaus
-title_l: Eisenhuthaus
+title: Sparmarkt Poysdorf
+title_l: Sparmarkt Poysdorf
 publishDate: 08 May 2023
 category: wp
 proejct_keys:
   year: "2023"
   year2: "2023"
-  area: "1000"
   tags:
-    - Öffentlich
-    - Ausstellungsraum
+    - Geschäft/Shop
+  area: "2000"
 titleimg:
-  img: /media/29.jpg
-  alt: Eisenhuthaus
+  img: /media/34.jpg
+  alt: Visualisierung
 fotos:
   - foto: /media/10.jpg
     alt: 1.zwischengeschoss
@@ -22,5 +21,5 @@ fotos:
     alt: test
 short: text
 long: text
-subcategory: Sanierung
+subcategory: Supermarkt
 ---

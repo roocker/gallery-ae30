@@ -1,9 +1,17 @@
 ---
 title: Atelier Eroicagasse
+title_l: Atelier Eroicagasse
 publishDate: 22 Apr 2023
-category: wp
-subcategory: EFH
-titleimg: 
+category: Waldbauer Peter
+proejct_keys:
+  year: "2023"
+  year2: "2023"
+  area: "200"
+  tags:
+    - Büro
+    - Privat
+    - arbeiten
+titleimg:
   img: /media/17.jpg
   alt: asdffff
 fotos:
@@ -21,4 +29,5 @@ fotos:
     alt: detail
 short: text
 long: text text text
+subcategory: EFH
 ---

@@ -9,7 +9,7 @@ function MainNav (props){
 
   const menuURLs = props.menu_urls;
   const menuNames = props.menu_names;
-  console.log('MainNav', menuURLs, menuNames);
+  // console.log('MainNav', menuURLs, menuNames);
 
   const tMenu = useStore(stateMainNav);
   const toggleMenu = () => {
@@ -19,9 +19,30 @@ function MainNav (props){
     stateMainNav.set(false);
   }
 
-  /* let tSmallWindow = false;
-  window.innerWidth > 816 ? tSmallWindow = true : tSmallWindow = false;
-  console.log("HALLO", tSmallWindow) */
+
+
+
+/* useEffect(() => {
+  let isMenuWide;
+
+  const setMenuWide = () => {
+    isMenuWide = window.innerWidth > 816;
+    console.log("widnesstatus:", isMenuWide);
+    // Use `isMenuWide` for further processing here
+  };
+
+  setMenuWide();
+  window.onresize = setMenuWide;
+
+  // Clean up the event handler when the component unmounts
+  return () => {
+    window.onresize = null;
+  };
+}, []);
+
+console.log("isMenuWide:", isMenuWide); */
+
+ 
 
   useEffect(() => {
 

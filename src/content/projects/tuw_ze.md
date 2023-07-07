@@ -1,8 +1,20 @@
 ---
-title: TU Wien - Bauteil ZE
+title: tuw ze
+title_l: TU Wien - Bauteil ZE
+title_zzl: USTEM und ATI
 publishDate: 23 Apr 2023
-category: kg
-subcategory: Universität, Öffentlich, Labor
+category: arge
+proejct_keys:
+  year: "2023"
+  year2: "2023"
+  area: "3000"
+  tags:
+    - Öffentlich
+    - Labor
+    - Außenraum
+    - lernen
+    - arbeiten
+    - Universität
 titleimg:
   img: /media/24.jpg
   alt: Alttext Title Bild - Rendering
@@ -32,8 +44,11 @@ plans:
     alt: Querschnitt
   - plan: /media/19.jpg
     alt: Detail
-short: "Zur Entlastung der Laborflächen des ATI (Atominstitut) und zur Aufnahme der Universitären Service Einrichtung für Transmissionselektronenmikroskopie (USTEM) entsteht am Areal Stadionallee ein neues Institutsgebäude."
+short: Zur Entlastung der Laborflächen des ATI (Atominstitut) und zur Aufnahme
+  der Universitären Service Einrichtung für Transmissionselektronenmikroskopie
+  (USTEM) entsteht am Areal Stadionallee ein neues Institutsgebäude.
 long: asdfasdf
+subcategory: Universität, Öffentlich, Labor
 ---
 Zur Entlastung der Laborflächen des ATI (Atominstitut) und zur Aufnahme der Universitären Service Einrichtung für Transmissionselektronenmikroskopie (USTEM) entsteht am Areal Stadionallee ein neues Institutsgebäude. 
 

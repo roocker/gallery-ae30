@@ -2,7 +2,7 @@
 title: Eisenhuthaus
 title_l: Eisenhuthaus
 publishDate: 08 May 2023
-category: wp
+category: Waldbauer Peter
 proejct_keys:
   year: "2023"
   year2: "2023"

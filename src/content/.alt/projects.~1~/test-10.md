@@ -1,10 +1,10 @@
 ---
-title: BC Lehartrakt
+title: test 1
 publishDate: 08 May 2023
-category: kg
-subcategory: TU Wien, Universität
+category: zk
+subcategory: test
 titleimg:
-  img: /media/37.jpg
+  img: /media/21.jpg
   alt: test
 fotos:
   - foto: /media/10.jpg
@@ -13,6 +13,6 @@ fotos:
     alt: haustechnik ebene
   - foto: /media/9.jpg
     alt: test
-short: test
-long: test
+short: "* test"
+long: ttest
 ---

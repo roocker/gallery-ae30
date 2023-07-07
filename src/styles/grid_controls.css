@@ -14,7 +14,32 @@ section.controls{
     font-family: var(--fsans2);
     color: var(--cgrey);
 
+    /* width: 100vw; */
+    justify-self: center;
+
     background: green;
 
+/* height: 3em; */
+
+    
+
+}
+.line{
+  /* height: 2em; */
+  /* padding: .5em; */
+  margin: 0;
+  font-family: var(--fsans2) ;
+  line-height: 2em;
+
+  backdrop-filter: blur(1px);
+}
+.test{
+  display: block;
+  background: red;
+}
+
+.counter_line{
+    font-family: var(--fsans3) !important;
+    font-size: 1.25rem;
 }
 

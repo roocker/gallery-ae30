@@ -1,8 +1,14 @@
 ---
 title: Sparmarkt Poysdorf
+title_l: Sparmarkt Poysdorf
 publishDate: 08 May 2023
-category: wp
-subcategory: Supermarkt
+category: Waldbauer Peter
+proejct_keys:
+  year: "2023"
+  year2: "2023"
+  tags:
+    - Geschäft/Shop
+  area: "2000"
 titleimg:
   img: /media/34.jpg
   alt: Visualisierung
@@ -15,4 +21,5 @@ fotos:
     alt: test
 short: text
 long: text
+subcategory: Supermarkt
 ---

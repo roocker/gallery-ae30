@@ -1,8 +1,18 @@
 ---
-title: AA Studienabteilung
+title: tuw_studienabteilung
+title_l: TU Wien - Studienabteilung
+title_zzl: Bauteil AA, Stiege 2
 publishDate: 08 May 2023
-category: kg
-subcategory: TU Wien
+category: arge
+proejct_keys:
+  year: "2019"
+  year2: "2020"
+  area: "500"
+  tags:
+    - Universität
+    - Öffentlich
+    - lernen
+    - arbeiten
 titleimg:
   img: /media/31.jpg
   alt: Studienabteilung Insel Möblierung
@@ -24,4 +34,6 @@ plans:
     alt: Detail
 short: text
 long: text
+subcategory: TU Wien
 ---
+studienabteilung juhuuu
