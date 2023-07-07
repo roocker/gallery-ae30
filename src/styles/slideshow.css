@@ -1,5 +1,5 @@
 main{
-  overflow:hidden;
+  /* overflow:hidden; */
   overscroll-behavior: auto; /* default */
 }
 .hide_overflow{

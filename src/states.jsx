@@ -2,11 +2,16 @@ import { atom } from 'nanostores';
 
 export const stateMainNav = atom(false);
 
+// Grid
+export const stateSelectedCat = atom();
+export const stateSelectedCatProjs = atom();
+
+export const indeciesToNotCullCats = atom();
+
 // Modal
 export const stateModal = atom(false);
 
 // Slideshow
-
 export const stateSlideshowIndex = atom(0);
 export const stateSlideshowDirection = atom(1);
 export const slideshow_length = atom(1);
@@ -20,14 +25,25 @@ export const slideshowAutoPlayInterval = atom();
 
 
 // Should use unsubscribe or comment out later!
- stateMainNav.subscribe((newValue) => {
-  console.log('States: stateMainNav updated:', newValue);
-})
+/* stateSelectedCat.subscribe((newValue) => {
+    console.log('States: stateSelectedCat updated:', newValue);
+  })
+
+stateSelectedCatProjs.subscribe((newValue) => {
+    console.log('States: stateSelectedCatProjs updated:', newValue);
+  }) */
+
+
 /*
-  slideshowCurrentAlt.subscribe((newValue) => {
+  
+stateMainNav.subscribe((newValue) => {
+    console.log('States: stateMainNav updated:', newValue);
+  })
+
+slideshowCurrentAlt.subscribe((newValue) => {
   console.log('States: currentAlt updated:', newValue);
 })
- stateModal.subscribe((newValue) => {
+stateModal.subscribe((newValue) => {
   console.log('States: stateModal updated:', newValue);
 })
 
