@@ -19,6 +19,9 @@ function MainNav (props){
     stateMainNav.set(false);
   }
 
+  const handleOpen = () => {
+    stateMainNav.set(true);
+  }
 
 
 

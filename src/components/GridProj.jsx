@@ -21,15 +21,26 @@ const height = 2;
 
 function GridProj (props) {
 
+  // Read from State and if not State then allProjects
+/*
 
-// Filter Projs from GridControls or use allProjs
+let projs = props.projects
+const currentProjs = useStore(stateCurrentProjs);
+stateCurrentProjs ? projs = useStore(stateCurrentProjs) : projs = props.projects
+  // one more fallback if no projects from index and no projects from states then query allProjs?
+
+
+ */
+
+
+// Filter Projs from GridControls or use allProjs Alt
 
 const selCat = useStore(stateSelectedCat);
 const selCatIndex = useStore(stateSelCatIndex)
 
 const allProjs = props.projects;
 
-let projs = allProjs;
+let projs;
 
 
 const filterProjs = () => {
@@ -101,9 +112,10 @@ return projs.map((proj, index) => {
       y: randomY,
     },
     z1:{
-      scale: 1.11,
+      scale: 1.05,
       transition: {
-        type: 'spring', stiffness: 100, damping: 20,
+        duration: .1,
+        // type: 'spring', stiffness: 100, damping: 20,
       },
     },
     z2:{
@@ -117,7 +129,6 @@ return projs.map((proj, index) => {
   }; 
 
 
-  let i = 0;
 
   return (
     <motion.article
@@ -127,6 +138,7 @@ return projs.map((proj, index) => {
     animate="a"
     exit="e"
     whileHover="z1"
+    // onHoverEnd={e => {}}
     // whileTap="z2"
     onAnimationComplete={() => {
       completedAnimations++;

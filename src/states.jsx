@@ -3,7 +3,11 @@ import { atom } from 'nanostores';
 export const stateMainNav = atom(false);
 
 // Grid
-export const stateSelectedCat = atom('all');
+export const stateSelectedCat = atom("all");
+export const stateSelectedTag = atom("tag");
+export const stateSelectedYear = atom("year");
+export const stateSelectedSize = atom("size");
+
 // export const stateSelectedCatProjs = atom();
 
 export const stateSelCatIndex = atom();
