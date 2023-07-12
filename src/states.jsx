@@ -3,10 +3,11 @@ import { atom } from 'nanostores';
 export const stateMainNav = atom(false);
 
 // Grid
-export const stateSelectedCat = atom();
-export const stateSelectedCatProjs = atom();
+export const stateSelectedCat = atom('all');
+// export const stateSelectedCatProjs = atom();
 
-export const indeciesToNotCullCats = atom();
+export const stateSelCatIndex = atom();
+export const stateCurrentProjs = atom();
 
 // Modal
 export const stateModal = atom(false);
@@ -22,6 +23,7 @@ export const stateSlideshow = atom(true);
 export const statePlayback = atom(false);
 export const stateSlideshowZoom = atom(false);
 export const slideshowAutoPlayInterval = atom();
+
 
 
 // Should use unsubscribe or comment out later!

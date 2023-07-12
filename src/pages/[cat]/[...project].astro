@@ -33,10 +33,17 @@ props: proj,
 }));
 }
 
+
 type Props = CollectionEntry<'projects'>;
 const proj = Astro.props;
-// console.log(proj);
+
+console.log("wos", proj)
 const p = proj.data;
+
+const { Content } = await proj.render();
+
+
+
 
 // Pictures Aspect Ratio
 const width = 3;
@@ -63,6 +70,7 @@ slideshow_plans_alts = p.plans.map((plan) => plan.alt);
 // console.log(slideshow_images);
 // console.log(slideshow_alts);
 
+// console.log(proj.body);
 ---
 
 <!-- <BasicScripts /> -->
@@ -121,7 +129,8 @@ slideshow_plans_alts = p.plans.map((plan) => plan.alt);
     <p>{p.short}</p>
     <p><a href="#">mehr...</a></p>
 
-    <p> {proj.body} </p>
+    
+    <p><Content/></p>
 
     </TextBlockModal>
 
