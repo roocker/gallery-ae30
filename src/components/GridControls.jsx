@@ -2,7 +2,7 @@ import { getCollection } from 'astro:content';
 import '../styles/grid_controls.css'
 import SlideshowCounter from './SlideshowCounter';
 import { useStore } from '@nanostores/react';
-import { indeciesToCullCats as indeciesToNotCullCats, stateSelectedCat, stateSelectedCatProjs } from '../states';
+import { stateCurrentProjs, stateSelCatIndex, stateSelectedCat,} from '../states';
 import { useEffect } from 'react';
 
 const allProjects = await getCollection('projects');
@@ -13,15 +13,20 @@ const allCategories = await getCollection('categories');
 // Get all categorie shorts from project collection
 const allCatsFromProjs = [... new Set(allProjects.map((proj) => {return proj.data.category}))];
 
-// TEST compare all allCatsFromProjs to categories collection 
 
-const allShortsFromCats = [... new Set(allCategories.map((cat) => {return cat.data.short}))];
+/*
+  // TEST compare all allCatsFromProjs to categories collection 
+
+
+  const allShortsFromCats = [... new Set(allCategories.map((cat) => {return cat.data.short}))];
 
 if (JSON.stringify(allCatsFromProjs.sort()) == JSON.stringify(allShortsFromCats.sort())) {
   console.log("APP-TEST(successful):","allCatsFromProjs === allTitlesFromCats");
 } else {
   console.log("APP-TEST(error):","found categories in projects not matching categories, pls check your projects for exact string on the category property.", allCatsFromProjs, "!=" , allShortsFromCats)
 }
+
+*/
 
 // define allCats for select options 
 
@@ -36,7 +41,6 @@ const allCatsURLs = [... new Set(allCategories.map((cat) => {return cat.data.sho
 
 // const allCats = allProjects.data.category;
 
-// const projsOfSelCat = 
 
   function GridControls (props) {
 
@@ -46,26 +50,39 @@ const allCatsURLs = [... new Set(allCategories.map((cat) => {return cat.data.sho
     const defaultYear = props.defaultYear;
     const defaultSize = props.defaultSize;
 
-    const selectedCat = useStore(stateSelectedCat);
-
-    // console.log("indexToNotCullfromSelCat", indexToNotCullfromSelCat);
-
+    const selectedCat = useStore(stateSelectedCat)
+    const selCatIndex = useStore(stateSelCatIndex)
+    const currentProjs = useStore(stateCurrentProjs)
+    
     const handleCategoryChange = (e) => {
-
-      const indexToNotCullfromSelCat = allProjects
-        .map((proj, index) =>{
-          if(proj.data.category === selectedCat){
-            return index;
-          }
-          return null;
-        })
-        .filter((index) => index !== null);
-      stateSelectedCat.set(e.target.value);
-
-      indeciesToNotCullCats.set(indexToNotCullfromSelCat);
-      // console.log("indexToNotCullfromSelCat",indexToNotCullfromSelCat)
-      // console.log("Selected category:", e.target.value);
+      stateSelectedCat.set(e.target.value)
+      console.log("e.target.value", e.target.value)
     };
+
+    let indeciesBySelCat;
+    useEffect(() => {
+      console.log( "selectedCat now", selectedCat , "projects:", stateSelCatIndex)
+
+        indeciesBySelCat = allProjects
+          .map((proj, index) =>{
+            if(proj.data.category === selectedCat){
+              return index;
+            } else if(selectedCat == "all"){
+              return index;
+            }
+            return null;
+          })
+          .filter((index) => index !== null);
+      
+      indeciesBySelCat ? stateSelCatIndex.set(indeciesBySelCat) && console.log("stateSelCatIndex=", indeciesBySelCat): console.log("asdfasdf");
+      
+
+
+
+    }, [selectedCat])
+
+
+
 
 
     return(
@@ -90,7 +107,9 @@ const allCatsURLs = [... new Set(allCategories.map((cat) => {return cat.data.sho
 
 
       <p className="line counter_line">
-      <span className="counter_number index">{index}</span> / <span className="counter_number length">{allProjects.length}</span>
+      <span className="counter_number index">{`${currentProjs ?
+      currentProjs.length: "0"} `}
+</span> / <span className="counter_number length">{allProjects.length}</span>
       </p>
       </section>
     )

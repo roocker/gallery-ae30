@@ -117,7 +117,6 @@ export default defineConfig({
                             label: 'Pages',
                             widget: 'relation',
                             collection: 'pages',
-                            // multiple: true,
                             search_fields:["title"],
                             value_field: "{{slug}}",
                             display_fields:["title"]
@@ -138,11 +137,12 @@ export default defineConfig({
                             name: 'menu_item_projects',
                             label: 'Hauptmenü Projekte',
                             widget: 'relation',
-                            collection: 'projects',
                             // multiple: true,
+                            collection: 'projects',
                             search_fields:["title"],
                             value_field: "{{slug}}",
-                            display_fields:["title"]
+                            display_fields:["title"],
+                            options_length: 200,
                           },
                           {
                             name: 'menue_item_projects_name',
