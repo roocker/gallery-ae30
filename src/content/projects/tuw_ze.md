@@ -43,17 +43,6 @@ plans:
     alt: Querschnitt
   - plan: /media/19.jpg
     alt: Detail
-proejct_keys:
-  year: "2023"
-  year2: "2023"
-  area: "3000"
-  tags:
-    - Öffentlich
-    - Labor
-    - Außenraum
-    - lernen
-    - arbeiten
-    - Universität
 short: Zur Entlastung der Laborflächen des ATI (Atominstitut) und zur Aufnahme
   der Universitären Service Einrichtung für Transmissionselektronenmikroskopie
   (USTEM) entsteht am Areal Stadionallee ein neues Institutsgebäude.

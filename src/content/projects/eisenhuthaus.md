@@ -3,7 +3,7 @@ title: Eisenhuthaus
 title_l: Eisenhuthaus
 publishDate: 08 May 2023
 category: wp
-proejct_keys:
+project_keys:
   year: "2023"
   year2: "2023"
   area: "1000"

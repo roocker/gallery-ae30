@@ -4,7 +4,7 @@ title_l: TU Wien - Bauteil OB
 title_zzl: Science Center / Halle 227
 publishDate: 22 Apr 2023
 category: arge
-proejct_keys:
+project_keys:
   year: "2023"
   year2: "2023"
   area: "9000"

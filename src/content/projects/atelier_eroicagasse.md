@@ -3,7 +3,7 @@ title: Atelier Eroicagasse
 title_l: Atelier Eroicagasse
 publishDate: 22 Apr 2023
 category: wp
-proejct_keys:
+project_keys:
   year: "2023"
   year2: "2023"
   area: "200"

@@ -4,7 +4,7 @@ title_l: TU Wien - Studienabteilung
 title_zzl: Bauteil AA, Stiege 2
 publishDate: 08 May 2023
 category: arge
-proejct_keys:
+project_keys:
   year: "2019"
   year2: "2020"
   area: "500"
