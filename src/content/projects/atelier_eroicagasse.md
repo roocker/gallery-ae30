@@ -4,13 +4,12 @@ title_l: Atelier Eroicagasse
 publishDate: 22 Apr 2023
 category: wp
 project_keys:
-  year: "2023"
-  year2: "2023"
-  area: "200"
+  year: "1991"
+  year2: "1991"
+  area: "100"
   tags:
-    - Büro
-    - Privat
     - arbeiten
+    - wohnen
 titleimg:
   img: /media/17.jpg
   alt: asdffff

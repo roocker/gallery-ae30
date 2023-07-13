@@ -8,7 +8,7 @@ project_keys:
   year2: "2023"
   tags:
     - Geschäft/Shop
-  area: "2000"
+  area: "60"
 titleimg:
   img: /media/34.jpg
   alt: Visualisierung
@@ -23,3 +23,4 @@ short: text
 long: text
 subcategory: Supermarkt
 ---
+Whoooo Spar!
