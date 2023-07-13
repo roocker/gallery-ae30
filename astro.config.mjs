@@ -158,6 +158,38 @@ export default defineConfig({
                     label: 'Anzahl Projekte Startseite',
                     widget: 'number',
                   },
+                  {
+                    name: 'filter',
+                    label: 'Filter Frontpage',
+                    widget: 'object',
+                    hint: 'Filter Optionen für die Startseite an/ausschalten',
+                    fields: [
+                      {
+                        name: 'cat',
+                        label: 'Kategorie',
+                        widget: 'boolean',
+                        hint: 'Kategorie Filter = ARGE/Kratochwil/Waldbauer/Zeinitzer/'
+                      },
+                      {
+                        name: 'tag',
+                        label: 'Typologie Filter',
+                        widget: 'boolean',
+                        hint: 'Typologie Filter = öffentlich, privat, ...'
+                      },
+                      {
+                        name: 'year',
+                        label: 'Jahres Filter',
+                        widget: 'boolean',
+                        hint: 'Jahres Filter = Filter nach Jahreszahlen'
+                      },
+                      {
+                        name: 'size',
+                        label: 'Größe Filter',
+                        widget: 'boolean',
+                        hint: 'Größe Filter = Filter nach Objektgröße'
+                      },
+                    ]
+                  },
                 ]
             },
 
@@ -265,6 +297,13 @@ export default defineConfig({
                       required: false,
                       hint: 'Projekt erscheint nicht in der Gallerie, ist aber über URL aufrufbar (ae30.at/categorie/projekt) (ae30.at/arge/ba) & ae30.at/archiv ',
                   },
+                  /* {
+                    name: 'share',
+                    widget: 'boolean',
+                    label: 'Teilen Option anzeigen ',
+                      required: false,
+                      hint: 'Teilen Option im Projekt anzeigen ein-/ausschalten',
+                  }, */
                   {
                     name: 'publishDate',
                     widget: 'datetime',

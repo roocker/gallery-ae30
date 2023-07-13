@@ -14,6 +14,18 @@ import { CURRENTYEAR } from '../consts';
 
 const allProjects = await getCollection('projects');
 // console.log("OlleProjekte:", allProjects);
+
+const settings = await getCollection('settings');
+
+const settingsFilter = settings[0].data.filter;
+
+const settingFilterCat = settingsFilter.cat;
+const settingFilterTag = settingsFilter.tag;
+const settingFilterYear = settingsFilter.year;
+const settingFilterSize = settingsFilter.size;
+
+const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && !settingFilterYear && !settingFilterSize);
+console.log("noFiltersActiveInCmsSettings" , noFiltersActiveInCmsSettings)
 ---
 <Layout title="AE30 - Gallerie - work in progress" description="gallery" image="">
 
@@ -28,15 +40,17 @@ const allProjects = await getCollection('projects');
     />
 
 
+    {noFiltersActiveInCmsSettings ? '' :
       <GridControls
       client:load
-      defaultCat="all"
-      defaultTag="irgendwas"
-      defaultYear1={1980}
+      defaultCat="kg"
+      defaultTag="wohnen"
+      defaultYear1={1960}
       defaultYear2={CURRENTYEAR}
       defaultSize1={0}
       defaultSize2={9999999}
       />
+      }
 
 
 
