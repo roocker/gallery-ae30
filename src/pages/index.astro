@@ -10,6 +10,8 @@ import GridProj from '../components/GridProj';
 import GridControls from '../components/GridControls';
 import { getCollection } from 'astro:content';
 
+import { CURRENTYEAR } from '../consts';
+
 const allProjects = await getCollection('projects');
 // console.log("OlleProjekte:", allProjects);
 ---
@@ -29,9 +31,11 @@ const allProjects = await getCollection('projects');
       <GridControls
       client:load
       defaultCat="all"
-      defaultTag={0}
-      defaultYear={0}
-      defaultSize={0}
+      defaultTag="irgendwas"
+      defaultYear1={1980}
+      defaultYear2={CURRENTYEAR}
+      defaultSize1={0}
+      defaultSize2={9999999}
       />
 
 

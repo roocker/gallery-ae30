@@ -1,17 +1,22 @@
 import { atom } from 'nanostores';
 
+import { getCollection } from 'astro:content';
+const allProjects = await getCollection('projects');
+
 export const stateMainNav = atom(false);
 
 // Grid
 export const stateSelectedCat = atom("all");
-export const stateSelectedTag = atom("tag");
-export const stateSelectedYear = atom("year");
-export const stateSelectedSize = atom("size");
+export const stateSelectedTag = atom("all");
+export const stateSelectedYear1 = atom(0);
+export const stateSelectedYear2 = atom(0); //rev 2023 sollte immer aktuelles Jahr sein!
+export const stateSelectedSize1 = atom(0);
+export const stateSelectedSize2 = atom(0);
 
 // export const stateSelectedCatProjs = atom();
 
 export const stateSelCatIndex = atom();
-export const stateCurrentProjs = atom();
+export const stateCurrentProjs = atom(allProjects); //hier sollte standard allProjects geladen werden 
 
 // Modal
 export const stateModal = atom(false);
