@@ -24,4 +24,9 @@ main_menu:
     - menu_item_projects: tuw_ob
       menue_item_projects_name: "227"
 index_amount: 1
+filter:
+  cat: true
+  tag: true
+  year: true
+  size: true
 ---
