@@ -22,18 +22,33 @@ const height = 2;
 function GridProj (props) {
 
   // Read from State and if not State then allProjects
-/*
+
 
 let projs = props.projects
+const allProjs = props.projects;
+
 const currentProjs = useStore(stateCurrentProjs);
-stateCurrentProjs ? projs = useStore(stateCurrentProjs) : projs = props.projects
+  if (currentProjs){
+    projs = currentProjs
+    console.log("SUCESS: GridProj found Projects in States");
+  } else {
+    projs = allProjs
+    console.log("WARNING: GridProj didn't fount Projects from States, default");
+  }
+
+  // console.log("rendererERER", projs)
+
   // one more fallback if no projects from index and no projects from states then query allProjs?
 
 
- */
 
 
+/*
+    
+// WORKED WITH CAT ONLY
 // Filter Projs from GridControls or use allProjs Alt
+
+
 
 const selCat = useStore(stateSelectedCat);
 const selCatIndex = useStore(stateSelCatIndex)
@@ -51,6 +66,8 @@ const filterProjs = () => {
 
 }
 filterProjs();
+
+*/
 
 
 
