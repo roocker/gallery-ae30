@@ -1,21 +1,10 @@
 import { atom } from 'nanostores';
 
 import { getCollection } from 'astro:content';
-const allProjects = await getCollection('projects');
-
-import GridControls from './components/GridControls';
 
 export const stateMainNav = atom(false);
 
-// Grid
-export const stateSelectedCat = atom("all");
-export const stateSelectedTag = atom("all");
-export const stateSelectedYear1 = atom(0);
-export const stateSelectedYear2 = atom(0); 
-export const stateSelectedSize1 = atom(0);
-export const stateSelectedSize2 = atom(0);
-
-export const stateCurrentProjs = atom(allProjects); //hier sollte standard allProjects geladen werden 
+export const stateCurrentProjs = atom(0); 
 
 // Modal
 export const stateModal = atom(false);
@@ -29,7 +18,7 @@ export const slideshowCurrentAlt = atom();
 export const stateSlideshow = atom(true);
 // #rev default value should control via CMS
 export const statePlayback = atom(false);
-export const stateSlideshowZoom = atom(false);
+export const stateSlideshowZoom = atom(true);
 export const slideshowAutoPlayInterval = atom();
 
 
