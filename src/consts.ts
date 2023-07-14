@@ -12,4 +12,3 @@ export const SITE_TITLE = 'AE30 - Atelier Eroicagasse - Architekten Kratochwil W
 export const SITE_DESCRIPTION = 'Atelier Eroicagasse - Architekten Kratochwil Waldbauer Zeinitzer ';
 
 export const CURRENTYEAR = new Date().getFullYear();
-console.log("const jahr:", CURRENTYEAR)

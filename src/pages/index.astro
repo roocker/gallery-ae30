@@ -3,6 +3,10 @@
 TODO:
 - [ ] allProjects filter with archived?
 - [ ] how to sort frontpage?
+- [ ] select from react-select for multiple tag input
+- [ ] toggle filter menu on/off with an F button
+- [ ] rename gridcontrols to gridfilters
+- [ ] gridcontrols = toggle.filter.btn, top, bottom scroll btn?
 */
 
 import Layout from '../layouts/Layout.astro';
@@ -25,7 +29,7 @@ const settingFilterYear = settingsFilter.year;
 const settingFilterSize = settingsFilter.size;
 
 const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && !settingFilterYear && !settingFilterSize);
-console.log("noFiltersActiveInCmsSettings" , noFiltersActiveInCmsSettings)
+// console.log("noFiltersActiveInCmsSettings" , noFiltersActiveInCmsSettings)
 ---
 <Layout title="AE30 - Gallerie - work in progress" description="gallery" image="">
 
@@ -43,12 +47,12 @@ console.log("noFiltersActiveInCmsSettings" , noFiltersActiveInCmsSettings)
     {noFiltersActiveInCmsSettings ? '' :
       <GridControls
       client:load
-      defaultCat="kg"
-      defaultTag="wohnen"
-      defaultYear1={1960}
+      defaultCat="all"
+      defaultTag="all"
+      defaultYear1={1990}
       defaultYear2={CURRENTYEAR}
       defaultSize1={0}
-      defaultSize2={9999999}
+      defaultSize2={7000}
       />
       }
 
@@ -68,6 +72,12 @@ console.log("noFiltersActiveInCmsSettings" , noFiltersActiveInCmsSettings)
 </section>
 </Layout>
 
+<style is:global>
+  main{
+    overflow-y: scroll !important;
+  }
+
+</style>
 <style>
   #grid-gallery{
     display: grid;

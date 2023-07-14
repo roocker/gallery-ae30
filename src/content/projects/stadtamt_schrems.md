@@ -8,7 +8,6 @@ project_keys:
   year2: "2023"
   area: "2000"
   tags:
-    - Labor
     - Öffentlich
     - arbeiten
     - Außenraum
