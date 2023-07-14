@@ -10,8 +10,7 @@
   import { useStore } from '@nanostores/react';
 import '../styles/grid.css';
 import { AnimatePresence, motion} from "framer-motion";
-import { stateSelectedCat, stateSelCatIndex, stateCurrentProjs } from '../states';
-import { useEffect } from 'react';
+import { stateCurrentProjs } from '../states';
 // import { Picture } from '@astrojs/image/components';
 // const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
 
@@ -21,179 +20,136 @@ const height = 2;
 
 function GridProj (props) {
 
-  // Read from State and if not State then allProjects
+  let projs = [];
+  const allProjs = props.projects;
 
+  const currentProjs = useStore(stateCurrentProjs);
 
-let projs = props.projects
-const allProjs = props.projects;
-
-const currentProjs = useStore(stateCurrentProjs);
-  if (currentProjs){
+  if(currentProjs){
     projs = currentProjs
-    console.log("SUCESS: GridProj found Projects in States");
+    console.log("SUCESS: GridProj found Projects in States" , projs);
   } else {
     projs = allProjs
-    console.log("WARNING: GridProj didn't fount Projects from States, default");
+    console.log("WARNING: GridProj didn't fount Projects from States, default to allProjects");
   }
 
-  // console.log("rendererERER", projs)
-
-  // one more fallback if no projects from index and no projects from states then query allProjs?
 
 
+  let completedAnimations = 0;
+  const totalAnimations = projs.length;
 
+  return projs.map((proj, index) => {
 
-/*
-    
-// WORKED WITH CAT ONLY
-// Filter Projs from GridControls or use allProjs Alt
+    // console.log(proj, index);
 
+    let smaller;
+    const vh = window.innerHeight;
+    const vw = window.innerWidth;
 
+    vw > vh ? smaller = vh : smaller = vw;
 
-const selCat = useStore(stateSelectedCat);
-const selCatIndex = useStore(stateSelCatIndex)
+    const min = smaller * -1;
+    const max = smaller;
 
-const allProjs = props.projects;
+    const minR = -270;
+    const maxR = 270;
 
-let projs;
+    const randomX = Math.random() * (max-min) + min;
+    // console.log(randomX);
+    const randomY = Math.random() * (max-min) + min;
+    // console.log(randomY);
+    const randomR = Math.random() * (maxR-minR) + minR;
+    // console.log(randomR);
+    const randomS = Math.random() ; 
+    // console.log(randomS);
 
-
-const filterProjs = () => {
-  projs = selCatIndex ? allProjs.filter((_,index) => selCatIndex.includes(index)) : projs = allProjs;
-  stateCurrentProjs.set(projs);
-  // selCatIndex? console.log(selCat, ": i filtered out:", selCatIndex, "leaving us with projs:", projs) : console.log("no projects to filter")
-  
-
-}
-filterProjs();
-
-*/
-
-
-
-
-
-
-
-
-
-
-
-let completedAnimations = 0;
-const totalAnimations = projs.length;
-
-return projs.map((proj, index) => {
-
-  // console.log(proj, index);
-
-  let smaller;
-  const vh = window.innerHeight;
-  const vw = window.innerWidth;
-
-  vw > vh ? smaller = vh : smaller = vw;
-
-  const min = smaller * -1;
-  const max = smaller;
-
-  const minR = -270;
-  const maxR = 270;
-
-  const randomX = Math.random() * (max-min) + min;
-  // console.log(randomX);
-  const randomY = Math.random() * (max-min) + min;
-  // console.log(randomY);
-  const randomR = Math.random() * (maxR-minR) + minR;
-  // console.log(randomR);
-  const randomS = Math.random() ; 
-  // console.log(randomS);
-
-  const shuffle = {
-    i: {
-      x: randomX,
-      y: randomY,
-      rotate: randomR,
-      scale: .8,
-    },
-    a: {
-      x: 0,
-      y: 0,
-      scale: 1,
-      rotate: 0,
-      transition: {
-        type: 'spring', stiffness: 100, damping: 20,
-        delay: index * 0.3 * randomS,
-      }
-    },
-    e: {
-      x: randomX,
-      y: randomY,
-    },
-    z1:{
-      scale: 1.05,
-      transition: {
-        duration: .1,
-        // type: 'spring', stiffness: 100, damping: 20,
+    const shuffle = {
+      i: {
+        x: randomX,
+        y: randomY,
+        rotate: randomR,
+        scale: .8,
       },
-    },
-    z2:{
-      scale: 7,
-      originY: "50%",
-      originX: "50%",
-      transition: {
-        type: 'spring', stiffness: 100, damping: 20,
+      a: {
+        x: 0,
+        y: 0,
+        scale: 1,
+        rotate: 0,
+        transition: {
+          type: 'spring', stiffness: 100, damping: 20,
+          delay: index * 0.3 * randomS,
+        }
       },
-    },
-  }; 
+      e: {
+        x: randomX,
+        y: randomY,
+      },
+      z1:{
+        scale: 1.05,
+        transition: {
+          duration: .1,
+          // type: 'spring', stiffness: 100, damping: 20,
+        },
+      },
+      z2:{
+        scale: 7,
+        originY: "50%",
+        originX: "50%",
+        transition: {
+          type: 'spring', stiffness: 100, damping: 20,
+        },
+      },
+    }; 
 
 
 
-  return (
-    <motion.article
-    variants={shuffle}
-    key={index}
-    initial="i"
-    animate="a"
-    exit="e"
-    whileHover="z1"
-    // onHoverEnd={e => {}}
-    // whileTap="z2"
-    onAnimationComplete={() => {
-      completedAnimations++;
-      if (completedAnimations === totalAnimations) {
-        window.scrollTo(0, 0);
-      }
-    }}
-    >
+    return (
+      <motion.article
+      variants={shuffle}
+      key={index}
+      initial="i"
+      animate="a"
+      exit="e"
+      whileHover="z1"
+      // onHoverEnd={e => {}}
+      // whileTap="z2"
+      onAnimationComplete={() => {
+        completedAnimations++;
+        if (completedAnimations === totalAnimations) {
+          window.scrollTo(0, 0);
+        }
+      }}
+      >
 
-    <a href={`../${proj.data.category}/${proj.slug}`}>
-    <AnimatePresence
-    initial={true}
-    >
-    <figure>
+      <a href={`../${proj.data.category}/${proj.slug}`}>
+      <AnimatePresence
+      initial={true}
+      >
+      <figure>
 
-    <img 
-    src={proj.data.titleimg.img}
-    alt={proj.data.titleimg.alt}
+      <img 
+      src={proj.data.titleimg.img}
+      alt={proj.data.titleimg.alt}
 
 
-    widths={[1024, 600, 500, 420, 128]} 
-    sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (min-width: 420px) 420px, 420px"
-    // aspectRatio={`${width}:${height}`}
-    background={`white`}
-    position="attention"
-    fit="cover"
-    loading="lazy"
-    decoding="async"
-    className=""
-    />
+      widths={[1024, 600, 500, 420, 128]} 
+      sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (min-width: 420px) 420px, 420px"
+      // aspectRatio={`${width}:${height}`}
+      background={`white`}
+      position="attention"
+      fit="cover"
+      loading="lazy"
+      decoding="async"
+      className=""
+      />
 
-    <figcaption>{index} {proj.data.title}</figcaption>
-    </figure> 
-    </AnimatePresence>
-    </a> 
-    </motion.article>
-  )
-},)
+      <figcaption>{index} {proj.data.title}</figcaption>
+      </figure> 
+      </AnimatePresence>
+      </a> 
+      </motion.article>
+    )
+  },)
 }
 
 export default GridProj;

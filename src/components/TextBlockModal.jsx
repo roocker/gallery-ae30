@@ -90,42 +90,45 @@ const handleClose = () => {
 
 
     // framerLogger(fLmodal)
-  return (
-    <AnimatePresence 
-    initial={true}
-    mode="wait"
-    onExitComplete={() => {
-      console.log('Modal exit animation completed');
-    }}
-    >
-    {isOpen && (
+return (
+  <AnimatePresence 
+  initial={true}
+  mode="wait"
+  onExitComplete={() => {
+    console.log('Modal exit animation completed');
+  }}
+  >
+  {isOpen && (
     <Backdrop classname="backdrop_modal" onClick={handleClose}>
-      <section className="modal_content">
-      <motion.div
-        className="content"
-        onClick={(e) => e.stopPropagation()}
-        variants={slideUp}
-        initial="i"
-        animate="a"
-        exit="e"
-        >
+    <motion.section
+    className="modal_content"
+    variants={slideUp}
+    initial="i"
+    animate="a"
+    exit="e"
+    key={isOpen}
+    >
+    <div
+    className="content"
+    onClick={(e) => e.stopPropagation()}
+    >
     {children} 
-<button
-      className="modal_close_btn" 
-      onClick={handleClose}>
-        <svg className="svg-icon">
-          <use id="icon-close" className="svg-icon-use" href="/svg.svg#close" />
-      </svg>
-      </button>
+    <button
+    className="modal_close_btn" 
+    onClick={handleClose}>
+    <svg className="svg-icon">
+    <use id="icon-close" className="svg-icon-use" href="/svg.svg#close" />
+    </svg>
+    </button>
 
-     
-      </motion.div>
-      </section>
+
+    </div>
+    </motion.section>
 
     </Backdrop>
-    )}
-    </AnimatePresence>
-  ) ;
+  )}
+  </AnimatePresence>
+) ;
 }
 
 export default TextBlockModal;

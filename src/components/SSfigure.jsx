@@ -43,7 +43,7 @@ function SSfigure(props) {
   const animate_slide = {
     i: (direction) => {
       return{
-        zIndex:0,
+        // zIndex:0,
         x: direction > 0 ? 1000 : -1000, 
         opacity: 0,
       };

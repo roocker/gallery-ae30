@@ -5,8 +5,9 @@ import { atom } from 'nanostores';
 import '../styles/grid_controls.css'
 import SlideshowCounter from './SlideshowCounter';
 import { useStore } from '@nanostores/react';
-import { stateCurrentProjs, stateSelCatIndex, stateSelectedCat, stateSelectedSize1, stateSelectedSize2, stateSelectedTag, stateSelectedYear1 as stateSelectedYear1, stateSelectedYear2,} from '../states';
+import { stateCurrentProjs } from '../states';
 import { useEffect, useState } from 'react';
+import ReactSlider from 'react-slider';
 
 const allProjects = await getCollection('projects');
 const allCategories = await getCollection('categories');
@@ -19,7 +20,7 @@ const settingFilterTag = settingsFilter.tag;
 const settingFilterYear = settingsFilter.year;
 const settingFilterSize = settingsFilter.size;
 
-console.log("Settings Filter:", settingsFilter , settingFilterCat );
+// console.log("Settings Filter:", settingsFilter , settingFilterCat );
 // console.log(allProjects[0]);
 
 // Get all categorie shorts from project collection
@@ -88,6 +89,8 @@ allTags.sort((a, b) => {
 // min
 // max
 
+  const minSize = 0;
+  const maxSize = 10000;
 
 
 // export const stateSelectedCatProjs = atom();
@@ -95,73 +98,68 @@ allTags.sort((a, b) => {
 
 function GridControls (props) {
 
+
   // ---------------------------------------------- 
   // Parameter Definitions for Filter
   // ---------------------------------------------- 
-  
-  let defaultCat; props.defaultCat ? defaultCat = props.defaultCat : "all";
-  const selectedCat = useStore(stateSelectedCat)
 
-  let defaultTag; props.defaultTag ? defaultTag = props.defaultTag : "all";
-  const selectedTag = useStore(stateSelectedTag);
+  const defaultCat = settingFilterCat ? (props.defaultCat ? props.defaultCat : "all") : "all";
+  const [selectedCat, setSelectedCat] = useState(defaultCat);
 
-  let defaultYear1 = props.defaultYear1;
-  const selectedYear1 = useStore(stateSelectedYear1);
+  const defaultTag = settingFilterTag ? (props.defaultTag ? props.defaultTag : "all") : "all";
+  const [selectedTag, setSelectedTag] = useState(defaultTag);
+
+  const defaultYear1 = settingFilterYear ? (props.defaultYear1 ? props.defaultYear1 : 0) : 0;
+  const [selectedYear1 , setSelectedYear1] = useState(defaultYear1)
   // console.log("defaultYear1" , defaultYear1, "selectedYear1" ,selectedYear1)
 
-  let defaultYear2 = props.defaultYear2;
-  const selectedYear2 = useStore(stateSelectedYear2);
+  const defaultYear2 = settingFilterYear ? (props.defaultYear2 ? props.defaultYear2 : 0) : 0;
+  const [selectedYear2 , setSelectedYear2] = useState(defaultYear2)
   // console.log("defaultYear2" , defaultYear2, "selectedYear2" ,selectedYear2)
 
-  let defaultSize1 = props.defaultSize1;
-  const selectedSize1 = useStore(stateSelectedSize1);
+  const defaultSize1 = settingFilterSize ? (props.defaultSize1 ? props.defaultSize1 : 0) : 0;
+  const [selectedSize1 , setSelectedSize1] = useState(defaultSize1)
   // console.log("defaultSize1" , defaultSize1, "selectedSize1" ,selectedSize1)
 
-  let defaultSize2 = props.defaultSize2;
-  const selectedSize2 = useStore(stateSelectedSize2);
+  const defaultSize2 = settingFilterSize ? (props.defaultSize2 ? props.defaultSize2 : 0) : 0;
+  const [selectedSize2 , setSelectedSize2] = useState(defaultSize2)
   // console.log("defaultSize2" , defaultSize2, "selectedSize2" ,selectedSize2)
-
 
   const currentProjs = useStore(stateCurrentProjs)
 
-  /* useEffect(() => {
-    
-  defaultCat && !selectedCat ? stateSelectedCat.set(defaultCat) : '';
-  defaultTag && !selectedCat ? stateSelectedTag.set(defaultTag) : '';
-  defaultYear1 !== 0 ? stateSelectedYear1.set(defaultYear1) : ''
-  defaultYear2 !== 0 ? stateSelectedYear2.set(defaultYear2) : ''
-  defaultSize1 !== 0 ? stateSelectedSize1.set(defaultSize1) : ''
-  defaultSize2 !== 0 ? stateSelectedSize2.set(defaultSize2) : ''
-    
-  }, []) */
 
 
   // ---------------------------------------------- 
   // Event (User Input) Handlers 
   // ---------------------------------------------- 
   
+  /*
+  if(!settingFilterTag){ setSelectedTag("all"); }else { "" };
+  if(!settingFilterYear){ setSelectedYear1(0); setSelectedYear2(0); }else { "" };
+  if(!settingFilterSize){ setSelectedSize1(0); setSelectedSize2(0); }else { "" }; 
+  */
 
   const handleCategoryChange = (e) => {
-    stateSelectedCat.set(e.target.value)
+   setSelectedCat(e.target.value);
   };
 
   const handleTagChange = (e) => {
-    stateSelectedTag.set(e.target.value)
+    setSelectedTag(e.target.value)
   }
 
-  const handleYear1Change = (e) => {
-    stateSelectedYear1.set(e.target.value)
-  }
-  const handleYear2Change = (e) => {
-    stateSelectedYear2.set(e.target.value)
+  const handleYearChange = (e) => {
+    setSelectedYear1(e[0])
+    setSelectedYear2(e[1])
+    console.log(selectedYear1, selectedYear2)
   }
 
-  const handleSize1 = (e) => {
-    stateSelectedSize1.set(e.target.value)
+  const handleSizeChange = (e) => {
+    setSelectedSize1(e[0])
+    setSelectedSize2(e[1])
+    console.log(selectedSize1, selectedSize2)
   }
-  const handleSize2 = (e) => {
-    stateSelectedSize2.set(e.target.value)
-  }
+
+  // console.log("HANDLEEESS AUCH OK?")
   
   // ---------------------------------------------- 
   // filter Function
@@ -178,7 +176,7 @@ function GridControls (props) {
     size2: selectedSize2
   };
 
-  console.log( "FILTER PARAMS !!!!!!" , params);
+  // console.log( "FILTER PARAMS !!!!!!" , params);
 
 
   let rmIndices = [];
@@ -193,10 +191,10 @@ function GridControls (props) {
       const hasCat = cat && cat !== "all" ? project.data.category === cat : true;
       const hasTag = tags && tags !== "all" ? project.data.project_keys.tags.includes(tags) : true;
 
-      const inYearRange = year2 && year2 !== 0 ? (projectYear1 <= year1 || projectYear2 <= year2 || projectYear1 == year2 || projectYear2 == year1 ) : true;
-
+      const inYearRange = year2 && year2 !== 0 ? (projectYear1 >= year1 && projectYear2 <= year2 ) : true;
 
       const inSizeRange = size2 && size2 !== 0 ? (size1 <= projectSize && projectSize <= size2) : true;
+      // #rev projectSize >= 10000 also true
 
       // console.log(index, projectTitle , ":", "hasCat" , hasCat , "hasTag" , hasTag , "inYearRange" , inYearRange , "inSizeRange", inSizeRange)
 
@@ -220,35 +218,26 @@ function GridControls (props) {
 
   useEffect(() => {
 
-    handleCategoryChange();
-
     filterProjects();
-    console.log( "USEEFFECT!" , selectedSize2)
 
-    console.log('Projekte', currentProjs , 'gem. Parameter:' , params);
+    // console.log('Projekte', currentProjs , 'gem. Parameter:' , params);
 
-  },[selectedCat, defaultCat, selectedTag, defaultCat, selectedYear1, defaultYear1, selectedYear2, defaultYear2,selectedSize1, defaultSize1, selectedSize2, defaultSize2])
+  },[selectedCat, selectedTag, selectedYear1, selectedYear2, selectedSize1, selectedSize2])
 
 
   // ---------------------------------------------- 
   // Remove Filter with button or CMS
   // ---------------------------------------------- 
   const handleRemoveFilter = () => {
-    stateSelectedCat.set("all")
-    stateSelectedTag.set("all")
-    stateSelectedYear1.set(0)
-    stateSelectedYear2.set(0)
-    stateSelectedSize1.set(0)
-    stateSelectedSize2.set(0)
+    setSelectedCat("all")
+    setSelectedTag("all")
+    setSelectedYear1(0)
+    setSelectedYear2(0)
+    setSelectedSize1(0)
+    setSelectedSize2(0)
     console.log("Removed all Filters")
   }
 
-
-
-  if(!settingFilterCat){ stateSelectedCat.set("all"); }
-  if(!settingFilterTag){ stateSelectedTag.set("all"); }
-  if(!settingFilterYear){ stateSelectedYear1.set(0); stateSelectedYear2.set(0); }
-  if(!settingFilterSize){ stateSelectedSize1.set(0); stateSelectedSize2.set(0); }
 
   // ---------------------------------------------- 
   // Returns
@@ -256,19 +245,19 @@ function GridControls (props) {
   
   //  https://zillow.github.io/react-slider/
     
-   // #rev don't render at all when all filter settings (cms) are off 
-    // if(!settingFilterCat && !settingFilterTag && !settingFilterYear && !settingFilterSize){
+        // <p className="line test">filter: {selectedCat}, {selectedTag}, {selectedYear1}, {selectedYear2}, {selectedSize1}, {selectedSize2} </p>
       return(
         <section className="controls" aria-label="Image Grid Controls">
-        <p className="line test">filter: {selectedCat}, {selectedTag}, {selectedYear1}, {selectedYear2}, {selectedSize1}, {selectedSize2} </p>
 
+          <div className="line select_line">
         {settingFilterCat && (
           <select
-          className="select_cat"
+          className="select select_cat"
           onChange={handleCategoryChange}
           defaultValue={defaultCat}
           >
-          <option value="all">Kategorie</option>
+          <option value="all">Kategorien (alle)</option>
+    padding: 2px;
           {allCatsTitles.map((cat, indexCat) => (
             <option
             key={indexCat}
@@ -280,14 +269,13 @@ function GridControls (props) {
           </select>
         )}
 
-
         {settingFilterTag && (
           <select
-          className="select_tag"
+          className="select select_tag"
           onChange={handleTagChange}
           defaultValue={defaultTag}
           >
-          <option value="all">Typologie</option>
+          <option value="all">Typologien (alle)</option>
           {allTags.map((tag, indexTag) => (
             <option
             key={indexTag}
@@ -298,26 +286,64 @@ function GridControls (props) {
           ))}
           </select>
         )}
-
+        </div>
+          
         {settingFilterYear && (
-
-          <p> Year Filter </p>
-
-
+          <div className="line">
+          <label id="label-year">Jahr</label>
+          <ReactSlider
+          className="horizontal-slider"
+          thumbClassName="slider-thumb"
+          trackClassName="slider-track"
+          withTracks={true}
+          defaultValue={[defaultYear1, defaultYear2]}
+          onChange={handleYearChange}
+          markClassName="slider-marks"
+          marks={[1980 , 1990, 2000, 2010, 2020]}
+          min={1980}
+          max={2023}
+          ariaLabelledby="label-year"
+          ariaLabel={['Lower thumb', 'Upper thumb']}
+          ariaValuetext={state => `Thumb value ${state.valueNow}`}
+          renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+          pearling
+          minDistance={1}
+          />
+          </div>
         )}
 
         {settingFilterSize && (
-
-          <p> Size FIlter </p>
-
+          <div className="line">
+          <label id="label-size">Fläche</label>
+          <ReactSlider
+          className="horizontal-slider"
+          thumbClassName="slider-thumb"
+          trackClassName="slider-track"
+          defaultValue={[defaultSize1, defaultSize2]}
+          onChange={handleSizeChange}
+          markClassName="slider-marks"
+          marks={[0, 1000,2000,3000,4000,5000,6000,7000,8000,9000, 10000]}
+          min={minSize}
+          max={maxSize}
+          step={100}
+          ariaLabelledby="label-size"
+          ariaLabel={['Lower thumb', 'Upper thumb']}
+          ariaValuetext={state => `Thumb value ${state.valueNow}`}
+          renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+          pearling
+          minDistance={100}
+          />
+          </div>
         )}
 
 
-        <p className="line counter_line">
+          <div className="line counter_line">
+        <p className="counter_p">
         <span className="counter_number index">
-        {`${currentProjs ? currentProjs.length.toString().padStart(2, '0') : '00'}`}
+        {`${currentProjs ? rmIndices.length.toString().padStart(2, '0') : '00'}`}
         </span> / <span className="counter_number length">{allProjects.length}</span>
         </p>
+        </div>
         </section>
       )
 
