@@ -2,9 +2,9 @@
 import ModalBtn from '../components/ModalBtn.jsx'
 import TextBlockModal from '../components/TextBlockModal.jsx'
 import BasicScripts from '../components/basicScripts.astro';
-import Slideshow from '../components/Slideshow.jsx'
+// import Slideshow from '../components/Slideshow.jsx'
 import Layout from '../layouts/Layout.astro'
-import NewSlideshow from '../components/NewSlideshow';
+// import NewSlideshow from '../components/NewSlideshow';
 
 const slideshow_pictures = [
 '/media/1.jpg',
@@ -43,6 +43,7 @@ const slideshow_plans_alts = [
   <article class="project">
     <div class="slideshow_div" >
       <figure class="slideshow_fig" >
+        <!--
         <NewSlideshow
         client:load
         pictures={slideshow_pictures}
@@ -51,6 +52,7 @@ const slideshow_plans_alts = [
         planTitles={slideshow_plans_alts}
         autoPlayInterval={5} 
         />
+        -->
 
       </figure>
     </div>
