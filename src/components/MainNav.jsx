@@ -90,7 +90,7 @@ console.log("isMenuWide:", isMenuWide); */
 
       <ul className="menue">
       {menuNames.map((name, index) =>(
-        <li key={index}><a href={`../${menuURLs[index]}`}>{name}</a></li>
+        <li key={index}><a href={`../../${menuURLs[index]}`}>{name}</a></li>
       ))}
       </ul>
 
