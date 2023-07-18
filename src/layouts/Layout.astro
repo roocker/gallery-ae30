@@ -83,7 +83,7 @@ const gmarginem:string = (gmargin / 16) + "em";
 //-------------------------------------------------
 // caccent, caccent2, cblack, cwhite, cgrey, cgrey20, cgrey60, cgrey80, cbg,
 
-const caccent = "#5bac30";
+const caccent = "#1111ee";
 const caccent2 ="#9f1db8";
 const cblack = "#111111";
 const cblack20 = "rgb(1,1,1,.2)";
@@ -187,11 +187,14 @@ const cfg = cblack;
     line-height: var(--fline_height);
   }
   a {
-    color: var(--grey80);
+    color: var(--caccent);
     text-decoration: none;
+    /* background: var(--cgrey60); */
+    /* border-bottom: 1px solid var(--caccent2); */
   }
   a:hover{
     color: var(--cblack);
+    /* background: ; */
     /* border-bottom: 1px solid var(--caccent2); */
   }
   main{ 

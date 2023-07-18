@@ -238,16 +238,23 @@ function GridControls (props) {
   }
 
 
+  const handleToggle = () => {
+    stateFilter.set(!tFilter);
+  }
   // ---------------------------------------------- 
   // Returns
   // ---------------------------------------------- 
   
-  //  https://zillow.github.io/react-slider/
     
         // <p className="line test">filter: {selectedCat}, {selectedTag}, {selectedYear1}, {selectedYear2}, {selectedSize1}, {selectedSize2} </p>
       return(
-        
-        <section className="controls" aria-label="Image Grid Controls">
+        <div className="filterdiv">
+
+      <button className="filter_close_btn" type="button" title="Hauptmenü schließen" aria-label="Hauptmenü schließen" onClick={handleToggle}>
+      <svg className="svg-icon">
+      <use id="icon-close" className="svg-icon-use" href="/svg.svg#close" />
+      </svg>
+      </button>
 
         <div className="line select_line"
         onClick={(e) => e.stopPropagation()}
@@ -321,6 +328,7 @@ function GridControls (props) {
           onClick={(e) => e.stopPropagation()}
           >
           <label id="label-size">Fläche</label>
+
           <ReactSlider
           className="horizontal-slider"
           thumbClassName="slider-thumb"
@@ -341,78 +349,11 @@ function GridControls (props) {
           />
           </div>
         )}
-
-
-          <div className="line counter_line">
-        <p className="counter_p">
-        <span className="counter_number index">
-        {`${currentProjs ? rmIndices.length.toString().padStart(2, '0') : '00'}`}
-        </span> / <span className="counter_number length">{allProjects.length}</span>
-        </p>
         </div>
-        </section>
+
+
       )
 
 
-    // }
 }
 export default GridControls
-/* <div className="range">
-  <div className="range-slider">
-  <span className="range-selected"></span>
-  </div>
-  <div className="range-input">
-  <label for="filter_year_from">Jahres Filter von</label>
-  <input
-id="filter_year_from"
-type="range"
-className="min"
-min="1980"
-max="2023"
-// value="300"
-step="1"
-  />
-  <label for="filter_year_until">Jahres Filter bis</label>
-  <input
-type="range"
-id="filter_year_until"
-name="filter_year_until"
-className="max"
-min="1980"
-max="2023"
-// value="700"
-step="1"
-  />
-  </div>
-  </div> 
-
-
-  <div className="range">
-  <div className="range-slider">
-  <span className="range-selected"></span>
-  </div>
-  <div className="range-input">
-  <label for="filter_size_from">Größe Filter von</label>
-  <input
-id="filter_size_from"
-type="range"
-className="min"
-min="1980"
-max="2023"
-// value="300"
-step="1"
-  />
-  <label for="filter_size_until">Größe Filter bis</label>
-  <input
-type="range"
-id="filter_size_until"
-name="filter_size_until"
-className="max"
-min="1980"
-max="2023"
-// value="700"
-step="1"
-  />
-  </div>
-  </div> 
-  */
