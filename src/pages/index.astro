@@ -12,6 +12,7 @@ TODO:
 import Layout from '../layouts/Layout.astro';
 import GridProj from '../components/GridProj';
 import GridControls from '../components/GridControls';
+import GridControlWrapper from '../components/GridControlWrapper';
 import { getCollection } from 'astro:content';
 
 import { CURRENTYEAR } from '../consts';
@@ -43,7 +44,14 @@ const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && 
     projects={allProjects}
     />
 
+    {noFiltersActiveInCmsSettings ? '' :
+    <GridControlWrapper
+    client:load
+    btnname="Filter Menü ein-/ausblenden"
+    />
+    }
 
+    <!--
     {noFiltersActiveInCmsSettings ? '' :
       <GridControls
       client:load
@@ -54,7 +62,8 @@ const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && 
       defaultSize1={0}
       defaultSize2={7000}
       />
-      }
+      } 
+      -->
 
 
 
@@ -83,8 +92,11 @@ const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && 
     display: grid;
     grid-template-columns: repeat(var(--gcolnum), 1fr);
     grid-auto-rows: min-content;
-    align-items: baseline;
+    grid-auto-flow: dense;
+
+    align-items: flex-start;
     gap: calc( 0.5 * var(--ggapspx));
+    margin-bottom: 10em;
   }
   @media only screen and (min-width: 64em /* var(--vwS) */) { 
     #grid-gallery{

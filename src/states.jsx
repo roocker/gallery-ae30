@@ -6,6 +6,7 @@ export const stateMainNav = atom(false);
 
 export const stateCurrentProjs = atom(0); 
 
+export const stateFilter = atom(false);
 // Modal
 export const stateModal = atom(false);
 

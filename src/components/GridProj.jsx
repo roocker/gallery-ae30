@@ -102,9 +102,18 @@ function GridProj (props) {
     }; 
 
 
+    console.log("weitheig:", proj.data.widehigh)
+    // console.log("hier:", proj.data.high)
+    const isWide = proj.data.widehigh === "extra breit" ? true : false;
+    const isHigh = proj.data.widehigh === "extra hoch" ? true : false;
+
+    console.log("hier:", isWide, isHigh)
+
+
 
     return (
       <motion.article
+      className={`${isWide ? "wide" : ""} ${isHigh ? "high" : ""}`}
       variants={shuffle}
       key={index}
       initial="i"
@@ -141,6 +150,7 @@ function GridProj (props) {
       loading="lazy"
       decoding="async"
       className=""
+      draggable="false"
       />
 
       <figcaption>{index} {proj.data.title}</figcaption>
