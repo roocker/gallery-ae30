@@ -1,11 +1,14 @@
-import GridControls from '../components/GridControls';
+import GridFilter from '../components/GridFilter';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from "@nanostores/react";
-import { stateFilter } from '../states';
+import { stateFilter, stateCurrentProjs } from '../states';
 
 import { CURRENTYEAR } from '../consts';
 import '../styles/grid_controls.css'
 import '../styles/btn.css'
+
+import { getCollection } from 'astro:content';
+const allProjects = await getCollection('projects');
 
 const slideUp = {
   i: {
@@ -37,6 +40,7 @@ const slideUp = {
 function GridControlWrapper (props){
 
   const tFilter = useStore(stateFilter);
+  const currentProjs = useStore(stateCurrentProjs)
 
   const handleToggle = () => {
     stateFilter.set(!tFilter);
@@ -44,58 +48,68 @@ function GridControlWrapper (props){
 
   console.log("BTN FILTER", tFilter, props.btnname)
 
-  if(!tFilter){
   return(
 
-    <div
-    className="control_wrapper nobg">
 
     <section
-    className="controls"
+    className={`controls ${tFilter ? 'bgwhite' : ''}`}
     aria-label="Image Grid Controls"
     >
 
-    <div className="line select_line filter_toggle_btn">
+    {!tFilter && (
+      <div className="line select_line filter_toggle_btn">
 
-    <button
+      <button
       onClick={handleToggle}
       className="btn filter_toggle_btn"
       title={props.btnname}
       >
-    <svg className="btn_svg">
+      <svg className="btn_svg">
       <use className="btn_use" href="/svg.svg#filter"/>
-    </svg>
+      </svg>
 
-    </button>
-    </div>
-    </section>
-    </div>
+      </button>
+      </div>
+    )}
 
-  )
-  } else {
-  return(
-    <AnimatePresence>
+
+    {tFilter && (
     <motion.div
-    className="control_wrapper"
-      onClick={handleToggle}
+    className="motiondiv"
+    onClick={handleToggle}
     variants={slideUp}
     key={tFilter}
     initial="i"
     animate="a"
     exit="e"
     >
-      <GridControls
-      defaultCat="all"
-      defaultTag="all"
-      defaultYear1={1990}
-      defaultYear2={CURRENTYEAR}
-      defaultSize1={0}
-      defaultSize2={7000}
-      />
+
+    <GridFilter
+    defaultCat="all"
+    defaultTag="all"
+    defaultYear1={1980}
+    defaultYear2={CURRENTYEAR}
+    defaultSize1={0}
+    defaultSize2={10000}
+    />
+
     </motion.div>
-    </AnimatePresence>
+    )}
+
+
+    <div className="line counter_line">
+    <p className="counter_p">
+    <span className="counter_number index">
+    {`${currentProjs ? currentProjs.length.toString().padStart(2, '0') : '00'}`}
+    </span> / <span className="counter_number length">{allProjects.length}</span>
+    </p>
+    </div>
+
+
+
+    </section>
+
   )
-  };
-}
+};
 
 export default GridControlWrapper
