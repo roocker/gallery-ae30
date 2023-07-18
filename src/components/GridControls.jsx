@@ -3,7 +3,6 @@ import { getCollection } from 'astro:content';
 import { atom } from 'nanostores';
 
 import '../styles/grid_controls.css'
-import SlideshowCounter from './SlideshowCounter';
 import { useStore } from '@nanostores/react';
 import { stateCurrentProjs } from '../states';
 import { useEffect, useState } from 'react';
@@ -247,9 +246,12 @@ function GridControls (props) {
     
         // <p className="line test">filter: {selectedCat}, {selectedTag}, {selectedYear1}, {selectedYear2}, {selectedSize1}, {selectedSize2} </p>
       return(
+        
         <section className="controls" aria-label="Image Grid Controls">
 
-          <div className="line select_line">
+        <div className="line select_line"
+        onClick={(e) => e.stopPropagation()}
+        >
         {settingFilterCat && (
           <select
           className="select select_cat"
@@ -289,7 +291,9 @@ function GridControls (props) {
         </div>
           
         {settingFilterYear && (
-          <div className="line">
+          <div className="line"
+          onClick={(e) => e.stopPropagation()}
+          >
           <label id="label-year">Jahr</label>
           <ReactSlider
           className="horizontal-slider"
@@ -313,7 +317,9 @@ function GridControls (props) {
         )}
 
         {settingFilterSize && (
-          <div className="line">
+          <div className="line"
+          onClick={(e) => e.stopPropagation()}
+          >
           <label id="label-size">Fläche</label>
           <ReactSlider
           className="horizontal-slider"

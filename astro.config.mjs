@@ -297,6 +297,21 @@ export default defineConfig({
                       required: false,
                       hint: 'Projekt erscheint nicht in der Gallerie, ist aber über URL aufrufbar (ae30.at/categorie/projekt) (ae30.at/arge/ba) & ae30.at/archiv ',
                   },
+                  {
+                    name: 'widehigh',
+                    widget: 'select',
+                    label: 'Größe Startseite',
+                    options: [ 'normal', 'extra breit', 'extra hoch'],
+                      required: false,
+                      hint: '',
+                  },
+                  {
+                    name: 'high',
+                    widget: 'boolean',
+                    label: 'high',
+                      required: false,
+                      hint: '',
+                  },
                   /* {
                     name: 'share',
                     widget: 'boolean',
