@@ -1,8 +1,10 @@
 ---
-title: test 1
+title: test 1 - high
+title_l: ba
+widehigh: extra hoch
+high: true
 publishDate: 08 May 2023
 category: zk
-subcategory: test
 project_keys:
   year: "2018"
   year2: "2022"
@@ -23,4 +25,5 @@ fotos:
     alt: test
 short: "* test"
 long: ttest
+subcategory: test
 ---

@@ -1,5 +1,8 @@
 ---
-title: test 1
+title: test 1 - wide
+title_l: wide
+widehigh: extra breit
+high: false
 publishDate: 08 May 2023
 category: zk
 project_keys:
@@ -10,7 +13,6 @@ project_keys:
     - Öffentlich
     - arbeiten
     - Außenraum
-subcategory: test
 titleimg:
   img: /media/22.jpg
   alt: test
@@ -21,6 +23,8 @@ fotos:
     alt: haustechnik ebene
   - foto: /media/9.jpg
     alt: test
+wide: true
 short: "* test"
 long: ttest
+subcategory: test
 ---

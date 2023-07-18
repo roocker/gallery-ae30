@@ -1,6 +1,8 @@
 ---
 title: Atelier Eroicagasse
 title_l: Atelier Eroicagasse
+wide: true
+high: false
 publishDate: 22 Apr 2023
 category: wp
 project_keys:

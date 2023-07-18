@@ -1,32 +1,63 @@
   article {
-    aspect-ratio: 1.5 ; /* #rev fallback! */
+    aspect-ratio: calc(3/2) ; /* #rev fallback! */
     grid-column: span 12;
     grid-row: span 1;
+    /* grid-auto-flow: dense; */
+
     /* background: yellow; */
+    /* grid-auto-flow: dense; */
+    /* grid-auto-rows: max-content; */
   }
+    article.high{
+      grid-row: span 2;
+      aspect-ratio: 0.73; 
+    }
+    article.wide{
+      aspect-ratio: 1.466666;
+    }
   @media only screen and (min-width: 37.5em/* var(--vwPl) */) {
     article{
       grid-column: span 6;
+    }
+    article.wide{
+      grid-column: span 12;
+      grid-row: span 2;
+    }
+    article.high{
+      grid-row: span 2;
+      aspect-ratio: 0.6999999; 
     }
   }
   @media only screen and (min-width: 64em/* var(--vwT) */) {
     article{
       grid-column: span 4;
     }
+    article.wide{
+      grid-column: span 8;
+    }
   }
   @media only screen and (min-width: 85.375em/* var(--vwM) */) {
     article{
       grid-column: span 3;
+    }
+    article.wide{
+      grid-column: span 6;
     }
   }
   @media only screen and (min-width: 120em/* var(--vwM) */) {
     article{
       grid-column: span 2;
     }
+    article.wide{
+      grid-column: span 4;
+    }
   }
   @media only screen and (min-width: 160em/* var(--vwM) */) {
     article{
       grid-column: span 1;
+    }
+    article.wide{
+      grid-column: span 2;
     }
   }
   figure, img{
