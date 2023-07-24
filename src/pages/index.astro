@@ -22,6 +22,7 @@ const allProjects = await getCollection('projects');
 
 const settings = await getCollection('settings');
 
+// console.log("OlleSettings:", settings);
 const settingsFilter = settings[0].data.filter;
 
 const settingFilterCat = settingsFilter.cat;
@@ -31,6 +32,30 @@ const settingFilterSize = settingsFilter.size;
 
 const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && !settingFilterYear && !settingFilterSize);
 // console.log("noFiltersActiveInCmsSettings" , noFiltersActiveInCmsSettings)
+
+// sort allProjects by CMS priority List & by date-added;
+
+const settingsPrioSort = settings[1].data.PrioList;
+console.log("settingsPrioSort:", settingsPrioSort);
+
+const sortedProjects = allProjects.sort((a, b) => {
+  const aIndex = settingsPrioSort.findIndex(item => item['relation-proj'] === a.slug);
+  const bIndex = settingsPrioSort.findIndex(item => item['relation-proj'] === b.slug);
+
+  if (aIndex === -1 && bIndex === -1) {
+    return new Date(b.data.publishDate) - new Date(a.data.publishDate);
+  } else if (aIndex !== -1 && bIndex !== -1) {
+    return aIndex - bIndex;
+  } else if (aIndex !== -1) {
+    return -1;
+  } else {
+    return 1;
+  }
+});
+// console.log("sortedProjects:", sortedProjectsByPublishDate);
+
+
+
 ---
 <Layout title="AE30 - Gallerie - work in progress" description="gallery" image="">
 
@@ -47,6 +72,8 @@ const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && 
     {noFiltersActiveInCmsSettings ? '' :
     <GridControlWrapper
     client:load
+    projects={allProjects}
+
     btnname="Filter Menü ein-/ausblenden"
 
     defaultCat="all"

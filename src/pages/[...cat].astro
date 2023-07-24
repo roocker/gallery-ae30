@@ -1,5 +1,4 @@
 ---
-import CatProj from '../components/Cat_proj.astro';
 import Layout from '../layouts/Layout.astro';
 import GridProj from '../components/GridProj';
 import GridControlWrapper from '../components/GridControlWrapper';
@@ -30,7 +29,7 @@ export async function getStaticPaths(){
     });
   } 
 
-  // const allProjects = await getCollection('projects');
+  const allProjects = await getCollection('projects');
 
 // type Props = CollectionEntry<'projects'>;
   const { cat } = Astro.params;
@@ -50,6 +49,25 @@ const settingFilterTag = settingsFilter.tag;
 const settingFilterYear = settingsFilter.year;
 const settingFilterSize = settingsFilter.size;
 const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && !settingFilterYear && !settingFilterSize);
+
+const settingsPrioSort = settings[1].data.PrioList;
+console.log("settingsPrioSort:", settingsPrioSort);
+
+
+const sortedProjects = proj.sort((a, b) => {
+  const aIndex = settingsPrioSort.findIndex(item => item['relation-proj'] === a.slug);
+  const bIndex = settingsPrioSort.findIndex(item => item['relation-proj'] === b.slug);
+
+  if (aIndex === -1 && bIndex === -1) {
+    return new Date(b.data.publishDate) - new Date(a.data.publishDate);
+  } else if (aIndex !== -1 && bIndex !== -1) {
+    return aIndex - bIndex;
+  } else if (aIndex !== -1) {
+    return -1;
+  } else {
+    return 1;
+  }
+});
 ---
 
 
@@ -66,6 +84,7 @@ const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && 
     {noFiltersActiveInCmsSettings ? '' :
     <GridControlWrapper
     client:load
+    projects={allProjects}
     btnname="Filter Menü ein-/ausblenden"
 
     defaultCat={cat}
