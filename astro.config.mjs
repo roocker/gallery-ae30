@@ -44,8 +44,8 @@ export default defineConfig({
         show_preview_links: true,
         disableIdentityWidgetInjection: true,
 
-        // https://github.com/decaporg/decap-cms/blob/master/dev-test/config.yml 
-        //https://cms-demo.netlify.com/#/collections/settings
+         // https://github.com/decaporg/decap-cms/blob/master/dev-test/config.yml 
+         // https://cms-demo.netlify.com/#/collections/settings
         
         // COLLECTIONS  -----------------------------------------------
         collections: [
@@ -56,140 +56,220 @@ export default defineConfig({
               label: 'Einstellungen',
               description: 'Allgmeine Website Einstellungen. NUR MIT VORSICHT ÄNDERN',
               comment: 'NUR MIT VORSICHT ÄNDERN / EDIT ONLY WITH CARE',
-              create: false,
-              delete: false,
-              folder: 'src/content/settings/',
               editor: { preview: false },
-              fields: [
+              files: [
                 {
-                  name: 'title',
-                  label: 'Einstellungen Titel',
-                  comment: 'NUR MIT SORGFALT ÄNDERN!',
-                  widget: 'hidden',
-                  default: 'SETTINGS',
-                },
-                {
-                  name: 'site-title',
-                  label: 'Website Titel',
-                  widget: 'string',
-                  hint: "zb AE30 - Atelier Eroicagasse",
-                },
-                {
-                  name: 'description',
-                  label: 'Seitenbeschreibung',
-                  widget: 'string',
-                },
-                {
-                  name: 'main_menu',
-                  label: 'Hauptmenü',
-                  widget: 'object',
+                  name: 'settings',
+                  label: 'Website Einstellungen',
+                  file: 'src/content/settings/settings.md',
                   fields: [
                     {
-                      name: 'menu_cats',
-                      label: 'Hauptmenü Kategorien',
-                      widget: 'list',
-                      fields: [ 
+                      name: 'title',
+                      label: 'Einstellungen Titel',
+                      comment: 'NUR MIT SORGFALT ÄNDERN!',
+                      widget: 'hidden',
+                      default: 'SETTINGS',
+                    },
+                    {
+                      name: 'site-title',
+                      label: 'Website Titel',
+                      widget: 'string',
+                      hint: "zb AE30 - Atelier Eroicagasse",
+                    },
+                    {
+                      name: 'description',
+                      label: 'Seitenbeschreibung',
+                      widget: 'string',
+                    },
+                    {
+                      name: 'main_menu',
+                      label: 'Hauptmenü',
+                      widget: 'object',
+                      fields: [
                         {
-                          name: 'menu_item_cat',
-                          label: 'Hauptmenü Kategories Link',
-                          widget: 'relation',
-                          collection: 'categories',
-                          // multiple: true,
-                          search_fields:["title"],
-                          value_field: "short",
-                          display_fields:["title"]
+                          name: 'menu_cats',
+                          label: 'Hauptmenü Kategorien',
+                          widget: 'list',
+                          fields: [ 
+                            {
+                              name: 'menu_item_cat',
+                              label: 'Hauptmenü Kategories Link',
+                              widget: 'relation',
+                              collection: 'categories',
+                              // multiple: true,
+                              search_fields:["title"],
+                              value_field: "short",
+                              display_fields:["title"]
+                            },
+                            {
+                              name: 'menue_item_cat_name',
+                              label: 'Hauptmenü Kategorie Name',
+                              widget: 'string'
+                            }
+                          ]
                         },
                         {
-                          name: 'menue_item_cat_name',
-                          label: 'Hauptmenü Kategorie Name',
-                          widget: 'string'
+                          name: 'menu_pages',
+                          label: 'Hauptmenü Pages',
+                          widget: 'list',
+                          fields: [ 
+                            {
+                              name: 'menu_item_pages',
+                              label: 'Pages',
+                              widget: 'relation',
+                              collection: 'pages',
+                              search_fields:["title"],
+                              value_field: "{{slug}}",
+                              display_fields:["title"]
+                            },
+                            {
+                              name: 'menue_item_pages_name',
+                              label: 'Hauptmenü Pages Name',
+                              widget: 'string'
+                            },
+                          ]
+                        },
+                        {
+                          name: 'menu_projects',
+                          label: 'Hauptmenü Projekte',
+                          widget: 'list',
+                          fields: [ 
+                            {
+                              name: 'menu_item_projects',
+                              label: 'Hauptmenü Projekte',
+                              widget: 'relation',
+                              // multiple: true,
+                              collection: 'projects',
+                              search_fields:["title"],
+                              value_field: "{{slug}}",
+                              display_fields:["title"],
+                              options_length: 200,
+                            },
+                            {
+                              name: 'menue_item_projects_name',
+                              label: 'Hauptmenü Projekte Name',
+                              widget: 'string'
+                            },
+                          ]
                         }
                       ]
                     },
                     {
-                      name: 'menu_pages',
-                      label: 'Hauptmenü Pages',
-                      widget: 'list',
-                      fields: [ 
+                      name: 'index_amount',
+                      label: 'Anzahl Projekte Startseite',
+                      widget: 'number',
+                    },
+                    {
+                      name: 'filter',
+                      label: 'Filter Frontpage',
+                      widget: 'object',
+                      hint: 'Filter Optionen für die Startseite an/ausschalten',
+                      fields: [
                         {
-                          name: 'menu_item_pages',
-                          label: 'Pages',
-                          widget: 'relation',
-                          collection: 'pages',
-                          search_fields:["title"],
-                          value_field: "{{slug}}",
-                          display_fields:["title"]
+                          name: 'cat',
+                          label: 'Kategorie',
+                          widget: 'boolean',
+                          hint: 'Kategorie Filter = ARGE/Kratochwil/Waldbauer/Zeinitzer/'
                         },
                         {
-                          name: 'menue_item_pages_name',
-                          label: 'Hauptmenü Pages Name',
-                          widget: 'string'
+                          name: 'tag',
+                          label: 'Typologie Filter',
+                          widget: 'boolean',
+                          hint: 'Typologie Filter = öffentlich, privat, ...'
+                        },
+                        {
+                          name: 'year',
+                          label: 'Jahres Filter',
+                          widget: 'boolean',
+                          hint: 'Jahres Filter = Filter nach Jahreszahlen'
+                        },
+                        {
+                          name: 'size',
+                          label: 'Größe Filter',
+                          widget: 'boolean',
+                          hint: 'Größe Filter = Filter nach Objektgröße'
                         },
                       ]
                     },
-                    {
-                      name: 'menu_projects',
-                      label: 'Hauptmenü Projekte',
-                      widget: 'list',
-                      fields: [ 
-                        {
-                          name: 'menu_item_projects',
-                          label: 'Hauptmenü Projekte',
-                          widget: 'relation',
-                          // multiple: true,
-                          collection: 'projects',
-                          search_fields:["title"],
-                          value_field: "{{slug}}",
-                          display_fields:["title"],
-                          options_length: 200,
-                        },
-                        {
-                          name: 'menue_item_projects_name',
-                          label: 'Hauptmenü Projekte Name',
-                          widget: 'string'
-                        },
-                      ]
-                    }
-                  ]
+                  ],
                 },
                 {
-                  name: 'index_amount',
-                  label: 'Anzahl Projekte Startseite',
-                  widget: 'number',
-                },
-                {
-                  name: 'filter',
-                  label: 'Filter Frontpage',
-                  widget: 'object',
-                  hint: 'Filter Optionen für die Startseite an/ausschalten',
+                  name: 'sorter',
+                  label: 'Gallerie Priorität Reihenfolge',
+                  file: 'src/content/settings/sort.md',
                   fields: [
                     {
-                      name: 'cat',
-                      label: 'Kategorie',
-                      widget: 'boolean',
-                      hint: 'Kategorie Filter = ARGE/Kratochwil/Waldbauer/Zeinitzer/'
+                      name: 'sorter-title',
+                      label: 'title',
+                      widget: 'string',
+                      hint: 'Gelistete Projekte werden nach Reihenfolge vorgereiht, alle anderen werden nach Erstellungs - Datum sortiert',
                     },
                     {
-                      name: 'tag',
-                      label: 'Typologie Filter',
-                      widget: 'boolean',
-                      hint: 'Typologie Filter = öffentlich, privat, ...'
+                      name: 'PrioList',
+                      label: 'Prioritäten Liste',
+                      widget: 'list',
+                      fields: [
+                        {
+                          name: 'relation-proj',
+                          label: 'relation-proj',
+                          widget: 'relation',
+                          collection: 'projects',
+                          search_fields: ["title"],
+                          value_field: "{{slug}}",
+                          display_fields: ["{{slug}} - Titel:  {{title}}"],
+                          options_length: 2000,
+                        },
+                      ],
                     },
-                    {
-                      name: 'year',
-                      label: 'Jahres Filter',
-                      widget: 'boolean',
-                      hint: 'Jahres Filter = Filter nach Jahreszahlen'
-                    },
-                    {
-                      name: 'size',
-                      label: 'Größe Filter',
-                      widget: 'boolean',
-                      hint: 'Größe Filter = Filter nach Objektgröße'
-                    },
+
                   ]
+
+
                 },
-              ]
+
+// CATEGORIES NEU  -----------------------------------------------
+                {
+                  name: 'categories',
+                  label: 'Haupt-Kategorien',
+                  file: 'src/content/settings/zcats.md',
+                  fields: [
+                    {
+                      name: 'settitlecats',
+                      label: 'title',
+                      widget: 'string',
+                      hidden: true,
+                      hint: 'Haupt Kategorien Erstellen. Achtung! Kategorien sollten nicht gelöscht werden (benötigt anpassen aller Projekte an Änderungen). Zum Anpassen fehlerhafter Projekte nach Änderungen einfach noch einmal die (geänderte bzw. neue) Kategorie in den jeweiligen Projekten auswählen und speichern!',
+                    },
+                    {
+                      name: 'title',
+                      label: 'Kategorien',
+                      widget: 'list',
+                      fields: [
+                        {
+                          name: 'title',
+                          widget: 'string',
+                          label: 'Kategorie Name',
+                          hint: 'Ganzer Name (Groß-/Kleinschreibung) zb.: Kratochwil Gerhard (erstes Wort wird für Kategorien Bezeichnung genutzt)',
+                        },
+                        {
+                          name: 'short',
+                          label: 'Kurzname',
+                          widget: 'string',
+                          hint: 'Kurzname (Kleinschreibung!) zb.: kg; wird für url genutzt',
+                        },
+                        {
+                          name: 'description',
+                          widget: 'string',
+                          label: 'Beschreibung'
+                        }
+                      ]
+                    },
+
+                  ]
+
+
+                },
+              ],
           },
 
           // PAGES  -----------------------------------------------

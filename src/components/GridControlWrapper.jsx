@@ -9,7 +9,6 @@ import '../styles/btn.css'
 
 import { getCollection } from 'astro:content';
 import { useEffect } from 'react';
-const allProjects = await getCollection('projects');
 
 const slideUp = {
   i: {
@@ -40,6 +39,7 @@ const slideUp = {
 
 function GridControlWrapper (props){
 
+const allProjects = props.projects
 
 useEffect (() => {
 
@@ -72,7 +72,7 @@ useEffect (() => {
     stateFilter.set(false);
   }
 
-  console.log("hallo", currentProjs )
+  // console.log("hallo", currentProjs )
 
 
  const defaultCat = props.defaultCat
@@ -89,7 +89,6 @@ useEffect (() => {
     }
   }, [defaultCat, currentProjs])
   const currentProjsLength = currentProjs.length
-  console.log('HELLLLOO', defaultCat.length, currentProjs.length)
 
   return(
 
