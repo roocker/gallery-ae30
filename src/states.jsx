@@ -4,6 +4,14 @@ import { getCollection } from 'astro:content';
 
 export const stateMainNav = atom(false);
 
+
+export const stateSelectedCat = atom("all"); 
+export const stateSelectedTag = atom("all"); 
+export const stateSelectedYear1 = atom(0); 
+export const stateSelectedYear2 = atom(0); 
+export const stateSelectedSize1 = atom(0); 
+export const stateSelectedSize2 = atom(0); 
+
 export const stateCurrentProjs = atom(0); 
 
 export const stateFilter = atom(false);

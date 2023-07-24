@@ -39,6 +39,17 @@ export async function getStaticPaths(){
   console.log("catprojects:", proj);
   // const titu = proj.map(proj => proj.data.title);
   // console.log("HIER ALLE TITEL der CATEGORY:", titu);
+import { CURRENTYEAR } from '../consts';
+
+const settings = await getCollection('settings');
+
+const settingsFilter = settings[0].data.filter;
+
+const settingFilterCat = settingsFilter.cat;
+const settingFilterTag = settingsFilter.tag;
+const settingFilterYear = settingsFilter.year;
+const settingFilterSize = settingsFilter.size;
+const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && !settingFilterYear && !settingFilterSize);
 ---
 
 
@@ -52,10 +63,19 @@ export async function getStaticPaths(){
     projects={proj}
     />
 
+    {noFiltersActiveInCmsSettings ? '' :
     <GridControlWrapper
     client:load
     btnname="Filter Menü ein-/ausblenden"
+
+    defaultCat={cat}
+    defaultTag="all"
+    defaultYear1={1980}
+    defaultYear2={CURRENTYEAR}
+    defaultSize1={0}
+    defaultSize2={10000}
     />
+    }
 
   </section>
 

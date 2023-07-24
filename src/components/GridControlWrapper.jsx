@@ -1,13 +1,14 @@
 import GridFilter from '../components/GridFilter';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from "@nanostores/react";
-import { stateFilter, stateCurrentProjs } from '../states';
+import { stateFilter, stateCurrentProjs, stateSelectedCat } from '../states';
 
 import { CURRENTYEAR } from '../consts';
 import '../styles/grid_controls.css'
 import '../styles/btn.css'
 
 import { getCollection } from 'astro:content';
+import { useEffect } from 'react';
 const allProjects = await getCollection('projects');
 
 const slideUp = {
@@ -39,6 +40,27 @@ const slideUp = {
 
 function GridControlWrapper (props){
 
+
+useEffect (() => {
+
+  const handleKeyDown = (event) => {
+    switch(event.key) {
+      case 'f':
+        handleToggle();
+        break;
+      case 'Escape':
+        handleClose();
+        break;
+      default:
+        break;
+    }
+  }
+
+  document.addEventListener('keydown', handleKeyDown);
+  return () => {
+    document.removeEventListener('keydown', handleKeyDown);
+  };
+});
   const tFilter = useStore(stateFilter);
   const currentProjs = useStore(stateCurrentProjs)
 
@@ -46,7 +68,28 @@ function GridControlWrapper (props){
     stateFilter.set(!tFilter);
   }
 
-  console.log("BTN FILTER", tFilter, props.btnname)
+  const handleClose = () => {
+    stateFilter.set(false);
+  }
+
+  console.log("hallo", currentProjs )
+
+
+ const defaultCat = props.defaultCat
+ const defaultTag = props.defaultTag
+ const defaultYear1 = props.defaultYear1
+ const defaultYear2 = props.defaultYear2
+ const defaultSize1 = props.defaultSize1
+ const defaultSize2 = props.defaultSize2
+
+  useEffect(() => {
+    if (defaultCat !== "all"){
+      stateSelectedCat.set(defaultCat)
+      // stateCurrentProjs.set()
+    }
+  }, [defaultCat, currentProjs])
+  const currentProjsLength = currentProjs.length
+  console.log('HELLLLOO', defaultCat.length, currentProjs.length)
 
   return(
 
@@ -85,12 +128,12 @@ function GridControlWrapper (props){
     >
 
     <GridFilter
-    defaultCat="all"
-    defaultTag="all"
-    defaultYear1={1980}
-    defaultYear2={CURRENTYEAR}
-    defaultSize1={0}
-    defaultSize2={10000}
+    defaultCat={defaultCat}
+    defaultTag={defaultTag}
+    defaultYear1={defaultYear1}
+    defaultYear2={defaultYear2}
+    defaultSize1={defaultSize1}
+    defaultSize2={defaultSize2}
     />
 
     </motion.div>
@@ -100,7 +143,7 @@ function GridControlWrapper (props){
     <div className="line counter_line">
     <p className="counter_p">
     <span className="counter_number index">
-    {`${currentProjs ? currentProjs.length.toString().padStart(2, '0') : '00'}`}
+    {`${currentProjs ? currentProjsLength.toString().padStart(2, '0') : '00'}`}
     </span> / <span className="counter_number length">{allProjects.length}</span>
     </p>
     </div>

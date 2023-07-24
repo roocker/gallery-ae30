@@ -31,6 +31,7 @@ function GridProj (props) {
   } else {
     projs = allProjs
     console.log("WARNING: GridProj didn't fount Projects from States, default to allProjects");
+    stateCurrentProjs.set(projs);
   }
 
 
