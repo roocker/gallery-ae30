@@ -4,7 +4,7 @@ import { atom } from 'nanostores';
 
 import '../styles/grid_controls.css'
 import { useStore } from '@nanostores/react';
-import { stateCurrentProjs } from '../states';
+import { stateCurrentProjs, stateSelectedCat, stateSelectedTag, stateSelectedYear1,stateSelectedYear2,stateSelectedSize1, stateSelectedSize2 } from '../states';
 import { useEffect, useState } from 'react';
 import ReactSlider from 'react-slider';
 
@@ -101,27 +101,34 @@ function GridControls (props) {
   // ---------------------------------------------- 
   // Parameter Definitions for Filter
   // ---------------------------------------------- 
-
   const defaultCat = settingFilterCat ? (props.defaultCat ? props.defaultCat : "all") : "all";
-  const [selectedCat, setSelectedCat] = useState(defaultCat);
 
+  // const [selectedCat, setSelectedCat] = useState(defaultCat);
+  const selectedCat = useStore(stateSelectedCat)
+
+  console.log("defaultCat" , defaultCat, "selectedCat" ,selectedCat)
   const defaultTag = settingFilterTag ? (props.defaultTag ? props.defaultTag : "all") : "all";
-  const [selectedTag, setSelectedTag] = useState(defaultTag);
+  // const [selectedTag, setSelectedTag] = useState(defaultTag);
+  const selectedTag = useStore(stateSelectedTag)
 
   const defaultYear1 = settingFilterYear ? (props.defaultYear1 ? props.defaultYear1 : 0) : 0;
-  const [selectedYear1 , setSelectedYear1] = useState(defaultYear1)
+  // const [selectedYear1 , setSelectedYear1] = useState(defaultYear1)
+  const selectedYear1 = useStore(stateSelectedYear1)
   // console.log("defaultYear1" , defaultYear1, "selectedYear1" ,selectedYear1)
 
   const defaultYear2 = settingFilterYear ? (props.defaultYear2 ? props.defaultYear2 : 0) : 0;
-  const [selectedYear2 , setSelectedYear2] = useState(defaultYear2)
+  // const [selectedYear2 , setSelectedYear2] = useState(defaultYear2)
+  const selectedYear2 = useStore(stateSelectedYear2)
   // console.log("defaultYear2" , defaultYear2, "selectedYear2" ,selectedYear2)
 
   const defaultSize1 = settingFilterSize ? (props.defaultSize1 ? props.defaultSize1 : 0) : 0;
-  const [selectedSize1 , setSelectedSize1] = useState(defaultSize1)
+  // const [selectedSize1 , setSelectedSize1] = useState(defaultSize1)
+  const selectedSize1 = useStore(stateSelectedSize1)
   // console.log("defaultSize1" , defaultSize1, "selectedSize1" ,selectedSize1)
 
   const defaultSize2 = settingFilterSize ? (props.defaultSize2 ? props.defaultSize2 : 0) : 0;
-  const [selectedSize2 , setSelectedSize2] = useState(defaultSize2)
+  // const [selectedSize2 , setSelectedSize2] = useState(defaultSize2)
+  const selectedSize2 = useStore(stateSelectedSize2)
   // console.log("defaultSize2" , defaultSize2, "selectedSize2" ,selectedSize2)
 
   const currentProjs = useStore(stateCurrentProjs)
@@ -139,22 +146,28 @@ function GridControls (props) {
   */
 
   const handleCategoryChange = (e) => {
-   setSelectedCat(e.target.value);
+    stateSelectedCat.set(e.target.value);
+   // setSelectedCat(e.target.value);
   };
 
   const handleTagChange = (e) => {
-    setSelectedTag(e.target.value)
+    stateSelectedTag.set(e.target.value);
+    // setSelectedTag(e.target.value)
   }
 
   const handleYearChange = (e) => {
-    setSelectedYear1(e[0])
-    setSelectedYear2(e[1])
+    stateSelectedYear1.set(e[0])
+    stateSelectedYear2.set(e[1])
+    // setSelectedYear1(e[0])
+    // setSelectedYear2(e[1])
     console.log(selectedYear1, selectedYear2)
   }
 
   const handleSizeChange = (e) => {
-    setSelectedSize1(e[0])
-    setSelectedSize2(e[1])
+    stateSelectedSize1.set(e[0])
+    stateSelectedSize2.set(e[1])
+    // setSelectedSize1(e[0])
+    // setSelectedSize2(e[1])
     console.log(selectedSize1, selectedSize2)
   }
 
@@ -221,19 +234,25 @@ function GridControls (props) {
 
     // console.log('Projekte', currentProjs , 'gem. Parameter:' , params);
 
-  },[selectedCat, selectedTag, selectedYear1, selectedYear2, selectedSize1, selectedSize2])
+  },[selectedCat, selectedTag, selectedYear1, selectedYear2, selectedSize1, selectedSize2, defaultCat])
 
 
   // ---------------------------------------------- 
   // Remove Filter with button or CMS
   // ---------------------------------------------- 
   const handleRemoveFilter = () => {
-    setSelectedCat("all")
-    setSelectedTag("all")
-    setSelectedYear1(0)
-    setSelectedYear2(0)
-    setSelectedSize1(0)
-    setSelectedSize2(0)
+    stateSelectedCat.set("all")
+    stateSelectedTag.set("all")
+    stateSelectedYear1.set(0)
+    stateSelectedYear2.set(0)
+    stateSelectedSize1.set(0)
+    stateSelectedSize2.set(0)
+    // setSelectedCat("all")
+    // setSelectedTag("all")
+    // setSelectedYear1(0)
+    // setSelectedYear2(0)
+    // setSelectedSize1(0)
+    // setSelectedSize2(0)
     console.log("Removed all Filters")
   }
 

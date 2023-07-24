@@ -1,3 +1,11 @@
+.noProjects{
+  /* grid-column: 3 3 span 6span 6; */
+  text-align: center;
+  grid-column: 2/12;
+  grid-row: 5;
+  width: 100%;
+  /* background: lavender; */
+}
 article {
   aspect-ratio: calc(3/2) ; /* #rev fallback! */
   grid-column: span 12;
@@ -10,18 +18,10 @@ article {
 }
 article.high{
   grid-row: span 2;
-  aspect-ratio: 0.73; 
+  aspect-ratio: 0.725; 
 }
 article.wide{
   aspect-ratio: 1.466666;
-}
-.noProjects{
-  /* grid-column: 3 3 span 6span 6; */
-  text-align: center;
-  grid-column: 2/12;
-  grid-row: 5;
-  width: 100%;
-  /* background: lavender; */
 }
 
 /* MEDIA QUERIES---------------------------- */
@@ -36,7 +36,6 @@ article.wide{
   }
   article.high{
     grid-row: span 2;
-    aspect-ratio: 0.6999999; 
   }
 }
 @media only screen and (min-width: 64em/* var(--vwT) */) {
@@ -45,6 +44,10 @@ article.wide{
   }
   article.wide{
     grid-column: span 8;
+  }
+  article.high{
+
+    aspect-ratio: 0.6999999; 
   }
 }
 @media only screen and (min-width: 85.375em/* var(--vwM) */) {

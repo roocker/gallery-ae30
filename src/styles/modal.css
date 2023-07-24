@@ -1,3 +1,4 @@
+
 .backdrop_modal{
   align-items: end;
 
@@ -7,7 +8,7 @@
   width: clamp(25em , calc(37.5em + 2em), 100%);
   backdrop-filter: blur(1px);
   background: var(--cwhite60);
-
+/* #bug MOBILE LANDSCAPE! */
   max-height: calc(100lvh - 8em);
   display: flex;
   flex-direction: column;
