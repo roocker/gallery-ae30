@@ -1,17 +1,17 @@
 ---
 /*
 TODO:
+- [ ] how to sort gallery?
 - [ ] allProjects filter with archived?
-- [ ] how to sort frontpage?
 - [ ] select from react-select for multiple tag input
-- [ ] toggle filter menu on/off with an F button
-- [ ] rename gridcontrols to gridfilters
-- [ ] gridcontrols = toggle.filter.btn, top, bottom scroll btn?
+- [x] toggle filter menu on/off with an F button
+- [x] rename gridcontrols to gridfilters
+- [x] gridcontrols = toggle.filter.btn, top, bottom scroll btn?
 */
 
 import Layout from '../layouts/Layout.astro';
 import GridProj from '../components/GridProj';
-import GridControls from '../components/GridControls';
+// import GridControls from '../components/GridControls';
 import GridControlWrapper from '../components/GridControlWrapper';
 import { getCollection } from 'astro:content';
 
@@ -48,6 +48,14 @@ const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && 
     <GridControlWrapper
     client:load
     btnname="Filter Menü ein-/ausblenden"
+
+    defaultCat="all"
+    defaultTag="all"
+    defaultYear1={1980}
+    defaultYear2={CURRENTYEAR}
+    defaultSize1={0}
+    defaultSize2={10000}
+
     />
     }
 
@@ -81,12 +89,6 @@ const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && 
 </section>
 </Layout>
 
-<style is:global>
-  main{
-    overflow-y: scroll !important;
-  }
-
-</style>
 <style>
   #grid-gallery{
     display: grid;
