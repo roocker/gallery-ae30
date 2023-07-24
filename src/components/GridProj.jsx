@@ -39,7 +39,7 @@ function GridProj (props) {
   let completedAnimations = 0;
   const totalAnimations = projs.length;
 
-  console.log("gibts noch projs?", projs)
+  // console.log("gibts noch projs?", projs)
 
 
   if(projs == 0){

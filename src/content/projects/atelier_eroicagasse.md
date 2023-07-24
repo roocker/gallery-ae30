@@ -1,9 +1,8 @@
 ---
 title: Atelier Eroicagasse
 title_l: Atelier Eroicagasse
-wide: true
 high: false
-publishDate: 22 Apr 2023
+publishDate: 27 Dec 2015
 category: wp
 project_keys:
   year: "1991"
@@ -28,6 +27,7 @@ fotos:
     alt: eingang
   - foto: /media/19.jpg
     alt: detail
+wide: true
 short: text
 long: text text text
 subcategory: EFH

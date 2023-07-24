@@ -1,7 +1,7 @@
 ---
 title: Stadtamt Schrems
 title_l: Stadtamt Schrems
-publishDate: 22 Apr 2023
+publishDate: 06 Jan 1960
 category: zk
 project_keys:
   year: "2021"
