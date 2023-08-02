@@ -114,7 +114,7 @@
 
 /* TEXT MENU  ---------------------------------*/
 
-  ul{
+  ul.menue{
     display: flex;
     flex-direction: column;
     margin: 0;
@@ -128,17 +128,17 @@
     /* background: green; */
 
   }
-  ul li{ 
+  ul.menue li{ 
     /* width: 100%; */
     /* background: orange; */
   }
-  ul li > a{
+  ul.menue li > a{
     display: block;
     color: var(--cgrey);
     /* background: red; */
     /* border-bottom: 1px solid rgb(255,255,255,.0); */
   }
-  ul li > a:hover{
+  ul.menue li > a:hover{
     color: var(--cblack);
     /* background: white; */
     /* border-bottom: 1px solid var(--cblack); */
@@ -165,7 +165,7 @@
     hr{
       display:none;
     }
-    ul{
+    ul.menue{
       flex-direction: row;
       padding-right: 8em;
       padding-left: 2em;
@@ -174,7 +174,7 @@
       gap: 2em;
 
     }
-    ul li{
+    ul.menue li{
       /* padding: 0; */
 
     }
@@ -195,7 +195,7 @@
     .menue-icons{
       height: 4em;
     }
-    ul{
+    ul.menue{
       line-height: 4em;
     }
     .backdrop_menue{
