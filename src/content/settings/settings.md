@@ -12,7 +12,7 @@ main_menu:
     - menu_item_cat: ZK
       menue_item_cat_name: Zeinitzer
   menu_pages:
-    - menu_item_pages: über-uns
+    - menu_item_pages: about
       menue_item_pages_name: Über uns
     - menu_item_pages: team
       menue_item_pages_name: Team

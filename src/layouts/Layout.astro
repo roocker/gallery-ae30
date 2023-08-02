@@ -113,7 +113,12 @@ const cfg = cblack;
   <head>
 
     <!-- Global Metadata -->
+
     <meta charset="utf-8" />
+
+    <!-- ist das besser? -->
+    <!-- <meta http-equiv="content-type" content="text/html; charset=utf-8"> -->
+
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/ae30-logo-icon.svg" />
     <meta name="generator" content={Astro.generator} />
@@ -156,7 +161,7 @@ const cfg = cblack;
 <style is:global define:vars={{ 
   fsans, fsans2, fsans3, fserif, fserif2, fsize, fline_height, fsize_title, fsize_h2, fsize_h3, fsize_h4,
   gmodul, gmodulpx, gmodulem,gcolnum, ggaps, ggapspx, ggapsem, gmargin, gmarginpx, gmarginem,
-  caccent, caccent2, cblack, cblack20, cblack30, cblack50,cblack80, cwhite, cwhite20, cwhite30, cwhite40, cwhite50,cwhite60, cwhite80, cgrey, cgrey20, cgrey60,cgrey20rgb, cgrey80, cbg, cfg,
+  caccent, caccent2, cblack, cblack20, cblack30, cblack50, cblack80, cwhite, cwhite20, cwhite30, cwhite40, cwhite50,cwhite60, cwhite80, cgrey, cgrey20, cgrey60,cgrey20rgb, cgrey80, cbg, cfg,
   vwP, vwPl, vwT, vwS, vwM, vwL, vwTV, vwRetina, }}>
 
   @font-face {
@@ -173,6 +178,9 @@ const cfg = cblack;
     font-style: normal;
     font-display: swap;
   }
+  html {
+    scroll-behavior: smooth;
+  }
   body{
 
     overflow-x: hidden;
@@ -187,7 +195,8 @@ const cfg = cblack;
     line-height: var(--fline_height);
   }
   a {
-    color: var(--caccent);
+    /* color: var(--caccent); */
+    color: var(--cblack50);
     text-decoration: none;
     /* background: var(--cgrey60); */
     /* border-bottom: 1px solid var(--caccent2); */
