@@ -1,11 +1,11 @@
-  h1{
+  h1.logo_head{
     margin: 0 !important;
   }
-  h1 span{
+  h1.logo_head span{
     text-indent: -9999px;
     display: none;
   }
-  h1 a{
+  h1.logo_head a{
     position: fixed;
     top: -0.5em;
     right: -0.5em !important;
@@ -76,7 +76,7 @@
   /* #1c1d1d */
 
   @media only screen and (min-width: 64em /* var(--vwS) */ ) { 
-    h1 a{
+    h1.logo_head a{
       top: -1em;
       right: -1em;
       width: 6em;

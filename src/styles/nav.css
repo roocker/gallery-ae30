@@ -19,7 +19,7 @@
   } 
 
 
-  nav{
+  nav#mainnav{
     position: fixed;
     top: 0;
     right:0;
@@ -158,7 +158,7 @@
 
 /* MEDIA QUERIES  ---------------------------------*/
   @media only screen and (min-width: 51em /* var(--vwS) */ ) { 
-    nav{
+    nav#mainnav{
       flex-direction: row;
     
     }
@@ -189,7 +189,7 @@
   }
 
   @media only screen and (min-width: 64em /* var(--vwS) */ ) { 
-    nav{
+    nav#mainnav{
       /* padding-left: .5em; */
     }
     .menue-icons{

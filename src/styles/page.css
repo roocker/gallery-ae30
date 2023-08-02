@@ -4,7 +4,7 @@
   html {
     scroll-behavior: smooth;
   }
-  .team_Page{
+  .page_sect{
     margin-top: 3em;
     display: grid;
     grid-template-columns: repeat(var(--gcolnum), 1fr);
@@ -19,7 +19,7 @@
     /* background: greenyellow; */
   }
 
-  .team_Page > * {
+  .page_sect > * {
     grid-column: span 12;
   }
 
@@ -31,8 +31,9 @@
     align-self: flex-start !important;
   } */
 
-  h1, h2 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--fsans2);
+    text-transform: uppercase;
   }
   h1.page_headline{
     position: absolute;
@@ -47,7 +48,7 @@
 
     /* background: red; */
   }
-  h2{
+  h2.members{
     text-transform: uppercase;
     margin-left: 2rem;
     align-self: flex-start;
@@ -239,7 +240,7 @@
       width: 100%;
       text-align: center;
     }
-    h2{
+    h2.members{
       align-self: center;
     }
     ul.former{
