@@ -17,26 +17,63 @@ export async function getStaticPaths(){
 type Props = CollectionEntry<'pages'>;
 const page = Astro.props;
 
-  console.log("page", page)
+  console.log("page from Astro.props:", page)
 
-const { Content } = await page.render();
+  const { Content, headings, remarkPluginFrontmatter  } = await page.render();
+
+  console.log("page Content", Content)
+  console.log("page Content", headings, remarkPluginFrontmatter)
+
+const filteredHeadings = headings.filter(heading => heading.depth === 1 || heading.depth === 2);
+
 // console.log("page Content", Content)
+
+// const toc = generateToc();
 ---
 <Layout title={`AE30 - ${page.data.title}`} description="Kategorie" image="">
-<section id="page" class="content" aria-label="Page Content">
-
-  <h1 class="page_headline" set:html={page.data.title} />
+<section class="page_sect" aria-label={page.data.tile}>
+  <section class="block">
 
     <div class="title_wrapper">
+      <h1 class="page_headline" set:html={page.data.title} />
         <img src={page.data.titleimg} alt={page.data.title} />
-    <ul class="submenu">{page.data.menu}</ul>
     </div>
+    <nav class="toc">
+      <ul>
+        {filteredHeadings.map(heading => (
+        <li key={heading.slug}>
+          <a href={`#${heading.slug}`}>{heading.text}</a>
+        </li>
+        ))}
+      </ul>
+    </nav>
 
+
+  </section>
+  <section class="content">
     <Content />
+  </section>
 
 
 </section>
 </Layout>
+
+
 <style>
+  .content{
+    margin: 0 2em 0 2em;
+  }
+
+  h1, h2, h3, h4, h5, h6{
+    font-family: var(--fsans2);
+    text-transform: uppercase;
+  }
+
+  .title_wrapper > img {
+    /* border: 2px solid red; */
+
+    max-width: var(--maxwidth);
+    width: 100% !important; 
+  }
 
 </style>

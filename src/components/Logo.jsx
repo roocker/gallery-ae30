@@ -93,7 +93,7 @@ function Logo (){
   }; 
 
   return (
-    <h1>
+    <h1 className="logo_head">
     <span>AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus</span>
     <a className="link" onClick={toggleMenu}>
     <AnimatePresence>
