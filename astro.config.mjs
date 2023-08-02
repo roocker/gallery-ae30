@@ -227,8 +227,10 @@ export default defineConfig({
 
                 },
 
-// CATEGORIES NEU  -----------------------------------------------
-                {
+          // CATEGORIES  -----------------------------------------------
+                // doesn't work, bc cant use relation widget on nested list - fields
+                
+                /* {
                   name: 'categories',
                   label: 'Haupt-Kategorien',
                   file: 'src/content/settings/zcats.md',
@@ -268,7 +270,7 @@ export default defineConfig({
                   ]
 
 
-                },
+                }, */
               ],
           },
 
@@ -277,32 +279,188 @@ export default defineConfig({
             name: 'pages',
               label: 'Seiten',
               description: 'Seiten wie Über uns, Kontakt, Impressum',
-              folder: 'src/content/pages',
               create: true,
               delete: true,
-              fields: [
+              // folder: 'src/content/pages',
+              files: [
                 {
-                  name: 'title',
-                  label: 'Titel',
-                  widget: 'string',
+                  name: 'team',
+                  label: 'Team',
+                  delete: false,
+                  file: 'src/content/pages/team.md',
+
+                  fields: [
+                    {
+                      name: 'title',
+                      label: 'Titel',
+                      widget: 'string',
+                    },
+                    {
+                      name: 'teamfoto',
+                      widget: 'object',
+                      label: 'Team Foto',
+                      fields: [
+                        {
+                          name: 'img',
+                          widget: 'image',
+                          label: 'Team Foto'
+                        },
+                        {
+                          name: 'alt',
+                          widget: 'string',
+                          label: 'Teamfoto = Alternativtext',
+                          hint: 'Bildtitel sind wichtig für Suchmaschinen & wenn das Bild nicht geladen werden kann!'
+                        },
+                      ]
+                    },
+                    {
+                      name: 'text',
+                      widget: 'markdown',
+                      required: false,
+                      label: 'Team Text 1'
+                    },
+                    {
+                      name: 'heading_members_highlighted',
+                      widget: 'string',
+                      label: 'Überschrift Mitglieder Section (highlighted)'
+                    },
+                    {
+                      name: 'heading_members_active',
+                      widget: 'string',
+                      label: 'Überschrift Mitglieder Section (active)'
+                    },
+                    {
+                      name: 'heading_members_former',
+                      widget: 'string',
+                      label: 'Überschrift Mitglieder Section (former)'
+                    },
+                    {
+                      name: 'member',
+                      label: 'Team Mitglied',
+                      widget: 'list',
+                      multiple: true,
+                      fields: [
+                        {
+                          name: 'name',
+                          label: 'Name',
+                          widget: 'string',
+                          hint: 'Titel Vorname Nachname, Titel 2',
+                        },
+                        {
+                          name: 'mode',
+                          label: 'Auswahl',
+                          widget: 'object',
+                          fields: [
+                            {
+                              name: 'highlighted',
+                              label: 'Hervorgehoben',
+                              required: false,
+                              widget: 'boolean',
+                            },
+                            {
+                              name: 'former',
+                              label: 'Ehemalige/r Mitarbeiter/-in',
+                              required: false,
+                              widget: 'boolean',
+                            },
+                            {
+                              name: 'archived',
+                              label: 'Ausgeblende/r Mitarbeiter/-in',
+                              required: false,
+                              widget: 'boolean',
+                            },
+                          ]
+                        },
+                        {
+                          name: 'details',
+                          label: 'Details',
+                          required: false,
+                          widget: 'list',
+                          fields: [
+                            {
+                              name: 'description',
+                              label: 'Detail Beschreibung',
+                              required: false,
+                              widget: 'string',
+                              hint: 'optional zb.: Geburtstag, oder Position',
+                            },
+                            {
+                              name: 'detail',
+                              label: 'Detail',
+                              widget: 'string',
+                              hint: 'zb.: 01.01.1980, oder Projektleiter',
+                            },
+                          ]
+                        },
+                        {
+                          name: 'img',
+                          widget: 'image',
+                          label: 'Member Foto',
+                          required: false,
+                        },
+                      ],
+
+                    },
+                  ]
                 },
                 {
-                  name: 'template',
-                  label: 'Design Template',
-                  widget: 'select',
-                  multiple: false,
-                  options: ["team", "about", "impressum", "sonstiges"],
+                  name: 'about',
+                  label: 'Über uns',
+                  file: 'src/content/pages/about.md',
+                  fields: [
+                    {
+                      name: 'title',
+                      label: 'Titel',
+                      widget: 'string',
+                    },
+                    {
+                      name: 'titleimg',
+                      label: 'Titel Bild',
+                      widget: 'image',
+                    },
+                    {
+                      name: 'body',
+                      label: 'Inhalt',
+                      widget: 'markdown',
+                    },
+                    /* {
+                      name: 'template',
+                      label: 'Design Template',
+                      widget: 'select',
+                      multiple: false,
+                      options: ["team", "about", "impressum", "sonstiges"],
+                    },
+                    {
+                      name: 'menu',
+                      label: 'Inhalts Menü (QuickJump)',
+                      widget: 'string',
+                      hint: 'Komma geteiltes Submenu mit Link, um schnell zu Überschriften zu springen; #rev ',
+                    }, */
+                  ]
                 },
+
                 {
-                  name: 'menu',
-                  label: 'Inhalts Menü (QuickJump)',
-                  widget: 'string',
-                  hint: 'Komma geteiltes Submenu mit Link, um schnell zu Überschriften zu springen; #rev ',
-                },
-                {
-                  name: 'body',
-                  label: 'Inhalt',
-                  widget: 'markdown',
+                  name: 'impressum',
+                  label: 'Impressum',
+                  file: 'src/content/pages/impressum.md',
+
+                  fields: [
+                    {
+                      name: 'title',
+                      label: 'Titel',
+                      widget: 'string',
+                    },
+                    {
+                      name: 'titleimg',
+                      label: 'Titel Bild',
+                      widget: 'image',
+                    },
+                    {
+                      name: 'body',
+                      label: 'Inhalt',
+                      widget: 'markdown',
+                    },
+                  ]
                 },
               ]
           },

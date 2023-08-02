@@ -1,12 +1,13 @@
 ---
 title: Über uns
 template: about
+titleimg: /media/17.jpg
 ---
+
+
 ```
 Geschichte, Architektur, Generalplanung, Partner, Baufaufsicht
 ```
-
-![Atelier Eroicagasse 30](/media/17.jpg "Atelier Eroicagasse 30")
 
 # Geschichte
 

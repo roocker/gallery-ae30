@@ -1,0 +1,147 @@
+---
+import Layout from "../layouts/Layout.astro";
+import * as teamPage from '../content/pages/team.md'
+import { marked } from 'marked';
+import '../styles/page.css';
+
+/* console.log("teamPage1",teamPage)
+console.log("headings",teamPage.getHeadings)
+console.log("fontmatter",teamPage.frontmatter) */
+
+const pageHeadings = teamPage.getHeadings();
+const page = teamPage.frontmatter
+
+const allMembersWithArchived = teamPage.frontmatter.member
+
+// purge when archived from list!
+
+const allMembers = allMembersWithArchived.filter(member => !member.mode || !member.mode.archived);
+
+
+const impMembers = allMembers.filter((mem) => mem.mode && mem.mode.highlighted === true);
+
+const forMembers = allMembers.filter((mem) => mem.mode && mem.mode.former === true);
+
+const actMembers = allMembers.filter((mem) => !mem.mode || (mem.mode.highlighted !== true && mem.mode.former !== true));
+
+/*
+console.log("allMembersWithArchived",allMembersWithArchived)
+console.log("allMembers",allMembers)
+console.log("impMembers",impMembers)
+console.log("forMembers",forMembers)
+console.log("actMembers",actMembers)
+*/
+
+// const hasNoImg = actMembers.img ? false : true;
+const teamText = marked(page.text);
+---
+<Layout title="AE30 - Team" description="Team" image="">
+<section class="team_Page" aria-label="Team Content">
+
+  <section class="block group">
+    <div class="title_wrapper">
+      <h1 class="page_headline" set:html={page.title} />
+        <img src={page.teamfoto.img} alt={page.teamfoto.alt} />
+    </div>
+
+    <div class="text" set:html={teamText}></div>
+
+    <div class="next_control">
+
+      <button onclick="location.href='#members_highlighted'" class="btn modal_toggle_btn" title="Architekten" >
+        <svg class="btn_svg">
+          <use class="btn_use" href="/svg.svg#arrow" />
+        </svg>
+
+      </button>
+    </div>
+  </section>
+
+
+  <section id="members_highlighted" class="block members">
+    <h2 class="members">{page.heading_members_highlighted}</h2>
+    <ul class="team_list highlighted">
+
+      {impMembers.map((mem) => (
+
+      <li>
+
+        <ul class="team_member">
+
+          {mem.img?
+          <li key={mem.img}><img src={mem.img} alt={mem.name} /></li> : ''}
+          <li key={mem.name}><h3>{mem.name}</h3></li>
+
+          {mem.details && mem.details.map((det) => (
+          <li><span class="detail_desc">{det.description}</span> {det.detail}</li>
+          ))}
+
+        </ul>
+      </li>
+      ))}
+
+    </ul>
+
+    <div class="next_control">
+      <button onclick="location.href='#members_active'" class="btn modal_toggle_btn" title="Aktuelle Mitarbeiter" >
+        <svg class="btn_svg">
+          <use class="btn_use" href="/svg.svg#arrow" />
+        </svg>
+      </button>
+    </div>
+
+  </section>
+
+  <section id="members_active" class="block members">
+
+    <h2 class="members">{page.heading_members_active}</h2>
+
+    <ul class="team_list active">
+      {actMembers.map((mem) => (
+      <li>
+        <ul class="team_member">
+          {mem.img?
+          <li key={mem.img}><img src={mem.img} alt={mem.name} /></li> : '' }
+          <li key={mem.name}><h3>{mem.name}</h3></li>
+
+          {mem.details && mem.details.map((det) => (
+          <li><span class="detail_desc">{det.description}</span> {det.detail}</li>
+          ))}
+        </ul>
+      </li>
+      ))}
+    </ul>
+
+    <div class="next_control">
+      <button onclick="location.href='#members_former'" class="btn modal_toggle_btn" title="Ehemalige Mitarbeiter" >
+        <svg class="btn_svg">
+          <use class="btn_use" href="/svg.svg#arrow" />
+        </svg>
+      </button>
+    </div>
+
+  </section>
+
+  <section id="members_former" class="block members">
+
+    <h2 class="members">{page.heading_members_former}</h2>
+
+    <ul class="team_list former">
+      {forMembers.map((mem) => (
+      <li key={mem.name}>&nbsp;{mem.name}, </li>
+      ))}
+    </ul>
+
+    <div class="next_control">
+      <button onclick="location.href='#top'" class="btn modal_toggle_btn" title="Team" >
+        <svg class="btn_svg top">
+          <use class="btn_use" href="/svg.svg#arrow" />
+        </svg>
+      </button>
+    </div>
+
+  </section>
+</section>
+</Layout>
+<style>
+</style>

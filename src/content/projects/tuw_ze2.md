@@ -16,10 +16,10 @@ project_keys:
     - arbeiten
 titleimg:
   img: /media/ai-teamfoto.jpg
-  alt: Alttext Title Bild - Rendering
+  alt: Äüµæáé öÖ
 fotos:
   - foto: /media/IMG_20220112_085913.jpg
-    alt: Foto Westansicht
+    alt: Äüµæáé Westansicht
   - foto: /media/IMG_20220112_085958.jpg
     alt: Foto vgl Übersicht Rendering
   - foto: /media/IMG_20220112_090306.jpg

@@ -3,6 +3,48 @@ title: Team
 template: team
 menu: Architekten Kratochwil Waldbauer Zeinitzer(Architekten Kratochwil
   Waldbauer Zeinitzer), Team(Aktuelle Mitarbeiter)
+teamfoto:
+  img: /media/ai-teamfoto.jpg
+  alt: Team Foto AE30 - Atelier Eroicagasse
+member:
+  - name: Arch DI Gerhard Kratochwil
+    img: /media/portrait_placeholder.jpg
+    mode:
+      highlighted: true
+    details:
+      - description: ""
+        detail: Architekt, Projektleiter
+      - description: Geburtstag
+        detail: 16.08.1960
+  - name: DI Peter Waldbauer
+    img: /media/portrait_placeholder.jpg
+    mode:
+      highlighted: true
+    details:
+      - description: ""
+        detail: Architekt, Projektleiter
+      - description: Geburtstag
+        detail: 16.08.1960
+  - name: DI Klaus Zeinitzer
+    img: /media/portrait_placeholder.jpg
+    mode:
+      highlighted: true
+    details:
+      - description: ""
+        detail: Architekt, Projektleiter
+      - description: Geburtstag
+        detail: 16.08.1960
+  - name: DI Sabine Chihadeh
+    img: /media/portrait_placeholder.jpg
+  - name: DI Katharina Giessenbacher
+    img: /media/portrait_placeholder.jpg
+  - name: DI Stefan Huber
+    img: /media/portrait_placeholder.jpg
+  - name: Iris Göttlinger
+    img: /media/portrait_placeholder.jpg
+    details:
+      - description: ""
+        detail: Sekretariat
 ---
 # Architekten Kratochwil - Waldbauer - Zeinitzer
 ![](/media/ai-teamfoto.jpg)
