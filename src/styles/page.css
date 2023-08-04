@@ -117,9 +117,7 @@
   .block > div {
     max-width: var(--maxwidth);
     /* margin-bottom: 1em; */
-    /* margin-top: 2em; */
-  }
-    
+    /* margin-top: 2em; */ }
 
 
   ul{

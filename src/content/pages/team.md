@@ -88,6 +88,10 @@ member:
   - name: Elisabeth Kofler
     mode:
       former: true
+  - name: Andreas Schmidt
+    mode:
+      highlighted: true
+    img: /media/12.jpg
 ---
 # Content
 asdfasdf
