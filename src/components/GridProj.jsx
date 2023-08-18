@@ -11,7 +11,6 @@
 import '../styles/grid.css';
 import { AnimatePresence, motion} from "framer-motion";
 import { stateCurrentProjs } from '../states';
-// import { Image } from 'astro:assets';
 
 
 // import { Picture } from '@astrojs/image/components';

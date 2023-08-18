@@ -37,7 +37,6 @@ props: proj,
 type Props = CollectionEntry<'projects'>;
 const proj = Astro.props;
 
-console.log("wos", proj)
 const p = proj.data;
 
 const { Content } = await proj.render();
