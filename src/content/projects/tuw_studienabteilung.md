@@ -14,23 +14,23 @@ project_keys:
     - lernen
     - arbeiten
 titleimg:
-  img: /media/31.jpg
+  img: ~/assets/media/31.jpg
   alt: Studienabteilung Insel Möblierung
 fotos:
-  - foto: /media/30.jpg
+  - foto: ~/assets/media/30.jpg
     alt: Studienabteilung
-  - foto: /media/7.jpg
+  - foto: ~/assets/media/7.jpg
     alt: Studienabteilung
-  - foto: /media/32.jpg
+  - foto: ~/assets/media/32.jpg
     alt: Studienabteilung
-  - foto: /media/6.jpg
+  - foto: ~/assets/media/6.jpg
     alt: Studienabteilung
 plans:
-  - plan: /media/21.jpg
+  - plan: ~/assets/media/21.jpg
     alt: Grundriss EG
-  - plan: /media/20.jpg
+  - plan: ~/assets/media/20.jpg
     alt: Querschnitt
-  - plan: /media/19.jpg
+  - plan: ~/assets/media/19.jpg
     alt: Detail
 short: text
 long: text

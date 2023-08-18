@@ -1,5 +1,6 @@
 ---
 title: test 1
+title_l: test 1
 publishDate: 08 May 2023
 category: zk
 project_keys:
@@ -11,14 +12,14 @@ project_keys:
     - Hallofehler
 subcategory: test
 titleimg:
-  img: /media/9.jpg
+  img: ~/assets/media/9.jpg
   alt: test
 fotos:
-  - foto: /media/10.jpg
+  - foto: ~/assets/media/10.jpg
     alt: 1.zwischengeschoss
-  - foto: /media/8.jpg
+  - foto: ~/assets/media/8.jpg
     alt: haustechnik ebene
-  - foto: /media/9.jpg
+  - foto: ~/assets/media/9.jpg
     alt: test
 short: "* test"
 long: ttest

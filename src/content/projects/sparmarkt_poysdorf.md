@@ -10,14 +10,14 @@ project_keys:
     - Geschäft/Shop
   area: "60"
 titleimg:
-  img: /media/34.jpg
+  img: ~/assets/media/34.jpg
   alt: Visualisierung
 fotos:
-  - foto: /media/10.jpg
+  - foto: ~/assets/media/10.jpg
     alt: 1.zwischengeschoss
-  - foto: /media/8.jpg
+  - foto: ~/assets/media/8.jpg
     alt: haustechnik ebene
-  - foto: /media/9.jpg
+  - foto: ~/assets/media/9.jpg
     alt: test
 short: text
 long: text

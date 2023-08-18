@@ -11,6 +11,9 @@
 import '../styles/grid.css';
 import { AnimatePresence, motion} from "framer-motion";
 import { stateCurrentProjs } from '../states';
+// import { Image } from 'astro:assets';
+
+
 // import { Picture } from '@astrojs/image/components';
 // const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
 
@@ -24,6 +27,9 @@ function GridProj (props) {
   const allProjs = props.projects;
 
   const currentProjs = useStore(stateCurrentProjs);
+
+  const imgSrcs = props.covers;
+  // console.log("HIERHERIER", imgSrcs)
 
   if(currentProjs){
     projs = currentProjs
@@ -150,20 +156,8 @@ function GridProj (props) {
         <figure>
 
         <img 
-        src={proj.data.titleimg.img}
+        src={imgSrcs[index]}
         alt={proj.data.titleimg.alt}
-
-
-        widths={[1024, 600, 500, 420, 128]} 
-        sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (min-width: 420px) 420px, 420px"
-        // aspectRatio={`${width}:${height}`}
-        background={`white`}
-        position="attention"
-        fit="cover"
-        loading="lazy"
-        decoding="async"
-        className=""
-        draggable="false"
         />
 
         <figcaption>{index} {proj.data.title}</figcaption>

@@ -14,10 +14,10 @@ project_keys:
     - lernen
     - Universität
 titleimg:
-  img: /media/22.jpg
+  img: ~/assets/media/22.jpg
   alt: Juridikum Fotos S/W
 fotos:
-  - foto: /media/23.jpg
+  - foto: ~/assets/media/23.jpg
     alt: Juridikum Zeichnung Waldbauer Peter
 short: text juridikum
 long: text juridikum

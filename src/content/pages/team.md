@@ -1,7 +1,7 @@
 ---
 title: Team - AE30
 teamfoto:
-  img: /media/ai-teamfoto.jpg
+  img: '../src/assets/media/ai-teamfoto.jpg'
   alt: Team Foto AE30 - Atelier Eroicagasse
 text: >-
   Unser Büro arbeitet unter der Leitung von [Arch DI Gerhard
@@ -88,10 +88,6 @@ member:
   - name: Elisabeth Kofler
     mode:
       former: true
-  - name: Andreas Schmidt
-    mode:
-      highlighted: true
-    img: /media/12.jpg
 ---
 # Content
 asdfasdf

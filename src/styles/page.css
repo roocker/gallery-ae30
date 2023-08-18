@@ -31,16 +31,14 @@
     align-self: flex-start !important;
   } */
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--fsans2);
-    text-transform: uppercase;
-  }
   h1.page_headline{
+    margin: 0;
     position: absolute;
     bottom: 1em;
     left: 2rem;
     /* width: 100%; */
     text-align: center;
+    line-height: 1em;
 
     text-transform: uppercase;
     color: var(--cwhite);
@@ -63,6 +61,8 @@
   .title_wrapper > img{
     max-width: var(--maxwidth);
     width: 100% !important; 
+    max-height: 45vh;
+    object-fit: cover;
   }
   
   div.next_control{
@@ -117,7 +117,8 @@
   .block > div {
     max-width: var(--maxwidth);
     /* margin-bottom: 1em; */
-    /* margin-top: 2em; */ }
+    /* margin-top: 2em; */ 
+  }
 
 
   ul{
@@ -298,3 +299,97 @@
   @media only screen and (min-width: 85.375em/* var(--vwM) */) {
 
   }
+
+/* TOC Nav ---------------------------------- */
+  /* rework */
+nav.toc{
+  align-self: flex-start;
+  font-family: var(--fsans2);
+  line-height: 2em;
+  width: 100%;
+  /* background: red; */
+
+}
+nav.toc ol{
+  padding: 0;
+  margin: 0;
+  list-style-position: inside;
+
+}
+nav.toc ol >::marker{
+  /* float: left; */
+  /* display: inline; */
+  /* font-weight: bold; */
+}
+nav.toc li{
+  background: var(--cgrey20);
+  margin-bottom: .25em;
+  padding-left: 2em;
+  white-space: nowrap;
+
+}
+nav.toc li a{
+  display: inline-block;
+  color: var(--cblack);
+}
+nav.toc li:hover{
+
+  background: var(--cgrey60);
+}
+  
+
+  @media only screen and (min-width: 48em/* var(--vwT) */) {
+    nav.toc{
+      position: fixed;
+      bottom: 2em;
+      right: 2em;
+      width: 42vw;
+      /* align-items: flex-end; */
+      /* float: right; */
+      /* background: green; */
+
+    }
+    nav.toc li{
+      backdrop-filter: blur(2px);
+      opacity: .8 ;
+    }
+  }
+
+/* General ---------------------------------- */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fsans2);
+    text-transform: uppercase;
+    margin: .5em 0 .5em 0;
+  }
+  h1{
+    line-height: 1.25em;
+
+  }
+  blockquote{
+    font-style: italic;
+  }
+  pre.github-dark{
+    background: grey !important;
+    /* font-family: var(--fsans3); */
+    /* color: #111111 !important; */
+  }
+  code{
+    font-family: var(--fsans3);
+  }
+  ul{
+    list-style-type: disc;
+    list-style-position: inside;
+  }
+  ol{
+    list-style-position: inside;
+    /* margin: 0; */
+  }
+  ol li::marker{
+    /* float: left; */
+  }
+  img{
+    /* min-width: 100%; */
+    width: clamp(50%, 100%);
+    max-width: 100%;
+  }
+

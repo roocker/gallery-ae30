@@ -1,7 +1,6 @@
 ---
 title: Atelier Eroicagasse
 title_l: Atelier Eroicagasse
-high: false
 publishDate: 27 Dec 2015
 category: wp
 project_keys:
@@ -12,20 +11,20 @@ project_keys:
     - arbeiten
     - wohnen
 titleimg:
-  img: /media/17.jpg
+  img: ~/assets/media/17.jpg
   alt: asdffff
 fotos:
-  - foto: /media/13.jpg
+  - foto: ~/assets/media/13.jpg
     alt: baustelle
-  - foto: /media/14.jpg
+  - foto: ~/assets/media/14.jpg
     alt: baustelle 2
-  - foto: /media/15.jpg
+  - foto: ~/assets/media/15.jpg
     alt: fassade
-  - foto: /media/16.jpg
+  - foto: ~/assets/media/16.jpg
     alt: fasssade2
-  - foto: /media/18.jpg
+  - foto: ~/assets/media/18.jpg
     alt: eingang
-  - foto: /media/19.jpg
+  - foto: ~/assets/media/19.jpg
     alt: detail
 wide: true
 short: text

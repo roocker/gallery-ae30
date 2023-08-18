@@ -14,14 +14,14 @@ project_keys:
     - arbeiten
     - Außenraum
 titleimg:
-  img: /media/22.jpg
+  img: ~/assets/media/22.jpg
   alt: test
 fotos:
-  - foto: /media/10.jpg
+  - foto: ~/assets/media/10.jpg
     alt: 1.zwischengeschoss
-  - foto: /media/8.jpg
+  - foto: ~/assets/media/8.jpg
     alt: haustechnik ebene
-  - foto: /media/9.jpg
+  - foto: ~/assets/media/9.jpg
     alt: test
 wide: true
 short: "* test"

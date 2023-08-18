@@ -15,33 +15,33 @@ project_keys:
     - lernen
     - arbeiten
 titleimg:
-  img: /media/24.jpg
+  img: ~/assets/media/24.jpg
   alt: Alttext Title Bild - Rendering
 fotos:
-  - foto: /media/IMG_20220112_085913.jpg
+  - foto: ~/assets/media/IMG_20220112_085913.jpg
     alt: Foto Westansicht
-  - foto: /media/IMG_20220112_085958.jpg
+  - foto: ~/assets/media/IMG_20220112_085958.jpg
     alt: Foto vgl Übersicht Rendering
-  - foto: /media/IMG_20220112_090306.jpg
+  - foto: ~/assets/media/IMG_20220112_090306.jpg
     alt: Foto Treppen Haupteingang West
-  - foto: /media/IMG_20220112_085913.jpg
+  - foto: ~/assets/media/IMG_20220112_085913.jpg
     alt: Foto Westansicht
-  - foto: /media/IMG_20220112_085958.jpg
+  - foto: ~/assets/media/IMG_20220112_085958.jpg
     alt: Foto vgl Übersicht Rendering
-  - foto: /media/IMG_20220112_090306.jpg
+  - foto: ~/assets/media/IMG_20220112_090306.jpg
     alt: Foto Treppen Haupteingang West
-  - foto: /media/IMG_20220112_085913.jpg
+  - foto: ~/assets/media/IMG_20220112_085913.jpg
     alt: Foto Westansicht
-  - foto: /media/IMG_20220112_085958.jpg
+  - foto: ~/assets/media/IMG_20220112_085958.jpg
     alt: Foto vgl Übersicht Rendering
-  - foto: /media/IMG_20220112_090306.jpg
+  - foto: ~/assets/media/IMG_20220112_090306.jpg
     alt: Foto Treppen Haupteingang West
 plans:
-  - plan: /media/21.jpg
+  - plan: ~/assets/media/21.jpg
     alt: Grundriss EG
-  - plan: /media/20.jpg
+  - plan: ~/assets/media/20.jpg
     alt: Querschnitt
-  - plan: /media/19.jpg
+  - plan: ~/assets/media/19.jpg
     alt: Detail
 short: Zur Entlastung der Laborflächen des ATI (Atominstitut) und zur Aufnahme
   der Universitären Service Einrichtung für Transmissionselektronenmikroskopie

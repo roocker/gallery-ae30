@@ -12,16 +12,16 @@ project_keys:
     - arbeiten
     - Außenraum
 titleimg:
-  img: /media/35.jpg
+  img: ~/assets/media/35.jpg
   alt: fasdfasdf
 fotos:
-  - foto: /media/11.jpg
+  - foto: ~/assets/media/11.jpg
     alt: okok
-  - foto: /media/12.jpg
+  - foto: ~/assets/media/12.jpg
     alt: gokok
-  - foto: /media/13.jpg
+  - foto: ~/assets/media/13.jpg
     alt: okok
-  - foto: /media/14.jpg
+  - foto: ~/assets/media/14.jpg
     alt: okok
 short: text
 long: langtext schrems

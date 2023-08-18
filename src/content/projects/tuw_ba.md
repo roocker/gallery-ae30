@@ -16,14 +16,14 @@ project_keys:
     - lernen
     - arbeiten
 titleimg:
-  img: /media/27.jpg
+  img: ~/assets/media/27.jpg
   alt: BA Getreidemarkt Ansicht
 fotos:
-  - foto: /media/3.jpg
+  - foto: ~/assets/media/3.jpg
     alt: BA Dachterasse OG11
-  - foto: /media/28.jpg
+  - foto: ~/assets/media/28.jpg
     alt: BA Ansicht Hof
-  - foto: /media/36.jpg
+  - foto: ~/assets/media/36.jpg
     alt: BA Ansicht Schild
 short: Text BA
 long: Text BA
