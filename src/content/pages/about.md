@@ -38,9 +38,7 @@ Gestaltung von Luft, Licht und Raum
 * Aufzählungspunkt
 
 
-
 1. Aufzählungspunkt
-
    1. Aufzählungspunkt
    2. Aufzählungspunkt
    3. Aufzählungspunkt
@@ -64,6 +62,7 @@ Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labor
 * Haustechnik: ZFG Haustechnik, 
 * Labortechnik: [Vitroplan Labortechnik GmbH](http://www.vitroplan.at/) 
 * IT-Fachplanung: CITEM 
-*
 
 # Bauaufsicht
+## Mängelbehebungen
+### Tiefe Überschrift Test

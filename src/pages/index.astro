@@ -15,6 +15,8 @@ import GridProj from '../components/GridProj';
 import GridControlWrapper from '../components/GridControlWrapper';
 import { getCollection } from 'astro:content';
 
+import { getImage } from 'astro:assets';
+
 import { CURRENTYEAR } from '../consts';
 
 const allProjects = await getCollection('projects');
@@ -36,7 +38,7 @@ const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && 
 // sort allProjects by CMS priority List & by date-added;
 
 const settingsPrioSort = settings[1].data.PrioList;
-console.log("settingsPrioSort:", settingsPrioSort);
+// console.log("settingsPrioSort:", settingsPrioSort);
 
 const sortedProjects = allProjects.sort((a, b) => {
   const aIndex = settingsPrioSort.findIndex(item => item['relation-proj'] === a.slug);
@@ -54,19 +56,51 @@ const sortedProjects = allProjects.sort((a, b) => {
 });
 // console.log("sortedProjects:", sortedProjectsByPublishDate);
 
+// Image Optimization
+// ------------------------------------------------
 
+/* import budl from '~/assets/media/IMG_20220112_085913.jpg';
+const optBudl = await getImage({ src:budl });
+console.log("optBudl", optBudl) */
+
+/* const optTitleImgs = allProjects.map((proj) => {
+await getImage({
+src : proj.titleimg.img,
+format: 'webp',
+width : 300,
+}),
+}) 
+console.log("opttitleimgs", optTitleImgs) */
+
+
+  const optTitleImgs = await Promise.all(
+    allProjects.map(async (proj) => {
+      const img = await getImage({
+        src: proj.data.titleimg.img,
+        format: 'webp',
+        width: 600,
+      });
+      return img.src;
+    })
+  );
+
+// optTitleImgs();
+
+// console.log("opttitleimgs", optTitleImgs);
 
 ---
-<Layout title="AE30 - Gallerie - work in progress" description="gallery" image="">
+<Layout title="ae30 - gallerie - work in progress" description="gallery" image="">
 
-<section id="grid-gallery" aria-label="Gallery Grid Overview">
-  <!-- <Testgallery/> -->
+<section id="grid-gallery" aria-label="gallery grid overview">
+  <!-- <testgallery/> -->
     <!--  /${proj.slug}`}  -->
+
 
 
     <GridProj
     client:only
     projects={allProjects}
+    covers={optTitleImgs}
     />
 
     {noFiltersActiveInCmsSettings ? '' :
@@ -76,26 +110,26 @@ const sortedProjects = allProjects.sort((a, b) => {
 
     btnname="Filter Menü ein-/ausblenden"
 
-    defaultCat="all"
-    defaultTag="all"
-    defaultYear1={1980}
-    defaultYear2={CURRENTYEAR}
-    defaultSize1={0}
-    defaultSize2={10000}
+    defaultcat="all"
+    defaulttag="all"
+    defaultyear1={1980}
+    defaultyear2={CURRENTYEAR}
+    defaultsize1={0}
+    defaultsize2={10000}
 
     />
     }
 
     <!--
-    {noFiltersActiveInCmsSettings ? '' :
-      <GridControls
+    {nofiltersactiveincmssettings ? '' :
+      <gridcontrols
       client:load
-      defaultCat="all"
-      defaultTag="all"
-      defaultYear1={1990}
-      defaultYear2={CURRENTYEAR}
-      defaultSize1={0}
-      defaultSize2={7000}
+      defaultcat="all"
+      defaulttag="all"
+      defaultyear1={1990}
+      defaultyear2={currentyear}
+      defaultsize1={0}
+      defaultsize2={7000}
       />
       } 
       -->
@@ -103,8 +137,8 @@ const sortedProjects = allProjects.sort((a, b) => {
 
 
     <!--
-    {allProjects.map((proj) => 
-    <GridProj 
+    {allprojects.map((proj) => 
+    <gridproj 
     title={proj.data.title} 
     link={`../${proj.data.category}/${proj.slug}`}
     titleimg={proj.data.titleimg.img} 
@@ -127,7 +161,7 @@ const sortedProjects = allProjects.sort((a, b) => {
     gap: calc( 0.5 * var(--ggapspx));
     margin-bottom: 10em;
   }
-  @media only screen and (min-width: 64em /* var(--vwS) */) { 
+  @media only screen and (min-width: 64em /* var(--vws) */) { 
     #grid-gallery{
       gap: var(--ggapspx);
     }

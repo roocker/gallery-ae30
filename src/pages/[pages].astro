@@ -24,7 +24,7 @@ const page = Astro.props;
   console.log("page Content", Content)
   console.log("page Content", headings, remarkPluginFrontmatter)
 
-const filteredHeadings = headings.filter(heading => heading.depth === 1 || heading.depth === 2);
+const filteredHeadings = headings.filter(heading => heading.depth === 1 );
 
 // console.log("page Content", Content)
 
@@ -39,13 +39,13 @@ const filteredHeadings = headings.filter(heading => heading.depth === 1 || headi
         <img src={page.data.titleimg} alt={page.data.title} />
     </div>
     <nav class="toc">
-      <ul>
+      <ol>
         {filteredHeadings.map(heading => (
         <li key={heading.slug}>
           <a href={`#${heading.slug}`}>{heading.text}</a>
         </li>
         ))}
-      </ul>
+      </ol>
     </nav>
 
 
@@ -54,6 +54,13 @@ const filteredHeadings = headings.filter(heading => heading.depth === 1 || headi
     <Content />
   </section>
 
+    <div class="next_control">
+      <button onclick="location.href='#top'" class="btn modal_toggle_btn" title="Top" >
+        <svg class="btn_svg top">
+          <use class="btn_use" href="/svg.svg#arrow" />
+        </svg>
+      </button>
+    </div>
 
 </section>
 </Layout>
@@ -74,6 +81,10 @@ const filteredHeadings = headings.filter(heading => heading.depth === 1 || headi
 
     max-width: var(--maxwidth);
     width: 100% !important; 
+  }
+  .next_control{
+    /* align-self: center; */
+    margin: 0 auto;
   }
 
 </style>
