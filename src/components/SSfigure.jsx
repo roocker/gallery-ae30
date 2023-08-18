@@ -77,7 +77,11 @@ function SSfigure(props) {
   }
 
   let images = sToggle ? props.pictures : props.plans;
+  const imagesSrcs = images.map((src) => { return src.src })
   let alts = sToggle ? props.pictureTitles : props.planTitles;
+
+  console.log("JETZT", images)
+  console.log("JETZT", imagesSrcs)
 
 
   //Toggle for Zoom
@@ -205,7 +209,7 @@ function SSfigure(props) {
     exit="e"
     >
     <SSimg
-    images={images}
+    images={imagesSrcs}
     index={index}
     alts={alts}
     zoom={zToggle}
