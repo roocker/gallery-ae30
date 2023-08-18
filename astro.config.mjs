@@ -5,18 +5,25 @@
 - [ ] settings and ?pages? should be files: -file: fields https://decapcms.org/docs/collection-types
 
   */
-  import { defineConfig } from 'astro/config';
+  import { defineConfig, sharpImageService } from 'astro/config';
 import NetlifyCMS from 'astro-netlify-cms';
 // import { de } from 'netlify-cms-locales';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
-import image from "@astrojs/image";
+// import image from "@astrojs/image";
 import react from "@astrojs/react";
+
 
 // CMS.registerLocale('de', de);
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ae30.at',
+  experimental: {
+    assets: true
+  },
+  image:{
+        service: sharpImageService(),
+      },
   integrations: [
     // SETTINGS -----------------------------------------------
     NetlifyCMS({
@@ -548,13 +555,13 @@ export default defineConfig({
                   required: false,
                   hint: '',
                 },
-                {
+                /* {
                   name: 'high',
                   widget: 'boolean',
                   label: 'high',
                   required: false,
                   hint: '',
-                },
+                }, */
                 /* {
                   name: 'share',
                   widget: 'boolean',
@@ -761,12 +768,11 @@ export default defineConfig({
 
         ] //collection ENDE
 
-
-
-
       },
         previewStyles: ['/src/styles/preview.css']
-      }), image({
-        serviceEntryPoint: '@astrojs/image/sharp'
-      }), mdx(), sitemap(), react()]
+      }),  mdx(), sitemap(), react()]
     });
+
+/* image({
+        serviceEntryPoint: '@astrojs/image/sharp'
+      }) */

@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import "../styles/slideshow.css";
+// import { Image } from 'astro:assets'
 
 const animation_zoom = {
   i:{
