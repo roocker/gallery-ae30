@@ -39,6 +39,7 @@ export async function getStaticPaths(){
   // const titu = proj.map(proj => proj.data.title);
   // console.log("HIER ALLE TITEL der CATEGORY:", titu);
 import { CURRENTYEAR } from '../consts';
+import { getImage } from 'astro:assets';
 
 const settings = await getCollection('settings');
 
@@ -68,6 +69,19 @@ const sortedProjects = proj.sort((a, b) => {
     return 1;
   }
 });
+
+// Image Optimization
+// ------------------------------------------------
+  const optTitleImgs = await Promise.all(
+    allProjects.map(async (proj) => {
+      const img = await getImage({
+        src: proj.data.titleimg.img,
+        format: 'webp',
+        width: 600,
+      });
+      return img.src;
+    })
+  );
 ---
 
 
@@ -79,6 +93,7 @@ const sortedProjects = proj.sort((a, b) => {
     <GridProj
     client:only
     projects={proj}
+    covers={optTitleImgs}
     />
 
     {noFiltersActiveInCmsSettings ? '' :

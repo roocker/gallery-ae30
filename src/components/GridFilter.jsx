@@ -8,6 +8,7 @@ import { stateCurrentProjs, stateSelectedCat, stateSelectedTag, stateSelectedYea
 import { useEffect, useState } from 'react';
 import ReactSlider from 'react-slider';
 
+// #bug not building bug?
 const allProjects = await getCollection('projects');
 const allCategories = await getCollection('categories');
 const settings = await getCollection('settings');

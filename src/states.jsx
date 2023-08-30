@@ -1,7 +1,5 @@
 import { atom } from 'nanostores';
 
-import { getCollection } from 'astro:content';
-
 export const stateMainNav = atom(false);
 
 

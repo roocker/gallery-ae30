@@ -11,7 +11,6 @@ NICE-TO-HAVE:
 */
 import Layout from '../../layouts/Layout.astro';
 import { CollectionEntry, getCollection } from 'astro:content'; 
-import { Image, Picture } from '@astrojs/image/components';
 // import BasicScripts from '../../components/basicScripts.astro';
 import TextBlockModal from '../../components/TextBlockModal';
 import SSfigure from '../../components/SSfigure';
@@ -23,7 +22,7 @@ import ModalBtn from '../../components/ModalBtn';
 import PlanBtn from '../../components/PlanBtn';
 import SlideshowBtn from '../../components/SlideshowBtn';
 import PlaybackBtn from '../../components/PlaybackBtn';
-
+import { getImage } from 'astro:assets';
 
 export async function getStaticPaths() {
 const allProjects = await getCollection('projects');
@@ -42,25 +41,38 @@ const p = proj.data;
 const { Content } = await proj.render();
 
 
+const rawSSPictures = [p.titleimg.img].concat(p.fotos.map((img) => img.foto));
 
 
-// Pictures Aspect Ratio
-const width = 3;
-const height = 2;
+const rawSSPicturesAlts = [p.titleimg.alt].concat(p.fotos.map((img) => img.alt));
 
-const slideshow_pictures = [p.titleimg.img].concat(p.fotos.map((img) => img.foto));
-const slideshow_pictures_alts = [p.titleimg.alt].concat(p.fotos.map((img) => img.alt));
-
-let slideshow_plans;
-let slideshow_plans_alts;
+let rawSSPlans;
+let rawSSPlansAlts;
 
 if(p.plans === undefined ){
-slideshow_plans = slideshow_pictures
-slideshow_plans_alts = slideshow_pictures_alts
+rawSSPlans = rawSSPictures
+rawSSPlansAlts = rawSSPicturesAlts
 } else {
-slideshow_plans = p.plans.map((plan) => plan.plan);
-slideshow_plans_alts = p.plans.map((plan) => plan.alt);
+rawSSPlans = p.plans.map((plan) => plan.plan);
+rawSSPlansAlts = p.plans.map((plan) => plan.alt);
 }
+
+// Image Optimization
+// ----------------------------
+console.log("raw!!!!!!!", rawSSPictures);
+
+//hier weitermachen 19.8
+const optSSPictures = await getImage({
+src: p.titleimg.img,
+format: 'webp',
+width: 1440,
+});
+
+
+
+console.log("hier!!!!!!!", optSSPictures); 
+
+
 
 // let slideshow_images = slideshow_plans // or slideshow_plans
 // let slideshow_alts = slideshow_plans_alts // or slideshow_plans_alts
@@ -81,10 +93,10 @@ slideshow_plans_alts = p.plans.map((plan) => plan.alt);
 
     <SSfigure
     client:only
-    pictures={slideshow_pictures}
-    pictureTitles={slideshow_pictures_alts}
-    plans={slideshow_plans}
-    planTitles={slideshow_plans_alts}
+    pictures={rawSSPictures}
+    pictureTitles={rawSSPicturesAlts}
+    plans={rawSSPlans}
+    planTitles={rawSSPlansAlts}
     autoPlayInterval={4} 
     />
     <!--
