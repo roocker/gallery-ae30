@@ -61,7 +61,7 @@
   .title_wrapper > img{
     max-width: var(--maxwidth);
     width: 100% !important; 
-    max-height: 45vh;
+    max-height: 50vh;
     object-fit: cover;
   }
   

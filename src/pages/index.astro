@@ -75,6 +75,7 @@ console.log("opttitleimgs", optTitleImgs) */
 
   const optTitleImgs = await Promise.all(
     allProjects.map(async (proj) => {
+    console.log("proj.data.titleimg.img", proj.data.titleimg.img)
       const img = await getImage({
         src: proj.data.titleimg.img,
         format: 'webp',

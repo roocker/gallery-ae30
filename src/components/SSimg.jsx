@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import "../styles/slideshow.css";
-// import { Image } from 'astro:assets'
 
 const animation_zoom = {
   i:{
@@ -20,6 +19,7 @@ const animation_zoom = {
 function SSimg ( props ) {
 
   const images = props.images;
+  
   const index = props.index;
   const alts = props.alts;
   //Toggle for Zoom
