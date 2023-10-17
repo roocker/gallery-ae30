@@ -2,7 +2,7 @@ import { useStore } from '@nanostores/react';
 import { stateModal } from '../states.jsx';
 import Backdrop from './Backdrop.jsx';
 import '../styles/modal.css';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 const slideUp = {

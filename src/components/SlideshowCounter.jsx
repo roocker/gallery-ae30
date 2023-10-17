@@ -1,3 +1,4 @@
+import React from 'react';
 import { useStore } from '@nanostores/react';
 import { slideshow_length, stateSlideshowIndex } from '../states.jsx';
 import '../styles/counter.css'

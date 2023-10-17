@@ -1,3 +1,4 @@
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import "../styles/slideshow.css";
 
@@ -40,6 +41,7 @@ function SSimg ( props ) {
 
   */
 
+  /*
   const img = document.getElementById('img');
   
   // console.log(img)
@@ -69,6 +71,11 @@ function SSimg ( props ) {
       ); 
     }
   }
+  */
+  const zoomDragDown = () => {
+    props.onClick();
+  }
+
 
   return(
     <AnimatePresence initial={true}>
@@ -83,10 +90,10 @@ function SSimg ( props ) {
     animate={zToggle ? "a" : "i"}
     transition={{ type: 'spring', stiffness: 200, damping: 20 }}
 
-    // onClick={zoomDragDown}
-    onMouseDown={zoomDragDown}
-    onMouseMove={zoomDragMove}
-    onMouseUp={zoomDragUp}
+    onClick={zoomDragDown}
+    // onMouseDown={zoomDragDown}
+    // onMouseMove={zoomDragMove}
+    // onMouseUp={zoomDragUp}
 
     draggable={false}
 

@@ -1,6 +1,7 @@
 import { useStore } from '@nanostores/react';
 import { stateModal, statePlayback } from '../states.jsx';
 import '../styles/btn.css'
+import React from 'react';
 
 function ModalBtn({ children }) {
   const isOpen = useStore(stateModal);

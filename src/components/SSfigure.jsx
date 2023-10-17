@@ -1,4 +1,4 @@
-import { useEffect, useRef, } from 'react';
+import React, { useEffect, useRef, } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '@nanostores/react';
 import SSimg from  '../components/SSimg'

@@ -3,6 +3,8 @@ import Layout from '../layouts/Layout.astro';
 import GridProj from '../components/GridProj';
 import GridControlWrapper from '../components/GridControlWrapper';
 import { CollectionEntry, getCollection } from 'astro:content';
+import { CURRENTYEAR } from '../consts';
+import { getImage } from 'astro:assets';
 
 export async function getStaticPaths(){
   const allProjects = await getCollection('projects');
@@ -10,36 +12,36 @@ export async function getStaticPaths(){
   const projMappedtoCats = new Map();
 
   allProjects.forEach(proj => {
-  const cat = proj.data.category;
+    const cat = proj.data.category;
     if (!projMappedtoCats.has(cat)) {
-    projMappedtoCats.set(cat, new Set());
+      projMappedtoCats.set(cat, new Set());
     }
     const projOfCat = projMappedtoCats.get(cat);
     projOfCat.add(proj);
-    });
-    // console.log(allProjects);
-    // console.log(proj);
+    // console.log("projOfCat",projMappedtoCats)
+  });
+  // console.log(allProjects);
+  // console.log(proj);
 
 
   return [...projMappedtoCats.entries()].map(([cat, proj]) => {
     return {
       params: { cat },
       props: { cat, proj }
-      }
-    });
-  } 
+    }
+  });
+} 
 
   const allProjects = await getCollection('projects');
 
 // type Props = CollectionEntry<'projects'>;
   const { cat } = Astro.params;
-  console.log("Angefrage Kategorie:", cat);
+  // console.log("Angefrage Kategorie:", cat);
   const proj = Array.from(Astro.props.proj);
-  console.log("catprojects:", proj);
+  // console.log("catprojects:", proj);
+
   // const titu = proj.map(proj => proj.data.title);
   // console.log("HIER ALLE TITEL der CATEGORY:", titu);
-import { CURRENTYEAR } from '../consts';
-import { getImage } from 'astro:assets';
 
 const settings = await getCollection('settings');
 
@@ -52,7 +54,7 @@ const settingFilterSize = settingsFilter.size;
 const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && !settingFilterYear && !settingFilterSize);
 
 const settingsPrioSort = settings[1].data.PrioList;
-console.log("settingsPrioSort:", settingsPrioSort);
+// console.log("settingsPrioSort:", settingsPrioSort);
 
 
 const sortedProjects = proj.sort((a, b) => {
@@ -70,18 +72,24 @@ const sortedProjects = proj.sort((a, b) => {
   }
 });
 
+
 // Image Optimization
 // ------------------------------------------------
-  const optTitleImgs = await Promise.all(
-    allProjects.map(async (proj) => {
-      const img = await getImage({
-        src: proj.data.titleimg.img,
-        format: 'webp',
-        width: 600,
-      });
-      return img.src;
-    })
-  );
+
+const orgTitleImgs = proj.map((proj, index) => ({ img: proj.data.titleimg.img, index}));
+
+const optTitleImgs = await Promise.all(
+  orgTitleImgs.map(async (covers) => {
+    const img = await getImage({
+      src: covers.img,
+      format: 'webp',
+      width: 600,
+    });
+    return { img , imgIndex: covers.index };
+  })
+);
+
+// console.log("cat.astro: optTitleImgs", optTitleImgs)
 ---
 
 
@@ -96,7 +104,7 @@ const sortedProjects = proj.sort((a, b) => {
     covers={optTitleImgs}
     />
 
-    {noFiltersActiveInCmsSettings ? '' :
+    {!noFiltersActiveInCmsSettings &&
     <GridControlWrapper
     client:load
     projects={allProjects}

@@ -5,7 +5,7 @@ import { atom } from 'nanostores';
 import '../styles/grid_controls.css'
 import { useStore } from '@nanostores/react';
 import { stateCurrentProjs, stateSelectedCat, stateSelectedTag, stateSelectedYear1,stateSelectedYear2,stateSelectedSize1, stateSelectedSize2 } from '../states';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactSlider from 'react-slider';
 
 // #bug not building bug?
@@ -40,7 +40,7 @@ if (JSON.stringify(allCatsFromProjs.sort()) == JSON.stringify(allShortsFromCats.
 
   */
 
-  // ----------------------------------
+// ----------------------------------
 // define allCats for select options 
 // ----------------------------------
 const allTitlesFromCats = [... new Set(allCategories.map((cat) => {return cat.data.title}))];
@@ -89,8 +89,8 @@ allTags.sort((a, b) => {
 // min
 // max
 
-  const minSize = 0;
-  const maxSize = 10000;
+const minSize = 0;
+const maxSize = 10000;
 
 
 // export const stateSelectedCatProjs = atom();
@@ -107,7 +107,7 @@ function GridControls (props) {
   // const [selectedCat, setSelectedCat] = useState(defaultCat);
   const selectedCat = useStore(stateSelectedCat)
 
-  console.log("defaultCat" , defaultCat, "selectedCat" ,selectedCat)
+  // console.log("defaultCat" , defaultCat, "selectedCat" ,selectedCat)
   const defaultTag = settingFilterTag ? (props.defaultTag ? props.defaultTag : "all") : "all";
   // const [selectedTag, setSelectedTag] = useState(defaultTag);
   const selectedTag = useStore(stateSelectedTag)
@@ -139,7 +139,8 @@ function GridControls (props) {
   // ---------------------------------------------- 
   // Event (User Input) Handlers 
   // ---------------------------------------------- 
-  
+  // was
+
   /*
   if(!settingFilterTag){ setSelectedTag("all"); }else { "" };
   if(!settingFilterYear){ setSelectedYear1(0); setSelectedYear2(0); }else { "" };
@@ -148,7 +149,8 @@ function GridControls (props) {
 
   const handleCategoryChange = (e) => {
     stateSelectedCat.set(e.target.value);
-   // setSelectedCat(e.target.value);
+    console.log("this cat is requested:", e.target.value)
+    // setSelectedCat(e.target.value);
   };
 
   const handleTagChange = (e) => {
@@ -173,7 +175,7 @@ function GridControls (props) {
   }
 
   // console.log("HANDLEEESS AUCH OK?")
-  
+
   // ---------------------------------------------- 
   // filter Function
   // ---------------------------------------------- 
@@ -264,115 +266,115 @@ function GridControls (props) {
   // ---------------------------------------------- 
   // Returns
   // ---------------------------------------------- 
-  
-    
-        // <p className="line test">filter: {selectedCat}, {selectedTag}, {selectedYear1}, {selectedYear2}, {selectedSize1}, {selectedSize2} </p>
-      return(
-        <div className="filterdiv">
+
+
+  // <p className="line test">filter: {selectedCat}, {selectedTag}, {selectedYear1}, {selectedYear2}, {selectedSize1}, {selectedSize2} </p>
+  return(
+    <div className="filterdiv">
 
       <button className="filter_close_btn" type="button" title="Hauptmenü schließen" aria-label="Hauptmenü schließen" onClick={handleToggle}>
-      <svg className="svg-icon">
-      <use id="icon-close" className="svg-icon-use" href="/svg.svg#close" />
-      </svg>
+        <svg className="svg-icon">
+          <use id="icon-close" className="svg-icon-use" href="/svg.svg#close" />
+        </svg>
       </button>
 
-        <div className="line select_line"
+      <div className="line select_line"
         onClick={(e) => e.stopPropagation()}
-        >
+      >
         {settingFilterCat && (
           <select
-          className="select select_cat"
-          onChange={handleCategoryChange}
-          defaultValue={defaultCat}
+            className="select select_cat"
+            onChange={handleCategoryChange}
+            defaultValue={defaultCat}
           >
-          <option value="all">Kategorien (alle)</option>
-    padding: 2px;
-          {allCatsTitles.map((cat, indexCat) => (
-            <option
-            key={indexCat}
-            value={allCatsURLs[indexCat]}
-            >
-            {cat}
-            </option>
-          ))}
+            <option value="all">Kategorien (alle)</option>
+            padding: 2px;
+            {allCatsTitles.map((cat, indexCat) => (
+              <option
+                key={indexCat}
+                value={allCatsURLs[indexCat]}
+              >
+                {cat}
+              </option>
+            ))}
           </select>
         )}
 
         {settingFilterTag && (
           <select
-          className="select select_tag"
-          onChange={handleTagChange}
-          defaultValue={defaultTag}
+            className="select select_tag"
+            onChange={handleTagChange}
+            defaultValue={defaultTag}
           >
-          <option value="all">Typologien (alle)</option>
-          {allTags.map((tag, indexTag) => (
-            <option
-            key={indexTag}
-            value={tag}
-            >
-            {tag}
-            </option>
-          ))}
+            <option value="all">Typologien (alle)</option>
+            {allTags.map((tag, indexTag) => (
+              <option
+                key={indexTag}
+                value={tag}
+              >
+                {tag}
+              </option>
+            ))}
           </select>
         )}
-        </div>
-          
-        {settingFilterYear && (
-          <div className="line"
+      </div>
+
+      {settingFilterYear && (
+        <div className="line"
           onClick={(e) => e.stopPropagation()}
-          >
+        >
           <label id="label-year">Jahr</label>
           <ReactSlider
-          className="horizontal-slider"
-          thumbClassName="slider-thumb"
-          trackClassName="slider-track"
-          withTracks={true}
-          defaultValue={[defaultYear1, defaultYear2]}
-          onChange={handleYearChange}
-          markClassName="slider-marks"
-          marks={[1980 , 1990, 2000, 2010, 2020]}
-          min={1980}
-          max={2023}
-          ariaLabelledby="label-year"
-          ariaLabel={['Lower thumb', 'Upper thumb']}
-          ariaValuetext={state => `Thumb value ${state.valueNow}`}
-          renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
-          pearling
-          minDistance={1}
+            className="horizontal-slider"
+            thumbClassName="slider-thumb"
+            trackClassName="slider-track"
+            withTracks={true}
+            defaultValue={[defaultYear1, defaultYear2]}
+            onChange={handleYearChange}
+            markClassName="slider-marks"
+            marks={[1980 , 1990, 2000, 2010, 2020]}
+            min={1980}
+            max={2023}
+            ariaLabelledby="label-year"
+            ariaLabel={['Lower thumb', 'Upper thumb']}
+            ariaValuetext={state => `Thumb value ${state.valueNow}`}
+            renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+            pearling
+            minDistance={1}
           />
-          </div>
-        )}
+        </div>
+      )}
 
-        {settingFilterSize && (
-          <div className="line"
+      {settingFilterSize && (
+        <div className="line"
           onClick={(e) => e.stopPropagation()}
-          >
+        >
           <label id="label-size">Fläche</label>
 
           <ReactSlider
-          className="horizontal-slider"
-          thumbClassName="slider-thumb"
-          trackClassName="slider-track"
-          defaultValue={[defaultSize1, defaultSize2]}
-          onChange={handleSizeChange}
-          markClassName="slider-marks"
-          marks={[0, 1000,2000,3000,4000,5000,6000,7000,8000,9000, 10000]}
-          min={minSize}
-          max={maxSize}
-          step={100}
-          ariaLabelledby="label-size"
-          ariaLabel={['Lower thumb', 'Upper thumb']}
-          ariaValuetext={state => `Thumb value ${state.valueNow}`}
-          renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
-          pearling
-          minDistance={100}
+            className="horizontal-slider"
+            thumbClassName="slider-thumb"
+            trackClassName="slider-track"
+            defaultValue={[defaultSize1, defaultSize2]}
+            onChange={handleSizeChange}
+            markClassName="slider-marks"
+            marks={[0, 1000,2000,3000,4000,5000,6000,7000,8000,9000, 10000]}
+            min={minSize}
+            max={maxSize}
+            step={100}
+            ariaLabelledby="label-size"
+            ariaLabel={['Lower thumb', 'Upper thumb']}
+            ariaValuetext={state => `Thumb value ${state.valueNow}`}
+            renderThumb={(props, state) => <div {...props}>{state.valueNow}</div>}
+            pearling
+            minDistance={100}
           />
-          </div>
-        )}
         </div>
+      )}
+    </div>
 
 
-      )
+  )
 
 
 }

@@ -59,18 +59,18 @@ rawSSPlansAlts = p.plans.map((plan) => plan.alt);
 
 // Image Optimization
 // ----------------------------
-console.log("raw!!!!!!!", rawSSPictures);
-
-//hier weitermachen 19.8
-const optSSPictures = await getImage({
-src: p.titleimg.img,
-format: 'webp',
-width: 1440,
-});
+// console.log("rawSSPictures", rawSSPictures);
 
 
+const optSSPictures = await Promise.all(rawSSPictures.map(async (img) => await getImage({
+  src: img,
+  format: 'webp',
+  width: 1440,
+})))
 
-console.log("hier!!!!!!!", optSSPictures); 
+
+
+// console.log("optSSPictures", optSSPictures); 
 
 
 
@@ -93,7 +93,7 @@ console.log("hier!!!!!!!", optSSPictures);
 
     <SSfigure
     client:only
-    pictures={rawSSPictures}
+    pictures={optSSPictures}
     pictureTitles={rawSSPicturesAlts}
     plans={rawSSPlans}
     planTitles={rawSSPlansAlts}
