@@ -11,20 +11,20 @@ project_keys:
     - arbeiten
     - wohnen
 titleimg:
-  img: ~/assets/media/17.jpg
+  img: /src/assets/media/17.jpg
   alt: asdffff
 fotos:
-  - foto: ~/assets/media/13.jpg
+  - foto: /src/assets/media/13.jpg
     alt: baustelle
-  - foto: ~/assets/media/14.jpg
+  - foto: /src/assets/media/14.jpg
     alt: baustelle 2
-  - foto: ~/assets/media/15.jpg
+  - foto: /src/assets/media/15.jpg
     alt: fassade
-  - foto: ~/assets/media/16.jpg
+  - foto: /src/assets/media/16.jpg
     alt: fasssade2
-  - foto: ~/assets/media/18.jpg
+  - foto: /src/assets/media/18.jpg
     alt: eingang
-  - foto: ~/assets/media/19.jpg
+  - foto: /src/assets/media/19.jpg
     alt: detail
 wide: true
 short: text

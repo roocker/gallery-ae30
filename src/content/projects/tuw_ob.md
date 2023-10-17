@@ -13,21 +13,21 @@ project_keys:
     - Labor
     - Universität
 titleimg:
-  img: ~/assets/media/11.jpg
+  img: /src/assets/media/11.jpg
   alt: TU Wien Bauteil OB, Halle 227 - Ansicht
 fotos:
-  - foto: ~/assets/media/10.jpg
+  - foto: /src/assets/media/10.jpg
     alt: 1. Zwischengeschoss
-  - foto: ~/assets/media/8.jpg
+  - foto: /src/assets/media/8.jpg
     alt: Haustechnik Ebene
-  - foto: ~/assets/media/9.jpg
+  - foto: /src/assets/media/9.jpg
     alt: "Ebene 2: Erweiterungsfläche"
 plans:
-  - plan: ~/assets/media/13.jpg
+  - plan: /src/assets/media/13.jpg
     alt: Grundriss
-  - plan: ~/assets/media/14.jpg
+  - plan: /src/assets/media/14.jpg
     alt: Schnitt
-  - plan: ~/assets/media/15.jpg
+  - plan: /src/assets/media/15.jpg
     alt: Detail
 short: kurzfassung
 long: text 227.

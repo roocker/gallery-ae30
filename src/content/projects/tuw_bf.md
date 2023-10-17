@@ -15,12 +15,12 @@ project_keys:
     - lernen
     - Universität
 titleimg:
-  img: ~/assets/media/25.jpg
+  img: /src/assets/media/25.jpg
   alt: alt
 fotos:
-  - foto: ~/assets/media/4.jpg
+  - foto: /src/assets/media/4.jpg
     alt: baustelle
-  - foto: ~/assets/media/5.png
+  - foto: /src/assets/media/5.png
     alt: baustelle
 short: test
 long: text bf
