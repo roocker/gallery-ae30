@@ -29,6 +29,18 @@ export const stateSlideshowZoom = atom(true);
 export const slideshowAutoPlayInterval = atom();
 
 
+  // ---------------------------------------------- 
+  // Remove Filter with button or CMS
+  // ---------------------------------------------- 
+export const handleRemoveFilter = () => {
+  stateSelectedCat.set("all")
+  stateSelectedTag.set("all")
+  stateSelectedYear1.set(0)
+  stateSelectedYear2.set(0)
+  stateSelectedSize1.set(0)
+  stateSelectedSize2.set(0)
+  console.log("Removed all Filters")
+}
 
 // Should use unsubscribe or comment out later!
 /* stateSelectedCat.subscribe((newValue) => {

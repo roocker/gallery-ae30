@@ -59,35 +59,21 @@ const sortedProjects = allProjects.sort((a, b) => {
 // Image Optimization
 // ------------------------------------------------
 
-/* import budl from '~/assets/media/IMG_20220112_085913.jpg';
-const optBudl = await getImage({ src:budl });
-console.log("optBudl", optBudl) */
+const orgTitleImgs = allProjects.map((proj, index) => ({ img: proj.data.titleimg.img, index}));
+// console.log("orgTitleImgs", orgTitleImgs)
 
-/* const optTitleImgs = allProjects.map((proj) => {
-await getImage({
-src : proj.titleimg.img,
-format: 'webp',
-width : 300,
-}),
-}) 
-console.log("opttitleimgs", optTitleImgs) */
+const optTitleImgs = await Promise.all(
+  orgTitleImgs.map(async (covers) => {
+    const img = await getImage({
+      src: covers.img,
+      format: 'webp',
+      width: 600,
+    });
+    return { img , imgIndex: covers.index };
+  })
+);
 
-
-  const optTitleImgs = await Promise.all(
-    allProjects.map(async (proj) => {
-    console.log("proj.data.titleimg.img", proj.data.titleimg.img)
-      const img = await getImage({
-        src: proj.data.titleimg.img,
-        format: 'webp',
-        width: 600,
-      });
-      return img.src;
-    })
-  );
-
-// optTitleImgs();
-
-// console.log("opttitleimgs", optTitleImgs);
+console.log("opttitleimgs", optTitleImgs);
 
 ---
 <Layout title="ae30 - gallerie - work in progress" description="gallery" image="">
@@ -104,14 +90,14 @@ console.log("opttitleimgs", optTitleImgs) */
     covers={optTitleImgs}
     />
 
-    {noFiltersActiveInCmsSettings ? '' :
+    {!noFiltersActiveInCmsSettings && 
     <GridControlWrapper
     client:load
     projects={allProjects}
 
     btnname="Filter Menü ein-/ausblenden"
 
-    defaultcat="all"
+    defaultcat="kg"
     defaulttag="all"
     defaultyear1={1980}
     defaultyear2={CURRENTYEAR}
