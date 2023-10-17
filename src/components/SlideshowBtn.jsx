@@ -1,3 +1,6 @@
+
+
+import React from 'react';
 import { useStore } from '@nanostores/react';
 import { stateSlideshowIndex, stateSlideshowDirection, slideshow_length, stateModal } from '../states';
 import '../styles/btn.css'

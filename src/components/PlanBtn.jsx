@@ -1,6 +1,7 @@
 import { useStore } from '@nanostores/react';
 import { stateSlideshow,  stateSlideshowIndex, stateSlideshowZoom} from '../states';
 import '../styles/btn.css'
+import React from 'react';
 
 function PlanBtn({ children }) {
 

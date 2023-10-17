@@ -1,3 +1,4 @@
+import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from '@nanostores/react';
 import { statePlayback, slideshowAutoPlayInterval } from '../states';

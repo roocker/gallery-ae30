@@ -3,7 +3,7 @@ import Backdrop from '../components/Backdrop'
 import '../styles/nav.css'
 import { stateMainNav } from '../states';
 import { useStore } from '@nanostores/react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 function MainNav (props){
 

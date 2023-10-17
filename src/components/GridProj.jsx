@@ -7,14 +7,13 @@
   - [ ] sharp image operation (color correction?)
 
   */
-  import { useStore } from '@nanostores/react';
-import '../styles/grid.css';
+import { useStore } from '@nanostores/react';
 import { AnimatePresence, motion} from "framer-motion";
-import { stateCurrentProjs } from '../states';
+import { handleRemoveFilter, stateCurrentProjs } from '../states';
 
+import '../styles/grid.css';
+import React, { useEffect } from 'react';
 
-// import { Picture } from '@astrojs/image/components';
-// const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
 
 // Pictures Aspect Ratio
 const width = 3;
@@ -26,18 +25,25 @@ function GridProj (props) {
   const allProjs = props.projects;
 
   const currentProjs = useStore(stateCurrentProjs);
+  console.log("currentProjs", currentProjs)
 
   const imgSrcs = props.covers;
-  // console.log("HIERHERIER", imgSrcs)
+  // console.log("imgSrcs", imgSrcs)
 
-  if(currentProjs){
-    projs = currentProjs
-    console.log("SUCESS: GridProj found Projects in States" , projs);
-  } else {
-    projs = allProjs
-    console.log("WARNING: GridProj didn't fount Projects from States, default to allProjects");
-    stateCurrentProjs.set(projs);
-  }
+
+
+    if(currentProjs){
+      projs = currentProjs
+      console.log("SUCESS: GridProj found Projects in States" , projs);
+    } else {
+      projs = allProjs
+      console.log("WARNING: GridProj didn't fount Projects from States, default to allProjects");
+      stateCurrentProjs.set(projs);
+    }
+
+
+  console.log("projs" , projs)
+
 
 
 
@@ -46,14 +52,14 @@ function GridProj (props) {
 
   // console.log("gibts noch projs?", projs)
 
-
+  // #bug #rev a href trigger reset!!!
   if(projs == 0){
     return (
       <div 
       className="noProjects"
       >
       <p>Es sind keine Projekte für die gewählten Filter Einstellungen vorhanden.</p>
-      <p><a href="">Filter entfernen</a> oder <a href="">Anpassen</a></p>
+      <p><a href="#" onClick={handleRemoveFilter}>Filter entfernen</a> oder <a href="">Anpassen</a></p>
       
       </div>
     )
@@ -152,10 +158,10 @@ function GridProj (props) {
         <AnimatePresence
         initial={true}
         >
-        <figure>
 
+        <figure>
         <img 
-        src={imgSrcs[index]}
+        src={imgSrcs.find((img) => img.imgIndex === index).img.src}
         alt={proj.data.titleimg.alt}
         />
 
