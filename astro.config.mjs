@@ -18,9 +18,6 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://ae30.at',
-  experimental: {
-    assets: true
-  },
   image:{
         service: sharpImageService(),
       },
@@ -36,8 +33,8 @@ export default defineConfig({
         /* #rev geht nicht */
         locale: 'de',
         publish_mode: 'editorial_workflow',
-        media_folder: '/public/media',
-        public_folder: '/media',
+        media_folder: '/src/assets/media',
+        public_folder: '/public',
         slug: {
           /* sanitizes filenames and media */
           encoding: "ascii",
