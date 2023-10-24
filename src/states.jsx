@@ -1,18 +1,18 @@
 import { atom } from 'nanostores';
 
+import { CURRENTYEAR } from './consts';
 export const stateMainNav = atom(false);
-
 
 export const stateSelectedCat = atom("all"); 
 export const stateSelectedTag = atom("all"); 
-export const stateSelectedYear1 = atom(0); 
-export const stateSelectedYear2 = atom(0); 
+export const stateSelectedYear1 = atom(1980); 
+export const stateSelectedYear2 = atom(CURRENTYEAR); 
 export const stateSelectedSize1 = atom(0); 
-export const stateSelectedSize2 = atom(0); 
+export const stateSelectedSize2 = atom(10000); 
 
 export const stateCurrentProjs = atom(0); 
 
-export const stateFilter = atom(false);
+export const stateFilter = atom(true);
 // Modal
 export const stateModal = atom(false);
 
@@ -35,12 +35,23 @@ export const slideshowAutoPlayInterval = atom();
 export const handleRemoveFilter = () => {
   stateSelectedCat.set("all")
   stateSelectedTag.set("all")
-  stateSelectedYear1.set(0)
-  stateSelectedYear2.set(0)
+  stateSelectedYear1.set(1980)
+  stateSelectedYear2.set(CURRENTYEAR)
   stateSelectedSize1.set(0)
-  stateSelectedSize2.set(0)
-  console.log("Removed all Filters")
+  stateSelectedSize2.set(10000)
+  console.log("Removed all Filters", 
+    stateSelectedCat.get(),
+    stateSelectedTag.get(),
+    stateSelectedYear1.get(),
+    stateSelectedYear2.get(),
+    stateSelectedSize1.get(),
+    stateSelectedSize2.get(),
+  );
 }
+
+  export const handleToggleFilter = () => {
+    stateFilter.set(!stateFilter.get());
+  }
 
 // Should use unsubscribe or comment out later!
 /* stateSelectedCat.subscribe((newValue) => {
