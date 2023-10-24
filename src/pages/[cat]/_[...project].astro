@@ -1,21 +1,9 @@
 ---
-/* TODO:
-- [ ] Mobile Landscape: /projekte wierd height behaviour vgl. Handy nicht chromium!!!
-- [ ] Controls: on widht < 280 verschwinden controls #bug
-
-
-NICE-TO-HAVE:
-- [ ] Fallback when JS is disabled!
-- [ ] custom Layouts & export to DIN A3 etc...
-
-*/
 import Layout from '../../layouts/Layout.astro';
 import { CollectionEntry, getCollection } from 'astro:content'; 
 // import BasicScripts from '../../components/basicScripts.astro';
 import TextBlockModal from '../../components/TextBlockModal';
 import SSfigure from '../../components/SSfigure';
-import Slideshow from '../../components/Slideshow';
-import NewSlideshow from '../../components/NewSlideshow';
 import SlideshowCounter from '../../components/SlideshowCounter';
 import SlideshowAlt from '../../components/SlideshowAlt';
 import ModalBtn from '../../components/ModalBtn';
@@ -72,8 +60,6 @@ const optSSPictures = await Promise.all(rawSSPictures.map(async (img) => await g
 
 // console.log("optSSPictures", optSSPictures); 
 
-
-
 // let slideshow_images = slideshow_plans // or slideshow_plans
 // let slideshow_alts = slideshow_plans_alts // or slideshow_plans_alts
 
@@ -84,7 +70,6 @@ const optSSPictures = await Promise.all(rawSSPictures.map(async (img) => await g
 // console.log(proj.body);
 ---
 
-<!-- <BasicScripts /> -->
 
 <Layout title={`AE30 - ${p.title} - work in progress`} description= {`${p.category}/${p.title}`}image="">
 
@@ -99,63 +84,28 @@ const optSSPictures = await Promise.all(rawSSPictures.map(async (img) => await g
     planTitles={rawSSPlansAlts}
     autoPlayInterval={4} 
     />
-    <!--
-    <Slideshow
-    client:load
-    pictures={slideshow_pictures}
-    pictureTitles={slideshow_pictures_alts}
-    plans={slideshow_plans}
-    planTitles={slideshow_plans_alts}
-    autoPlayInterval={4} 
-    />
-    -->
 
-    <!--
-    <NewSlideshow
-    client:load
-    pictures={slideshow_pictures}
-    />
-    -->
+      <TextBlockModal client:load>
 
-    <!-- <ModalBtn BtnName="Text ein-/ausblenden" client:load/> -->
+        <h2>{p.title}</h2>
+        <dl class="textmodal_ul">
+          <dt>Jahr:</dt><dd>2018 - 2022</dd>
+          <dt>NFL:</dt><dd>3090m²</dd>
+          <dt>Typ:</dt><dd>Neubau, Erweiterung</dd>
+          <dt>Tags:</dt><dd>{p.subcategory}</dd>
+        </dl>
 
-    <TextBlockModal client:load>
+        <p><Content/></p>
 
-    <h2>{p.title}</h2>
-    <dl class="textmodal_ul">
-      <dt>Jahr:</dt><dd>2018 - 2022</dd>
-      <dt>NFL:</dt><dd>3090m²</dd>
-      <dt>Typ:</dt><dd>Neubau, Erweiterung</dd>
-      <dt>Tags:</dt><dd>{p.subcategory}</dd>
-    </dl>
-    <details open>
-      <summary>Kennwerte</summary>
-      <p>
-      id: {proj.id} <br/>
-      slug: {proj.slug} <br/>
-      collection: {proj.collection} <br/>
-
-      </p>
-    </details>
-    <p>{p.short}</p>
-    <p><a href="#">mehr...</a></p>
-
-    
-    <p><Content/></p>
-
-    </TextBlockModal>
+      </TextBlockModal>
 
 
   </article>
 
 
 
-  <!-- <span class="cat">{p.category} - </span> -->
-
 
   <section class="controls" aria-label="Plankopf Footer Controls">
-
-
 
     <div class="footer_line alt_line">
       <SlideshowAlt client:load />
@@ -183,8 +133,6 @@ const optSSPictures = await Promise.all(rawSSPictures.map(async (img) => await g
 
 </section>
 </Layout>
-
-<!--+++++++++++++++++++++++++++ -->
 
 <style is:global>
   .wrapper{
@@ -341,7 +289,6 @@ dt{
 dd{
   margin: 0;
 }
-
 
 
 </style>

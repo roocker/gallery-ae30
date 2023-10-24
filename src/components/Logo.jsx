@@ -12,30 +12,27 @@ const rotate_variants = {
   a: (i) => {
     const delay = i * 0.5;
     return {
-      rotate:  0,
+      // rotate:  0,
       opacity: .8,
       originX: "50%",
       originY: "52%",
       transition: {
-        rotate: { 
+        /* rotate: { 
           delay,
           type: "spring",
           stiffness: 250,
           damping: 10,
-        },
+        }, */
         opacity:{
           duration: .2,
         }
       },
     }
   },
-  /* t: { 
-    rotate: [null, 360 ],
-  }, */
   h: {
     opacity: 1,
     scale: 1.05,
-    rotate: [null, -10, 10, 0],
+    // rotate: [null, -10, 10, 0],
     transition: {
       opacity: {
         duration: .2,

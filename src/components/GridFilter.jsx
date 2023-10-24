@@ -16,99 +16,105 @@ import {
 import React, { useEffect, useState } from "react";
 import ReactSlider from "react-slider";
 
-// #bug not building bug?
-const allProjects = await getCollection("projects");
+// const allProjects = await getCollection("projects");
 const allCategories = await getCollection("categories");
 const settings = await getCollection("settings");
 
-const settingsFilter = settings[0].data.filter;
+function GridFilter(props) {
 
-const settingFilterCat = settingsFilter.cat;
-const settingFilterTag = settingsFilter.tag;
-const settingFilterYear = settingsFilter.year;
-const settingFilterSize = settingsFilter.size;
 
-// console.log("Settings Filter:", settingsFilter , settingFilterCat );
-// console.log(allProjects[0]);
 
-// Get all categorie shorts from project collection
+  const projects = props.allProjects;
 
-const allCatsFromProjs = [
-  ...new Set(
-    allProjects.map((proj) => {
-      return proj.data.category;
-    }),
-  ),
-];
+  const settingsFilter = settings[0].data.filter;
 
-// ----------------------------------
-// define allCats for select options
-// ----------------------------------
-const allTitlesFromCats = [
-  ...new Set(
-    allCategories.map((cat) => {
-      return cat.data.title;
-    }),
-  ),
-];
+  const settingFilterCat = settingsFilter.cat;
+  const settingFilterTag = settingsFilter.tag;
+  const settingFilterYear = settingsFilter.year;
+  const settingFilterSize = settingsFilter.size;
 
-const allCatsTitles = allTitlesFromCats.map((cat) => cat.split(" ")[0]);
-// console.log("allCatsTitles", allCatsTitles)
+  // console.log("Settings Filter:", settingsFilter , settingFilterCat );
+  // console.log(allProjects[0]);
 
-const allCatsURLs = [
-  ...new Set(
-    allCategories.map((cat) => {
-      return cat.data.short;
-    }),
-  ),
-];
-// console.log("allCatsURLs", allCatsURLs)
+  // Get all categorie shorts from project collection
 
-// ----------------------------------
-// define allTags for select options; sort all Tags by lower/uppercase; Tags = Typologien
-// ----------------------------------
+  const allCatsFromProjs = [
+    ...new Set(
+      projects.map((proj) => {
+        return proj.data.category;
+      }),
+    ),
+  ];
 
-const allTagsUnsorted = [
-  ...new Set(allProjects.flatMap((proj) => proj.data.project_keys?.tags ?? [])),
-];
+  // ----------------------------------
+  // define allCats for select options
+  // ----------------------------------
+  const allTitlesFromCats = [
+    ...new Set(
+      allCategories.map((cat) => {
+        return cat.data.title;
+      }),
+    ),
+  ];
 
-const allTags = [...allTagsUnsorted];
+  const allCatsTitles = allTitlesFromCats.map((cat) => cat.split(" ")[0]);
+  // console.log("allCatsTitles", allCatsTitles)
 
-allTags.sort((a, b) => {
-  const lowerA = a.toLowerCase();
-  const lowerB = b.toLowerCase();
-  const isLowerA = lowerA[0] === a[0];
-  const isLowerB = lowerB[0] === b[0];
+  const allCatsURLs = [
+    ...new Set(
+      allCategories.map((cat) => {
+        return cat.data.short;
+      }),
+    ),
+  ];
+  // console.log("allCatsURLs", allCatsURLs)
 
-  if (isLowerA && !isLowerB) {
-    return -1;
-  } else if (!isLowerA && isLowerB) {
-    return 1;
-  } else {
-    return lowerA.localeCompare(lowerB);
-  }
-});
+  // ----------------------------------
+  // define allTags for select options; sort all Tags by lower/uppercase; Tags = Typologien
+  // ----------------------------------
 
-// console.log("allTags", allTags);
+  const allTagsUnsorted = [
+    ...new Set(
+      projects.flatMap((proj) => proj.data.project_keys?.tags ?? []),
+    ),
+  ];
 
-// ----------------------------------
-// define allYears for Slider
-// ----------------------------------
-// min
-// max
+  const allTags = [...allTagsUnsorted];
 
-// ----------------------------------
-// define allSizes for Slider
-// ----------------------------------
-// min
-// max
+  allTags.sort((a, b) => {
+    const lowerA = a.toLowerCase();
+    const lowerB = b.toLowerCase();
+    const isLowerA = lowerA[0] === a[0];
+    const isLowerB = lowerB[0] === b[0];
 
-const minSize = 0;
-const maxSize = 10000;
+    if (isLowerA && !isLowerB) {
+      return -1;
+    } else if (!isLowerA && isLowerB) {
+      return 1;
+    } else {
+      return lowerA.localeCompare(lowerB);
+    }
+  });
 
-// export const stateSelectedCatProjs = atom();
+  // console.log("allTags", allTags);
 
-function GridControls(props) {
+  // ----------------------------------
+  // define allYears for Slider
+  // ----------------------------------
+  // min
+  // max
+
+  // ----------------------------------
+  // define allSizes for Slider
+  // ----------------------------------
+  // min
+  // max
+
+  const minSize = 0;
+  const maxSize = 10000;
+
+  // export const stateSelectedCatProjs = atom();
+
   // ----------------------------------------------
   // Parameter Definitions for Filter
   // ----------------------------------------------
@@ -118,7 +124,7 @@ function GridControls(props) {
       : "all"
     : "all";
 
-  // const [selectedCat, setSelectedCat] = useState(defaultCat);
+
   const selectedCat = useStore(stateSelectedCat);
 
   // console.log("defaultCat" , defaultCat, "selectedCat" ,selectedCat)
@@ -127,7 +133,6 @@ function GridControls(props) {
       ? props.defaultTag
       : "all"
     : "all";
-  // const [selectedTag, setSelectedTag] = useState(defaultTag);
   const selectedTag = useStore(stateSelectedTag);
 
   const defaultYear1 = settingFilterYear
@@ -135,7 +140,10 @@ function GridControls(props) {
       ? props.defaultYear1
       : 0
     : 0;
-  // const [selectedYear1 , setSelectedYear1] = useState(defaultYear1)
+ 
+  // console.log("defaultYear1", props.defaultYear1)  
+  // console.log("defaultYear1", defaultYear1)  
+
   const selectedYear1 = useStore(stateSelectedYear1);
   // console.log("defaultYear1" , defaultYear1, "selectedYear1" ,selectedYear1)
 
@@ -144,7 +152,6 @@ function GridControls(props) {
       ? props.defaultYear2
       : 0
     : 0;
-  // const [selectedYear2 , setSelectedYear2] = useState(defaultYear2)
   const selectedYear2 = useStore(stateSelectedYear2);
   // console.log("defaultYear2" , defaultYear2, "selectedYear2" ,selectedYear2)
 
@@ -153,7 +160,6 @@ function GridControls(props) {
       ? props.defaultSize1
       : 0
     : 0;
-  // const [selectedSize1 , setSelectedSize1] = useState(defaultSize1)
   const selectedSize1 = useStore(stateSelectedSize1);
   // console.log("defaultSize1" , defaultSize1, "selectedSize1" ,selectedSize1)
 
@@ -162,11 +168,15 @@ function GridControls(props) {
       ? props.defaultSize2
       : 0
     : 0;
-  // const [selectedSize2 , setSelectedSize2] = useState(defaultSize2)
   const selectedSize2 = useStore(stateSelectedSize2);
   // console.log("defaultSize2" , defaultSize2, "selectedSize2" ,selectedSize2)
 
   const currentProjs = useStore(stateCurrentProjs);
+
+ 
+  const isCatPage = defaultCat !== "all" ? true : false;
+  // console.log ( "isCatPage", isCatPage )
+
 
   // ----------------------------------------------
   // Event (User Input) Handlers
@@ -181,13 +191,14 @@ function GridControls(props) {
 
   const handleCategoryChange = (e) => {
     stateSelectedCat.set(e.target.value);
-    console.log("this cat is requested:", e.target.value);
+    // console.log("this cat is requested:", e.target.value);
     // setSelectedCat(e.target.value);
   };
 
   const handleTagChange = (e) => {
     stateSelectedTag.set(e.target.value);
     // setSelectedTag(e.target.value)
+    // console.log("TagChange:",selectedYear1, selectedYear2);
   };
 
   const handleYearChange = (e) => {
@@ -195,7 +206,7 @@ function GridControls(props) {
     stateSelectedYear2.set(e[1]);
     // setSelectedYear1(e[0])
     // setSelectedYear2(e[1])
-    console.log(selectedYear1, selectedYear2);
+    // console.log("YearChange:",selectedYear1, selectedYear2);
   };
 
   const handleSizeChange = (e) => {
@@ -203,7 +214,7 @@ function GridControls(props) {
     stateSelectedSize2.set(e[1]);
     // setSelectedSize1(e[0])
     // setSelectedSize2(e[1])
-    console.log(selectedSize1, selectedSize2);
+    // console.log("SizeChange:", selectedSize1, selectedSize2);
   };
 
   // console.log("HANDLEEESS AUCH OK?")
@@ -224,13 +235,30 @@ function GridControls(props) {
 
   // console.log( "FILTER PARAMS !!!!!!" , params);
 
+  /* console.log(
+    "FILTER INFOS of PROJS:",
+    projects.map((proj,i) => (
+  {
+      index: i,
+      title: proj.id,
+      cat: proj.data.category,
+      tags: proj.data.project_keys.tags,
+      year1: proj.data.project_keys.year,
+      year2: proj.data.project_keys.year2,
+      size: proj.data.project_keys.area
+    }
+  ))); */
+
+
   let rmIndices = [];
-  function filterProjectsByCriteria(allProjects, criteria) {
-    rmIndices = allProjects.reduce((rmIndices, project, index) => {
+  function filterProjectsByCriteria(projects, criteria) {
+    rmIndices = projects.reduce((rmIndices, project, index) => {
       const projectTitle = project.data.title;
       const { cat, tags, year1, year2, size1, size2 } = criteria;
-      const projectYear1 = parseInt(project.data.project_keys.year);
-      const projectYear2 = parseInt(project.data.project_keys.year2);
+      // const projectYear1 = parseInt(project.data.project_keys.year);
+      // const projectYear2 = parseInt(project.data.project_keys.year2);
+      const projectYear1 = project.data.project_keys.year.getFullYear();
+      const projectYear2 = project.data.project_keys.year2.getFullYear();
       const projectSize = parseInt(project.data.project_keys.area);
 
       const hasCat =
@@ -245,6 +273,16 @@ function GridControls(props) {
           ? projectYear1 >= year1 && projectYear2 <= year2
           : true;
 
+      /* console.log(
+        project.slug, ":",
+        "TEST:",
+        projectYear1 >= year1 && projectYear2 <= year2 ? "year1 > crityear1" : "falsch",
+        "projectYear1", projectYear1,
+        "year1", year1,
+        "projectYear2", projectYear2,
+        "year2", year2,
+      ) */
+
       const inSizeRange =
         size2 && size2 !== 0
           ? size1 <= projectSize && projectSize <= size2
@@ -256,23 +294,25 @@ function GridControls(props) {
       if (hasCat && hasTag && inYearRange && inSizeRange) {
         rmIndices.push(index);
       }
+      // console.log("rmIndices", rmIndices)
       return rmIndices;
     }, []);
     return rmIndices;
   }
 
-  filterProjectsByCriteria(allProjects, params);
+
+  filterProjectsByCriteria(projects, params);
 
   let projs = [];
+
   const filterProjects = () => {
-    projs = allProjects.filter((_, index) => rmIndices.includes(index));
+    projs = projects.filter((_, index) => rmIndices.includes(index));
     stateCurrentProjs.set(projs);
   };
 
   useEffect(() => {
     filterProjects();
 
-    // console.log('Projekte', currentProjs , 'gem. Parameter:' , params);
   }, [
     selectedCat,
     selectedTag,
@@ -283,24 +323,26 @@ function GridControls(props) {
     defaultCat,
   ]);
 
-  // ----------------------------------------------
-  // Remove Filter with button or CMS
-  // ----------------------------------------------
-  const handleRemoveFilter = () => {
-    stateSelectedCat.set("all");
-    stateSelectedTag.set("all");
-    stateSelectedYear1.set(0);
-    stateSelectedYear2.set(0);
-    stateSelectedSize1.set(0);
-    stateSelectedSize2.set(0);
-    // setSelectedCat("all")
-    // setSelectedTag("all")
-    // setSelectedYear1(0)
-    // setSelectedYear2(0)
-    // setSelectedSize1(0)
-    // setSelectedSize2(0)
-    console.log("Removed all Filters");
-  };
+    // console.log('Projekte', currentProjs , 'gem. Parameter:' , params);
+
+  /* console.log(
+    "fiter var:" ,
+    selectedCat,
+    selectedTag,
+    selectedYear1,
+    selectedYear2,
+    selectedSize1,
+    selectedSize2,
+  )
+    console.log(
+    "store vars:" ,
+      useStore(stateSelectedCat),
+      useStore(stateSelectedTag),
+      useStore(stateSelectedYear1),
+      useStore(stateSelectedYear2),
+      useStore(stateSelectedSize1),
+      useStore(stateSelectedSize2)
+    ) */
 
   const handleToggle = () => {
     stateFilter.set(!tFilter);
@@ -325,7 +367,8 @@ function GridControls(props) {
       </button>
 
       <div className="line select_line" onClick={(e) => e.stopPropagation()}>
-        {settingFilterCat && (
+        {settingFilterCat &&
+          !isCatPage && (
           <select
             className="select select_cat"
             onChange={handleCategoryChange}
@@ -414,4 +457,4 @@ function GridControls(props) {
     </div>
   );
 }
-export default GridControls;
+export default GridFilter;
