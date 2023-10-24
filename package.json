@@ -30,5 +30,9 @@
       "react": "$react",
       "react-dom": "$react-dom"
     }
+  },
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "eslint-plugin-astro": "^0.29.1"
   }
 }
