@@ -18,11 +18,7 @@ main_menu:
       menue_item_pages_name: Team
     - menu_item_pages: impressum
       menue_item_pages_name: Impressum
-  menu_projects:
-    - menu_item_projects: tuw_ze
-      menue_item_projects_name: ZE
-    - menu_item_projects: tuw_ob
-      menue_item_projects_name: "227"
+  menu_projects: []
 index_amount: 1
 filter:
   cat: true

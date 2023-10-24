@@ -5,15 +5,15 @@ title_zzl: Science Center / Halle 227
 publishDate: 22 Apr 2023
 category: kg
 project_keys:
-  year: "2023"
-  year2: "2023"
+  year: "1999"
+  year2: "2002"
   area: "9000"
   tags:
     - Öffentlich
     - Labor
     - Universität
 titleimg:
-  img: /src/assets/media/11.jpg
+  img: /src/assets/media/11ob.jpg
   alt: TU Wien Bauteil OB, Halle 227 - Ansicht
 fotos:
   - foto: /src/assets/media/10.jpg
@@ -29,8 +29,5 @@ plans:
     alt: Schnitt
   - plan: /src/assets/media/15.jpg
     alt: Detail
-short: kurzfassung
-long: text 227.
-subcategory: tuw, labor, universität
 ---
 wie? jajaja langtext

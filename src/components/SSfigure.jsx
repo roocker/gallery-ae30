@@ -92,13 +92,19 @@ function SSfigure(props) {
   }
 
   // change Controls color on Plan/Picture Toggle
- // const zModal = useStore(stateModal);
+  const mToggle = useStore(stateModal);
+
+
    useEffect(() => {
+
+    const bgIsDark = sToggle && !mToggle && zToggle ? true : false;
+    // console.log( "zToggle",zToggle , "mToggle", mToggle ,"stoggle" ,sToggle)
+    // console.log("bgIsDark" ,bgIsDark)
+
     const footerControls = document.querySelector(".controls");
-    footerControls.style.color = sToggle ?  'var(--cwhite)' : 'var(--cgrey)';
-    footerControls.style.color = zToggle && sToggle ?  'var(--cwhite)' : 'var(--cgrey)';
-    // footerControls.style.color = zModal ? 'var(--cgrey)' : 'var(--cwhite)';
-  }, [sToggle, zToggle]) 
+    footerControls.style.color = bgIsDark ?  'var(--cwhite)' : 'var(--cgrey)';
+
+  }, [sToggle, zToggle , mToggle]) 
 
   // Slider Functions 
   

@@ -15,14 +15,11 @@ project_keys:
     - lernen
     - Universität
 titleimg:
-  img: /src/assets/media/25.jpg
+  img: /src/assets/media/25bf.jpg
   alt: alt
 fotos:
   - foto: /src/assets/media/4.jpg
     alt: baustelle
   - foto: /src/assets/media/5.png
     alt: baustelle
-short: test
-long: text bf
-subcategory: tuw, labor, universität
 ---

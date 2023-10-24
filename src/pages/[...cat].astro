@@ -85,29 +85,46 @@ const optTitleImgs = await Promise.all(
       format: 'webp',
       width: 600,
     });
-    return { img , imgIndex: covers.index };
+    return { img /* , imgIndex: covers.index */ };
   })
 );
 
-// console.log("cat.astro: optTitleImgs", optTitleImgs)
+console.log( "proj from CAT" ,proj )
+
+const projWithOptCovers = proj.map((proj, i ) => {
+  return{
+    ...proj,
+    data: {
+      ...proj.data,
+      titleimg: optTitleImgs[i]
+    }
+  };
+})
+
+console.log( "projs from ...CAT" , projWithOptCovers.map((proj,i) => (
+  {
+    id: proj.data,
+    index: i,
+    // img: proj.data.titleimg.img
+  }
+)));
+
+
+
 ---
-
-
-
 <Layout title="AE30 - Kategorie - work in progress" description="Kategorie" image="">
 <section id="grid-gallery" aria-label="Gallery Grid Overview">
 
-
     <GridProj
     client:only
-    projects={proj}
-    covers={optTitleImgs}
+    projects={projWithOptCovers}
     />
+    <!-- covers={optTitleImgs} -->
 
     {!noFiltersActiveInCmsSettings &&
     <GridControlWrapper
     client:load
-    projects={allProjects}
+    projects={projWithOptCovers}
     btnname="Filter Menü ein-/ausblenden"
 
     defaultCat={cat}

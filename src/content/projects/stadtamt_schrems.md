@@ -5,17 +5,17 @@ publishDate: 06 Jan 1960
 category: zk
 project_keys:
   year: "2021"
-  year2: "2023"
+  year2: "2022"
   area: "2000"
   tags:
     - Öffentlich
     - arbeiten
     - Außenraum
 titleimg:
-  img: /src/assets/media/35.jpg
+  img: /src/assets/media/35schrems.jpg
   alt: fasdfasdf
 fotos:
-  - foto: /src/assets/media/11.jpg
+  - foto: /src/assets/media/11ob.jpg
     alt: okok
   - foto: /src/assets/media/12.jpg
     alt: gokok
@@ -23,7 +23,4 @@ fotos:
     alt: okok
   - foto: /src/assets/media/14.jpg
     alt: okok
-short: text
-long: langtext schrems
-subcategory: öffentlich
 ---

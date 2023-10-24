@@ -1,17 +1,7 @@
 ---
-title: Atelier Eroicagasse
 title_l: Atelier Eroicagasse
-publishDate: 27 Dec 2015
-category: wp
-project_keys:
-  year: "1991"
-  year2: "1991"
-  area: "100"
-  tags:
-    - arbeiten
-    - wohnen
 titleimg:
-  img: /src/assets/media/17.jpg
+  img: /src/assets/media/17atelier.jpg
   alt: asdffff
 fotos:
   - foto: /src/assets/media/13.jpg
@@ -27,7 +17,17 @@ fotos:
   - foto: /src/assets/media/19.jpg
     alt: detail
 wide: true
+title: Atelier Eroicagasse
+project_keys:
+  year: "1991"
+  year2: "1995"
+  area: "100"
+  tags:
+    - arbeiten
+    - wohnen
 short: text
 long: text text text
+publishDate: 27 Dec 2015
+category: wp
 subcategory: EFH
 ---

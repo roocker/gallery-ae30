@@ -19,7 +19,7 @@ import { getImage } from 'astro:assets';
 
 import { CURRENTYEAR } from '../consts';
 
-const allProjects = await getCollection('projects');
+let allProjects = await getCollection('projects');
 // console.log("OlleProjekte:", allProjects);
 
 const settings = await getCollection('settings');
@@ -69,70 +69,54 @@ const optTitleImgs = await Promise.all(
       format: 'webp',
       width: 600,
     });
-    return { img , imgIndex: covers.index };
+    return { img /*,  imgIndex: covers.index */ };
   })
 );
 
-console.log("opttitleimgs", optTitleImgs);
+// console.log("opttitleimgs", optTitleImgs);
 
+allProjects = allProjects.map((proj, i) => {
+  return{
+    ...proj,
+    data: {
+      ...proj.data,
+      titleimg: optTitleImgs[i]
+    }
+  };
+})
+
+console.log( "allProjects from INDEX" , allProjects.map((proj,i) => (
+  {
+    id: proj.id,
+    index: i,
+    img: proj.data.titleimg.img
+  }
+)));
 ---
 <Layout title="ae30 - gallerie - work in progress" description="gallery" image="">
 
 <section id="grid-gallery" aria-label="gallery grid overview">
-  <!-- <testgallery/> -->
-    <!--  /${proj.slug}`}  -->
-
-
 
     <GridProj
     client:only
     projects={allProjects}
-    covers={optTitleImgs}
     />
+    <!-- covers={optTitleImgs} -->
 
     {!noFiltersActiveInCmsSettings && 
     <GridControlWrapper
     client:load
     projects={allProjects}
-
     btnname="Filter Menü ein-/ausblenden"
-
-    defaultcat="kg"
-    defaulttag="all"
-    defaultyear1={1980}
-    defaultyear2={CURRENTYEAR}
-    defaultsize1={0}
-    defaultsize2={10000}
+    defaultCat="all"
+    defaultTag="all"
+    defaultYear1={1980}
+    defaultYear2={CURRENTYEAR}
+    defaultSize1={0}
+    defaultSize2={10000}
 
     />
     }
-
-    <!--
-    {nofiltersactiveincmssettings ? '' :
-      <gridcontrols
-      client:load
-      defaultcat="all"
-      defaulttag="all"
-      defaultyear1={1990}
-      defaultyear2={currentyear}
-      defaultsize1={0}
-      defaultsize2={7000}
-      />
-      } 
-      -->
-
-
-
-    <!--
-    {allprojects.map((proj) => 
-    <gridproj 
-    title={proj.data.title} 
-    link={`../${proj.data.category}/${proj.slug}`}
-    titleimg={proj.data.titleimg.img} 
-    titlealt={proj.data.titleimg.alt} 
-    cat={proj.data.category} 
-    /> )}
-    -->
 
 </section>
 </Layout>

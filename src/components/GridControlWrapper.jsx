@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import GridFilter from '../components/GridFilter';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useStore } from "@nanostores/react";
-import { stateFilter, stateCurrentProjs, stateSelectedCat } from '../states';
+import { stateFilter, stateCurrentProjs, handleToggleFilter, stateSelectedCat } from '../states';
 
 import { CURRENTYEAR } from '../consts';
 import '../styles/grid_controls.css'
@@ -41,12 +41,19 @@ function GridControlWrapper (props){
 
   const allProjects = props.projects
 
+  /* console.log( "WRAPPER allProjects" , allProjects.map((proj,i) => (
+    {
+      id: proj.id,
+      index: i
+    }
+  ))); */
+
   useEffect (() => {
 
     const handleKeyDown = (event) => {
       switch(event.key) {
         case 'f':
-          handleToggle();
+          handleToggleFilter();
           break;
         case 'Escape':
           handleClose();
@@ -63,10 +70,6 @@ function GridControlWrapper (props){
   });
   const tFilter = useStore(stateFilter);
   const currentProjs = useStore(stateCurrentProjs)
-
-  const handleToggle = () => {
-    stateFilter.set(!tFilter);
-  }
 
   const handleClose = () => {
     stateFilter.set(false);
@@ -88,6 +91,7 @@ function GridControlWrapper (props){
       // stateCurrentProjs.set()
     }
   }, [defaultCat, currentProjs])
+
   const currentProjsLength = currentProjs.length
 
 
@@ -103,7 +107,7 @@ function GridControlWrapper (props){
         <div className="line select_line filter_toggle_btn">
 
           <button
-            onClick={handleToggle}
+            onClick={handleToggleFilter}
             className="btn filter_toggle_btn"
             title={props.btnname}
           >
@@ -119,7 +123,7 @@ function GridControlWrapper (props){
       {tFilter && (
         <motion.div
           className="motiondiv"
-          onClick={handleToggle}
+          onClick={handleToggleFilter}
           variants={slideUp}
           key={tFilter}
           initial="i"
@@ -128,6 +132,7 @@ function GridControlWrapper (props){
         >
 
           <GridFilter
+            allProjects={allProjects}
             defaultCat={defaultCat}
             defaultTag={defaultTag}
             defaultYear1={defaultYear1}

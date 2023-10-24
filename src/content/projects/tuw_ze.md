@@ -15,7 +15,7 @@ project_keys:
     - lernen
     - arbeiten
 titleimg:
-  img: /src/assets/media/24.jpg
+  img: /src/assets/media/24ze.jpg
   alt: Alttext Title Bild - Rendering
 fotos:
   - foto: /src/assets/media/IMG_20220112_085913.jpg
@@ -43,11 +43,6 @@ plans:
     alt: Querschnitt
   - plan: /src/assets/media/19.jpg
     alt: Detail
-short: Zur Entlastung der Laborflächen des ATI (Atominstitut) und zur Aufnahme
-  der Universitären Service Einrichtung für Transmissionselektronenmikroskopie
-  (USTEM) entsteht am Areal Stadionallee ein neues Institutsgebäude.
-long: asdfasdf
-subcategory: Universität, Öffentlich, Labor
 ---
 Zur Entlastung der Laborflächen des ATI (Atominstitut) und zur Aufnahme der Universitären Service Einrichtung für Transmissionselektronenmikroskopie (USTEM) entsteht am Areal Stadionallee ein neues Institutsgebäude. 
 
