@@ -53,7 +53,7 @@ rawSSPlansAlts = p.plans.map((plan) => plan.alt);
 const optSSPictures = await Promise.all(rawSSPictures.map(async (img) => await getImage({
   src: img,
   format: 'webp',
-  width: 1440,
+  width: 1920,
 })))
 
 
