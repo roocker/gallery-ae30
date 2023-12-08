@@ -57,6 +57,8 @@ const optSSPictures = await Promise.all(rawSSPictures.map(async (img) => await g
 })))
 
 
+console.log(p)
+
 ---
 
 
@@ -76,12 +78,19 @@ const optSSPictures = await Promise.all(rawSSPictures.map(async (img) => await g
 
       <TextBlockModal client:load>
 
-        <h2>{p.title}</h2>
+        <h2>{p.title_l}</h2>
+        {p.title? <h3>{p.title_zzl}</h3> : ""}
+        
         <dl class="textmodal_ul">
-          <dt>Jahr:</dt><dd>2018 - 2022</dd>
-          <dt>NFL:</dt><dd>3090m²</dd>
+
+          <dt>Status:</dt><dd>Status:{p.project_keys.status}</dd>
+          <dt>Jahr:</dt><dd>{p.project_keys.year.getFullYear()} - {p.project_keys.year2.getFullYear()}</dd>
+          <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
+          <dt>Typ:</dt><dd>{p.project_keys.tags.map(tag => ( tag + ", " ))}</dd>
+          <!--
           <dt>Typ:</dt><dd>Neubau, Erweiterung</dd>
           <dt>Tags:</dt><dd>{p.subcategory}</dd>
+          -->
         </dl>
 
         <p><Content/></p>

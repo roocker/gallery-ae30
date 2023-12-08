@@ -14,7 +14,8 @@ fotos:
     alt: fasssade2
   - foto: /src/assets/media/18.jpg
     alt: eingang
-  - foto: /src/assets/media/19.jpg
+plans:
+  - plan: /src/assets/media/19.jpg
     alt: detail
 wide: true
 title: Atelier Eroicagasse
