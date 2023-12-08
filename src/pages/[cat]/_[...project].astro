@@ -87,12 +87,16 @@ const optSSPictures = await Promise.all(rawSSPictures.map(async (img) => await g
 
       <TextBlockModal client:load>
 
-        <h2>{p.title}</h2>
+        <h2>{p.title_l}</h2>
         <dl class="textmodal_ul">
+          {p.}
+
+          <!--
           <dt>Jahr:</dt><dd>2018 - 2022</dd>
           <dt>NFL:</dt><dd>3090m²</dd>
           <dt>Typ:</dt><dd>Neubau, Erweiterung</dd>
           <dt>Tags:</dt><dd>{p.subcategory}</dd>
+          -->
         </dl>
 
         <p><Content/></p>
