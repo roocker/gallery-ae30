@@ -8,4 +8,5 @@ PrioList:
   - relation-proj: atelier_eroicagasse
   - relation-proj: tuw_bf
   - relation-proj: juridikum
+  - relation-proj: test
 ---
