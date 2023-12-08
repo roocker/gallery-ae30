@@ -1,7 +1,7 @@
 ---
 title: Team - AE30
 teamfoto:
-  img: '../src/assets/media/ai-teamfoto.jpg'
+  img: /media/ai-teamfoto.jpg
   alt: Team Foto AE30 - Atelier Eroicagasse
 text: >-
   Unser Büro arbeitet unter der Leitung von [Arch DI Gerhard
