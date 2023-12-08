@@ -1,6 +1,7 @@
 ---
 title: tuw bf
 title_l: TU Wien - Bauteil BF
+widehigh: extra breit
 publishDate: 22 Apr 2023
 category: arge
 project_keys:
