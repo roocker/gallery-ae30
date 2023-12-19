@@ -85,15 +85,18 @@ allProjects = allProjects.map((proj, i) => {
   };
 })
 
-  /*
+// remove archived projects
+allProjects = allProjects.filter(proj => !proj.data.archived);
+  
 console.log( "allProjects from INDEX" , allProjects.map((proj,i) => (
   {
     id: proj.id,
     index: i,
-    img: proj.data.titleimg.img
+    img: proj.data.titleimg.img,
+    archived: proj.data.archived
   }
 )));
-*/
+
 
 ---
 <Layout title="AE30" description="gallery" image="">

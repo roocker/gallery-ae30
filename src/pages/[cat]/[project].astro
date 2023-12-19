@@ -31,7 +31,6 @@ const { Content } = await proj.render();
 
 const rawSSPictures = [p.titleimg.img].concat(p.fotos.map((img) => img.foto));
 
-
 const rawSSPicturesAlts = [p.titleimg.alt].concat(p.fotos.map((img) => img.alt));
 
 let rawSSPlans;
@@ -57,12 +56,12 @@ const optSSPictures = await Promise.all(rawSSPictures.map(async (img) => await g
 })))
 
 
-console.log(p)
+// console.log(p)
 
 ---
 
 
-<Layout title={`AE30 - ${p.title} - work in progress`} description= {`${p.category}/${p.title}`}image="">
+<Layout title={`AE30 - ${p.title_l}`} description= {`${p.category}/${p.title}`}image="">
 
 <section class="project_presentation" aria-label={`Projekt ${p.title} Presentation`}>
   <article class="project">

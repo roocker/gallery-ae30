@@ -1,6 +1,6 @@
 ---
-title: tuw ze
-title_l: TU Wien - Bauteil ZE
+title: "tuw ze"
+title_l: "TU Wien - Bauteil ZE"
 title_zzl: USTEM und ATI
 publishDate: 23 Apr 2023
 category: arge
