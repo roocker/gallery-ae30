@@ -279,8 +279,8 @@ export default defineConfig({
             name: "pages",
             label: "Seiten",
             description: "Seiten wie Über uns, Kontakt, Impressum",
-            create: true,
-            delete: true,
+            create: false,
+            delete: false,
             // folder: 'src/content/pages',
             files: [
               {
