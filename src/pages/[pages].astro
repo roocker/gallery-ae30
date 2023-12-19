@@ -17,12 +17,12 @@ export async function getStaticPaths(){
 type Props = CollectionEntry<'pages'>;
 const page = Astro.props;
 
-  console.log("page from Astro.props:", page)
+  // console.log("page from Astro.props:", page)
 
   const { Content, headings, remarkPluginFrontmatter  } = await page.render();
 
-  console.log("page Content", Content)
-  console.log("page Content", headings, remarkPluginFrontmatter)
+  // console.log("page Content", Content)
+  // console.log("page Content", headings, remarkPluginFrontmatter)
 
 const filteredHeadings = headings.filter(heading => heading.depth === 1 );
 
