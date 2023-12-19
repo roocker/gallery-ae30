@@ -46,7 +46,7 @@ plans:
 ---
 Zur Entlastung der Laborflächen des ATI (Atominstitut) und zur Aufnahme der Universitären Service Einrichtung für Transmissionselektronenmikroskopie (USTEM) entsteht am Areal Stadionallee ein neues Institutsgebäude. 
 
-> Das neue Institutsgebäude soll in seiner Form und Proportion die Kubatur des Bestands fortführen und so Bezug zum Reaktorgebäude herstellen. Das Untergeschoss des Neubaus und des ATI-Bestandsbaues bilden einen gemeinsamen Anlieferungshof. 
+Das neue Institutsgebäude soll in seiner Form und Proportion die Kubatur des Bestands fortführen und so Bezug zum Reaktorgebäude herstellen. Das Untergeschoss des Neubaus und des ATI-Bestandsbaues bilden einen gemeinsamen Anlieferungshof. 
 
 Der Haupteingang für das neue Institutsgebäude wurde Richtung Stadionallee orientiert. Das Anfang der 60er Jahre errichtete Reaktor- und Bürogebäude bleibt in seinem architektonischen Erscheinungsbild und in seiner Funktion unberührt und ermöglicht unabhängige technische und funktionale Abläufe. 
 Der Baukörper besteht aus einem Untergeschoß, dem Erdgeschoß und drei Obergeschossen. Das 1.UG nimmt sämtliche labortechnische Räume zum USTEM auf und ist nach Funktionsgruppen gegliedert  Die dreizonige innere Grundrissstrukturierung bestehend aus den Bürozonen an den Fassaden und den dienenden Räumen (Sanitärräume)   und Kommunikationszonen im Kern bietet die Möglichkeit alle   aus Erfahrung notwendigen Nebenfunktionen (IT-Raum, Putz- und Institutslagerraum, Kopierzone, Archive, Teeküche, etc.), sowie ein   zweites Flucht-Stiegenhaus im Geschoß unterzubringen. Im OG3 bietet   die Kernzone Platz für die Haustechnikzentrale, die die Lüftungsanlagen   für die Büroobergeschosse (EG-OG3) beherbergt. 
@@ -68,3 +68,4 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 ## Nachhaltigkeit
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+>>>>>>> e82c70c6d5041f8f02c4f0173d6062d7357646d2
