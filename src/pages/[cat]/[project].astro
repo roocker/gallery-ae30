@@ -83,7 +83,7 @@ console.log(p)
         
         <dl class="textmodal_ul">
 
-          <dt>Status:</dt><dd>Status:{p.project_keys.status}</dd>
+          {p.project_keys.status? <dt>Status:</dt><dd>Status:{p.project_keys.status}</dd> : ""}
           <dt>Jahr:</dt><dd>{p.project_keys.year.getFullYear()} - {p.project_keys.year2.getFullYear()}</dd>
           <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
           <dt>Typ:</dt><dd>{p.project_keys.tags.map(tag => ( tag + ", " ))}</dd>
