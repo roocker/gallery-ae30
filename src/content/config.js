@@ -7,7 +7,7 @@ const projCollection = defineCollection({
       title: z.string(),
       title_l: z.string(),
       title_zzl: z.string().optional(),
-      archived: z.string().optional(),
+      archived: z.boolean().optional(),
       widehigh: z.string().optional(),
       publishDate: z.string().transform((string) => new Date(string)),
       category: z.string(),

@@ -1,0 +1,60 @@
+---
+
+/* 
+  TODO
+  - [ ] Make editable in CMS
+
+*/
+import Layout from '../layouts/Layout.astro';
+import '../styles/page.css';
+
+const pagetitle = "404: Seite wurde nicht gefunden";
+
+
+---
+<Layout title={`AE30 - ${pagetitle}`} description="Kategorie" image="">
+<section class="page_sect" aria-label={pagetitle}>
+  <section class="block">
+
+    <div class="title_wrapper">
+      <h1> Fehler 404: Seite wurde nicht gefunden</h1>
+    </div>
+
+
+  </section>
+  <section class="content">
+      <p>Diese Seite konnte leider nicht gefunden werden</p>
+      <ul>
+        <li><a href="/"> zurück zur ARGE Projektgalerie </a> </li>
+        <li><a href="/kg"> zurück zur Projektgalerie von Arch DI Gerhard Kratochwil </a> </li>
+        <li><a href="/wp"> zurück zur Projektgalerie von Arch DI Peter Waldbauer </a> </li>
+        <li><a href="/zk"> zurück zur Projektgalerie von Arch DI Klaus Zeinitzer </a> </li>
+      </ul>
+      <p>Sie werden in Kürze automatisch zur Projektgalerie weitergeleitet.</p>
+  </section>
+
+
+</section>
+</Layout>
+
+
+<style>
+  .content{
+    margin: 0 2em 0 2em;
+  }
+
+  h1, h2, h3, h4, h5, h6{
+    font-family: var(--fsans2);
+    text-transform: uppercase;
+  }
+
+  .title_wrapper > img {
+    max-width: var(--maxwidth);
+    width: 100% !important; 
+  }
+  .next_control{
+    /* align-self: center; */
+    margin: 0 auto;
+  }
+
+</style>
