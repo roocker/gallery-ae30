@@ -7,15 +7,15 @@ title: Dokumentation Website AE30
 
 # Wie erstelle/bearbeite ich ein Projekt?
 
-Projekte können auf zwei arten angelegt bzw verwaltet werden:
+Projekte können auf zwei Arten angelegt bzw verwaltet werden:
 
-1. [Projekte anlegen vis CMS (Content Managment System)](#projekte-anlegenbearbeiten-vis-cms):
+1. [Projekte anlegen mit CMS (Content Managment System)](#projekte-anlegenbearbeiten-mit-cms):
 
-2. [Projekte manuell anlegen via .md (Markdown) Datei)](#projekte-manuell-anlegenbearbeiten):
+2. [Projekte manuell anlegen mit .md (Markdown) Datei)](#projekte-manuell-anlegenbearbeiten):
     - die [Projekt Felder Daten Beschreibung](#projekt-felder-daten-beschreibung) oder [hier](projekt_felder_beschreibung.md) als Datei hilft das Projekt "richtig" anzulgen.
 
-# Projekte anlegen/bearbeiten vis CMS:
-> gehe: [zum CMS](/admin) oder [CMS Projekte](/admin#/collections/projects)
+# Projekte anlegen/bearbeiten mit CMS
+> gehe: [zum CMS](/admin) oder [CMS Prjekte](/admin#/collections/projects)
 
 Login Daten sind beim Administrator bzw. Sekritariat hinterlegt.
 
@@ -23,14 +23,14 @@ Login Daten sind beim Administrator bzw. Sekritariat hinterlegt.
 - Ein Klick auf das jeweilige Projekt öffnet einen Editor mit allen möglichen Feldern.
 - Optionale Felder sind entsprechen (Optional) im Editor markiert
 - `>` - Symbole können mit Klick aufgeklappt werden
-- Felder die mehrere Datensätze behinhalten können, zum Beispiel Fotos/Pläne haben einen entsprechenden `fotos hinzufügen +` Button.
+- Felder die mehrere Datensätze beinhalten können, zum Beispiel Fotos/Pläne haben einen entsprechenden `fotos hinzufügen +` Button.
 - Datensätze die ein `==` Symbol mittig haben, können mit Drag- and Drop neu angeordnet bzw verschoben werden.
 - Das `x` Symbol löscht ensprechend Datensätze
 - Der Langtext hat einen eingebauten *Rich Text* Editor mit dem Markdown formatierungen wie *italic*, **bold**, Überschriften etc. erstellt werden können. Im Editor das `+` Symbol ermöglicht auch das einfügen von Bildern im Lauftext. Der Editor kann ensprechend dem Schieberegler auch auf den `Markdown Modus` umgeschaltet werden, siehe [ Markdown Syntax ](https://www.markdownguide.org/cheat-sheet/).
 - Eine genauere Beschreibung der notwendigen Inhalte ist in [Projekt Felder Daten Beschreibung](#projekt-felder-daten-beschreibung) oder [hier](projekt_felder_beschreibung.md) als Datei aufrufbar
 - Bilder können im ensprechenden Bereich nach hinzufügen eines Datensatzes mit dem Link `Wähle ein Bild` auf den Website Server geladen, oder aus der Galerie ausgewählt werden.
  
-# Projekte manuell anlegen/bearbeiten:
+# Projekte manuell anlegen/bearbeiten
 Alle Projekte sind im Ordner `src/content/projekte/*.md` als [Markdown Dateien](https://de.wikipedia.org/wiki/Markdown) abgelegt.
 - Leere Vorlage: [projekt_leer.md](projekt_leer.md)
 - Felder Beschreibung Vorlage: [projekt_felder_beschreibung.md](projekt_felder_beschreibung.md)
@@ -139,7 +139,7 @@ Wie auch *Projekte* können *Seiten* mit dem [CMS](/admin) oder manuell (.md Fil
     img: /src/assets/media/portrait_placeholder.jpg
 ```
 
-# Welche Einstellungen können sonst werden?
+# Welche Einstellungen können sonst vorgenommen werden?
 
 > gehe: [zum CMS](/admin) oder [CMS Einstellungen](/admin#/collections/settings)
 
