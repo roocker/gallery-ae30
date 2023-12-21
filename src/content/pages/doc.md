@@ -139,7 +139,7 @@ Wie auch *Projekte* können *Seiten* mit dem [CMS](/admin) oder manuell (.md Fil
     img: /src/assets/media/portrait_placeholder.jpg
 ```
 
-# Welche Einstellungen können sonst vorgenommen werden?
+# Welche Einstellungen sonst vorgenommen werden?
 
 > gehe: [zum CMS](/admin) oder [CMS Einstellungen](/admin#/collections/settings)
 
