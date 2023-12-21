@@ -158,13 +158,8 @@ export default defineConfig({
                     ],
                   },
                   {
-                    name: "index_amount",
-                    label: "Anzahl Projekte Startseite",
-                    widget: "number",
-                  },
-                  {
                     name: "filter",
-                    label: "Filter Frontpage",
+                    label: "Filter Galerie",
                     widget: "object",
                     hint: "Filter Optionen für die Startseite an/ausschalten",
                     fields: [
