@@ -128,11 +128,12 @@
     /* margin-bottom: 1em; */
     /* margin-top: 2em; */ 
   }
-  .content{
+  .cont{
     
     /* background: pink; */
     width: calc(100% - 2em);
     max-width: var(--maxwidth);
+    margin-bottom: 0;
 
   }
 
@@ -403,21 +404,21 @@ width: 42vw;
    code{
     font-family: var(--fsans3);
   }
-   .content ol{
+   .cont ol{
     margin:0;
     padding: 0;
     margin-block: 0;
     margin-inline: 0;
     list-style-position: outside !important;
   }
-  .content ul, .content ol{
+  .cont ul, .cont ol{
     list-style-position: outside;
     margin-left: 1em;
   }
-  .content ul{
+  .cont ul{
     list-style-type: disc;
   }
-  .content ul li{
+  .cont ul li{
     margin-top: .5em;
   }
   .toc ol{
