@@ -52,12 +52,29 @@ export default defineConfig({
 
         // COLLECTIONS  -----------------------------------------------
         collections: [
+          /* {
+            name: "doc",
+            label: "Dokumentation",
+            create: false,
+            files: [
+              {
+                file: "/src/content/pages/doc.md",
+                name: "doc",
+                label: "document",
+           fields: [ {label: "Body", name: "body", widget: "markdown"} ],
+
+              }
+            ]
+
+
+          }, */
+
           // SETTINGS  -----------------------------------------------
           {
             name: "settings",
             label: "Einstellungen",
             description:
-              "Allgmeine Website Einstellungen. NUR MIT VORSICHT ÄNDERN",
+              'Allgmeine Website Einstellungen. NUR MIT VORSICHT ÄNDERN. ',
             comment: "NUR MIT VORSICHT ÄNDERN / EDIT ONLY WITH CARE",
             editor: { preview: false },
             files: [
