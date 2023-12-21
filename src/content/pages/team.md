@@ -88,6 +88,17 @@ member:
   - name: Elisabeth Kofler
     mode:
       former: true
+  - name: Max Mustermann
+    mode:
+      archived: true
+      highlighted: false
+      former: false
+    details:
+      - description: Geburtstag
+        detail: 01.01.1988
+      - description: Aufgabenbereich
+        detail: Vorzeigemitarbeiter
+    img: /src/assets/media/portrait_placeholder.jpg
 ---
 # Content
 asdfasdf

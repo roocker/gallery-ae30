@@ -1,6 +1,5 @@
 ---
 title: Über uns
-template: about
 titleimg: /media/17.jpg
 ---
 # Geschichte Überschrift 1

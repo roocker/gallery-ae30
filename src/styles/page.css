@@ -24,7 +24,7 @@
   }
 
   /* Version h1 oben links */
-  /* h1.page_headline{
+  /* h1.page_headline_white{
     text-transform: uppercase;
     margin-bottom: 2em !important;
     border: 1px solid blue; 
@@ -32,6 +32,10 @@
   } */
 
   h1.page_headline{
+    font-size: 2em;
+    text-transform: uppercase;
+  }
+  h1.page_headline_white{
     margin: 0;
     position: absolute;
     bottom: 1em;
@@ -59,10 +63,15 @@
   }
 
   .title_wrapper > img{
-    max-width: var(--maxwidth);
-    width: 100% !important; 
-    max-height: 50vh;
+    /* max-width: var(--maxwidth); */
+    min-width: 100%;
+    display: block;
+    max-height: 35vh;
     object-fit: cover;
+    object-position: center 40% ;
+  }
+  .tphoto > img {
+    max-height: 100% !important;
   }
   
   div.next_control{
@@ -114,10 +123,17 @@
 
     /* background: lightblue; */
   }
-  .block > div {
+  .block > div  {
     max-width: var(--maxwidth);
     /* margin-bottom: 1em; */
     /* margin-top: 2em; */ 
+  }
+  .content{
+    
+    /* background: pink; */
+    width: calc(100% - 2em);
+    max-width: var(--maxwidth);
+
   }
 
 
@@ -234,7 +250,8 @@
       width: 100% !important;
       max-width: 100% !important;
     }
-    h1.page_headline{
+    h1.page_headline_white{
+      font-family: var(--fsans2);
       left: 0;
       width: 100%;
       text-align: center;
@@ -296,17 +313,15 @@
   }
 
 
-  @media only screen and (min-width: 85.375em/* var(--vwM) */) {
-
-  }
 
 /* TOC Nav ---------------------------------- */
   /* rework */
 nav.toc{
-  align-self: flex-start;
+  align-self: flex-center;
   font-family: var(--fsans2);
   line-height: 2em;
   width: 100%;
+    max-width: var(--maxwidth);
   /* background: red; */
 
 }
@@ -323,10 +338,11 @@ nav.toc ol >::marker{
 }
 nav.toc li{
   background: var(--cgrey20);
-  margin-bottom: .25em;
+  margin-top: .25em;
   padding-left: 2em;
   white-space: nowrap;
 
+    box-sizing: border-box;
 }
 nav.toc li a{
   display: inline-block;
@@ -338,17 +354,26 @@ nav.toc li:hover{
 }
   
 
-  @media only screen and (min-width: 48em/* var(--vwT) */) {
-    nav.toc{
-      position: fixed;
-      bottom: 2em;
-      right: 2em;
-      width: 42vw;
-      /* align-items: flex-end; */
-      /* float: right; */
-      /* background: green; */
+  @media only screen and (min-width: 85.375em/* var(--vwM) */) {
 
-    }
+  }
+  @media only screen and (min-width: 48em/* var(--vwT) */) {
+    /*
+TOC Fixed needs work (text wrap, ein/ausblenden)
+nav.toc{
+position: fixed;
+bottom: 2em;
+right: 2em;
+width: 42vw;
+
+}
+*/
+
+    /* nav.toc{
+      width: auto;
+      margin-left: 2em;
+      padding-right: 2em;
+    } */
     nav.toc li{
       backdrop-filter: blur(2px);
       opacity: .8 ;
@@ -356,40 +381,52 @@ nav.toc li:hover{
   }
 
 /* General ---------------------------------- */
-  h1, h2, h3, h4, h5, h6 {
+   h1, h2, h3, h4, h5, h6 {
     font-family: var(--fsans2);
-    text-transform: uppercase;
-    margin: .5em 0 .5em 0;
+    /* text-transform: uppercase; */
+    margin: 1.25em 0 .5em 0;
   }
-  h1{
+   h1{
+    font-size: 1.75em;
     line-height: 1.25em;
 
   }
-  blockquote{
+   .blockquote{
     font-style: italic;
   }
-  pre.github-dark{
-    background: grey !important;
+   pre.github-dark{
+    background: #ddd !important;
     /* font-family: var(--fsans3); */
-    /* color: #111111 !important; */
+    color: #444444 !important;
+    padding: 1em;
   }
-  code{
+   code{
     font-family: var(--fsans3);
   }
-  ul{
-    list-style-type: disc;
-    list-style-position: inside;
+   .content ol{
+    margin:0;
+    padding: 0;
+    margin-block: 0;
+    margin-inline: 0;
+    list-style-position: outside !important;
   }
-  ol{
-    list-style-position: inside;
-    /* margin: 0; */
+  .content ul, .content ol{
+    list-style-position: outside;
+    margin-left: 1em;
+  }
+  .content ul{
+    list-style-type: disc;
+  }
+  .content ul li{
+    margin-top: .5em;
+  }
+  .toc ol{
+    list-style-position: inside !important
   }
   ol li::marker{
     /* float: left; */
   }
   img{
-    /* min-width: 100%; */
-    width: clamp(50%, 100%);
-    max-width: 100%;
+    width: clamp(50%, 100%, 100%);
   }
 
