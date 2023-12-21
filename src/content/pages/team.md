@@ -78,6 +78,9 @@ member:
   - name: Kevin Djavan
     details:
       - detail: Studentischer Mitarbeiter
+      - detail: BIM Manager
+      - detail: Mentor
+      - detail: EDV Beauftragter
   - name: Maria Harman
     mode:
       former: true
