@@ -1,7 +1,7 @@
 ---
 title: Team - AE30
 teamfoto:
-  img: /media/ai-teamfoto.jpg
+  img: /src/assets/media/ai-teamfoto.jpg
   alt: Team Foto AE30 - Atelier Eroicagasse
 text: >-
   Unser Büro arbeitet unter der Leitung von [Arch DI Gerhard
@@ -16,7 +16,7 @@ heading_members_active: Aktuelle Mitarbeiter
 heading_members_former: Ehemalige Mitarbeiter
 member:
   - name: Arch DI Gerhard Kratochwil
-    img: /media/portrait_placeholder.jpg
+    img: /src/assets/media/portrait_placeholder.jpg
     mode:
       highlighted: true
     details:
@@ -27,7 +27,7 @@ member:
       - description: "Spezialisierungen:"
         detail: Objektbau, Laborbau, Universitäten, Entwurf bis Bauabwicklung
   - name: DI Peter Waldbauer
-    img: /media/portrait_placeholder.jpg
+    img: /src/assets/media/portrait_placeholder.jpg
     mode:
       highlighted: true
     details:
@@ -38,7 +38,7 @@ member:
       - description: "Spezialisierungen:"
         detail: Einfamilienhäuser, Ausstellungsräume
   - name: DI Klaus Zeinitzer
-    img: /media/portrait_placeholder.jpg
+    img: /src/assets/media/portrait_placeholder.jpg
     mode:
       highlighted: true
     details:
@@ -49,26 +49,26 @@ member:
       - description: "Spezialisierungen:"
         detail: Objektbau, Schulen, Universitäten, Entwurf bis Bauabwicklung
   - name: DI Sabine Chihadeh
-    img: /media/portrait_placeholder.jpg
+    img: /src/assets/media/portrait_placeholder.jpg
     details:
       - description: ""
         detail: Projektleiterin
       - description: seit
         detail: 2002
   - name: DI Katharina Giessenbacher
-    img: /media/portrait_placeholder.jpg
+    img: /src/assets/media/portrait_placeholder.jpg
     details:
       - description: ""
         detail: Projektleiterin
       - description: seit
         detail: 2002
   - name: DI Stefan Huber
-    img: /media/portrait_placeholder.jpg
+    img: /src/assets/media/portrait_placeholder.jpg
     details:
       - description: ""
         detail: Projektleiter
   - name: Iris Göttlinger
-    img: /media/portrait_placeholder.jpg
+    img: /src/assets/media/portrait_placeholder.jpg
     details:
       - description: ""
         detail: Sekretariat
