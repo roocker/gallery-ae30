@@ -1,6 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { CollectionEntry, getCollection } from "astro:content";
+import { type CollectionEntry, getCollection } from "astro:content";
 import "../styles/page.css";
 
 export async function getStaticPaths() {
@@ -48,7 +48,7 @@ const filteredHeadings = headings.filter(heading => heading.depth === 1);
         <ol>
           {
             filteredHeadings.map(heading => (
-              <li key={heading.slug}>
+              <li>
                 <a href={`#${heading.slug}`}>{heading.text}</a>
               </li>
             ))
