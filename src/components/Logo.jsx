@@ -87,12 +87,15 @@ function Logo (){
   const tMenu = useStore(stateMainNav);
  const toggleMenu = () => {
    stateMainNav.set(!tMenu)
+    // if tMenu
   }; 
 
   return (
     <h1 className="logo_head">
     <span>AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus</span>
-    <a className="link" onClick={toggleMenu}>
+    <a className="link"
+        onClick={toggleMenu}
+      >
     <AnimatePresence>
     <motion.svg
     className="logo svg-logo-use"
