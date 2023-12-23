@@ -337,11 +337,11 @@ nav.toc li {
   margin-top: 0.25em;
   padding-left: 2em;
   white-space: nowrap;
-
-  box-sizing: border-box;
 }
 nav.toc li a {
+  /* background: red; */
   display: inline-block;
+  width: 100%;
   color: var(--cblack);
 }
 nav.toc li:hover {
