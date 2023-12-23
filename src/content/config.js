@@ -1,6 +1,18 @@
 import { string } from "astro/zod";
 import { defineCollection, z } from "astro:content";
 
+const pagesCollection = defineCollection({
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      cover: image()
+        .refine(img => img.width >= 1024, {
+          message: "Cover image must be at least 1024 pixels wide!",
+        })
+        .optional(),
+    }),
+});
+
 const teamCollection = defineCollection({
   schema: ({ image }) =>
     z.object({
@@ -11,7 +23,6 @@ const teamCollection = defineCollection({
         }),
         alt: z.string(),
       }),
-      text: z.string(),
       heading_members_highlighted: z.string(),
       heading_members_active: z.string(),
       heading_members_former: z.string(),
@@ -98,4 +109,5 @@ const projCollection = defineCollection({
 export const collections = {
   projects: projCollection,
   team: teamCollection,
+  pages: pagesCollection,
 };

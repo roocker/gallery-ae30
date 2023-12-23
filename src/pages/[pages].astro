@@ -3,9 +3,10 @@ import Layout from "../layouts/Layout.astro";
 import { type CollectionEntry, getCollection } from "astro:content";
 import "../styles/page.css";
 
+import { Image } from "astro:assets";
+
 export async function getStaticPaths() {
   const allPages = await getCollection("pages");
-  // console.log('allPages', allPages);
 
   return allPages.map(page => ({
     params: { pages: page.slug },
@@ -15,6 +16,8 @@ export async function getStaticPaths() {
 
 type Props = CollectionEntry<"pages">;
 const page = Astro.props;
+
+const c = page.data;
 
 // console.log("page from Astro.props:", page)
 
@@ -31,18 +34,15 @@ const filteredHeadings = headings.filter(heading => heading.depth === 1);
 ---
 
 <Layout title={`AE30 - ${page.data.title}`} description="Kategorie" image="">
-  <section class="page_sect" aria-label={page.data.tile}>
+  <section class="page_sect" aria-label={c.title}>
     <section class="block">
       <div class="title_wrapper">
         <h1
-          class={page.data.titleimg ? "page_headline_white" : "page_headline"}
-          set:html={page.data.title}
+          class={c.cover ? "page_headline_white" : "page_headline"}
+          set:html={c.title}
         />
-        {
-          page.data.titleimg && (
-            <img src={page.data.titleimg} alt={page.data.title} />
-          )
-        }
+        {c.cover && <Image src={c.cover} alt={c.title} width={1080} />}
+        <!-- <img src={page.data.titleimg} alt={page.data.title} /> -->
       </div>
       <nav class="toc">
         <ol>

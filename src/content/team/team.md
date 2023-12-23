@@ -3,14 +3,6 @@ title: Team - AE30
 teamfoto:
   img: /src/assets/media/ai-teamfoto.jpg
   alt: Team Foto AE30 - Atelier Eroicagasse
-text: >-
-  Unser Büro arbeitet unter der Leitung von [Arch DI Gerhard
-  Kratochwil](#members_highlighted), [DI Peter Waldbauer](#members_highlighted)
-  und [Arch DI Klaus Zeinitzer ](#members_highlighted)in unterschiedlichen
-  Arbeitsgruppen. 
-
-
-  Unsere Mitarbeiter werden projektspezifisch eingesetzt und arbeiten in kleinen, effizienten Teams, je nach Projektgröße von Entwurf bis Ausführung an allen Projektphasen. Hier finden sie eine Liste von [aktiven](#members_active) und [ehemaligen](#members_former) Mitarbeitern.
 heading_members_highlighted: Architekten
 heading_members_active: Aktuelle Mitarbeiter
 heading_members_former: Ehemalige Mitarbeiter
@@ -104,7 +96,10 @@ member:
         detail: Vorzeigemitarbeiter
     img: /src/assets/media/portrait_placeholder.jpg
 ---
-# Content
-asdfasdf
-asdf
+  Unser Büro arbeitet unter der Leitung von [Arch DI Gerhard
+  Kratochwil](#members_highlighted), [DI Peter Waldbauer](#members_highlighted)
+  und [Arch DI Klaus Zeinitzer ](#members_highlighted)in unterschiedlichen
+  Arbeitsgruppen. 
 
+
+  Unsere Mitarbeiter werden projektspezifisch eingesetzt und arbeiten in kleinen, effizienten Teams, je nach Projektgröße von Entwurf bis Ausführung an allen Projektphasen. Hier ist eine Liste von [aktiven](#members_active) und [ehemaligen](#members_former) Mitarbeitern.
