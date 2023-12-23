@@ -1,2 +1,29 @@
-body{background: #eeeeee;}
-/* h1{color: red;} */
+:root {
+  @font-face {
+    font-family: "ssp";
+    src: url("/fonts/ssp/SourceSansPro-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: "scp";
+    src: url("/fonts/scp/SourceCodePro-VariableFont_wght.ttf");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  --fsans: "ssp", sans-serif;
+}
+body {
+  font-family: var(--fsans);
+}
+h1 {
+  /* color: red; */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

@@ -9,20 +9,20 @@ TODO:
 - [x] gridcontrols = toggle.filter.btn, top, bottom scroll btn?
 */
 
-import Layout from '../layouts/Layout.astro';
-import GridProj from '../components/GridProj';
+import Layout from "../layouts/Layout.astro";
+import GridProj from "../components/GridProj";
 // import GridControls from '../components/GridControls';
-import GridControlWrapper from '../components/GridControlWrapper';
-import { getCollection } from 'astro:content';
+import GridControlWrapper from "../components/GridControlWrapper";
+import { getCollection } from "astro:content";
 
-import { getImage } from 'astro:assets';
+import { getImage } from "astro:assets";
 
-import { CURRENTYEAR } from '../consts';
+import { CURRENTYEAR } from "../consts";
 
-let allProjects = await getCollection('projects');
+let allProjects = await getCollection("projects");
 // console.log("OlleProjekte:", allProjects);
 
-const settings = await getCollection('settings');
+const settings = await getCollection("settings");
 
 // console.log("OlleSettings:", settings);
 const settingsFilter = settings[0].data.filter;
@@ -32,7 +32,11 @@ const settingFilterTag = settingsFilter.tag;
 const settingFilterYear = settingsFilter.year;
 const settingFilterSize = settingsFilter.size;
 
-const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && !settingFilterYear && !settingFilterSize);
+const noFiltersActiveInCmsSettings =
+  !settingFilterCat &&
+  !settingFilterTag &&
+  !settingFilterYear &&
+  !settingFilterSize;
 // console.log("noFiltersActiveInCmsSettings" , noFiltersActiveInCmsSettings)
 
 // sort allProjects by CMS priority List & by date-added;
@@ -41,8 +45,12 @@ const settingsPrioSort = settings[1].data.PrioList;
 // console.log("settingsPrioSort:", settingsPrioSort);
 
 const sortedProjects = allProjects.sort((a, b) => {
-  const aIndex = settingsPrioSort.findIndex(item => item['relation-proj'] === a.slug);
-  const bIndex = settingsPrioSort.findIndex(item => item['relation-proj'] === b.slug);
+  const aIndex = settingsPrioSort.findIndex(
+    item => item["relation-proj"] === a.slug
+  );
+  const bIndex = settingsPrioSort.findIndex(
+    item => item["relation-proj"] === b.slug
+  );
 
   if (aIndex === -1 && bIndex === -1) {
     return new Date(b.data.publishDate) - new Date(a.data.publishDate);
@@ -59,14 +67,17 @@ const sortedProjects = allProjects.sort((a, b) => {
 // Image Optimization
 // ------------------------------------------------
 
-const orgTitleImgs = allProjects.map((proj, index) => ({ img: proj.data.titleimg.img, index}));
+const orgTitleImgs = allProjects.map((proj, index) => ({
+  img: proj.data.titleimg.img,
+  index,
+}));
 // console.log("orgTitleImgs", orgTitleImgs)
 
 const optTitleImgs = await Promise.all(
-  orgTitleImgs.map(async (covers) => {
+  orgTitleImgs.map(async covers => {
     const img = await getImage({
       src: covers.img,
-      format: 'webp',
+      format: "webp",
       width: 1000,
     });
     return { img /*,  imgIndex: covers.index */ };
@@ -76,18 +87,18 @@ const optTitleImgs = await Promise.all(
 // console.log("opttitleimgs", optTitleImgs);
 
 allProjects = allProjects.map((proj, i) => {
-  return{
+  return {
     ...proj,
     data: {
       ...proj.data,
-      titleimg: optTitleImgs[i]
-    }
+      titleimg: optTitleImgs[i],
+    },
   };
-})
+});
 
 // remove archived projects
 allProjects = allProjects.filter(proj => !proj.data.archived);
-  
+
 /* console.log( "allProjects from INDEX" , allProjects.map((proj,i) => (
   {
     id: proj.id,
@@ -96,50 +107,49 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     archived: proj.data.archived
   }
 ))); */
-
-
 ---
+
+<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+<script>
+  CMS.registerPreviewStyle("src/styles/page.css");
+</script>
+
 <Layout title="AE30" description="gallery" image="">
-
-<section id="grid-gallery" aria-label="gallery grid overview">
-
-    <GridProj
-    client:only
-    projects={allProjects}
-    />
+  <section id="grid-gallery" aria-label="gallery grid overview">
+    <GridProj client:only projects={allProjects} />
     <!-- covers={optTitleImgs} -->
 
-    {!noFiltersActiveInCmsSettings && 
-    <GridControlWrapper
-    client:load
-    projects={allProjects}
-    btnname="Filter Menü ein-/ausblenden"
-    defaultCat="all"
-    defaultTag="all"
-    defaultYear1={1980}
-    defaultYear2={CURRENTYEAR}
-    defaultSize1={0}
-    defaultSize2={10000}
-
-    />
+    {
+      !noFiltersActiveInCmsSettings && (
+        <GridControlWrapper
+          client:load
+          projects={allProjects}
+          btnname="Filter Menü ein-/ausblenden"
+          defaultCat="all"
+          defaultTag="all"
+          defaultYear1={1980}
+          defaultYear2={CURRENTYEAR}
+          defaultSize1={0}
+          defaultSize2={10000}
+        />
+      )
     }
-
-</section>
+  </section>
 </Layout>
 
 <style>
-  #grid-gallery{
+  #grid-gallery {
     display: grid;
     grid-template-columns: repeat(var(--gcolnum), 1fr);
     grid-auto-rows: min-content;
     grid-auto-flow: dense;
 
     align-items: flex-start;
-    gap: calc( 0.5 * var(--ggapspx));
+    gap: calc(0.5 * var(--ggapspx));
     margin-bottom: 10em;
   }
-  @media only screen and (min-width: 64em /* var(--vws) */) { 
-    #grid-gallery{
+  @media only screen and (min-width: 64em /* var(--vws) */) {
+    #grid-gallery {
       gap: var(--ggapspx);
     }
   }
@@ -147,4 +157,3 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     max-width: 80vw;
   } */
 </style>
-
