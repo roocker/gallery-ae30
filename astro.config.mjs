@@ -52,436 +52,6 @@ export default defineConfig({
 
         // COLLECTIONS  -----------------------------------------------
         collections: [
-          /* {
-            name: "doc",
-            label: "Dokumentation",
-            create: false,
-            files: [
-              {
-                file: "/src/content/pages/doc.md",
-                name: "doc",
-                label: "document",
-           fields: [ {label: "Body", name: "body", widget: "markdown"} ],
-
-              }
-            ]
-
-
-          }, */
-
-          // SETTINGS  -----------------------------------------------
-          {
-            name: "settings",
-            label: "Einstellungen",
-            description:
-              "Allgmeine Website Einstellungen. NUR MIT VORSICHT ÄNDERN. ",
-            comment: "NUR MIT VORSICHT ÄNDERN / EDIT ONLY WITH CARE",
-            editor: { preview: false },
-            files: [
-              {
-                name: "settings",
-                label: "Website Einstellungen",
-                file: "src/content/settings/settings.md",
-                fields: [
-                  {
-                    name: "title",
-                    label: "Einstellungen Titel",
-                    comment: "NUR MIT SORGFALT ÄNDERN!",
-                    widget: "hidden",
-                    default: "SETTINGS",
-                  },
-                  {
-                    name: "site-title",
-                    label: "Website Titel",
-                    widget: "string",
-                    hint: "zb AE30 - Atelier Eroicagasse",
-                  },
-                  {
-                    name: "description",
-                    label: "Seitenbeschreibung",
-                    widget: "string",
-                  },
-                  {
-                    name: "main_menu",
-                    label: "Hauptmenü",
-                    widget: "object",
-                    fields: [
-                      {
-                        name: "menu_cats",
-                        label: "Hauptmenü Kategorien",
-                        widget: "list",
-                        fields: [
-                          {
-                            name: "menu_item_cat",
-                            label: "Hauptmenü Kategories Link",
-                            widget: "relation",
-                            collection: "categories",
-                            // multiple: true,
-                            search_fields: ["title"],
-                            value_field: "short",
-                            display_fields: ["title"],
-                          },
-                          {
-                            name: "menue_item_cat_name",
-                            label: "Hauptmenü Kategorie Name",
-                            widget: "string",
-                          },
-                        ],
-                      },
-                      {
-                        name: "menu_pages",
-                        label: "Hauptmenü Pages",
-                        widget: "list",
-                        fields: [
-                          {
-                            name: "menu_item_pages",
-                            label: "Pages",
-                            widget: "relation",
-                            collection: "pages",
-                            search_fields: ["title"],
-                            value_field: "{{slug}}",
-                            display_fields: ["title"],
-                          },
-                          {
-                            name: "menue_item_pages_name",
-                            label: "Hauptmenü Pages Name",
-                            widget: "string",
-                          },
-                        ],
-                      },
-                      {
-                        name: "menu_projects",
-                        label: "Hauptmenü Projekte",
-                        widget: "list",
-                        fields: [
-                          {
-                            name: "menu_item_projects",
-                            label: "Hauptmenü Projekte",
-                            widget: "relation",
-                            // multiple: true,
-                            collection: "projects",
-                            search_fields: ["title"],
-                            value_field: "{{slug}}",
-                            display_fields: ["title"],
-                            options_length: 200,
-                          },
-                          {
-                            name: "menue_item_projects_name",
-                            label: "Hauptmenü Projekte Name",
-                            widget: "string",
-                          },
-                        ],
-                      },
-                    ],
-                  },
-                  {
-                    name: "filter",
-                    label: "Filter Galerie",
-                    widget: "object",
-                    hint: "Filter Optionen für die Startseite an/ausschalten",
-                    fields: [
-                      {
-                        name: "cat",
-                        label: "Kategorie",
-                        widget: "boolean",
-                        hint: "Kategorie Filter = ARGE/Kratochwil/Waldbauer/Zeinitzer/",
-                      },
-                      {
-                        name: "tag",
-                        label: "Typologie Filter",
-                        widget: "boolean",
-                        hint: "Typologie Filter = öffentlich, privat, ...",
-                      },
-                      {
-                        name: "year",
-                        label: "Jahres Filter",
-                        widget: "boolean",
-                        hint: "Jahres Filter = Filter nach Jahreszahlen",
-                      },
-                      {
-                        name: "size",
-                        label: "Größe Filter",
-                        widget: "boolean",
-                        hint: "Größe Filter = Filter nach Objektgröße",
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                name: "sorter",
-                label: "Gallerie Priorität Reihenfolge",
-                file: "src/content/settings/sort.md",
-                fields: [
-                  {
-                    name: "sorter-title",
-                    label: "title",
-                    widget: "string",
-                    hint: "Gelistete Projekte werden nach Reihenfolge vorgereiht, alle anderen werden nach Erstellungs - Datum sortiert",
-                  },
-                  {
-                    name: "PrioList",
-                    label: "Prioritäten Liste",
-                    widget: "list",
-                    fields: [
-                      {
-                        name: "relation-proj",
-                        label: "relation-proj",
-                        widget: "relation",
-                        collection: "projects",
-                        search_fields: ["title"],
-                        value_field: "{{slug}}",
-                        display_fields: ["{{slug}} - Titel:  {{title}}"],
-                        options_length: 2000,
-                      },
-                    ],
-                  },
-                ],
-              },
-
-              // CATEGORIES  -----------------------------------------------
-              // doesn't work, bc cant use relation widget on nested list - fields
-
-              /* {
-                  name: 'categories',
-                  label: 'Haupt-Kategorien',
-                  file: 'src/content/settings/zcats.md',
-                  fields: [
-                    {
-                      name: 'settitlecats',
-                      label: 'title',
-                      widget: 'string',
-                      hidden: true,
-                      hint: 'Haupt Kategorien Erstellen. Achtung! Kategorien sollten nicht gelöscht werden (benötigt anpassen aller Projekte an Änderungen). Zum Anpassen fehlerhafter Projekte nach Änderungen einfach noch einmal die (geänderte bzw. neue) Kategorie in den jeweiligen Projekten auswählen und speichern!',
-                    },
-                    {
-                      name: 'title',
-                      label: 'Kategorien',
-                      widget: 'list',
-                      fields: [
-                        {
-                          name: 'title',
-                          widget: 'string',
-                          label: 'Kategorie Name',
-                          hint: 'Ganzer Name (Groß-/Kleinschreibung) zb.: Kratochwil Gerhard (erstes Wort wird für Kategorien Bezeichnung genutzt)',
-                        },
-                        {
-                          name: 'short',
-                          label: 'Kurzname',
-                          widget: 'string',
-                          hint: 'Kurzname (Kleinschreibung!) zb.: kg; wird für url genutzt',
-                        },
-                        {
-                          name: 'description',
-                          widget: 'string',
-                          label: 'Beschreibung'
-                        }
-                      ]
-                    },
-
-                  ]
-
-
-                }, */
-            ],
-          },
-
-          // TEAM -----------------------------------------------
-          {
-            name: "team",
-            label: "Team",
-            description: "Team Seite",
-            create: false,
-            delete: false,
-            files: [
-              {
-                name: "team",
-                label: "Team",
-                delete: false,
-                file: "src/content/team/team.md",
-
-                fields: [
-                  {
-                    name: "title",
-                    label: "Titel",
-                    widget: "string",
-                  },
-                  {
-                    name: "teamfoto",
-                    widget: "object",
-                    label: "Team Foto",
-                    fields: [
-                      {
-                        name: "img",
-                        widget: "image",
-                        label: "Team Foto",
-                      },
-                      {
-                        name: "alt",
-                        widget: "string",
-                        label: "Teamfoto = Alternativtext",
-                        hint: "Bildtitel sind wichtig für Suchmaschinen & wenn das Bild nicht geladen werden kann!",
-                      },
-                    ],
-                  },
-                  {
-                    name: "text",
-                    widget: "markdown",
-                    required: false,
-                    label: "Team Text 1",
-                  },
-                  {
-                    name: "heading_members_highlighted",
-                    widget: "string",
-                    label: "Überschrift Mitglieder Section (highlighted)",
-                  },
-                  {
-                    name: "heading_members_active",
-                    widget: "string",
-                    label: "Überschrift Mitglieder Section (active)",
-                  },
-                  {
-                    name: "heading_members_former",
-                    widget: "string",
-                    label: "Überschrift Mitglieder Section (former)",
-                  },
-                  {
-                    name: "member",
-                    label: "Team Mitglied",
-                    widget: "list",
-                    multiple: true,
-                    fields: [
-                      {
-                        name: "name",
-                        label: "Name",
-                        widget: "string",
-                        hint: "Titel Vorname Nachname, Titel 2",
-                      },
-                      {
-                        name: "mode",
-                        label: "Auswahl",
-                        widget: "object",
-                        fields: [
-                          {
-                            name: "highlighted",
-                            label: "Hervorgehoben",
-                            required: false,
-                            widget: "boolean",
-                          },
-                          {
-                            name: "former",
-                            label: "Ehemalige/r Mitarbeiter/-in",
-                            required: false,
-                            widget: "boolean",
-                          },
-                          {
-                            name: "archived",
-                            label: "Ausgeblende/r Mitarbeiter/-in",
-                            required: false,
-                            widget: "boolean",
-                          },
-                        ],
-                      },
-                      {
-                        name: "details",
-                        label: "Details",
-                        required: false,
-                        widget: "list",
-                        fields: [
-                          {
-                            name: "description",
-                            label: "Detail Beschreibung",
-                            required: false,
-                            widget: "string",
-                            hint: "optional zb.: Geburtstag, oder Position",
-                          },
-                          {
-                            name: "detail",
-                            label: "Detail",
-                            widget: "string",
-                            hint: "zb.: 01.01.1980, oder Projektleiter",
-                          },
-                        ],
-                      },
-                      {
-                        name: "img",
-                        widget: "image",
-                        label: "Member Foto",
-                        required: false,
-                      },
-                    ],
-                  },
-                ],
-              },
-            ],
-          },
-
-          // }
-          // PAGES  -----------------------------------------------
-          {
-            name: "pages",
-            label: "Seiten",
-            description: "Seiten wie Über uns, Kontakt, Impressum",
-            create: true,
-            delete: true,
-            folder: "src/content/pages",
-            fields: [
-              {
-                name: "title",
-                label: "Titel",
-                widget: "string",
-              },
-              {
-                name: "cover",
-                label: "Titel Bild",
-                widget: "image",
-              },
-              {
-                name: "body",
-                label: "Inhalt",
-                widget: "markdown",
-              },
-            ],
-          },
-
-          // CATEGORIES  -----------------------------------------------
-          {
-            name: "categories",
-            label: "Haupt-Kategorien",
-            description:
-              "Haupt Kategorien Erstellen. Achtung! Kategorien sollten nicht gelöscht werden (benötigt anpassen aller Projekte an Änderungen). Zum Anpassen fehlerhafter Projekte nach Änderungen einfach noch einmal die (geänderte bzw. neue) Kategorie in den jeweiligen Projekten auswählen und speichern!",
-            folder: "src/content/categories",
-            create: true,
-            delete: false,
-            editor: {
-              preview: false,
-            },
-            fields: [
-              {
-                name: "title",
-                widget: "string",
-                label: "Kategorie Name",
-                hint: "Ganzer Name (Groß-/Kleinschreibung) zb.: Kratochwil Gerhard (erstes Wort wird für Kategorien Bezeichnung genutzt)",
-              },
-              {
-                name: "short",
-                label: "Kurzname",
-                widget: "string",
-                hint: "Kurzname (Kleinschreibung!) zb.: kg; wird für url genutzt",
-              },
-              /* {
-                  name: 'url',
-                  widget: 'string',
-                  label: 'Kategorie URL'
-                }, */
-              {
-                name: "description",
-                widget: "string",
-                label: "Beschreibung",
-              },
-            ],
-          },
-
           // PROJECTS  -----------------------------------------------
 
           {
@@ -726,6 +296,419 @@ export default defineConfig({
                   label: 'Karte',
                   required: false
                 } */
+            ],
+          },
+
+          // PAGES  -----------------------------------------------
+          {
+            name: "pages",
+            label: "Seiten",
+            description: "Seiten wie Über uns, Kontakt, Impressum",
+            create: true,
+            delete: true,
+            folder: "src/content/pages",
+            fields: [
+              {
+                name: "title",
+                label: "Titel",
+                widget: "string",
+              },
+              {
+                name: "cover",
+                label: "Titel Bild",
+                widget: "image",
+              },
+              {
+                name: "body",
+                label: "Inhalt",
+                widget: "markdown",
+              },
+            ],
+          },
+
+          // TEAM -----------------------------------------------
+          {
+            name: "team",
+            label: "Team",
+            description: "Team Seite",
+            create: false,
+            delete: false,
+            files: [
+              {
+                name: "team",
+                label: "Team",
+                delete: false,
+                file: "src/content/team/team.md",
+
+                fields: [
+                  {
+                    name: "title",
+                    label: "Titel",
+                    widget: "string",
+                  },
+                  {
+                    name: "teamfoto",
+                    widget: "object",
+                    label: "Team Foto",
+                    fields: [
+                      {
+                        name: "img",
+                        widget: "image",
+                        label: "Team Foto",
+                      },
+                      {
+                        name: "alt",
+                        widget: "string",
+                        label: "Teamfoto = Alternativtext",
+                        hint: "Bildtitel sind wichtig für Suchmaschinen & wenn das Bild nicht geladen werden kann!",
+                      },
+                    ],
+                  },
+                  {
+                    name: "text",
+                    widget: "markdown",
+                    required: false,
+                    label: "Team Text 1",
+                  },
+                  {
+                    name: "heading_members_highlighted",
+                    widget: "string",
+                    label: "Überschrift Mitglieder Section (highlighted)",
+                  },
+                  {
+                    name: "heading_members_active",
+                    widget: "string",
+                    label: "Überschrift Mitglieder Section (active)",
+                  },
+                  {
+                    name: "heading_members_former",
+                    widget: "string",
+                    label: "Überschrift Mitglieder Section (former)",
+                  },
+                  {
+                    name: "member",
+                    label: "Team Mitglied",
+                    widget: "list",
+                    multiple: true,
+                    fields: [
+                      {
+                        name: "name",
+                        label: "Name",
+                        widget: "string",
+                        hint: "Titel Vorname Nachname, Titel 2",
+                      },
+                      {
+                        name: "mode",
+                        label: "Auswahl",
+                        widget: "object",
+                        fields: [
+                          {
+                            name: "highlighted",
+                            label: "Hervorgehoben",
+                            required: false,
+                            widget: "boolean",
+                          },
+                          {
+                            name: "former",
+                            label: "Ehemalige/r Mitarbeiter/-in",
+                            required: false,
+                            widget: "boolean",
+                          },
+                          {
+                            name: "archived",
+                            label: "Ausgeblende/r Mitarbeiter/-in",
+                            required: false,
+                            widget: "boolean",
+                          },
+                        ],
+                      },
+                      {
+                        name: "details",
+                        label: "Details",
+                        required: false,
+                        widget: "list",
+                        fields: [
+                          {
+                            name: "description",
+                            label: "Detail Beschreibung",
+                            required: false,
+                            widget: "string",
+                            hint: "optional zb.: Geburtstag, oder Position",
+                          },
+                          {
+                            name: "detail",
+                            label: "Detail",
+                            widget: "string",
+                            hint: "zb.: 01.01.1980, oder Projektleiter",
+                          },
+                        ],
+                      },
+                      {
+                        name: "img",
+                        widget: "image",
+                        label: "Member Foto",
+                        required: false,
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          // SETTINGS  -----------------------------------------------
+          {
+            name: "settings",
+            label: "Einstellungen",
+            description:
+              "Allgmeine Website Einstellungen. NUR MIT VORSICHT ÄNDERN. ",
+            comment: "NUR MIT VORSICHT ÄNDERN / EDIT ONLY WITH CARE",
+            editor: { preview: false },
+            files: [
+              {
+                name: "settings",
+                label: "Website Einstellungen",
+                file: "src/content/settings/settings.md",
+                fields: [
+                  {
+                    name: "title",
+                    label: "Einstellungen Titel",
+                    comment: "NUR MIT SORGFALT ÄNDERN!",
+                    widget: "hidden",
+                    default: "SETTINGS",
+                  },
+                  {
+                    name: "site-title",
+                    label: "Website Titel",
+                    widget: "string",
+                    hint: "zb AE30 - Atelier Eroicagasse",
+                  },
+                  {
+                    name: "description",
+                    label: "Seitenbeschreibung",
+                    widget: "string",
+                  },
+                  {
+                    name: "main_menu",
+                    label: "Hauptmenü",
+                    widget: "object",
+                    fields: [
+                      {
+                        name: "menu_cats",
+                        label: "Hauptmenü Kategorien",
+                        widget: "list",
+                        fields: [
+                          {
+                            name: "menu_item_cat",
+                            label: "Hauptmenü Kategories Link",
+                            widget: "relation",
+                            collection: "categories",
+                            // multiple: true,
+                            search_fields: ["title"],
+                            value_field: "short",
+                            display_fields: ["title"],
+                          },
+                          {
+                            name: "menue_item_cat_name",
+                            label: "Hauptmenü Kategorie Name",
+                            widget: "string",
+                          },
+                        ],
+                      },
+                      {
+                        name: "menu_pages",
+                        label: "Hauptmenü Pages",
+                        widget: "list",
+                        fields: [
+                          {
+                            name: "menu_item_pages",
+                            label: "Pages",
+                            widget: "relation",
+                            collection: "pages",
+                            search_fields: ["title"],
+                            value_field: "{{slug}}",
+                            display_fields: ["title"],
+                          },
+                          {
+                            name: "menue_item_pages_name",
+                            label: "Hauptmenü Pages Name",
+                            widget: "string",
+                          },
+                        ],
+                      },
+                      {
+                        name: "menu_projects",
+                        label: "Hauptmenü Projekte",
+                        widget: "list",
+                        fields: [
+                          {
+                            name: "menu_item_projects",
+                            label: "Hauptmenü Projekte",
+                            widget: "relation",
+                            // multiple: true,
+                            collection: "projects",
+                            search_fields: ["title"],
+                            value_field: "{{slug}}",
+                            display_fields: ["title"],
+                            options_length: 200,
+                          },
+                          {
+                            name: "menue_item_projects_name",
+                            label: "Hauptmenü Projekte Name",
+                            widget: "string",
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    name: "filter",
+                    label: "Filter Galerie",
+                    widget: "object",
+                    hint: "Filter Optionen für die Startseite an/ausschalten",
+                    fields: [
+                      {
+                        name: "cat",
+                        label: "Kategorie",
+                        widget: "boolean",
+                        hint: "Kategorie Filter = ARGE/Kratochwil/Waldbauer/Zeinitzer/",
+                      },
+                      {
+                        name: "tag",
+                        label: "Typologie Filter",
+                        widget: "boolean",
+                        hint: "Typologie Filter = öffentlich, privat, ...",
+                      },
+                      {
+                        name: "year",
+                        label: "Jahres Filter",
+                        widget: "boolean",
+                        hint: "Jahres Filter = Filter nach Jahreszahlen",
+                      },
+                      {
+                        name: "size",
+                        label: "Größe Filter",
+                        widget: "boolean",
+                        hint: "Größe Filter = Filter nach Objektgröße",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: "sorter",
+                label: "Gallerie Priorität Reihenfolge",
+                file: "src/content/settings/sort.md",
+                fields: [
+                  {
+                    name: "sorter-title",
+                    label: "title",
+                    widget: "string",
+                    hint: "Gelistete Projekte werden nach Reihenfolge vorgereiht, alle anderen werden nach Erstellungs - Datum sortiert",
+                  },
+                  {
+                    name: "PrioList",
+                    label: "Prioritäten Liste",
+                    widget: "list",
+                    fields: [
+                      {
+                        name: "relation-proj",
+                        label: "relation-proj",
+                        widget: "relation",
+                        collection: "projects",
+                        search_fields: ["title"],
+                        value_field: "{{slug}}",
+                        display_fields: ["{{slug}} - Titel:  {{title}}"],
+                        options_length: 2000,
+                      },
+                    ],
+                  },
+                ],
+              },
+
+              // CATEGORIES  -----------------------------------------------
+              // doesn't work, bc cant use relation widget on nested list - fields
+
+              /* {
+                  name: 'categories',
+                  label: 'Haupt-Kategorien',
+                  file: 'src/content/settings/zcats.md',
+                  fields: [
+                    {
+                      name: 'settitlecats',
+                      label: 'title',
+                      widget: 'string',
+                      hidden: true,
+                      hint: 'Haupt Kategorien Erstellen. Achtung! Kategorien sollten nicht gelöscht werden (benötigt anpassen aller Projekte an Änderungen). Zum Anpassen fehlerhafter Projekte nach Änderungen einfach noch einmal die (geänderte bzw. neue) Kategorie in den jeweiligen Projekten auswählen und speichern!',
+                    },
+                    {
+                      name: 'title',
+                      label: 'Kategorien',
+                      widget: 'list',
+                      fields: [
+                        {
+                          name: 'title',
+                          widget: 'string',
+                          label: 'Kategorie Name',
+                          hint: 'Ganzer Name (Groß-/Kleinschreibung) zb.: Kratochwil Gerhard (erstes Wort wird für Kategorien Bezeichnung genutzt)',
+                        },
+                        {
+                          name: 'short',
+                          label: 'Kurzname',
+                          widget: 'string',
+                          hint: 'Kurzname (Kleinschreibung!) zb.: kg; wird für url genutzt',
+                        },
+                        {
+                          name: 'description',
+                          widget: 'string',
+                          label: 'Beschreibung'
+                        }
+                      ]
+                    },
+
+                  ]
+
+
+                }, */
+            ],
+          },
+
+          // }
+
+          // CATEGORIES  -----------------------------------------------
+          {
+            name: "categories",
+            label: "Haupt-Kategorien",
+            description:
+              "Haupt Kategorien Erstellen. Achtung! Kategorien sollten nicht gelöscht werden (benötigt anpassen aller Projekte an Änderungen). Zum Anpassen fehlerhafter Projekte nach Änderungen einfach noch einmal die (geänderte bzw. neue) Kategorie in den jeweiligen Projekten auswählen und speichern!",
+            folder: "src/content/categories",
+            create: true,
+            delete: false,
+            editor: {
+              preview: false,
+            },
+            fields: [
+              {
+                name: "title",
+                widget: "string",
+                label: "Kategorie Name",
+                hint: "Ganzer Name (Groß-/Kleinschreibung) zb.: Kratochwil Gerhard (erstes Wort wird für Kategorien Bezeichnung genutzt)",
+              },
+              {
+                name: "short",
+                label: "Kurzname",
+                widget: "string",
+                hint: "Kurzname (Kleinschreibung!) zb.: kg; wird für url genutzt",
+              },
+              /* {
+                  name: 'url',
+                  widget: 'string',
+                  label: 'Kategorie URL'
+                }, */
+              {
+                name: "description",
+                widget: "string",
+                label: "Beschreibung",
+              },
             ],
           },
         ], //collection ENDE
