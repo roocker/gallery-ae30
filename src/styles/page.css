@@ -59,12 +59,12 @@ h2.members {
 .title_wrapper {
   position: relative;
   width: 100%;
+  text-align: center;
   /* background: green; */
 }
 
 .title_wrapper > img {
-  /* max-width: var(--maxwidth); */
-  min-width: 100%;
+  width: 100%;
   display: block;
   max-height: 35vh;
   object-fit: cover;
