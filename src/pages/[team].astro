@@ -1,23 +1,32 @@
 ---
 import Layout from "../layouts/Layout.astro";
-// import * as teamPage from "../content/pages/team.md";
-import { marked } from "marked";
 import "../styles/page.css";
-import { getCollection, getEntry } from "astro:content";
-import { getImage } from "astro:assets";
+import { getEntry } from "astro:content";
+import { getCollection } from 'astro:content'; 
 
 import { Image } from "astro:assets";
 
-const page = await getEntry("team", "team");
-// const page = await getCollection("team");
+export async function getStaticPaths() {
+  const page = await getCollection("team");
+  /* const page = await getEntry("team", "team");
+  return ({
+    params: { team: page.slug },
+    props: { page }
+  }) */
+  return page.map(page => ({
+    params: { team: page.slug },
+    props: { page }
+  }))
+};
 
-// console.log("PAGECOL:", page);
+const { page } = Astro.props;
+// console.log("TEAMPAGE:", page);
 
-const p = page.data;
+const c = page.data;
+const { Content } = await page.render();
 
-// console.log("frontmatter:", p);
 
-const allMembersWithArchived = p.member;
+const allMembersWithArchived = c.member;
 
 // purge when archived from list!
 
@@ -35,44 +44,21 @@ const actMembers = allMembers.filter(
     !mem.mode || (mem.mode.highlighted !== true && mem.mode.former !== true)
 );
 
-// #rev astro way to render markdown from frontmatter
-const teamText = marked(p.text);
-
-// Image Optimization
-// -----------------------------------
-
-// teamfoto.img
-// member.img
-
-/* const optTeamFoto = await getImage({
-  src: p.teamfoto.img,
-  width: 1000,
-  format: "webp",
-}); */
-
-// console.log("OPTTEAMFOTO:", optTeamFoto.src);
-
-// ALT
-// import budl from "~/assets/media/ai-teamfoto.jpg";
-// import(page.teamfoto.img).then(budl);
-
-// import budl2 from "page.teamfoto.img";
-
-// const optTeamFoto = getImage(page.teamfoto.img);
-// console.log("whooooo", budl)
-//
-console.log("alt:", p.teamfoto.alt);
 ---
 
 <Layout title="AE30 - Team" description="Team" image="">
   <section class="page_sect" aria-label="Team Content">
     <section class="block group">
       <div class="title_wrapper tphoto">
-        <h1 class="page_headline_white" set:html={p.title} />
-        <Image src={p.teamfoto.img} alt={p.teamfoto.alt} width={1080} />
+        <h1 class="page_headline_white" set:html={c.title} />
+        <Image src={c.teamfoto.img} alt={c.teamfoto.alt} width={1080} />
       </div>
 
-      <div class="text" set:html={teamText} />
+      <!-- <div class="text" set:html={teamText} /> -->
+      <div class="text">
+        <Content />
+
+      </div>
 
       <div class="next_control">
         <button
@@ -133,7 +119,7 @@ console.log("alt:", p.teamfoto.alt);
     </section>
 
     <section id="members_active" class="block members">
-      <h2 class="members">{p.heading_members_active}</h2>
+      <h2 class="members">{c.heading_members_active}</h2>
 
       <ul class="team_list active">
         {
@@ -179,7 +165,7 @@ console.log("alt:", p.teamfoto.alt);
     </section>
 
     <section id="members_former" class="block members">
-      <h2 class="members">{p.heading_members_former}</h2>
+      <h2 class="members">{c.heading_members_former}</h2>
 
       <ul class="team_list former">
         {forMembers.map(mem => <li key={mem.name}>&nbsp;{mem.name}, </li>)}

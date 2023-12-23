@@ -424,6 +424,7 @@ code {
 ol li::marker {
   /* float: left; */
 }
-img {
+.cont img {
   width: clamp(50%, 100%, 100%);
+  height: auto;
 }

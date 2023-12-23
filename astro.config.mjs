@@ -33,7 +33,7 @@ export default defineConfig({
         locale: "de",
         publish_mode: "editorial_workflow",
         media_folder: "/src/assets/media/",
-        public_folder: "/src/assets/media",
+        public_folder: "../../assets/media",
         slug: {
           /* sanitizes filenames and media */
           encoding: "ascii",
@@ -74,7 +74,7 @@ export default defineConfig({
             name: "settings",
             label: "Einstellungen",
             description:
-              'Allgmeine Website Einstellungen. NUR MIT VORSICHT ÄNDERN. ',
+              "Allgmeine Website Einstellungen. NUR MIT VORSICHT ÄNDERN. ",
             comment: "NUR MIT VORSICHT ÄNDERN / EDIT ONLY WITH CARE",
             editor: { preview: false },
             files: [
@@ -286,20 +286,19 @@ export default defineConfig({
             ],
           },
 
-          // PAGES  -----------------------------------------------
+          // TEAM -----------------------------------------------
           {
-            name: "pages",
-            label: "Seiten",
-            description: "Seiten wie Über uns, Kontakt, Impressum",
+            name: "team",
+            label: "Team",
+            description: "Team Seite",
             create: false,
             delete: false,
-            // folder: 'src/content/pages',
             files: [
               {
                 name: "team",
                 label: "Team",
                 delete: false,
-                file: "src/content/pages/team.md",
+                file: "src/content/team/team.md",
 
                 fields: [
                   {
@@ -414,64 +413,33 @@ export default defineConfig({
                   },
                 ],
               },
+            ],
+          },
+
+          // }
+          // PAGES  -----------------------------------------------
+          {
+            name: "pages",
+            label: "Seiten",
+            description: "Seiten wie Über uns, Kontakt, Impressum",
+            create: true,
+            delete: true,
+            folder: "src/content/pages",
+            fields: [
               {
-                name: "about",
-                label: "Über uns",
-                file: "src/content/pages/about.md",
-                fields: [
-                  {
-                    name: "title",
-                    label: "Titel",
-                    widget: "string",
-                  },
-                  {
-                    name: "titleimg",
-                    label: "Titel Bild",
-                    widget: "image",
-                  },
-                  {
-                    name: "body",
-                    label: "Inhalt",
-                    widget: "markdown",
-                  },
-                  /* {
-                      name: 'template',
-                      label: 'Design Template',
-                      widget: 'select',
-                      multiple: false,
-                      options: ["team", "about", "impressum", "sonstiges"],
-                    },
-                    {
-                      name: 'menu',
-                      label: 'Inhalts Menü (QuickJump)',
-                      widget: 'string',
-                      hint: 'Komma geteiltes Submenu mit Link, um schnell zu Überschriften zu springen; #rev ',
-                    }, */
-                ],
+                name: "title",
+                label: "Titel",
+                widget: "string",
               },
-
               {
-                name: "impressum",
-                label: "Impressum",
-                file: "src/content/pages/impressum.md",
-
-                fields: [
-                  {
-                    name: "title",
-                    label: "Titel",
-                    widget: "string",
-                  },
-                  {
-                    name: "titleimg",
-                    label: "Titel Bild",
-                    widget: "image",
-                  },
-                  {
-                    name: "body",
-                    label: "Inhalt",
-                    widget: "markdown",
-                  },
-                ],
+                name: "cover",
+                label: "Titel Bild",
+                widget: "image",
+              },
+              {
+                name: "body",
+                label: "Inhalt",
+                widget: "markdown",
               },
             ],
           },
