@@ -1,9 +1,6 @@
 ---
 title: Dokumentation Website AE30 
 ---
-<!-- # Abkürzungen: -->
-<!-- - [Content Managment System](/admin) -->
-<!-- - [Content Managment System: Projekte](/admin#/collections/projects) -->
 
 # Wie erstelle/bearbeite ich ein Projekt?
 
