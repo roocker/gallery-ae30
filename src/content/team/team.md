@@ -18,17 +18,13 @@ member:
         detail: 16.08.1960
       - description: "Spezialisierungen:"
         detail: Objektbau, Laborbau, Universitäten, Entwurf bis Bauabwicklung
-  - name: DI Peter Waldbauer
+  - name: DI Sabine Chihadeh
     img: /src/assets/media/portrait_placeholder.jpg
-    mode:
-      highlighted: true
     details:
       - description: ""
-        detail: Architekt, Projektleiter
-      - description: null
-        detail: 16.08.1960
-      - description: "Spezialisierungen:"
-        detail: Einfamilienhäuser, Ausstellungsräume
+        detail: Projektleiterin
+      - description: seit
+        detail: 2002
   - name: DI Klaus Zeinitzer
     img: /src/assets/media/portrait_placeholder.jpg
     mode:
@@ -40,13 +36,11 @@ member:
         detail: 16.08.1960
       - description: "Spezialisierungen:"
         detail: Objektbau, Schulen, Universitäten, Entwurf bis Bauabwicklung
-  - name: DI Sabine Chihadeh
+  - name: DI Stefan Huber
     img: /src/assets/media/portrait_placeholder.jpg
     details:
       - description: ""
-        detail: Projektleiterin
-      - description: seit
-        detail: 2002
+        detail: Projektleiter
   - name: DI Katharina Giessenbacher
     img: /src/assets/media/portrait_placeholder.jpg
     details:
@@ -54,11 +48,17 @@ member:
         detail: Projektleiterin
       - description: seit
         detail: 2002
-  - name: DI Stefan Huber
+  - name: DI Peter Waldbauer
     img: /src/assets/media/portrait_placeholder.jpg
+    mode:
+      highlighted: true
     details:
       - description: ""
-        detail: Projektleiter
+        detail: Architekt, Projektleiter
+      - description: null
+        detail: 16.08.1960
+      - description: "Spezialisierungen:"
+        detail: Einfamilienhäuser, Ausstellungsräume
   - name: Iris Göttlinger
     img: /src/assets/media/portrait_placeholder.jpg
     details:
@@ -74,19 +74,15 @@ member:
       - detail: Mentor
       - detail: EDV Beauftragter
     img: /src/assets/media/1000031317.jpg
-  - name: Maria Harman
-    mode:
-      former: true
-  - name: Benedikt Welz
-    mode:
-      former: true
-      archived: true
   - name: Elisabeth Kofler
+    mode:
+      former: true
+  - name: Maria Harman
     mode:
       former: true
   - name: Max Mustermann
     mode:
-      archived: true
+      archived: false
       highlighted: false
       former: false
     details:
@@ -94,7 +90,11 @@ member:
         detail: 01.01.1988
       - description: Aufgabenbereich
         detail: Vorzeigemitarbeiter
-    img: /src/assets/media/portrait_placeholder.jpg
+    img: ../../assets/media/1000031349.jpg
+  - name: Benedikt Welz
+    mode:
+      former: true
+      archived: true
 ---
   Unser Büro arbeitet unter der Leitung von [Arch DI Gerhard
   Kratochwil](#members_highlighted), [DI Peter Waldbauer](#members_highlighted)
