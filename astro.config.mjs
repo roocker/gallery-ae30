@@ -1,12 +1,5 @@
-/* 
-  TODO
-- [ ] categories short = url (arge hat nix problem)
-- [ ] jahreszahl auf string mit REGEX umstellen
-- [ ] settings and ?pages? should be files: -file: fields https://decapcms.org/docs/collection-types
-
-  */
 import { defineConfig, sharpImageService } from "astro/config";
-import NetlifyCMS from "astro-netlify-cms";
+import NetlifyCMS from "@jee-r/astro-decap-cms";
 // import { de } from 'netlify-cms-locales';
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
@@ -15,6 +8,13 @@ import react from "@astrojs/react";
 
 // CMS.registerLocale('de', de);
 // https://astro.build/config
+/* 
+  TODO #rev
+- [ ] categories short = url (arge hat nix problem)
+- [ ] jahreszahl auf string mit REGEX umstellen
+- [ ] settings and ?pages? should be files: -file: fields https://decapcms.org/docs/collection-types
+
+  */
 export default defineConfig({
   site: "https://ae30.at",
   image: {
@@ -44,7 +44,8 @@ export default defineConfig({
         display_url: "https://ae30-test.netlify.app",
         logo_url: "/ae30-logo.svg",
         /* #rev looks good doen't work */
-        show_preview_links: true,
+        load_config_file: false,
+        show_preview_links: false,
         disableIdentityWidgetInjection: true,
 
         // https://github.com/decaporg/decap-cms/blob/master/dev-test/config.yml
@@ -624,55 +625,8 @@ export default defineConfig({
                   },
                 ],
               },
-
-              // CATEGORIES  -----------------------------------------------
-              // doesn't work, bc cant use relation widget on nested list - fields
-
-              /* {
-                  name: 'categories',
-                  label: 'Haupt-Kategorien',
-                  file: 'src/content/settings/zcats.md',
-                  fields: [
-                    {
-                      name: 'settitlecats',
-                      label: 'title',
-                      widget: 'string',
-                      hidden: true,
-                      hint: 'Haupt Kategorien Erstellen. Achtung! Kategorien sollten nicht gelöscht werden (benötigt anpassen aller Projekte an Änderungen). Zum Anpassen fehlerhafter Projekte nach Änderungen einfach noch einmal die (geänderte bzw. neue) Kategorie in den jeweiligen Projekten auswählen und speichern!',
-                    },
-                    {
-                      name: 'title',
-                      label: 'Kategorien',
-                      widget: 'list',
-                      fields: [
-                        {
-                          name: 'title',
-                          widget: 'string',
-                          label: 'Kategorie Name',
-                          hint: 'Ganzer Name (Groß-/Kleinschreibung) zb.: Kratochwil Gerhard (erstes Wort wird für Kategorien Bezeichnung genutzt)',
-                        },
-                        {
-                          name: 'short',
-                          label: 'Kurzname',
-                          widget: 'string',
-                          hint: 'Kurzname (Kleinschreibung!) zb.: kg; wird für url genutzt',
-                        },
-                        {
-                          name: 'description',
-                          widget: 'string',
-                          label: 'Beschreibung'
-                        }
-                      ]
-                    },
-
-                  ]
-
-
-                }, */
             ],
           },
-
-          // }
 
           // CATEGORIES  -----------------------------------------------
           {
@@ -699,11 +653,6 @@ export default defineConfig({
                 widget: "string",
                 hint: "Kurzname (Kleinschreibung!) zb.: kg; wird für url genutzt",
               },
-              /* {
-                  name: 'url',
-                  widget: 'string',
-                  label: 'Kategorie URL'
-                }, */
               {
                 name: "description",
                 widget: "string",
@@ -713,14 +662,10 @@ export default defineConfig({
           },
         ], //collection ENDE
       },
-      previewStyles: ["/src/styles/preview.css"],
+      // previewStyles: ["/src/styles/preview.css"],
     }),
     mdx(),
     sitemap(),
     react(),
   ],
 });
-
-/* image({
-        serviceEntryPoint: '@astrojs/image/sharp'
-      }) */
