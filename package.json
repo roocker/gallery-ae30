@@ -23,10 +23,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-slider": "^2.0.6",
-    "sharp": "^0.32.6"
+    "sharp": "^0.32.6",
+    "@fontsource-variable/material-symbols-rounded": "^5.0.19"
   },
   "overrides": {
-    "@jee-r/astro-decap-cms" :{
+    "@jee-r/astro-decap-cms": {
       "astro": "^4.1.1"
     },
     "decap-cms-app": {

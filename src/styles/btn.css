@@ -1,6 +1,6 @@
-button.btn{
+button.btn {
   padding: 0;
-  margin: 0 .2em 0 .2em;
+  margin: 0 0.2em 0 0.2em;
   height: 100%;
   aspect-ratio: 1;
 
@@ -11,45 +11,52 @@ button.btn{
 
   backdrop-filter: blur(2px);
   color: var(--cgrey);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-button.btn:hover{
+button.btn:hover {
   color: var(--cblack);
   cursor: pointer;
   /* background: orange; */
 }
-svg.btn_svg{
+svg.btn_svg {
   height: 100%;
   width: 100%;
   /* background: green; */
-
 }
 
-use.btn_use{
-    stroke-linecap: square;
-    stroke-linejoin: square;
-    stroke-dasharray: none;
-    paint-order: fill;
+use.btn_use {
+  stroke-linecap: square;
+  stroke-linejoin: square;
+  stroke-dasharray: none;
+  paint-order: fill;
 
-    fill: currentColor;
-    stroke: none;
-  }
-.btn_use{
-  transform: translate(0,0);
+  fill: currentColor;
+  stroke: none;
+}
+.btn_use {
+  transform: translate(0, 0);
   background: blue;
 }
 
-.btn_arrowL{
+.btn_arrowL {
   transform: rotate(180deg) !important;
 }
-.btn_play{
+.btn_play {
   border: 2px solid var(--cgrey) !important;
 }
 
-button.btn:hover, button.btn:active{
-    animation: buttonHoverZoom 0.3s ease-in-out forwards;
+button.btn:hover,
+button.btn:active {
+  animation: buttonHoverZoom 0.3s ease-in-out forwards;
   border: 2px solid var(--cgrey) !important;
+}
+@keyframes buttonHoverZoom {
+  0% {
+    transform: scale(0.9);
   }
-  @keyframes buttonHoverZoom{
-    0% { transform: scale(.9); }
-    100% { transform: scale(1); }
+  100% {
+    transform: scale(1);
   }
+}

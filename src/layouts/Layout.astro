@@ -5,18 +5,20 @@ TODO:
 - [ ] Mobile WIDE/projekte wierd
 
 */
-import '../styles/normalize.css';
-import Nav from '../components/Nav.astro';
+
+import "../styles/normalize.css";
+import Nav from "../components/Nav.astro";
+import "@fontsource-variable/material-symbols-rounded";
 
 export interface Props {
-title: string;
-description: string;
-image?: string;
+  title: string;
+  description: string;
+  image?: string;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site); // #rev??
 
-const { title, description, image = '/placeholder-social.jpg'} = Astro.props; // #rev??
+const { title, description, image = "/placeholder-social.jpg" } = Astro.props; // #rev??
 
 // DS Variables
 // fonts & typography
@@ -39,14 +41,15 @@ const fsize_h4 = "1rem";
 // 1 em = 16px
 // bei 366/367px passiert was! bilder werden nicht mehr kleiner??
 
-const vwP:string = 37.5 + 'em';     // <600px  (max-width) Mobile Phones <600px (max)
-const vwPl:string = 37.5 + 'em';    // >600px  (min-width) Landscape Mobile Phones and Portrait Tablet >600px (min)
-const vwT:string = 48 + 'em';     // >768px  (min-width) Landscape Tablets 
-const vwS:string = 64 + 'em';  // >1024px (min-width) Desktop S
-const vwM:string = 85.375 + 'em';  // >1366px (min-width) Desktop M
-const vwL:string = 120 + 'em';  // >1920px (min-width) Desktop L
-const vwTV:string = 160 + 'em';        // >2560px (min-width) TV 4k 
-const vwRetina:string = "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)"; // retina
+const vwP: string = 37.5 + "em"; // <600px  (max-width) Mobile Phones <600px (max)
+const vwPl: string = 37.5 + "em"; // >600px  (min-width) Landscape Mobile Phones and Portrait Tablet >600px (min)
+const vwT: string = 48 + "em"; // >768px  (min-width) Landscape Tablets
+const vwS: string = 64 + "em"; // >1024px (min-width) Desktop S
+const vwM: string = 85.375 + "em"; // >1366px (min-width) Desktop M
+const vwL: string = 120 + "em"; // >1920px (min-width) Desktop L
+const vwTV: string = 160 + "em"; // >2560px (min-width) TV 4k
+const vwRetina: string =
+  "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi)"; // retina
 
 // grid
 //-------------------------------------------------
@@ -59,24 +62,24 @@ const vwRetina:string = "(-webkit-min-device-pixel-ratio: 2), (min-resolution: 1
 
 // gmodul, gcolnum, ggaps, ggapspx, gmarginL, gmarginLpx,
 
-const gmodul:number = 16; // =16
-const gmodulpx:string = 16 + 'px'; // =16px
-const gmodulem:string = 1 + 'em'; // =16px=1em
-const gcolnum:number = 12;
-const ggaps:number = 2 * gmodul;  // 32px=2em
-const ggapspx:string = ggaps + 'px'; 
-const ggapsem:string = (ggaps / 16) + 'em';
-const gmargin:number = 2 * gmodul; // 32
-const gmarginpx:string = gmargin + "px";
-const gmarginem:string = (gmargin / 16) + "em";
+const gmodul: number = 16; // =16
+const gmodulpx: string = 16 + "px"; // =16px
+const gmodulem: string = 1 + "em"; // =16px=1em
+const gcolnum: number = 12;
+const ggaps: number = 2 * gmodul; // 32px=2em
+const ggapspx: string = ggaps + "px";
+const ggapsem: string = ggaps / 16 + "em";
+const gmargin: number = 2 * gmodul; // 32
+const gmarginpx: string = gmargin + "px";
+const gmarginem: string = gmargin / 16 + "em";
 
-    /* --lay-margin-M: 64px; */
-    /* --lay-margin-S: 64px; */
-    /* --lay-margin-T: 64px; */
-    /* --lay-margin-H: 16px; */
+/* --lay-margin-M: 64px; */
+/* --lay-margin-S: 64px; */
+/* --lay-margin-T: 64px; */
+/* --lay-margin-H: 16px; */
 
-// const growheightpx =  "16px"; 
-// img-proportion-gal-L: 1.5; 
+// const growheightpx =  "16px";
+// img-proportion-gal-L: 1.5;
 // row-height-L: 16px;
 
 // colors
@@ -84,7 +87,7 @@ const gmarginem:string = (gmargin / 16) + "em";
 // caccent, caccent2, cblack, cwhite, cgrey, cgrey20, cgrey60, cgrey80, cbg,
 
 const caccent = "#1111ee";
-const caccent2 ="#9f1db8";
+const caccent2 = "#9f1db8";
 const cblack = "#111111";
 const cblack20 = "rgb(1,1,1,.2)";
 const cblack30 = "rgb(1,1,1,.3)";
@@ -97,8 +100,8 @@ const cwhite40 = "rgb(255,255,255,.4)";
 const cwhite50 = "rgb(255,255,255,.5)";
 const cwhite60 = "rgb(255,255,255,.6)";
 const cwhite80 = "rgb(255,255,255,.8)";
-const cgrey = "#222"; 
-const cgrey20 = "#DDDDDD"; 
+const cgrey = "#222";
+const cgrey20 = "#DDDDDD";
 const cgrey20rgb = "rgb(221,221,221,.8)";
 const cgrey60 = "#BBBBBB";
 const cgrey80 = "#AAAAAA";
@@ -107,11 +110,9 @@ const cbg = cwhite; // light dark mode!
 const cfg = cblack;
 ---
 
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
   <head>
-
     <!-- Global Metadata -->
 
     <meta charset="utf-8" />
@@ -144,36 +145,83 @@ const cfg = cblack;
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(image, Astro.url)} />
-
   </head>
   <body>
     <main>
       <!-- <p>{ggapspx} , {ggapsem} , {gmargin}</p> -->
-       <Nav/> 
-        <div class="wrapper">
-          <slot/>
-        </div> 
+      <Nav />
+      <div class="wrapper">
+        <slot />
+      </div>
     </main>
   </body>
 </html>
 
-
-<style is:global define:vars={{ 
-  fsans, fsans2, fsans3, fserif, fserif2, fsize, fline_height, fsize_title, fsize_h2, fsize_h3, fsize_h4,
-  gmodul, gmodulpx, gmodulem,gcolnum, ggaps, ggapspx, ggapsem, gmargin, gmarginpx, gmarginem,
-  caccent, caccent2, cblack, cblack20, cblack30, cblack50, cblack80, cwhite, cwhite20, cwhite30, cwhite40, cwhite50,cwhite60, cwhite80, cgrey, cgrey20, cgrey60,cgrey20rgb, cgrey80, cbg, cfg,
-  vwP, vwPl, vwT, vwS, vwM, vwL, vwTV, vwRetina, }}>
-
+<style
+  is:global
+  define:vars={{
+    fsans,
+    fsans2,
+    fsans3,
+    fserif,
+    fserif2,
+    fsize,
+    fline_height,
+    fsize_title,
+    fsize_h2,
+    fsize_h3,
+    fsize_h4,
+    gmodul,
+    gmodulpx,
+    gmodulem,
+    gcolnum,
+    ggaps,
+    ggapspx,
+    ggapsem,
+    gmargin,
+    gmarginpx,
+    gmarginem,
+    caccent,
+    caccent2,
+    cblack,
+    cblack20,
+    cblack30,
+    cblack50,
+    cblack80,
+    cwhite,
+    cwhite20,
+    cwhite30,
+    cwhite40,
+    cwhite50,
+    cwhite60,
+    cwhite80,
+    cgrey,
+    cgrey20,
+    cgrey60,
+    cgrey20rgb,
+    cgrey80,
+    cbg,
+    cfg,
+    vwP,
+    vwPl,
+    vwT,
+    vwS,
+    vwM,
+    vwL,
+    vwTV,
+    vwRetina,
+  }}
+>
   @font-face {
-    font-family: 'ssp';
-    src: url('/fonts/ssp/SourceSansPro-Regular.ttf');
+    font-family: "ssp";
+    src: url("/fonts/ssp/SourceSansPro-Regular.ttf");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
   }
   @font-face {
-    font-family: 'scp';
-    src: url('/fonts/scp/SourceCodePro-VariableFont_wght.ttf');
+    font-family: "scp";
+    src: url("/fonts/scp/SourceCodePro-VariableFont_wght.ttf");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -181,8 +229,7 @@ const cfg = cblack;
   html {
     scroll-behavior: smooth;
   }
-  body{
-
+  body {
     overflow-x: hidden;
 
     overflow-y: auto;
@@ -201,57 +248,79 @@ const cfg = cblack;
     /* background: var(--cgrey60); */
     /* border-bottom: 1px solid var(--caccent2); */
   }
-  a:hover{
+  a:hover {
     color: var(--cblack);
     /* background: ; */
     /* border-bottom: 1px solid var(--caccent2); */
   }
-  main{ 
+  main {
     overflow: hidden;
     /* overflow-x: hidden; */
     /* #BUG mobile!  */
-    /* height: 100vh */ 
+    /* height: 100vh */
     /* background: yellow; */
   }
-  .wrapper{
+  .wrapper {
     margin-top: calc(var(--gmodulem) * 3);
     /* background: green ; */
-  } 
-  @media only screen and (min-width: 64em /* var(--vwS) */) { 
-    .wrapper{
+  }
+  @media only screen and (min-width: 64em /* var(--vwS) */) {
+    .wrapper {
       margin-top: calc(var(--gmodulem) * 4);
-      margin-left:  var(--gmarginem);
+      margin-left: var(--gmarginem);
       margin-right: var(--gmarginem);
     }
   }
-  @media only screen and (min-width: 85.375em /* var(--vwM) */) { 
-    .wrapper{
+  @media only screen and (min-width: 85.375em /* var(--vwM) */) {
+    .wrapper {
       /* margin: calc( 2 * var(--gmarginem) / 1.5) calc( 2 * var(--gmarginem)) 0 calc( 2 * var(--gmarginem)); */
-      margin-left:  calc( 2 * var(--gmarginem));
-      margin-right: calc( 2 * var(--gmarginem));
+      margin-left: calc(2 * var(--gmarginem));
+      margin-right: calc(2 * var(--gmarginem));
     }
   }
-  .link:hover{
+  .link:hover {
     cursor: pointer;
     /* cursor: url(l.cur), auto; */
     /* cursor: url(r.cur), auto; */
     /* cursor: w-resize; */
     /* cursor: e-resize; */
   }
-  .hidden{
-    display:none;
+  .hidden {
+    display: none;
   }
-  figure{margin:0;} /* #rev irgendwo bekommt figure einen margin? why? ??? */
+  figure {
+    margin: 0;
+  } /* #rev irgendwo bekommt figure einen margin? why? ??? */
 
-.svg-icon-use{
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: currentColor;
-  stroke: currentColor;
-}
-:focus{
-  outline:thin;
-}
+  .svg-icon-use {
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: currentColor;
+    stroke: currentColor;
+  }
+  :focus {
+    outline: thin;
+  }
+
+  .material-symbols-rounded {
+    font-variation-settings:
+      "FILL" 1,
+      "wght" 400,
+      "GRAD" 0,
+      "opsz" 24;
+  }
+  .material-symbols-rounded {
+    font-family: "Material Symbols Rounded Variable";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 32px;
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  }
 </style>
-

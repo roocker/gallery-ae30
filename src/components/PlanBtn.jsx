@@ -1,10 +1,13 @@
-import { useStore } from '@nanostores/react';
-import { stateSlideshow,  stateSlideshowIndex, stateSlideshowZoom} from '../states';
-import '../styles/btn.css'
-import React from 'react';
+import { useStore } from "@nanostores/react";
+import {
+  stateSlideshow,
+  stateSlideshowIndex,
+  stateSlideshowZoom,
+} from "../states";
+import "../styles/btn.css";
+import React from "react";
 
 function PlanBtn({ children }) {
-
   // const [toggle, setToggle] = useStore(stateSlideshow);
   const zToggle = useStore(stateSlideshowZoom);
   const sToggle = useStore(stateSlideshow);
@@ -12,7 +15,7 @@ function PlanBtn({ children }) {
     stateSlideshow.set(!sToggle);
     stateSlideshowIndex.set(0);
     stateSlideshowZoom.set(false);
-  }
+  };
 
   return (
     // console.log(children.props.value),
@@ -20,14 +23,14 @@ function PlanBtn({ children }) {
       onClick={setToggle}
       className="btn modal_toggle_btn"
       title={children.props.value}
-      >
-    <svg className="btn_svg">
-      <use className="btn_use" href="/svg.svg#plans"/>
-    </svg>
-
+    >
+      <span class="material-symbols-rounded"> architecture</span>
     </button>
   );
 }
 
-
 export default PlanBtn;
+
+/* <svg className="btn_svg">
+      <use className="btn_use" href="/svg.svg#plans"/>
+    </svg> */
