@@ -1,20 +1,11 @@
 import { defineConfig, sharpImageService } from "astro/config";
 import NetlifyCMS from "@jee-r/astro-decap-cms";
+
 // import { de } from 'netlify-cms-locales';
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
-// import image from "@astrojs/image";
 import react from "@astrojs/react";
 
-// CMS.registerLocale('de', de);
-// https://astro.build/config
-/* 
-  TODO #rev
-- [ ] categories short = url (arge hat nix problem)
-- [ ] jahreszahl auf string mit REGEX umstellen
-- [ ] settings and ?pages? should be files: -file: fields https://decapcms.org/docs/collection-types
-
-  */
 export default defineConfig({
   site: "https://ae30.at",
   image: {
@@ -85,7 +76,7 @@ export default defineConfig({
               {
                 name: "archived",
                 widget: "boolean",
-                label: "Archiviern (ein = archiviert!",
+                label: "Archiviern (ein = archiviert!)",
                 required: false,
                 hint: "Projekt erscheint nicht in der Gallerie, ist aber über URL aufrufbar (ae30.at/categorie/projekt) (ae30.at/arge/ba) & ae30.at/archiv ",
               },
@@ -176,16 +167,21 @@ export default defineConfig({
                   {
                     name: "year",
                     label: "Jahr",
-                    widget: "date",
-                    format: "YYYY",
+                    widget: "string",
+                    pattern: [
+                      "^.{4}$",
+                      "Muss eine 4-stellige Zahl sein (zb.: 2020)",
+                    ], // \d for digit doesnt work?
                     hint: "Jahr VON (wichtig ist die Jahreszahl), im Picker auf Jahreszahl klicken!",
                   },
                   {
                     name: "year2",
                     label: "Jahr2",
-                    widget: "date",
-                    format: "YYYY",
-                    time_format: false,
+                    widget: "string",
+                    pattern: [
+                      "^.{4}$",
+                      "Muss eine 4-stellige Zahl sein (zb.: 2020)",
+                    ], // \d for digit doesnt work?
                     hint: "Jahr BIS (wichtig ist die Jahreszahl)",
                   },
                   {
@@ -242,13 +238,16 @@ export default defineConfig({
 
               {
                 name: "fotos",
+                label: "Fotos",
                 widget: "list",
-                // required: false,
+                min: 1,
+                max: 100,
+                summary: "{{fields.alt}}",
                 fields: [
                   {
                     name: "foto",
-                    widget: "image",
                     label: "Foto",
+                    widget: "image",
                   },
                   {
                     name: "alt",
@@ -262,7 +261,10 @@ export default defineConfig({
               {
                 name: "plans",
                 widget: "list",
+                min: 1,
+                max: 100,
                 required: false,
+                summary: "{{fields.alt}}",
                 fields: [
                   {
                     name: "plan",
@@ -661,6 +663,7 @@ export default defineConfig({
             ],
           },
         ], //collection ENDE
+        previewStyles: ["/src/styles/preview.css"],
       },
       // previewStyles: ["/src/styles/preview.css"],
     }),
