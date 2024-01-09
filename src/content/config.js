@@ -70,9 +70,11 @@ const projCollection = defineCollection({
       category: z.string(),
       project_keys: z.object({
         status: z.string().optional(),
-        year: z.string().transform(string => new Date(string)),
-        year2: z.string().transform(string => new Date(string)),
-        area: z.string(),
+        year: z.number(),
+        year2: z.number(),
+        // year: z.string().transform(string => new Date(string)),
+        // year2: z.string().transform(string => new Date(string)),
+        area: z.number(),
         tags: z.array(z.string()),
       }),
       titleimg: z.object({

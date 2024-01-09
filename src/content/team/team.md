@@ -1,14 +1,14 @@
 ---
 title: Team - AE30
 teamfoto:
-  img: /src/assets/media/ai-teamfoto.jpg
+  img: ../media/ai-teamfoto.jpg
   alt: Team Foto AE30 - Atelier Eroicagasse
 heading_members_highlighted: Architekten
 heading_members_active: Aktuelle Mitarbeiter
 heading_members_former: Ehemalige Mitarbeiter
 member:
   - name: Arch DI Gerhard Kratochwil
-    img: /src/assets/media/portrait_placeholder.jpg
+    img: ../media/portrait_placeholder.jpg
     mode:
       highlighted: true
     details:
@@ -19,14 +19,14 @@ member:
       - description: "Spezialisierungen:"
         detail: Objektbau, Laborbau, Universitäten, Entwurf bis Bauabwicklung
   - name: DI Sabine Chihadeh
-    img: /src/assets/media/portrait_placeholder.jpg
+    img: ../media/portrait_placeholder.jpg
     details:
       - description: ""
         detail: Projektleiterin
       - description: seit
         detail: 2002
   - name: DI Klaus Zeinitzer
-    img: /src/assets/media/portrait_placeholder.jpg
+    img: ../media/portrait_placeholder.jpg
     mode:
       highlighted: true
     details:
@@ -37,19 +37,19 @@ member:
       - description: "Spezialisierungen:"
         detail: Objektbau, Schulen, Universitäten, Entwurf bis Bauabwicklung
   - name: DI Stefan Huber
-    img: /src/assets/media/portrait_placeholder.jpg
+    img: ../media/portrait_placeholder.jpg
     details:
       - description: ""
         detail: Projektleiter
   - name: DI Katharina Giessenbacher
-    img: /src/assets/media/portrait_placeholder.jpg
+    img: ../media/portrait_placeholder.jpg
     details:
       - description: ""
         detail: Projektleiterin
       - description: seit
         detail: 2002
   - name: DI Peter Waldbauer
-    img: /src/assets/media/portrait_placeholder.jpg
+    img: ../media/portrait_placeholder.jpg
     mode:
       highlighted: true
     details:
@@ -60,7 +60,7 @@ member:
       - description: "Spezialisierungen:"
         detail: Einfamilienhäuser, Ausstellungsräume
   - name: Iris Göttlinger
-    img: /src/assets/media/portrait_placeholder.jpg
+    img: ../media/portrait_placeholder.jpg
     details:
       - description: ""
         detail: Sekretariat
@@ -73,7 +73,7 @@ member:
       - detail: BIM Manager
       - detail: Mentor
       - detail: EDV Beauftragter
-    img: /src/assets/media/1000031317.jpg
+    img: ../media/1000031317.jpg
   - name: Elisabeth Kofler
     mode:
       former: true
@@ -90,7 +90,7 @@ member:
         detail: 01.01.1988
       - description: Aufgabenbereich
         detail: Vorzeigemitarbeiter
-    img: ../../assets/media/1000031349.jpg
+    img: ../media/1000031349.jpg
   - name: Benedikt Welz
     mode:
       former: true

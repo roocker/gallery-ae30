@@ -1,31 +1,29 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import "../styles/slideshow.css";
 
 const animation_zoom = {
-  i:{
+  i: {
     minHeight: "0lvh",
     minWidth: "0lvw",
   },
-  a:{
-    minHeight: "100lvh", 
-    minWidth: "100lvw", 
+  a: {
+    minHeight: "100lvh",
+    minWidth: "100lvw",
   },
-  e:{
+  e: {
     minHeight: "0lvh",
     minWidth: "0lvw",
-  }
-}
+  },
+};
 
-function SSimg ( props ) {
-
+function SSimg(props) {
   const images = props.images;
-  
+
   const index = props.index;
   const alts = props.alts;
   //Toggle for Zoom
   const zToggle = props.zoom;
-
 
   /* console.log("current images:", images)
   console.log("current index:", images[index])
@@ -74,32 +72,28 @@ function SSimg ( props ) {
   */
   const zoomDragDown = () => {
     props.onClick();
-  }
+  };
 
-
-  return(
+  return (
     <AnimatePresence initial={true}>
-    <motion.img
-    className=""
-    id="img"
-    src={images[index]}
-    alt={alts[index]}
-    variants={animation_zoom}
-    exit="e"
-    initial={zToggle ? "a" : "i"}
-    animate={zToggle ? "a" : "i"}
-    transition={{ type: 'spring', stiffness: 200, damping: 20 }}
+      <motion.img
+        className=""
+        id="img"
+        src={images[index]}
+        alt={alts[index]}
+        variants={animation_zoom}
+        exit="e"
+        initial={zToggle ? "a" : "i"}
+        animate={zToggle ? "a" : "i"}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        onClick={zoomDragDown}
+        // onMouseDown={zoomDragDown}
+        // onMouseMove={zoomDragMove}
+        // onMouseUp={zoomDragUp}
 
-    onClick={zoomDragDown}
-    // onMouseDown={zoomDragDown}
-    // onMouseMove={zoomDragMove}
-    // onMouseUp={zoomDragUp}
-
-    draggable={false}
-
-    />
+        draggable={false}
+      />
     </AnimatePresence>
-  )
-
+  );
 }
 export default SSimg;

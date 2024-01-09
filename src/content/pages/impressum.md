@@ -1,6 +1,6 @@
 ---
 title: Impressum
-cover: /src/assets/media/13.jpg
+cover: ../media/13.jpg
 ---
 # Impressum
 ## Informationen und Offenlegung gemäß §5 (1) ECG, § 25 MedienG, § 63 GewO und § 14 UGB
