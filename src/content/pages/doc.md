@@ -69,9 +69,9 @@ widehigh: (optional) eine dieser optionen: "normal", "extra breit", "extra hoch"
 publishDate: (in diesem Format anzugeben) zb.: "01 Jan 2023" - benötigt für Sortierung
 category: (auswählbar: arge, kg, wp, zk) - benötigt für Projekt Kategorie zuordnung
 project_keys: (bleibt leer)
-  year: (Projektstart Jahr) zb.:"2021" - benötigt für Sortierung
-  year2: (Projektschluss Jahr) zb.:"2023" - benötigt für Sortierung
-  area: (Nutzfläche in m² gerundet; ohne Einheit, als ganze Zahl) zb.:"3000" - benötigt für Sortierung
+  year: (Projektstart Jahr) zb.:2021 - benötigt für Sortierung - ohne Anführungszeichen
+  year2: (Projektschluss Jahr) zb.:2023 - benötigt für Sortierung - ohne Anführungszeichen
+  area: (Nutzfläche in m² gerundet; ohne Einheit, als ganze Zahl) zb.:"3000" - benötigt für Sortierung - ohne Anführungszeichen
   tags: (bleibt leer; jeder Tag (=Typologie) steht in einer neuen Zeile mit Minus, Leerzeichen "- " davor); - benötigt für Sortierung - alle Auswahlmöglichkeiten sind hier aufgezählt; mehrere Möglich, mindestens eine: 
     - Öffentlich
     - Privat

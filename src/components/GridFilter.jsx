@@ -21,9 +21,6 @@ const allCategories = await getCollection("categories");
 const settings = await getCollection("settings");
 
 function GridFilter(props) {
-
-
-
   const projects = props.allProjects;
 
   const settingsFilter = settings[0].data.filter;
@@ -40,9 +37,9 @@ function GridFilter(props) {
 
   const allCatsFromProjs = [
     ...new Set(
-      projects.map((proj) => {
+      projects.map(proj => {
         return proj.data.category;
-      }),
+      })
     ),
   ];
 
@@ -51,20 +48,20 @@ function GridFilter(props) {
   // ----------------------------------
   const allTitlesFromCats = [
     ...new Set(
-      allCategories.map((cat) => {
+      allCategories.map(cat => {
         return cat.data.title;
-      }),
+      })
     ),
   ];
 
-  const allCatsTitles = allTitlesFromCats.map((cat) => cat.split(" ")[0]);
+  const allCatsTitles = allTitlesFromCats.map(cat => cat.split(" ")[0]);
   // console.log("allCatsTitles", allCatsTitles)
 
   const allCatsURLs = [
     ...new Set(
-      allCategories.map((cat) => {
+      allCategories.map(cat => {
         return cat.data.short;
-      }),
+      })
     ),
   ];
   // console.log("allCatsURLs", allCatsURLs)
@@ -74,9 +71,7 @@ function GridFilter(props) {
   // ----------------------------------
 
   const allTagsUnsorted = [
-    ...new Set(
-      projects.flatMap((proj) => proj.data.project_keys?.tags ?? []),
-    ),
+    ...new Set(projects.flatMap(proj => proj.data.project_keys?.tags ?? [])),
   ];
 
   const allTags = [...allTagsUnsorted];
@@ -124,7 +119,6 @@ function GridFilter(props) {
       : "all"
     : "all";
 
-
   const selectedCat = useStore(stateSelectedCat);
 
   // console.log("defaultCat" , defaultCat, "selectedCat" ,selectedCat)
@@ -140,9 +134,9 @@ function GridFilter(props) {
       ? props.defaultYear1
       : 0
     : 0;
- 
-  // console.log("defaultYear1", props.defaultYear1)  
-  // console.log("defaultYear1", defaultYear1)  
+
+  // console.log("defaultYear1", props.defaultYear1);
+  // console.log("defaultYear1", defaultYear1);
 
   const selectedYear1 = useStore(stateSelectedYear1);
   // console.log("defaultYear1" , defaultYear1, "selectedYear1" ,selectedYear1)
@@ -173,10 +167,8 @@ function GridFilter(props) {
 
   const currentProjs = useStore(stateCurrentProjs);
 
- 
   const isCatPage = defaultCat !== "all" ? true : false;
   // console.log ( "isCatPage", isCatPage )
-
 
   // ----------------------------------------------
   // Event (User Input) Handlers
@@ -189,19 +181,19 @@ function GridFilter(props) {
   if(!settingFilterSize){ setSelectedSize1(0); setSelectedSize2(0); }else { "" }; 
   */
 
-  const handleCategoryChange = (e) => {
+  const handleCategoryChange = e => {
     stateSelectedCat.set(e.target.value);
     // console.log("this cat is requested:", e.target.value);
     // setSelectedCat(e.target.value);
   };
 
-  const handleTagChange = (e) => {
+  const handleTagChange = e => {
     stateSelectedTag.set(e.target.value);
     // setSelectedTag(e.target.value)
     // console.log("TagChange:",selectedYear1, selectedYear2);
   };
 
-  const handleYearChange = (e) => {
+  const handleYearChange = e => {
     stateSelectedYear1.set(e[0]);
     stateSelectedYear2.set(e[1]);
     // setSelectedYear1(e[0])
@@ -209,7 +201,7 @@ function GridFilter(props) {
     // console.log("YearChange:",selectedYear1, selectedYear2);
   };
 
-  const handleSizeChange = (e) => {
+  const handleSizeChange = e => {
     stateSelectedSize1.set(e[0]);
     stateSelectedSize2.set(e[1]);
     // setSelectedSize1(e[0])
@@ -249,16 +241,13 @@ function GridFilter(props) {
     }
   ))); */
 
-
   let rmIndices = [];
   function filterProjectsByCriteria(projects, criteria) {
     rmIndices = projects.reduce((rmIndices, project, index) => {
       const projectTitle = project.data.title;
       const { cat, tags, year1, year2, size1, size2 } = criteria;
-      // const projectYear1 = parseInt(project.data.project_keys.year);
-      // const projectYear2 = parseInt(project.data.project_keys.year2);
-      const projectYear1 = project.data.project_keys.year.getFullYear();
-      const projectYear2 = project.data.project_keys.year2.getFullYear();
+      const projectYear1 = project.data.project_keys.year;
+      const projectYear2 = project.data.project_keys.year2;
       const projectSize = parseInt(project.data.project_keys.area);
 
       const hasCat =
@@ -274,22 +263,40 @@ function GridFilter(props) {
           : true;
 
       /* console.log(
-        project.slug, ":",
-        "TEST:",
-        projectYear1 >= year1 && projectYear2 <= year2 ? "year1 > crityear1" : "falsch",
-        "projectYear1", projectYear1,
-        "year1", year1,
-        "projectYear2", projectYear2,
-        "year2", year2,
-      ) */
+        project.slug,
+        ":",
+        "TEST Date:",
+        projectYear1 >= year1 && projectYear2 <= year2 ? "true" : "falsch",
+        "projectYear1",
+        projectYear1,
+        "year1",
+        year1,
+        "projectYear2",
+        projectYear2,
+        "year2",
+        year2
+      ); */
 
       const inSizeRange =
-        size2 && size2 !== 0
-          ? size1 <= projectSize && projectSize <= size2
-          : true;
-      // #rev projectSize >= 10000 also true
+        projectSize >= 10000 && size2 == 10000
+          ? true
+          : size2 && size2 !== 0
+            ? size1 <= projectSize && projectSize <= size2
+            : true;
 
-      // console.log(index, projectTitle , ":", "hasCat" , hasCat , "hasTag" , hasTag , "inYearRange" , inYearRange , "inSizeRange", inSizeRange)
+      console.log(
+        index,
+        projectTitle,
+        ":",
+        "hasCat",
+        hasCat,
+        "hasTag",
+        hasTag,
+        "inYearRange",
+        inYearRange,
+        "inSizeRange",
+        inSizeRange
+      );
 
       if (hasCat && hasTag && inYearRange && inSizeRange) {
         rmIndices.push(index);
@@ -299,7 +306,6 @@ function GridFilter(props) {
     }, []);
     return rmIndices;
   }
-
 
   filterProjectsByCriteria(projects, params);
 
@@ -312,7 +318,6 @@ function GridFilter(props) {
 
   useEffect(() => {
     filterProjects();
-
   }, [
     selectedCat,
     selectedTag,
@@ -323,7 +328,7 @@ function GridFilter(props) {
     defaultCat,
   ]);
 
-    // console.log('Projekte', currentProjs , 'gem. Parameter:' , params);
+  // console.log('Projekte', currentProjs , 'gem. Parameter:' , params);
 
   /* console.log(
     "fiter var:" ,
@@ -366,9 +371,8 @@ function GridFilter(props) {
         </svg>
       </button>
 
-      <div className="line select_line" onClick={(e) => e.stopPropagation()}>
-        {settingFilterCat &&
-          !isCatPage && (
+      <div className="line select_line" onClick={e => e.stopPropagation()}>
+        {settingFilterCat && !isCatPage && (
           <select
             className="select select_cat"
             onChange={handleCategoryChange}
@@ -401,7 +405,7 @@ function GridFilter(props) {
       </div>
 
       {settingFilterYear && (
-        <div className="line" onClick={(e) => e.stopPropagation()}>
+        <div className="line" onClick={e => e.stopPropagation()}>
           <label id="label-year">Jahr</label>
           <ReactSlider
             className="horizontal-slider"
@@ -416,7 +420,7 @@ function GridFilter(props) {
             max={2023}
             ariaLabelledby="label-year"
             ariaLabel={["Lower thumb", "Upper thumb"]}
-            ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
+            ariaValuetext={state => `Thumb value ${state.valueNow}`}
             renderThumb={(props, state) => (
               <div {...props}>{state.valueNow}</div>
             )}
@@ -427,7 +431,7 @@ function GridFilter(props) {
       )}
 
       {settingFilterSize && (
-        <div className="line" onClick={(e) => e.stopPropagation()}>
+        <div className="line" onClick={e => e.stopPropagation()}>
           <label id="label-size">Fläche</label>
 
           <ReactSlider
@@ -445,7 +449,7 @@ function GridFilter(props) {
             step={100}
             ariaLabelledby="label-size"
             ariaLabel={["Lower thumb", "Upper thumb"]}
-            ariaValuetext={(state) => `Thumb value ${state.valueNow}`}
+            ariaValuetext={state => `Thumb value ${state.valueNow}`}
             renderThumb={(props, state) => (
               <div {...props}>{state.valueNow}</div>
             )}

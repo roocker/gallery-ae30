@@ -4,6 +4,7 @@ import { CollectionEntry, getCollection } from "astro:content";
 // import BasicScripts from '../../components/basicScripts.astro';
 import TextBlockModal from "../../components/TextBlockModal";
 import SSfigure from "../../components/SSfigure";
+import ProjectSummary from "../../components/ProjectSummary";
 import SlideshowCounter from "../../components/SlideshowCounter";
 import SlideshowAlt from "../../components/SlideshowAlt";
 import ModalBtn from "../../components/ModalBtn";
@@ -27,6 +28,8 @@ const p = proj.data;
 
 const { Content } = await proj.render();
 
+// p.fotos.map(img => console.log("Fotos org path", img.foto.src));
+
 const rawSSPictures = [p.titleimg.img].concat(p.fotos.map(img => img.foto));
 
 const rawSSPicturesAlts = [p.titleimg.alt].concat(p.fotos.map(img => img.alt));
@@ -35,8 +38,10 @@ let rawSSPlans;
 let rawSSPlansAlts;
 
 if (p.plans === undefined) {
-  rawSSPlans = rawSSPictures;
-  rawSSPlansAlts = rawSSPicturesAlts;
+  rawSSPlans = undefined;
+  rawSSPlansAlts = undefined;
+  // rawSSPlans = rawSSPictures;
+  // rawSSPlansAlts = rawSSPicturesAlts;
 } else {
   rawSSPlans = p.plans.map(plan => plan.plan);
   rawSSPlansAlts = p.plans.map(plan => plan.alt);
@@ -57,7 +62,19 @@ const optSSPictures = await Promise.all(
   )
 );
 
-// console.log(p)
+const numLines = 5;
+console.log("body", proj.body)
+console.log("body", Content)
+
+// Split the content into lines
+/* const lines = content.split('\n');
+
+// Get the first 'numLines' from 'lines'
+const summaryLines = lines.slice(0, numLines);
+
+// Join them back into a single string
+const summary = summaryLines.join('\n'); */
+
 ---
 
 <Layout
@@ -77,7 +94,37 @@ const optSSPictures = await Promise.all(
         plans={rawSSPlans}
         planTitles={rawSSPlansAlts}
         autoPlayInterval={4}
-      />
+      >
+
+        <ProjectSummary client:only pictureTitles={rawSSPicturesAlts}
+        planTitles={rawSSPlansAlts}
+        >
+        <h2>{p.title_l}</h2>
+        {p.title ? <h3>{p.title_zzl}</h3> : ""}
+
+        <dl class="">
+          {
+            p.project_keys.status ? (
+              <>
+                <dt>Status:</dt>
+                <dd>Status:{p.project_keys.status}</dd>
+              </>
+            ) : (
+              ""
+            )
+          }
+          <dt>Jahr:</dt><dd>
+            {p.project_keys.year} - {p.project_keys.year2}
+          </dd>
+          <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
+          <dt>Typ:</dt><dd>{p.project_keys.tags.map(tag => tag + ", ")}</dd>
+        </dl>
+
+        <p><Content /></p>
+
+        </ProjectSummary>
+
+      </SSfigure>
 
       <TextBlockModal client:load>
         <h2>{p.title_l}</h2>
@@ -95,9 +142,7 @@ const optSSPictures = await Promise.all(
             )
           }
           <dt>Jahr:</dt><dd>
-            {p.project_keys.year.getFullYear()} - {
-              p.project_keys.year2.getFullYear()
-            }
+            {p.project_keys.year} - {p.project_keys.year2}
           </dd>
           <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
           <dt>Typ:</dt><dd>{p.project_keys.tags.map(tag => tag + ", ")}</dd>
@@ -124,7 +169,8 @@ const optSSPictures = await Promise.all(
         <SlideshowBtn dir="prev" client:load>Vorheriges Bild</SlideshowBtn>
         <ModalBtn client:load>Text ein-/ausblenden</ModalBtn>
         <PlaybackBtn client:load>Slideshow pausieren</PlaybackBtn>
-        <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>
+        {p.plans &&
+          <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>}
         <SlideshowBtn dir="next" client:load>Nächstes Bild</SlideshowBtn>
       </div>
 

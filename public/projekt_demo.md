@@ -7,22 +7,22 @@ widehigh: normal
 publishDate: 01 Jan 2023
 category: arge
 project_keys:
-  year: "2013"
-  year2: "2024"
+  year: 2013
+  year2: 2024
   status: abgeschlossen; aber immer Erweiterbar
-  area: "10000"
+  area: 10000
   tags:
     - Öffentlich
     - Ausstellungsraum
     - arbeiten
 titleimg:
-  img: /src/assets/media/17atelier.jpg
+  img: ../demo/17atelier.jpg
   alt: Atelier Eroicagasse von innen
 fotos:
-  - foto: /src/assets/media/13.jpg
+  - foto: ../demo/13.jpg
     alt: Atelier Eroicagasse im Rohbau
 plans:
-  - plan: /src/assets/media/19.jpg
+  - plan: ../demo/19.jpg
     alt: Fassadendetail Atelier Eroicagasse
 ---
 # Überschrift

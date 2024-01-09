@@ -45,7 +45,7 @@ export const handleRemoveFilter = () => {
     stateSelectedYear1.get(),
     stateSelectedYear2.get(),
     stateSelectedSize1.get(),
-    stateSelectedSize2.get(),
+    stateSelectedSize2.get()
   );
 };
 

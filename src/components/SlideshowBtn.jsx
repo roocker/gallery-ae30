@@ -45,9 +45,9 @@ function SlideshowBtn({ dir, children }) {
       title={children.props.value}
     >
       {dir === "next" ? (
-        <span class="material-symbols-rounded"> navigate_next</span>
+        <span className="material-symbols-rounded"> navigate_next</span>
       ) : (
-        <span class="material-symbols-rounded"> navigate_before</span>
+        <span className="material-symbols-rounded"> navigate_before</span>
       )}
     </button>
   );

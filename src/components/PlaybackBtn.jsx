@@ -47,9 +47,9 @@ function PlaybackBtn({ children }) {
       title={children.props.value}
     >
       {!pToggle ? (
-        <span class="material-symbols-rounded"> play_arrow</span>
+        <span className="material-symbols-rounded"> play_arrow</span>
       ) : (
-        <span class="material-symbols-rounded"> pause</span>
+        <span className="material-symbols-rounded"> pause</span>
       )}
     </motion.button>
   );

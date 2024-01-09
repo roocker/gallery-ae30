@@ -24,8 +24,8 @@ export default defineConfig({
         /* #rev geht nicht */
         locale: "de",
         publish_mode: "editorial_workflow",
-        media_folder: "/src/assets/media/",
-        public_folder: "../../assets/media",
+        media_folder: "/src/content/media/",
+        public_folder: "../media",
         slug: {
           /* sanitizes filenames and media */
           encoding: "ascii",
@@ -54,6 +54,9 @@ export default defineConfig({
             folder: "src/content/projects",
             create: true,
             delete: true,
+            path: "{{slug}}/data",
+            media_folder: "",
+            public_folder: "../{{slug}}",
             fields: [
               {
                 name: "title",
@@ -168,27 +171,27 @@ export default defineConfig({
                   {
                     name: "year",
                     label: "Jahr",
-                    widget: "string",
+                    widget: "number",
                     pattern: [
                       "^.{4}$",
                       "Muss eine 4-stellige Zahl sein (zb.: 2020)",
-                    ], // \d for digit doesnt work?
-                    hint: "Jahr VON (wichtig ist die Jahreszahl), im Picker auf Jahreszahl klicken!",
+                    ],
+                    hint: "Baubeginn/Planungsbeginn Jahr VON ",
                   },
                   {
                     name: "year2",
                     label: "Jahr2",
-                    widget: "string",
+                    widget: "number",
                     pattern: [
                       "^.{4}$",
                       "Muss eine 4-stellige Zahl sein (zb.: 2020)",
-                    ], // \d for digit doesnt work?
-                    hint: "Jahr BIS (wichtig ist die Jahreszahl)",
+                    ],
+                    hint: "Baubeginn/Planungsbeginn Jahr VON ",
                   },
                   {
                     name: "area",
                     label: "Fläche",
-                    widget: "string",
+                    widget: "number",
                     hint: "Fläche in m² gerundet",
                   },
                   {
@@ -368,12 +371,12 @@ export default defineConfig({
                       },
                     ],
                   },
-                  {
+                  /* {
                     name: "text",
                     widget: "markdown",
                     required: false,
                     label: "Team Text 1",
-                  },
+                  }, */
                   {
                     name: "heading_members_highlighted",
                     widget: "string",
@@ -454,6 +457,11 @@ export default defineConfig({
                         required: false,
                       },
                     ],
+                  },
+                  {
+                    name: "body",
+                    label: "Langtext",
+                    widget: "markdown",
                   },
                 ],
               },
