@@ -39,7 +39,7 @@ figure {
 
   overflow: hidden;
   z-index: 0;
-  background: red;
+  /* background: red; */
 }
 figure img {
   max-width: 100lvw;
@@ -148,6 +148,6 @@ button.slideshow_btn {
   /* transform: translateY(-2em); */
   margin-bottom: 16em;
   width: clamp(16em, calc(37.5em + 2em), 80vw);
-  background: green;
+  /* background: green; */
   /* color: black; */
 }

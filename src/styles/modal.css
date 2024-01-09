@@ -1,14 +1,12 @@
-
-.backdrop_modal{
+.backdrop_modal {
   align-items: end;
-
 }
-.modal_content{
+.modal_content {
   z-index: 4;
-  width: clamp(25em , calc(37.5em + 2em), 100%);
+  width: clamp(25em, calc(37.5em + 2em), 100%);
   backdrop-filter: blur(1px);
-  background: var(--cwhite60);
-/* #bug MOBILE LANDSCAPE! */
+  background: var(--cwhite80);
+  /* #bug MOBILE LANDSCAPE! */
   max-height: calc(100lvh - 8em);
   display: flex;
   flex-direction: column;
@@ -17,7 +15,7 @@
   /* background: green; */
 }
 
-.content{
+.content {
   overflow: auto;
   padding: 2em;
   width: 100%;
@@ -26,39 +24,36 @@
   margin-bottom: 12em;
 
   /* background: red;   */
-
 }
 /* Hacky way to target mobile browsers? */
 @media screen and (max-width: 600px) and (-webkit-min-device-pixel-ratio: 0) {
-  .content{
+  .content {
     margin-bottom: calc(12em + calc(100lvh - 100svh));
   }
 }
 @media only screen and (min-width: 48em/* var(--vwT) */) {
-.content{
-  margin-bottom: 8em;
+  .content {
+    margin-bottom: 8em;
+  }
 }
-}
-button.modal_close_btn{
+button.modal_close_btn {
   border: none;
   background: none;
   height: calc(var(--gmodulem) * 1);
   padding: 0;
   position: absolute;
-  top: var(--gmodulem) ;
-  right: var(--gmodulem) ;
+  top: var(--gmodulem);
+  right: var(--gmodulem);
   color: var(--cgrey);
 }
 
-button.modal_close_btn:hover{
+button.modal_close_btn:hover {
   cursor: pointer;
-    color: var(--cblack);
+  color: var(--cblack);
 }
 
-.svg-icon{
+.svg-icon {
   /* background: yellow; */
   /* height: 100%; */
   aspect-ratio: 1;
-
 }
-
