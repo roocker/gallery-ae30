@@ -9,6 +9,7 @@ TODO:
 import "../styles/normalize.css";
 import Nav from "../components/Nav.astro";
 import "@fontsource-variable/material-symbols-rounded";
+import "@fontsource-variable/material-symbols-rounded/fill.css";
 
 export interface Props {
   title: string;
@@ -247,6 +248,7 @@ const cfg = cblack;
     text-decoration: none;
     /* background: var(--cgrey60); */
     /* border-bottom: 1px solid var(--caccent2); */
+    transition: color 0.3s ease-in-out;
   }
   a:hover {
     color: var(--cblack);
