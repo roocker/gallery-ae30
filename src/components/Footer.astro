@@ -1,0 +1,92 @@
+---
+import Logo from "../components/Logo";
+import Roocker from "../components/Roocker.astro";
+
+import { getCollection } from "astro:content";
+
+import { marked } from "marked";
+const settings = await getCollection("settings");
+
+const s = settings[0].data;
+
+console.log("S", s);
+
+const opts = {
+  mangle: false,
+  headerIds: false,
+};
+
+
+
+---
+
+<section class="footer">
+  <div class="logo_foot">
+    <Logo client:load  />
+  </div>
+
+  <dl>
+    <dt>Büroname</dt>
+    <dd><h1>{s.title}</h1></dd>
+    <dt>Beschreibung</dt>
+    <dd><h2>{s.title_alt}</h2></dd>
+    <dt>Adresse Zeile 1</dt>
+    <dd>{ s.contact.address1 }</dd>
+    <dt>Adresse Zeile 2</dt>
+    <dd>{ s.contact.address2 }</dd>
+    <dt class="visible">Tel</dt>
+    <dd>{s.contact.tel}</dd>
+    <dt class="visible">Fax</dt>
+    <dd>{s.contact.fax}</dd>
+    <dt>Mail</dt>
+    <dd>{s.contact.mail}</dd>
+    <dt>UID Firmenbuchnummer</dt>
+    <dd>{s.contact.uid}</dd>
+  </dl>
+
+  <Roocker />
+</section>
+
+<style>
+  .footer {
+    padding-top: 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    background: var(--cblack20);
+    font-family: var(--fsans2); 
+  }
+  .footer h1{
+    text-transform: uppercase;
+  }
+  .footer h2{
+    font-size: 1.2em;
+    font-weight: 100;
+    margin-bottom: 1em;
+  }
+dl{
+    margin: 0 0 0 2em;
+  /* text-align: center; */
+    /* width: auto; */
+    display: inline;
+  /* line-height: 2em; */
+}
+  /* dl > *{background: pink;} */
+  dt {
+    text-indent: -9999px;
+    display: none;
+  }
+  dt.visible{
+    float: left;
+    text-indent: 0;
+    display: inline;
+    margin-right: .3em;
+  }
+dd{
+  margin: 0;
+}
+
+  .logo_foot {
+    height: 12em;
+  }
+</style>

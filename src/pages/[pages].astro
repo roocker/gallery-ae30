@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
 import { type CollectionEntry, getCollection } from "astro:content";
 import "../styles/page.css";
 
@@ -57,7 +58,7 @@ const filteredHeadings = headings.filter(heading => heading.depth === 1);
       </nav>
     </section>
     <section class="block">
-      <div class="cont">
+      <div class="cont text">
         <Content />
       </div>
 
@@ -73,6 +74,8 @@ const filteredHeadings = headings.filter(heading => heading.depth === 1);
         </button>
       </div>
     </section>
+
+    <Footer />
   </section>
 </Layout>
 

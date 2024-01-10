@@ -1,8 +1,18 @@
 ---
-site-title: AE30 - Atelier Eroicagasse
-description: AE30 - Atelier Eroicagasse 30 - ARGE Kratochwil Waldbauer
-  Zeinitzer; Arbeitsgemeinschaft der Architekten Arch DI Gerhard Kratochwil, DI
-  Peter Waldbauer und Arch DI Klaus Zeinitzer
+title: AE30 - Atelier Eroicagasse
+description: Arbeitsgemeinschaft AE30 Atelier Eroicagasse der Architekten Arch
+  DI Gerhard Kratochwil, DI Peter Waldbauer und Arch DI Klaus Zeinitzer
+title_alt: ARGE der Architekten Kratochwil – Waldbauer - Zeinitzer
+contact:
+  uid: ATU 49300901
+  fax: +43 1 3705013
+  tel: +43 1 3180500
+  mail: office@ae30.at
+  address: |-
+    Eroicagasse 30
+    1190 Wien
+  address1: Eroicagasse 30
+  address2: 1190 Wien
 main_menu:
   menu_cats:
     - menu_item_cat: " "

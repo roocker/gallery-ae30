@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/page.css";
 import { getEntry } from "astro:content";
 import { getCollection } from 'astro:content'; 
@@ -184,5 +185,6 @@ const actMembers = allMembers.filter(
       </div>
     </section>
   </section>
+    <Footer />
 </Layout>
 <style></style>
