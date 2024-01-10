@@ -1,32 +1,32 @@
-h1.logo_head {
+h1.logo {
   margin: 0 !important;
+  height: 100%;
+  aspect-ratio: 1;
+  /* width: 4em; */
+  /* height: 4em; */
 }
-h1.logo_head span {
+h1.logo span {
   text-indent: -9999px;
   display: none;
 }
-h1.logo_head a {
-  position: fixed;
-  top: -0.5em;
-  right: -0.5em !important;
-
+h1.logo a {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 
-  width: 4em;
-  height: 4em;
-
-  border-radius: 50%;
   /* dark mode */
-  background: var(--cwhite);
   /* light mode */
   /* background: var(--cgrey);   */
   /* background: red; */
-  z-index: 10;
   /* box-shadow: 0 0 .5em 0 lightgrey; */
 }
-.logo {
+h1.logo.bg a {
+  border-radius: 50%;
+  background: var(--cwhite);
+}
+
+.logo_svg {
   /* dark mode */
   color: var(--cblack);
   /* light mode */
@@ -36,6 +36,7 @@ h1.logo_head a {
   display: flex;
   justify-content: center;
   align-items: center;
+
   width: 65%;
   height: 65%;
 
@@ -66,22 +67,20 @@ h1.logo_head a {
 }
 
 .logo_div {
-  background: red;
   z-index: 10;
 }
-use#use_logo {
+
+.logo_svg.white {
+  color: var(--cwhite);
+  stroke: var(--cwhite);
 }
 
 /* #1c1d1d */
 
 @media only screen and (min-width: 64em /* var(--vwS) */) {
-  h1.logo_head a {
+  h1.logo a {
     top: 0em;
     right: 0em !important;
-    /* top: -1em;
-    right: -1em;
-    width: 4em;
-    height: 4em; */
   }
   .logo {
     /* width: calc(var(--gmodulem) * 4); */
