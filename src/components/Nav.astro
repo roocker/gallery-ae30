@@ -10,29 +10,32 @@ TODO:
 - [ ] Logo: or when 1024px media query 
 - [ ] Scroll Open Menu if Browserheight too low?
 */
-import { CollectionEntry, getCollection } from 'astro:content'; 
+import { CollectionEntry, getCollection } from "astro:content";
 import BasicScripts from "../components/basicScripts.astro";
 import Logo from "../components/Logo";
-import MainNav from './MainNav';
+import MainNav from "./MainNav";
 
-const settings = await getCollection('settings');
-const allProjects = await getCollection('projects');
-
+const settings = await getCollection("settings");
+const allProjects = await getCollection("projects");
 
 // GET MENU URLS -----------------------------------------
 const settingsMenu = settings[0].data.main_menu;
 
 // console.log("menu_items", settingsMenu);
 
-const menuCats = settingsMenu.menu_cats.map(item => item.menu_item_cat.toLowerCase());
+const menuCats = settingsMenu.menu_cats.map(item =>
+  item.menu_item_cat.toLowerCase()
+);
 // console.log("!!menuCats :",menuCats);
 
 const menuPages = settingsMenu.menu_pages.map(item => item.menu_item_pages);
 // console.log("!!menuPages:", menuPages);
 
 const menuProjects = settingsMenu.menu_projects.map(item => {
-  const project = allProjects.find(project => project.slug === item.menu_item_projects);
-  const category = project ? project.data.category : 'unknown';
+  const project = allProjects.find(
+    project => project.slug === item.menu_item_projects
+  );
+  const category = project ? project.data.category : "unknown";
   return `${category}/${item.menu_item_projects}`;
 });
 // console.log("!!menuProjects:", menuProjects);
@@ -41,47 +44,52 @@ const allMenuURLs = [...menuCats, ...menuPages, ...menuProjects];
 // console.log("!!all URLS " ,allMenuURLs);
 
 // GET MENU Names -----------------------------------------
-const menuCatsName = settingsMenu.menu_cats.map(item => `${item.menue_item_cat_name}`);
+const menuCatsName = settingsMenu.menu_cats.map(
+  item => `${item.menue_item_cat_name}`
+);
 // console.log("!!menuCatsName :",menuCatsName);
 
-const menuPagesName = settingsMenu.menu_pages.map(item => `${item.menue_item_pages_name}`);
+const menuPagesName = settingsMenu.menu_pages.map(
+  item => `${item.menue_item_pages_name}`
+);
 // console.log("!!menuPagesName :",menuPagesName);
 
-const menuProjectsName = settingsMenu.menu_projects.map(item => `${item.menue_item_projects_name}`);
+const menuProjectsName = settingsMenu.menu_projects.map(
+  item => `${item.menue_item_projects_name}`
+);
 // console.log("!!menuProjectsName :",menuProjectsName);
 
-const allMenuNames = [...menuCatsName, ...menuPagesName, ... menuProjectsName];
+const allMenuNames = [...menuCatsName, ...menuPagesName, ...menuProjectsName];
 // console.log("!!allMenuNames " ,allMenuNames);
-
-
-
-
 
 // const {  menuToggle = false, ??? no need? } = Astro.props;
 ---
+
 <BasicScripts />
- <script>
- </script>
+<script></script>
 
-   <section id="header" aria-label="Header Logo & Navigation">
-
-     <Logo client:load/>
-
-     <MainNav
-     client:only
-     menu_urls={allMenuURLs}
-     menu_names={allMenuNames} />
-
-
-
-
-   </section>
+<section id="header" aria-label="Header Logo & Navigation">
+  <div class="logo_head">
+    <Logo client:load head={true} background={true} dark={true} />
+  </div>
+  <MainNav client:only menu_urls={allMenuURLs} menu_names={allMenuNames} />
+</section>
 
 <style>
-
-  
-
-
-
-
+  .logo_head {
+    position: fixed;
+    height: 8em;
+    z-index: 10;
+    top: -1em;
+    /* right: -0.5em !important; */
+    right: -1em;
+  }
+  .logo_head > h1 {
+  }
+  @media only screen and (min-width: 64em /* var(--vwS) */) {
+    .logo_head {
+      top: 0em;
+      right: 0em;
+    }
+  }
 </style>

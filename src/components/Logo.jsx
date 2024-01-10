@@ -49,57 +49,63 @@ const rotate_variants = {
   },
 };
 
-const path_variants = {
-  i: {
-    opacity: 0,
-    pathLength: 0,
-    fill: "var(--cwhite)",
-  },
-  a: i => {
-    const delay = 1 + i * 0.5;
-    return {
-      opacity: 1,
-      pathLength: [null, 1, 0],
-      fill: "var(--cgrey)",
-      transition: {
-        fill: {
-          delay,
-          duration: 2,
-        },
-        pathLength: {
-          delay,
-          duration: 1.5,
-          type: "tween",
-        },
-      },
-    };
-  },
-  e: {
-    pathLength: 0,
-  },
-};
-
 // onClick="menuToggle"
 
-function Logo() {
+function Logo({ head, background, color }) {
+  const fillcolor = color == "white" ? "var(--cwhite)" : "var(--cgrey)";
+
+  const path_variants = {
+    i: {
+      opacity: 0,
+      pathLength: 0,
+      fill: "rgba(0,0,0,0)",
+    },
+    a: i => {
+      const delay = 1 + i * 0.5;
+      return {
+        opacity: 1,
+        pathLength: [null, 1, 0],
+        fill: fillcolor,
+        transition: {
+          fill: {
+            delay,
+            duration: 2,
+          },
+          pathLength: {
+            delay,
+            duration: 1.5,
+            type: "tween",
+          },
+        },
+      };
+    },
+    e: {
+      pathLength: 0,
+    },
+  };
+
   const tMenu = useStore(stateMainNav);
 
   const toggleMenu = () => {
-    stateMainNav.set(!tMenu);
-    if (tMenu) {
+    if (head) {
+      stateMainNav.set(!tMenu);
+    }
+    if (tMenu | !head) {
       window.location.href = "/";
     }
   };
 
   return (
-    <h1 className="logo_head">
+    <h1 className={`logo ${background ? "bg" : ""}`}>
       <span>
         AE30 Architekten - Kratochwil Gerhard, Waldbauer Peter, Zeinitzer Klaus
       </span>
       <a className="link" onClick={toggleMenu}>
         <AnimatePresence>
           <motion.svg
-            className="logo svg-logo-use"
+            className={`logo_svg svg-logo-use ${
+              color == "white" ? "white" : ""
+            }`}
             custom={7}
             key={7}
             variants={rotate_variants}
@@ -107,8 +113,12 @@ function Logo() {
             whileHover="h"
             whileDrag="h"
             initial="i"
+            // animate={head ? "a" : ""}
             animate="a"
             exit="e"
+            // whileInView="a"
+            // onViewportLeave="e"
+            viewport={{ once: false }}
             viewBox="0 0 128 128"
           >
             <g className="lg">
