@@ -200,6 +200,7 @@ export default defineConfig({
                     widget: "select",
                     multiple: true,
                     min: 1,
+                    max: 100,
                     hint: "mehrere auswählen möglich, mindestens eins",
                     options: [
                       "Öffentlich",
@@ -483,13 +484,6 @@ export default defineConfig({
                 fields: [
                   {
                     name: "title",
-                    label: "Einstellungen Titel",
-                    comment: "NUR MIT SORGFALT ÄNDERN!",
-                    widget: "hidden",
-                    default: "SETTINGS",
-                  },
-                  {
-                    name: "site-title",
                     label: "Website Titel",
                     widget: "string",
                     hint: "zb AE30 - Atelier Eroicagasse",
@@ -497,12 +491,62 @@ export default defineConfig({
                   {
                     name: "description",
                     label: "Seitenbeschreibung",
+                    widget: "text",
+                    hint: "Sollte exakt zwischen 150 und 160 Zeichen lang sein (SEO)",
+                  },
+                  {
+                    name: "title_alt",
+                    label: "Alternativ Titel",
                     widget: "string",
+                  },
+                  {
+                    name: "contact",
+                    label: "Kontakt Informationen",
+                    widget: "object",
+                    collapsed: true,
+                    fields: [
+                      {
+                        name: "address1",
+                        label: "Adresse Zeile 1",
+                        widget: "string",
+                      },
+                      {
+                        name: "address2",
+                        label: "Adresse Zeile 2",
+                        widget: "string",
+                      },
+                      {
+                        name: "address3",
+                        label: "Adresse Zeile 3",
+                        widget: "string",
+                      },
+                      {
+                        name: "mail",
+                        label: "Mail Adresse",
+                        widget: "string",
+                      },
+                      {
+                        name: "tel",
+                        label: "Telefon Nummer",
+                        widget: "string",
+                      },
+                      {
+                        name: "fax",
+                        label: "Fax Nummer",
+                        widget: "string",
+                      },
+                      {
+                        name: "uid",
+                        label: "UID",
+                        widget: "string",
+                      },
+                    ],
                   },
                   {
                     name: "main_menu",
                     label: "Hauptmenü",
                     widget: "object",
+                    collapsed: true,
                     fields: [
                       {
                         name: "menu_cats",
@@ -515,8 +559,8 @@ export default defineConfig({
                             widget: "relation",
                             collection: "categories",
                             // multiple: true,
-                            search_fields: ["title"],
                             value_field: "short",
+                            search_fields: ["title"],
                             display_fields: ["title"],
                           },
                           {
@@ -574,8 +618,9 @@ export default defineConfig({
                   },
                   {
                     name: "filter",
-                    label: "Filter Galerie",
+                    label: "Galerie Filter an/ausschalten",
                     widget: "object",
+                    collapsed: true,
                     hint: "Filter Optionen für die Startseite an/ausschalten",
                     fields: [
                       {
