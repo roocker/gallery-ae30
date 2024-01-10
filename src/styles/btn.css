@@ -47,10 +47,13 @@ use.btn_use {
   border: 2px solid var(--cgrey) !important;
 }
 
+button.btn:active {
+  border: 2px solid var(--cgrey) !important;
+}
+
 button.btn:hover,
 button.btn:active {
   animation: buttonHoverZoom 0.3s ease-in-out forwards;
-  border: 2px solid var(--cgrey) !important;
 }
 @keyframes buttonHoverZoom {
   0% {

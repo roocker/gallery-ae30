@@ -1,11 +1,12 @@
-import { getCollection } from "astro:content";
+// import { getCollection } from "astro:content";
 
-const allProjects = await getCollection("projects");
-console.log("allprojects ", allProjects);
+// const allProjects = await getCollection("projects");
 
 export default function SimilarProjects(props) {
   let items = props.items;
   // let currentProj = props.currentProj;
+  const allProjects = props.allProjects;
+  console.log("allprojects ", allProjects);
 
   let currentProj = allProjects.find(p => p.slug === props.currentProj);
 
@@ -34,14 +35,21 @@ export default function SimilarProjects(props) {
 
   console.log("Similar projects:", similarProjects);
 
-  const test = similarProjects.map(p => p.proj.data.titleimg.img);
+  const test = similarProjects.map(p => p.proj.data.titleimg.img.src);
   console.log("test", test);
 
   return (
     <div className="similar_projects">
       <ul>
         {similarProjects.map(p => (
-          <li key={p.proj.slug}>{p.proj.slug}</li>
+          <li key={p.proj.slug}>
+            <a href={`../${p.proj.data.category}/${p.proj.slug}`}>
+              <figure>
+                <img src={p.proj.data.titleimg.img.src} />
+                <figcaption>{p.proj.data.title_l}</figcaption>
+              </figure>
+            </a>
+          </li>
         ))}
       </ul>
     </div>

@@ -105,26 +105,20 @@ img {
 }
 button.slideshow_btn {
   border: none;
-  text-indent: -9999px;
-
-  /* opacity: 0.2; */
   opacity: 0.4;
 
-  /* naughty positioning!!! */
   position: fixed;
-  top: 50%;
+  top: 37.5%;
 
-  /* background: var(--cblack); */
-  width: 8em;
-  height: 8em;
+  height: 25%;
 
   color: var(--cwhite);
-  fill: currentColor;
   z-index: 3;
 
   /* background: green; */
-
-  /* box-shadow: 0 0 1em 0 black; */
+}
+button.slideshow_btn > span {
+  font-size: 4em;
 }
 .slideshow_btn:hover {
   opacity: 0.8;
@@ -132,22 +126,14 @@ button.slideshow_btn {
 .btn_prev {
   left: 0;
   cursor: w-resize; /* #rev custom arrow icons */
-  background: 100% 50% url("/arrow.svg") no-repeat;
+  /* background: 100% 50% url("/arrow.svg") no-repeat; */
   /* background-color: purple; */
-  transform: translate(-25%, 0%) rotate(180deg) scale(0.5);
+  /* transform: translate(-25%, 0%) rotate(180deg) scale(0.5); */
 }
 .btn_next {
   right: 0;
   cursor: e-resize; /* #rev custom arrow icons */
-  background: 100% 50% url("/arrow.svg") no-repeat;
+  /* background: 100% 50% url("/arrow.svg") no-repeat; */
   /* background-color: pink; */
-  transform: translate(25%, 0%) rotate(0) scale(0.5);
-}
-
-.project_summary {
-  /* transform: translateY(-2em); */
-  margin-bottom: 16em;
-  width: clamp(16em, calc(37.5em + 2em), 80vw);
-  /* background: green; */
-  /* color: black; */
+  /* transform: translate(25%, 0%) rotate(0) scale(0.5); */
 }

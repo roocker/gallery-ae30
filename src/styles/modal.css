@@ -3,11 +3,11 @@
 }
 .modal_content {
   z-index: 4;
-  width: clamp(25em, calc(37.5em + 2em), 100%);
+  width: clamp(25em, calc(48em + 2em), 100%);
   backdrop-filter: blur(1px);
   background: var(--cwhite80);
   /* #bug MOBILE LANDSCAPE! */
-  max-height: calc(100lvh - 8em);
+  max-height: calc(100lvh - 6.5em);
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -16,24 +16,25 @@
 }
 
 .content {
-  overflow: auto;
+  overflow-y: auto;
   padding: 2em;
   width: 100%;
   box-sizing: border-box;
 
-  margin-bottom: 12em;
+  padding-bottom: 16em;
+  /* margin-bottom: 12em; */
 
-  /* background: red;   */
+  /* background: red; */
 }
 /* Hacky way to target mobile browsers? */
 @media screen and (max-width: 600px) and (-webkit-min-device-pixel-ratio: 0) {
   .content {
-    margin-bottom: calc(12em + calc(100lvh - 100svh));
+    /* margin-bottom: calc(12em + calc(100lvh - 100svh)); */
   }
 }
 @media only screen and (min-width: 48em/* var(--vwT) */) {
   .content {
-    margin-bottom: 8em;
+    /* margin-bottom: 8em; */
   }
 }
 button.modal_close_btn {

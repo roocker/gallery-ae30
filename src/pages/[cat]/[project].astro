@@ -62,6 +62,19 @@ const optSSPictures = await Promise.all(
   )
 );
 
+let optSSPlans = undefined;
+if (rawSSPlans) {
+  optSSPlans = await Promise.all(
+    rawSSPlans.map(
+      async img =>
+        await getImage({
+          src: img,
+          format: "webp",
+          width: 1920,
+        })
+    )
+  );
+}
 const opts = {
   mangle: false,
   headerIds: false,
@@ -72,6 +85,37 @@ const htmlbody_lines = htmlbody.split("\n");
 const htmlbodyshorted = htmlbody_lines.slice(0, 1);
 const summary = htmlbodyshorted.join("\n");
 // console.log("PROJ", proj);
+
+// need for cover optimization for summary
+let allProjects = await getCollection("projects");
+const orgTitleImgs = allProjects.map((proj, index) => ({
+  img: proj.data.titleimg.img,
+  index,
+}));
+
+const optTitleImgs = await Promise.all(
+  orgTitleImgs.map(async covers => {
+    const img = await getImage({
+      src: covers.img,
+      format: "webp",
+      height: 100,
+    });
+    return { img /*,  imgIndex: covers.index */ };
+  })
+);
+
+allProjects = allProjects.map((proj, i) => {
+  return {
+    ...proj,
+    data: {
+      ...proj.data,
+      titleimg: optTitleImgs[i],
+    },
+  };
+});
+
+// remove archived projects
+allProjects = allProjects.filter(proj => !proj.data.archived);
 ---
 
 <Layout
@@ -88,18 +132,19 @@ const summary = htmlbodyshorted.join("\n");
         client:only
         pictures={optSSPictures}
         pictureTitles={rawSSPicturesAlts}
-        plans={rawSSPlans}
+        plans={optSSPlans}
         planTitles={rawSSPlansAlts}
         autoPlayInterval={4}
       >
         <ProjectSummary
           client:only
+          allProjects={allProjects}
           pictureTitles={rawSSPicturesAlts}
           currentProj={proj.slug}
           planTitles={rawSSPlansAlts}
         >
           <h1>{p.title_l}</h1>
-          {p.title ? <h2>{p.title_zzl}</h2> : ""}
+          {p.title ? <h2 class="title_zzl">{p.title_zzl}</h2> : ""}
 
           <dl class="">
             {
@@ -120,7 +165,7 @@ const summary = htmlbodyshorted.join("\n");
             <dt>TYP:</dt><dd>{p.project_keys.tags.map(tag => tag + ", ")}</dd>
           </dl>
 
-          <div set:html={summary} />
+          <div class="summary_text text" set:html={summary} />
         </ProjectSummary>
       </SSfigure>
 
@@ -162,7 +207,7 @@ const summary = htmlbodyshorted.join("\n");
       </div>
 
       <div class="footer_line title_line">
-        <h3 class="footer_title">{p.title}</h3>
+        <h3 class="footer_title">{p.title_l}</h3>
       </div>
 
       <div class="footer_line control_line">
@@ -323,7 +368,8 @@ const summary = htmlbodyshorted.join("\n");
   dl {
     font-size: 1em;
     font-family: var(--fsans2);
-    line-height: 2rem;
+    line-height: 1.5em;
+    margin: 0;
     /* margin-left: 1.5em; */
   }
   /* dl > *{ background: red;} */
