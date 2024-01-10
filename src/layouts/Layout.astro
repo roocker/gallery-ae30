@@ -10,6 +10,10 @@ import "../styles/normalize.css";
 import Nav from "../components/Nav.astro";
 import "@fontsource-variable/material-symbols-rounded";
 import "@fontsource-variable/material-symbols-rounded/fill.css";
+import '@fontsource-variable/source-code-pro';
+import '@fontsource/source-sans-pro';
+
+
 
 export interface Props {
   title: string;
@@ -26,8 +30,8 @@ const { title, description, image = "/placeholder-social.jpg" } = Astro.props; /
 //-------------------------------------------------
 // fsans, fsans2, fserif, fserif2, fsize, fline_height, fsize_title, fsize_h2, fsize_h3, fsize_h4,
 const fsans = "'Arial', sans-serif";
-const fsans2 = "'ssp', sans-serif";
-const fsans3 = "'scp', sans-serif";
+const fsans2 = "'Source Sans Pro', sans-serif";
+const fsans3 = "'Source Code Pro Variable', sans-serif";
 const fserif = "sans-serif";
 const fserif2 = "sans-serif";
 const fsize = "1rem";
@@ -248,9 +252,34 @@ const cfg = cblack;
     text-decoration: none;
     /* background: var(--cgrey60); */
     /* border-bottom: 1px solid var(--caccent2); */
-    transition: color 0.3s ease-in-out;
+    transition: color 0.5s ease-in;
+    /* font-weight: bold; */
+    /* font-weight: 400; */
   }
   a:hover {
+    color: var(--cblack);
+    /* background: ; */
+    /* border-bottom: 1px solid var(--caccent2); */
+  }
+
+  .text a {
+    /* color: var(--caccent); */
+    color: var(--cblack50);
+    text-decoration: none;
+    /* background: var(--cgrey60); */
+    /* border-bottom: 1px solid var(--caccent2); */
+    transition: color 0.5s ease-in;
+    /* font-weight: bold; */
+    /* font-weight: 400; */
+  }
+  .text a:before {
+    font-family: "Material Symbols Rounded Variable";
+    content: "arrow_outward";
+    font-size: 1em;
+    margin-right: 0.25em;
+    vertical-align: bottom;
+  }
+  .text a:hover {
     color: var(--cblack);
     /* background: ; */
     /* border-bottom: 1px solid var(--caccent2); */
@@ -292,7 +321,7 @@ const cfg = cblack;
   }
   figure {
     margin: 0;
-  } /* #rev irgendwo bekommt figure einen margin? why? ??? */
+  } 
 
   .svg-icon-use {
     stroke-width: 1.5;
@@ -324,5 +353,20 @@ const cfg = cblack;
     word-wrap: normal;
     white-space: nowrap;
     direction: ltr;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar{
+    width: .5em;
+    border-radius: .5em;
+    background: none;
+  }
+
+  .content::-webkit-scrollbar-thumb {
+    border-radius: .5em;
+    background: var(--cblack20);
+    -webkit-border-radius: 4ex;
+  }
+  .content::-webkit-scrollbar-corner {
   }
 </style>

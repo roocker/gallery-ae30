@@ -106,14 +106,22 @@ function SSfigure(props) {
   // change Controls color on Plan/Picture Toggle
   const mToggle = useStore(stateModal);
 
+  let bgIsDark = true;
   useEffect(() => {
-    const bgIsDark = sToggle && !mToggle && zToggle ? true : false;
+    bgIsDark =
+      index == slideshow_length.get() - 1
+        ? false
+        : sToggle && !mToggle && zToggle
+          ? true
+          : false;
+
+    // console.log("HIER", index, slideshow_length.get());
     // console.log( "zToggle",zToggle , "mToggle", mToggle ,"stoggle" ,sToggle)
     // console.log("bgIsDark" ,bgIsDark)
 
     const footerControls = document.querySelector(".controls");
     footerControls.style.color = bgIsDark ? "var(--cwhite)" : "var(--cgrey)";
-  }, [sToggle, zToggle, mToggle]);
+  }, [sToggle, zToggle, mToggle, index]);
 
   // Slider Functions
 
@@ -236,12 +244,12 @@ function SSfigure(props) {
       </motion.figure>
 
       <button className="slideshow_btn btn_prev" onClick={prevSlide}>
-        {" "}
-        ◀️ vorheriges Bild{" "}
+        {/* ◀️ vorheriges Bild */}
+        <span className="material-symbols-rounded"> navigate_before</span>
       </button>
       <button className="slideshow_btn btn_next" onClick={nextSlide}>
-        {" "}
-        ▶️ nächstes Bild{" "}
+        {/* ▶️ nächstes Bild */}
+        <span className="material-symbols-rounded"> navigate_next</span>
       </button>
     </>
   );

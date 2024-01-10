@@ -34,7 +34,7 @@ const slideUp = {
 
 function TextBlockModal({ children, fLmodal }) {
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = event => {
       switch (event.key) {
         case "t":
           handleToggle();
@@ -68,7 +68,7 @@ function TextBlockModal({ children, fLmodal }) {
 
   // event listener for Esc
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = event => {
       if (event.key === "Escape") {
         handleClose();
       }
@@ -80,18 +80,13 @@ function TextBlockModal({ children, fLmodal }) {
     };
   }, []);
 
-
   // const bgIsBright = tFilter ? true : false;
   // console.log("bgIsBright" ,bgIsBright)
 
-
-
-
-   useEffect(() => {
+  useEffect(() => {
     const footerControls = document.querySelector(".controls");
-    footerControls.style.color = isOpen ?  'var(--cgrey)' : '';
-  }, [ isOpen ]) 
-
+    footerControls.style.color = isOpen ? "var(--cgrey)" : "";
+  }, [isOpen]);
 
   return (
     <AnimatePresence
@@ -111,7 +106,7 @@ function TextBlockModal({ children, fLmodal }) {
             exit="e"
             key={isOpen}
           >
-            <div className="content" onClick={(e) => e.stopPropagation()}>
+            <div className="content text" onClick={e => e.stopPropagation()}>
               {children}
               <button className="modal_close_btn" onClick={handleClose}>
                 <svg className="svg-icon">

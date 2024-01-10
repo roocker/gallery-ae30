@@ -1,5 +1,11 @@
-import { stateSlideshowIndex, stateSlideshow, stateModal } from "../states.jsx";
+import {
+  stateSlideshowIndex,
+  stateSlideshow,
+  stateModal,
+  slideshowCurrentAlt,
+} from "../states.jsx";
 import SimilarProjects from "./SimilarProjects.jsx";
+import "../styles/summary.css";
 
 export default function ProjectSummary(props) {
   // console.log("summary,picture", props.pictureTitles);
@@ -21,47 +27,54 @@ export default function ProjectSummary(props) {
     stateModal.set(true);
   };
 
+  const exportToStates = () => {
+    slideshowCurrentAlt.set("Zusammenfassung");
+  };
+  exportToStates();
+
   return (
     <div className="project_summary">
       {children}
-
-      <p className="read_more">
+      <p className="read_more link">
         <a href="#" onClick={() => toggleModal()}>
-          mehr lesen...
+          mehr lesen
         </a>
       </p>
-
-      <h3> Fotos </h3>
-      <ol>
-        {pictureTitles.map((img, i) => (
-          <li key={img}>
-            <a href="#" onClick={() => setIndexFotos(i)}>
-              {img}
-            </a>
-          </li>
-        ))}
-      </ol>
-
-      {planTitles && (
-        <>
-          <h3> Pläne </h3>
-          <ol>
-            {planTitles.map((img, i) => (
-              <li key={img}>
-                <a href="#" onClick={() => setIndexPlans(i)}>
-                  {img}
-                </a>
-              </li>
-            ))}
-          </ol>
-        </>
-      )}
-
-      <h2>Ähnliche Projekte:</h2>
-      <SimilarProjects items="4" currentProj={props.currentProj} />
-      <h2>
+      <div class="project_navigation">
+        <ol>
+          <h3> Fotos </h3>
+          {pictureTitles.map((img, i) => (
+            <li key={img}>
+              <a href="#" onClick={() => setIndexFotos(i)}>
+                {img}
+              </a>
+            </li>
+          ))}
+        </ol>
+        {planTitles && (
+          <>
+            <ol>
+              <h3> Pläne </h3>
+              {planTitles.map((img, i) => (
+                <li key={img}>
+                  <a href="#" onClick={() => setIndexPlans(i)}>
+                    {img}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </>
+        )}
+      </div>
+      <h2>Ähnliche Projekte</h2>
+      <SimilarProjects
+        items="4"
+        currentProj={props.currentProj}
+        allProjects={props.allProjects}
+      />
+      <p className="link center">
         <a href="/">Kehre zur Galerie zurück</a>
-      </h2>
+      </p>
     </div>
   );
 }
