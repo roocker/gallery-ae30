@@ -24,7 +24,13 @@ function PlanBtn({ children }) {
       className="btn modal_toggle_btn"
       title={children.props.value}
     >
-      <span className="material-symbols-rounded"> architecture</span>
+      {sToggle ? (
+        <span className="material-symbols-rounded"> architecture</span>
+      ) : (
+        <span className="material-symbols-rounded material-nofill">
+          photo_library
+        </span>
+      )}
     </button>
   );
 }

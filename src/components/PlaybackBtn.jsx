@@ -1,39 +1,31 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useStore } from "@nanostores/react";
-import { statePlayback, slideshowAutoPlayInterval } from "../states";
+import { statePlayback } from "../states";
 import "../styles/btn.css";
 
-function PlaybackBtn({ children }) {
+function PlaybackBtn({ autoPlayInterval, children }) {
   const pToggle = useStore(statePlayback);
   const setToggle = () => {
     statePlayback.set(!pToggle);
   };
-
-  const interval = useStore(slideshowAutoPlayInterval);
+  const interval = autoPlayInterval;
 
   const btnvariants = {
-    loop: Infinity,
-    ease: "linear",
-    duration: interval,
-  };
-
-  /* i: {
+    i: {
       pathLength: 0,
     },
     a: {
       pathLength: 1,
+      transition: {
+        repeat: Infinity,
+        repeatDelay: 0,
+        duration: interval,
+      },
     },
-    e: {},
-    h: {
-    },
-    t: {}
-
-  } */
+  };
 
   return (
-    // console.log(children.props.value),
-    // {`${pToggle ? 'an' : 'aus'}`}
     <motion.button
       style={""}
       animate={{ rotate: 0 }}
@@ -46,6 +38,20 @@ function PlaybackBtn({ children }) {
       className="btn btn_play"
       title={children.props.value}
     >
+      <svg className={`circle_path ${!pToggle ? "hide" : ""}`}>
+        <motion.path
+          d="M 1, 24
+        a 10,10 0 1,1 46,0
+        a 10,10 0 1,1 -46,0"
+          fill="none"
+          strokeWidth="2"
+          stroke="var(--cgrey)"
+          strokeLinecap="round"
+          animate={pToggle ? "a" : ""}
+          initial="i"
+          variants={btnvariants}
+        />
+      </svg>
       {!pToggle ? (
         <span className="material-symbols-rounded"> play_arrow</span>
       ) : (
@@ -56,8 +62,3 @@ function PlaybackBtn({ children }) {
 }
 
 export default PlaybackBtn;
-
-/* <svg className="btn_svg">
-
-      <use className="btn_use" href={!pToggle ? "/svg.svg#play" : "/svg.svg#pause"}/>
-    </svg> */

@@ -22,7 +22,11 @@ function ModalBtn({ children }) {
       className="btn modal_toggle_btn"
       title={children.props.value}
     >
-      <span className="material-symbols-rounded"> format_align_left</span>
+      {!isOpen ? (
+        <span className="material-symbols-rounded"> format_align_left</span>
+      ) : (
+        <span className="material-symbols-rounded"> close</span>
+      )}
     </button>
   );
 }
