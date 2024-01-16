@@ -2,6 +2,7 @@ import { useStore } from "@nanostores/react";
 import { stateModal, statePlayback } from "../states.jsx";
 import "../styles/btn.css";
 import React from "react";
+import HoverHint from "./HoverHint";
 
 function ModalBtn({ children }) {
   const isOpen = useStore(stateModal);
@@ -22,6 +23,7 @@ function ModalBtn({ children }) {
       className="btn modal_toggle_btn"
       title={children.props.value}
     >
+      <HoverHint>{children.props.value}</HoverHint>
       {!isOpen ? (
         <span className="material-symbols-rounded"> format_align_left</span>
       ) : (
