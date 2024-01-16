@@ -40,7 +40,7 @@ export default function ProjectSummary(props) {
           mehr lesen
         </a>
       </p>
-      <div class="project_navigation">
+      <div className="project_navigation">
         <ol>
           <h3> Fotos </h3>
           {pictureTitles.map((img, i) => (
