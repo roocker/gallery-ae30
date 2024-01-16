@@ -16,10 +16,9 @@ const height = fontSize + padding;
 export default function SlideshowCounter() {
   const index = useStore(stateSlideshowIndex);
   const length = useStore(slideshow_length);
-  console.log("index", index, "/", length);
 
   return (
-    <p
+    <div
       className={`counter ${length > 9 ? "twodigits" : ""}`}
       style={{ fontSize }}
     >
@@ -29,7 +28,7 @@ export default function SlideshowCounter() {
       <div className="digit">
         <span className="slideshow_number length">{length}</span>
       </div>
-    </p>
+    </div>
   );
 }
 
