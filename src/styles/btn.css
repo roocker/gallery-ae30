@@ -44,7 +44,20 @@ use.btn_use {
   transform: rotate(180deg) !important;
 }
 .btn_play {
-  border: 2px solid var(--cgrey) !important;
+  /* border: 2px solid var(--cgrey) !important; */
+}
+.control_line > .btn {
+  /* width: 7em !important; */
+}
+.circle_path {
+  width: 3em;
+  height: 3em;
+  position: absolute;
+  /* height: 100%; */
+  /* background: lavender; */
+}
+.circle_path.hide {
+  display: none;
 }
 
 button.btn:active {
@@ -62,4 +75,12 @@ button.btn:active {
   100% {
     transform: scale(1);
   }
+}
+
+.material-nofill {
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 24;
 }

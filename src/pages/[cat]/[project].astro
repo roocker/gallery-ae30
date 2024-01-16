@@ -113,7 +113,7 @@ allProjects = allProjects.map((proj, i) => {
     },
   };
 });
-
+const autoPlayInterval = 4;
 // remove archived projects
 allProjects = allProjects.filter(proj => !proj.data.archived);
 ---
@@ -134,7 +134,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
         pictureTitles={rawSSPicturesAlts}
         plans={optSSPlans}
         planTitles={rawSSPlansAlts}
-        autoPlayInterval={4}
+        autoPlayInterval={autoPlayInterval}
       >
         <ProjectSummary
           client:only
@@ -213,7 +213,9 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
       <div class="footer_line control_line">
         <SlideshowBtn dir="prev" client:load>Vorheriges Bild</SlideshowBtn>
         <ModalBtn client:load>Text ein-/ausblenden</ModalBtn>
-        <PlaybackBtn client:load>Slideshow pausieren</PlaybackBtn>
+        <PlaybackBtn autoPlayInterval={autoPlayInterval} client:load>
+          Slideshow pausieren
+        </PlaybackBtn>
         {p.plans && <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>}
         <SlideshowBtn dir="next" client:load>Nächstes Bild</SlideshowBtn>
       </div>
