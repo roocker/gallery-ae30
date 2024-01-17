@@ -6,6 +6,7 @@ import {
   slideshow_length,
   stateModal,
 } from "../states";
+import Tooltip from "./Tooltip";
 import "../styles/btn.css";
 
 function SlideshowBtn({ dir, children }) {
@@ -44,6 +45,9 @@ function SlideshowBtn({ dir, children }) {
       className="btn modal_toggle_btn"
       title={children.props.value}
     >
+      <Tooltip dir={`${dir == "next" ? "right" : "left"}`}>
+        {children.props.value}
+      </Tooltip>
       {dir === "next" ? (
         <span className="material-symbols-rounded"> navigate_next</span>
       ) : (

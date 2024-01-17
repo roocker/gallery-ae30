@@ -10,6 +10,7 @@ button.btn {
   background: var(--cwhite60);
 
   backdrop-filter: blur(2px);
+
   color: var(--cgrey);
   display: flex;
   justify-content: center;
@@ -18,7 +19,7 @@ button.btn {
 button.btn:hover {
   color: var(--cblack);
   cursor: pointer;
-  /* background: orange; */
+  border: 2px solid var(--cgrey) !important;
 }
 svg.btn_svg {
   height: 100%;

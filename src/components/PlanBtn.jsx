@@ -1,3 +1,4 @@
+import React from "react";
 import { useStore } from "@nanostores/react";
 import {
   stateSlideshow,
@@ -5,7 +6,7 @@ import {
   stateSlideshowZoom,
 } from "../states";
 import "../styles/btn.css";
-import React from "react";
+import Tooltip from "./Tooltip";
 
 function PlanBtn({ children }) {
   // const [toggle, setToggle] = useStore(stateSlideshow);
@@ -24,6 +25,7 @@ function PlanBtn({ children }) {
       className="btn modal_toggle_btn"
       title={children.props.value}
     >
+      <Tooltip dir="top">{children.props.value}</Tooltip>
       {sToggle ? (
         <span className="material-symbols-rounded"> architecture</span>
       ) : (

@@ -1,26 +1,64 @@
 .tooltip {
-  /* display: none; */
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease-in-out 0.5s;
 
   position: absolute;
-  top: calc(-50% - 3em);
-  /* left: -50%; */
+  bottom: calc(50% + 2em);
+
+  min-height: 2em;
+  /* #rev dangerous */
+  white-space: nowrap;
+  /* font-weight: bold; */
+
+  display: flex;
+  align-items: center;
+
+  border-radius: 2em;
+  background: var(--cwhite60);
+
+  z-index: 100;
+}
+.tooltip span {
   padding: 0.5em 1em 0.5em 1em;
   border-radius: 2em;
-  z-index: 100;
-  background: var(--cwhite60);
-  backdrop-filter: blur(2px);
-  /* background: red; */
-  opacity: 0;
-  transition: all 0.8s ease-in-out;
-  white-space: nowrap;
+  /* #rev geht nicht? */
+  backdrop-filter: blur(3px);
+  display: inline-block;
+  /* background: orange; */
 }
-*:hover:has(> .tooltip) .tooltip {
-  opacity: 1;
-  display: block;
-  /* width: 100%; */
-  /* height: 100%; */
+@media (hover: hover) {
+  *:hover:has(> .tooltip) .tooltip {
+    opacity: 1;
+    visibility: visible;
+  }
 }
-.tooltip::after {
+
+.tooltip.t {
+  bottom: calc(50% + 2em);
+  /* background: green; */
+}
+.tooltip.l {
+  top: 12.5%;
+  right: calc(50% + 2em);
+  /* background: yellow; */
+}
+.tooltip.r {
+  top: 12.5%;
+  left: calc(50% + 2em);
+}
+.tooltip.b {
+  top: calc(50% + 2em);
+}
+
+.tooltip.bl {
+  /* top: 12.5%; */
+  top: calc(50% + 2em);
+  right: calc(50% + 2em);
+}
+
+/* arrow */
+/* .tooltip::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -29,5 +67,4 @@
   border-width: 1em;
   border-style: solid;
   border-color: var(--cwhite60) transparent transparent transparent;
-  /* border-color: red transparent transparent transparent; */
-}
+} */
