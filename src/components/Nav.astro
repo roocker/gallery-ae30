@@ -14,6 +14,7 @@ import { CollectionEntry, getCollection } from "astro:content";
 import BasicScripts from "../components/basicScripts.astro";
 import Logo from "../components/Logo";
 import MainNav from "./MainNav";
+// import Tooltip from "./Tooltip";
 
 const settings = await getCollection("settings");
 const allProjects = await getCollection("projects");
@@ -70,6 +71,7 @@ const allMenuNames = [...menuCatsName, ...menuPagesName, ...menuProjectsName];
 
 <section id="header" aria-label="Header Logo & Navigation">
   <div class="logo_head">
+    <!-- <Tooltip dir="bottom-left">Zurück zur Galerie</Tooltip> -->
     <Logo client:load head={true} background={true} dark={true} />
   </div>
   <MainNav client:only menu_urls={allMenuURLs} menu_names={allMenuNames} />
