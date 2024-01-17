@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useStore } from "@nanostores/react";
 import { statePlayback } from "../states";
+import Tooltip from "./Tooltip";
 import "../styles/btn.css";
 
 function PlaybackBtn({ autoPlayInterval, children }) {
@@ -65,6 +66,7 @@ function PlaybackBtn({ autoPlayInterval, children }) {
       className="btn btn_play"
       title={children.props.value}
     >
+      <Tooltip>{children.props.value}</Tooltip>
       <svg className={`circle_path ${!pToggle ? "hide" : ""}`}>
         <motion.path
           d="M 1, 24

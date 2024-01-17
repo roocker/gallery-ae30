@@ -212,9 +212,9 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 
       <div class="footer_line control_line">
         <SlideshowBtn dir="prev" client:load>Vorheriges Bild</SlideshowBtn>
-        <ModalBtn client:load>Text ein-/ausblenden</ModalBtn>
+        <ModalBtn client:load>Projekt Beschreibung</ModalBtn>
         <PlaybackBtn autoPlayInterval={autoPlayInterval} client:load>
-          Slideshow pausieren
+          Automatische Wiedergabe 
         </PlaybackBtn>
         {p.plans && <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>}
         <SlideshowBtn dir="next" client:load>Nächstes Bild</SlideshowBtn>

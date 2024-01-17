@@ -1,8 +1,8 @@
+import React from "react";
 import { useStore } from "@nanostores/react";
 import { stateModal, statePlayback } from "../states.jsx";
-import "../styles/btn.css";
-import React from "react";
 import Tooltip from "./Tooltip";
+import "../styles/btn.css";
 
 function ModalBtn({ children }) {
   const isOpen = useStore(stateModal);
