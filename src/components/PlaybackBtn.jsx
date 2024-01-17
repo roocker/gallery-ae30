@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useStore } from "@nanostores/react";
 import { statePlayback } from "../states";
@@ -11,15 +11,40 @@ function PlaybackBtn({ autoPlayInterval, children }) {
   };
   const interval = autoPlayInterval;
 
+  const [cycle, setCycle] = useState(true);
+
+  useEffect(() => {
+    if (pToggle) {
+      const timer = setInterval(() => {
+        setCycle(prevCycle => !prevCycle);
+      }, interval * 1000); // interval is in milliseconds
+
+      return () => clearInterval(timer); // cleanup on unmount or when pToggle changes
+    }
+  }, [pToggle, interval]);
+
   const btnvariants = {
     i: {
       pathLength: 0,
+      rotate: 0,
     },
     a: {
+      rotate: 0,
       pathLength: 1,
       transition: {
-        repeat: Infinity,
-        repeatDelay: 0,
+        pathLength: {
+          repeat: Infinity,
+          duration: interval,
+        },
+        rotate: {
+          duration: 0.000001,
+        },
+      },
+    },
+    d: {
+      rotate: 360,
+      pathLength: 0,
+      transition: {
         duration: interval,
       },
     },
@@ -47,7 +72,8 @@ function PlaybackBtn({ autoPlayInterval, children }) {
           strokeWidth="2"
           stroke="var(--cgrey)"
           strokeLinecap="round"
-          animate={pToggle ? "a" : ""}
+          // animate={pToggle ? "a" : ""}
+          animate={pToggle ? (cycle ? "a" : "d") : "i"}
           initial="i"
           variants={btnvariants}
         />
@@ -62,3 +88,16 @@ function PlaybackBtn({ autoPlayInterval, children }) {
 }
 
 export default PlaybackBtn;
+/* <motion.circle
+          cx="24"
+          cy="24"
+          r="23"
+          fill="none"
+          strokeWidth="2"
+          // stroke="var(--cgrey)"
+          stroke="red"
+          strokeLinecap="round"
+          animate={pToggle ? "a" : ""}
+          initial="i"
+          variants={btnvariants}
+        /> */
