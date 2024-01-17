@@ -27,6 +27,8 @@
   display: inline-block;
   /* background: orange; */
 }
+
+/* needed bc mobile doesn't like that?  */
 @media (hover: hover) {
   *:hover:has(> .tooltip) .tooltip {
     opacity: 1;
