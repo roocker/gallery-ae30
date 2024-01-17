@@ -1,4 +1,4 @@
-.hover_hint {
+.tooltip {
   /* display: none; */
 
   position: absolute;
@@ -14,13 +14,13 @@
   transition: all 0.8s ease-in-out;
   white-space: nowrap;
 }
-*:hover:has(> .hover_hint) .hover_hint {
+*:hover:has(> .tooltip) .tooltip {
   opacity: 1;
   display: block;
   /* width: 100%; */
   /* height: 100%; */
 }
-.hover_hint::after {
+.tooltip::after {
   content: "";
   position: absolute;
   top: 100%;
