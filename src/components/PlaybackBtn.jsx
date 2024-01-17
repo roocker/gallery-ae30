@@ -17,11 +17,11 @@ function PlaybackBtn({ autoPlayInterval, children }) {
     if (pToggle) {
       const timer = setInterval(() => {
         setCycle(prevCycle => !prevCycle);
-      }, interval * 1000); // interval is in milliseconds
+      }, interval * 1000);
 
-      return () => clearInterval(timer); // cleanup on unmount or when pToggle changes
+      return () => clearInterval(timer);
     }
-  }, [pToggle, interval]);
+  }, [pToggle]);
 
   const btnvariants = {
     i: {
@@ -30,6 +30,8 @@ function PlaybackBtn({ autoPlayInterval, children }) {
     },
     a: {
       rotate: 0,
+      originX: "50%",
+      originY: "50%",
       pathLength: 1,
       transition: {
         pathLength: {
