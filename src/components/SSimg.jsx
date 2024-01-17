@@ -39,40 +39,33 @@ function SSimg(props) {
 
   */
 
-  /*
-  const img = document.getElementById('img');
-  
+  const img = document.getElementById("img");
+
   // console.log(img)
-  const zoomDragUp = () =>{
-    // console.log("up", img.dataset.downX)
+  /* const zoomDragUp = () => {
+    console.log("up", img.dataset.downX);
     img.dataset.downX = 0;
     img.dataset.prevPercentage = img.dataset.downX;
-  }
-  const zoomDragDown = (e) => {
-      props.onClick();
-      if (e.nativeEvent instanceof MouseEvent) {
-        img.dataset.downX = e.clientX;
-        // console.log("zoomDragDown x:",img.dataset.downX)
-      }
+  };
+  const zoomDragDown = e => {
+    // props.onClick();
+    if (e.nativeEvent instanceof MouseEvent) {
+      img.dataset.downX = e.clientX;
+      console.log("zoomDragDown x:", img.dataset.downX);
     }
-  const zoomDragMove = (e) =>{
+  };
+  const zoomDragMove = e => {
     if (zToggle && e.nativeEvent instanceof MouseEvent) {
       const moveXdelta = img.dataset.downX - e.clientX;
       const maxXdelta = window.innerWidth;
-      const moveXdeltaPercent = ( moveXdelta / maxXdelta  ) * -100  ;
-      const nextPercentage = img.dataset.prevPercentage + moveXdeltaPercent 
-      return (
-        img.animate(
-          {objectPosition: `${nextPercentage}% 50%`},
-          {duration: 1200, fill: "forwards"},
-        )
-      ); 
+      const moveXdeltaPercent = (moveXdelta / maxXdelta) * -100;
+      const nextPercentage = img.dataset.prevPercentage + moveXdeltaPercent;
+      return img.animate(
+        { objectPosition: `${nextPercentage}% 50%` },
+        { duration: 1200, fill: "forwards" }
+      );
     }
-  }
-  */
-  const zoomDragDown = () => {
-    props.onClick();
-  };
+  }; */
 
   return (
     <AnimatePresence initial={true}>
@@ -86,11 +79,10 @@ function SSimg(props) {
         initial={zToggle ? "a" : "i"}
         animate={zToggle ? "a" : "i"}
         transition={{ type: "spring", stiffness: 200, damping: 20 }}
-        onClick={zoomDragDown}
+        onClick={props.onClick}
         // onMouseDown={zoomDragDown}
         // onMouseMove={zoomDragMove}
         // onMouseUp={zoomDragUp}
-
         draggable={false}
       />
     </AnimatePresence>
