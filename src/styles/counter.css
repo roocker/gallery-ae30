@@ -1,12 +1,13 @@
 .counter {
-  /* width: auto; */
   margin: 0;
   position: relative;
   display: flex;
+  align-items: center;
   gap: 0.5em;
   overflow: hidden;
 
-  /* background: green; */
+  /* background: lime; */
+  /* height: 1.3em; */
 }
 
 .twodigits {
@@ -40,7 +41,9 @@
   justify-content: center;
   align-items: center;
   width: 1.5em;
+  /* height: 24px; */
   /* border: 1px solid red; */
+  /* background: red; */
 }
 
 .div {
