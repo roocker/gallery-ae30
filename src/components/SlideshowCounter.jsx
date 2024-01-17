@@ -10,7 +10,7 @@ import {
 import "../styles/counter.css";
 
 const fontSize = 20;
-const padding = 18;
+const padding = 2;
 const height = fontSize + padding;
 
 export default function SlideshowCounter() {
@@ -20,7 +20,7 @@ export default function SlideshowCounter() {
   return (
     <div
       className={`counter ${length > 9 ? "twodigits" : ""}`}
-      style={{ fontSize }}
+      style={{ height }}
     >
       {length > 9 && <Digit place={10} val={index + 1} />}
       <Digit place={1} val={index + 1} />

@@ -271,13 +271,15 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 
     display: flex;
     flex-direction: column;
-
-    color: var(--cgrey);
     text-align: center;
     align-items: center;
 
-    justify-content: center;
+    color: var(--cgrey);
+
     /* background: green; */
+  }
+  .controls:nth-of-type(1) {
+    /* background: orange; */
   }
 
   .footer_line {
@@ -320,6 +322,9 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
   }
   /* #rev counter_line vertical position from bot should be equal to gridlayout */
   .counter_line {
+    align-items: center;
+    display: flex;
+
     font-family: var(--fsans3) !important;
     font-size: 1.25rem;
     /* font-weight: bold; */
