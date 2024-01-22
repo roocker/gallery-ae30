@@ -1,5 +1,4 @@
 main {
-  /* overflow:hidden; */
   overscroll-behavior: auto; /* default */
 }
 .hide_overflow {
@@ -19,7 +18,7 @@ figure {
   height: 100lvh;
   width: 100lvw;
 
-  /* background: green; */
+  background: green;
   position: relative;
 
   overflow: hidden;

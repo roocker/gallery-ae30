@@ -1,0 +1,24 @@
+.project {
+  background: green;
+  overflow: auto;
+}
+#image-carousel {
+  display: flex;
+  gap: 4vmin;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(0%, -50%);
+  user-select: none;
+
+  border: 2px solid red;
+}
+#image-carousel figure {
+  background: lightblue;
+}
+#image-carousel img {
+  width: 40vmin;
+  height: 56vmin;
+  object-fit: cover;
+  object-position: 100% center;
+}

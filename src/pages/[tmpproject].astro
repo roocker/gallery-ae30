@@ -1,0 +1,366 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { CollectionEntry, getCollection } from "astro:content";
+// import BasicScripts from '../components/basicScripts.astro';
+import TextBlockModal from "../components/TextBlockModal";
+import SScarousel from "../components/SScarousel";
+import ProjectSummary from "../components/ProjectSummary";
+import SlideshowCounter from "../components/SlideshowCounter";
+import SlideshowAlt from "../components/SlideshowAlt";
+import ModalBtn from "../components/ModalBtn";
+import PlanBtn from "../components/PlanBtn";
+import SlideshowBtn from "../components/SlideshowBtn";
+import PlaybackBtn from "../components/PlaybackBtn";
+import { getImage } from "astro:assets";
+import { marked } from "marked";
+import "../styles/textbody.css";
+
+export async function getStaticPaths() {
+  const allProjects = await getCollection("projects");
+  return allProjects.map(proj => ({
+    params: { tmpproject: proj.slug, cat: proj.data.category },
+    props: proj,
+  }));
+}
+
+type Props = CollectionEntry<"projects">;
+const proj = Astro.props;
+
+const p = proj.data;
+
+const { Content } = await proj.render();
+
+// p.fotos.map(img => console.log("Fotos org path", img.foto.src));
+
+const rawSSPictures = [p.titleimg.img].concat(p.fotos.map(img => img.foto));
+
+const rawSSPicturesAlts = [p.titleimg.alt].concat(p.fotos.map(img => img.alt));
+
+let rawSSPlans;
+let rawSSPlansAlts;
+
+if (p.plans === undefined) {
+  rawSSPlans = undefined;
+  rawSSPlansAlts = undefined;
+} else {
+  rawSSPlans = p.plans.map(plan => plan.plan);
+  rawSSPlansAlts = p.plans.map(plan => plan.alt);
+}
+
+// Image Optimization
+// ----------------------------
+// console.log("rawSSPictures", rawSSPictures);
+
+const optSSPictures = await Promise.all(
+  rawSSPictures.map(
+    async img =>
+      await getImage({
+        src: img,
+        format: "webp",
+        width: 1920,
+      })
+  )
+);
+
+let optSSPlans = undefined;
+if (rawSSPlans) {
+  optSSPlans = await Promise.all(
+    rawSSPlans.map(
+      async img =>
+        await getImage({
+          src: img,
+          format: "webp",
+          width: 1920,
+        })
+    )
+  );
+}
+const opts = {
+  mangle: false,
+  headerIds: false,
+};
+
+const htmlbody = marked.parse(proj.body, opts);
+const htmlbody_lines = htmlbody.split("\n");
+const htmlbodyshorted = htmlbody_lines.slice(0, 1);
+const summary = htmlbodyshorted.join("\n");
+// console.log("PROJ", proj);
+
+// need for cover optimization for summary
+let allProjects = await getCollection("projects");
+const orgTitleImgs = allProjects.map((proj, index) => ({
+  img: proj.data.titleimg.img,
+  index,
+}));
+
+const optTitleImgs = await Promise.all(
+  orgTitleImgs.map(async covers => {
+    const img = await getImage({
+      src: covers.img,
+      format: "webp",
+      height: 100,
+    });
+    return { img /*,  imgIndex: covers.index */ };
+  })
+);
+
+allProjects = allProjects.map((proj, i) => {
+  return {
+    ...proj,
+    data: {
+      ...proj.data,
+      titleimg: optTitleImgs[i],
+    },
+  };
+});
+const autoPlayInterval = 4;
+// remove archived projects
+allProjects = allProjects.filter(proj => !proj.data.archived);
+---
+
+<Layout
+  title={`AE30 - ${p.title_l}`}
+  description={`${p.category}/${p.title}`}
+  image=""
+>
+  <section
+    class="project_presentation"
+    aria-label={`Projekt ${p.title} Presentation`}
+  >
+    <article class="project">
+      <SScarousel
+        client:only
+        pictures={optSSPictures}
+        pictureTitles={rawSSPicturesAlts}
+        plans={optSSPlans}
+        planTitles={rawSSPlansAlts}
+        autoPlayInterval={autoPlayInterval}
+      />
+
+      <TextBlockModal client:load>
+        <h1>{p.title_l}</h1>
+        {p.title_zzl && <h3>{p.title_zzl}</h3>}
+
+        <dl class="textmodal_ul">
+          {
+            p.project_keys.status ? (
+              <>
+                <dt>Status:</dt>
+                <dd>Status:{p.project_keys.status}</dd>
+              </>
+            ) : (
+              ""
+            )
+          }
+          <dt>Jahr:</dt><dd>
+            {p.project_keys.year} - {p.project_keys.year2}
+          </dd>
+          <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
+
+          <dt>TYP:</dt><dd>{p.project_keys.tags.map(tag => tag + ", ")}</dd>
+        </dl>
+
+        <p><Content /></p>
+      </TextBlockModal>
+    </article>
+
+    <section class="controls" aria-label="Plankopf Footer Controls">
+      <div class="footer_line alt_line">
+        <SlideshowAlt client:load />
+      </div>
+
+      <div class="footer_line title_line">
+        <h3 class="footer_title">{p.title_l}</h3>
+      </div>
+
+      <div class="footer_line control_line">
+        <SlideshowBtn dir="prev" client:load>Vorheriges Bild</SlideshowBtn>
+        <ModalBtn client:load>Projekt Beschreibung</ModalBtn>
+        <PlaybackBtn autoPlayInterval={autoPlayInterval} client:load>
+          Automatische Wiedergabe
+        </PlaybackBtn>
+        {p.plans && <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>}
+        <SlideshowBtn dir="next" client:load>Nächstes Bild</SlideshowBtn>
+      </div>
+
+      <div class="counter_line footer_line">
+        <SlideshowCounter client:load />
+      </div>
+    </section>
+  </section>
+</Layout>
+
+<style is:global>
+  .wrapper {
+    margin: 0 !important;
+    /* background: lightblue !important; */
+  }
+  .slideshow_div {
+  }
+</style>
+
+<style>
+  .project_presentation {
+    background: pink;
+    /* height: 100%; */
+
+    display: flex;
+    align-items: center; /* center vertically flexbox */
+    justify-content: center; /* center horizontally flex */
+  }
+  article.project {
+    /* max-width: 100%; */
+    /* max-height: 100%; */
+
+    /* overflow: hidden; */
+    /* background: lightblue;  */
+  }
+
+  article .pictures {
+  }
+  article .plans {
+  }
+  article .texts {
+  }
+  /* FOOTER CONTROLS  ----------------------------*/
+
+  .controls {
+    /*  document.querySelector(".controls"); in Slideshow controls color */
+    position: fixed;
+
+    z-index: 8 !important;
+    font-family: var(--fsans2);
+    bottom: 1em;
+    left: auto;
+
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+
+    color: var(--cgrey);
+
+    /* background: green; */
+  }
+  .controls:nth-of-type(1) {
+    /* background: orange; */
+  }
+
+  .footer_line {
+    line-height: 2em;
+    height: 2em;
+    backdrop-filter: blur(1px);
+    /* border-radius: 50%; */
+    /* background: lavender; */
+    font-family: var(--fsans2);
+  }
+
+  .control_line {
+    display: flex;
+    justify-content: space-evenly;
+    align-self: center;
+
+    margin: 0.5em 0 0.5em 0;
+    line-height: 3em;
+    height: 3em !important;
+
+    /* background: green; */
+  }
+  .title_line {
+    width: auto;
+    border-radius: 1em;
+    padding: 0 1em 0 1em;
+    /* background: red; */
+  }
+  h3.footer_title {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    /* font-weight: 100; */
+    margin: 0 !important;
+  }
+  .alt_line {
+    font-size: 1rem;
+    border-radius: 1em;
+    padding: 0 1em 0 1em;
+    /* background: orange; */
+  }
+  /* #rev counter_line vertical position from bot should be equal to gridlayout */
+  .counter_line {
+    align-items: center;
+    display: flex;
+
+    font-family: var(--fsans3) !important;
+    font-size: 1.25rem;
+    /* font-weight: bold; */
+    /* color: red; */
+    /* background: blue; */
+  }
+
+  @media only screen and (min-width: 48em/* var(--vwT) */) {
+    .title_line {
+      position: absolute;
+      left: 2em;
+      z-index: 10;
+    }
+    .alt_line {
+      position: absolute;
+      right: 2em;
+      z-index: 10;
+    }
+    .controls {
+      width: 100vw;
+      display: flex;
+      flex-direction: row;
+      /* margin: 0; */
+      align-items: center;
+      justify-content: center;
+      /* background: green; */
+    }
+    .control_line {
+      position: absolute;
+      bottom: 2.5em;
+    }
+  }
+  /* Modal Styles ----------------- */
+
+  /* Modal Text styles------------------- */
+
+  h1 {
+    /* font-size: 1.2em; */
+    /* line-height: 1em; */
+    text-transform: uppercase;
+    /* margin: 0; */
+    font-family: var(--fsans2);
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+
+  dl {
+    font-size: 1em;
+    font-family: var(--fsans2);
+    line-height: 1.5em;
+    margin: 0;
+    /* margin-left: 1.5em; */
+  }
+  /* dl > *{ background: red;} */
+  dt {
+    text-transform: uppercase;
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 1.5em;
+    float: left;
+    /* display: none; */
+    /* text-indent: -9999px; */
+  }
+  dl dt:first-child {
+    margin-right: 0.9em;
+    /* background: blue; */
+  }
+  dd {
+    /* background: white; */
+    /* padding: .5em 1em .5em 1em; */
+    /* border-radius: 2em; */
+    margin: 0;
+  }
+</style>
