@@ -54,12 +54,16 @@ h2.title_zzl {
 }
 
 .project_navigation {
-  /* background: lavender; */
+  background: lavender;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   gap: 1em;
   margin-bottom: 2em;
+
+  /* #rev */
+  max-height: 25vh;
+  overflow: hidden;
 }
 .project_navigation > ol {
   margin: 0;
@@ -80,7 +84,7 @@ h2.title_zzl {
 }
 @media only screen and (min-width: 37.5em) {
   .project_navigation {
-    display: flex;
+    /* display: flex; */
   }
   .project_summary dl,
   .summary_text {
@@ -90,6 +94,12 @@ h2.title_zzl {
 @media only screen and (min-width: 48em) {
   .alt_line {
     display: inline;
+  }
+}
+
+@media only screen and (min-height: 1200px) {
+  .project_navigation {
+    display: flex;
   }
 }
 
