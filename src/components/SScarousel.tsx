@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion, useMotionValue } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import { useStore } from "@nanostores/react";
 import {
   slideshow_length,
@@ -29,8 +34,6 @@ export default function SScarousel({
   // const [nextPercentage, setNextPercentage] = useState(0);
   const [prevPercentage, setPrevPercentage] = useState(0);
 
-  const move = useMotionValue(0);
-
   const handleOnDown = e => {
     setMouseDownAt(e.clientX);
   };
@@ -55,21 +58,29 @@ export default function SScarousel({
     );
 
     setPercentage(nextPercentage);
-
-    move.set(percentage);
   };
 
-  useEffect(
+  const moves = useMotionValue(0);
+  const move = useTransform(moves, [0, percentage], [0, percentage]);
+
+  useEffect(() => {
+    // console.log("percentage to move to", percentage);
+    move.set(percentage);
+    // console.log(move.get());
+  }, [percentage]);
+
+  useEffect(() => move.on("change", latest => console.log(latest)), [move]);
+
+  /* useEffect(
     () =>
-      move.onChange(latest => {
-        console.log(move);
+      move.on("change", latest => {
+        console.log(latest);
+        // const newIndex = calculateIndex(latest, images.length + 1);
+        // console.log("newIndex", newIndex);
+        // stateSlideshowIndex.set(newIndex);
       }),
     [percentage, move]
-  );
-
-  // console.log("mouse down at", mouseDownAt);
-  // console.log("percentage", percentage);
-  // }, [mouseDownAt, percentage]);
+  ); */
 
   const move_carousel = {
     i: { x: 0, y: "-50%" },
@@ -117,14 +128,14 @@ export default function SScarousel({
 
     setPercentage(imgAtPos);
 
-    console.log(
+    /* console.log(
       "index changed",
       index + 1,
       "/",
       images.length + 1,
       "=>",
       imgAtPos
-    );
+    ); */
   }, [index]);
 
   // update index according to percentage:
@@ -136,10 +147,9 @@ export default function SScarousel({
   useEffect(() => {
     // const currentPercentage = move.get();
     // console.log("currentPercentage", currentPercentage);
-
-    const newIndex = calculateIndex(percentage, images.length + 1);
+    // const newIndex = calculateIndex(percentage, images.length + 1);
     // console.log("newIndex", newIndex);
-    stateSlideshowIndex.set(newIndex);
+    // stateSlideshowIndex.set(newIndex);
   }, [percentage]);
 
   // -------
@@ -160,7 +170,7 @@ export default function SScarousel({
         id="image-carousel"
         data-mouse-down-at="0"
         data-prev-percentage="0"
-        // style={{ move }}
+        // style={{ transform: `translate(${percentage}% , -50%)` }}
         variants={move_carousel}
         animate="a"
         initial="i"
