@@ -135,6 +135,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
         plans={optSSPlans}
         planTitles={rawSSPlansAlts}
         autoPlayInterval={autoPlayInterval}
+        title={p.title}
       />
 
       <TextBlockModal client:load>
@@ -193,7 +194,6 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 <style is:global>
   .wrapper {
     margin: 0 !important;
-    /* background: lightblue !important; */
   }
   .slideshow_div {
   }
@@ -201,19 +201,14 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 
 <style>
   .project_presentation {
-    background: pink;
-    /* height: 100%; */
-
     display: flex;
     align-items: center; /* center vertically flexbox */
     justify-content: center; /* center horizontally flex */
   }
   article.project {
-    /* max-width: 100%; */
-    /* max-height: 100%; */
-
-    /* overflow: hidden; */
-    /* background: lightblue;  */
+    height: 100vh;
+    width: 100vw;
+    /* background: lightgreen; */
   }
 
   article .pictures {
