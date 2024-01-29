@@ -14,11 +14,11 @@ main {
 .slideshow_div:hover {
 }
 
-figure {
+figure.slideshow {
   height: 100lvh;
   width: 100lvw;
 
-  background: green;
+  /* background: green; */
   position: relative;
 
   overflow: hidden;
@@ -40,7 +40,7 @@ figure {
   z-index: 0;
   /* background: red; */
 }
-figure img {
+figure.slideshow img {
   max-width: 100lvw;
   max-height: 100lvh;
 
@@ -48,13 +48,13 @@ figure img {
   object-position: 50% 60%;
   /* object-position: 50% 50%; */
 }
-figure.slideshow_fig:hover {
+figure.slideshow:hover {
   /* cursor: zoom-out; */
 }
 figure.slidshow_fig_zoomed_out:hover {
   /* cursor: zoom-in; */
 }
-figure picture {
+figure.slideshow picture {
   margin: 0 !important;
   padding: 0 !important;
   background: blue;

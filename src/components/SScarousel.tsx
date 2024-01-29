@@ -10,9 +10,11 @@ import {
   slideshow_length,
   stateSlideshow,
   stateSlideshowIndex,
+  stateSlideshowZoom2,
 } from "../states.jsx";
 
 import "../styles/carousel.css";
+import SSfigure from "./SSfigure.jsx";
 
 export default function SScarousel({
   title,
@@ -21,12 +23,25 @@ export default function SScarousel({
   plans,
   planTitles,
   children,
+  autoPlayInterval,
 }) {
   const sToggle = useStore(stateSlideshow);
   const images = sToggle ? pictures : plans;
   const alts = sToggle ? pictureTitles : planTitles;
 
   const index = useStore(stateSlideshowIndex);
+
+  const zoom = useStore(stateSlideshowZoom2);
+
+  const zoomIn = (i: Number) => {
+    stateSlideshowZoom2.set(1);
+    console.log("requested zoom index:", i, "- status:", zoom);
+  };
+
+  const zoomOut = () => {
+    stateSlideshowZoom2.set(0);
+  };
+  // console.log("zoom", zoom);
 
   // carousel ----
   const [mouseDownAt, setMouseDownAt] = useState(0);
@@ -69,7 +84,7 @@ export default function SScarousel({
     // console.log(move.get());
   }, [percentage]);
 
-  useEffect(() => move.on("change", latest => console.log(latest)), [move]);
+  // useEffect(() => move.on("change", latest => console.log(latest)), [move]);
 
   /* useEffect(
     () =>
@@ -105,6 +120,12 @@ export default function SScarousel({
         },
       },
     },
+  };
+
+  const anim_Zoom1 = {
+    i: { height: "auto" },
+
+    a: { height: "100%" },
   };
 
   useEffect(() => {
@@ -165,36 +186,59 @@ export default function SScarousel({
       onMouseUp={handleOnUp}
       onMouseMove={handleOnMove}
     >
-      <div className="crosshair" />
-      <motion.div
-        id="image-carousel"
-        data-mouse-down-at="0"
-        data-prev-percentage="0"
-        // style={{ transform: `translate(${percentage}% , -50%)` }}
-        variants={move_carousel}
-        animate="a"
-        initial="i"
-      >
-        {children}
-        {images.map((img, i) => (
-          <figure key={alts[i]}>
-            <a href="">
-              <motion.img
-                src={img.src}
-                alt={alts[i]}
-                variants={move_image}
-                animate="a"
-                draggable="false"
-              />
-            </a>
-            {/*
+      <AnimatePresence initial={true}>
+        <div className="crosshair" />
+        {zoom === 0 && (
+          <motion.div
+            id="image-carousel"
+            data-mouse-down-at="0"
+            data-prev-percentage="0"
+            // style={{ transform: `translate(${percentage}% , -50%)` }}
+            variants={move_carousel}
+            animate="a"
+            initial="i"
+          >
+            {children}
+            {images.map((img, i) => (
+              <figure key={`carouselfig_${alts[i]}`}>
+                <a
+                  onClick={() => {
+                    zoomIn(i);
+                  }}
+                >
+                  <motion.img
+                    src={img.src}
+                    alt={alts[i]}
+                    variants={move_image}
+                    animate="a"
+                    draggable="false"
+                  />
+                </a>
+                {/*
               rechts unten? ==> Slideshow_alt update
 
             <figcaption>{alts[i]}</figcaption> */}
-          </figure>
-        ))}
-        <div className="summary_block">{title}</div>
-      </motion.div>
+              </figure>
+            ))}
+
+            <div className="summary_block">{title}</div>
+          </motion.div>
+        )}
+
+        {zoom === 1 && (
+          <motion.div variants={anim_Zoom1} animate="a" initial="i" exit="e">
+            <SSfigure
+              pictures={pictures}
+              pictureTitles={pictureTitles}
+              plans={plans}
+              planTitles={planTitles}
+              autoPlayInterval={autoPlayInterval}
+            >
+              test
+            </SSfigure>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

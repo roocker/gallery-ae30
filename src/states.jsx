@@ -25,7 +25,8 @@ export const slideshowCurrentAlt = atom();
 export const stateSlideshow = atom(true);
 // #rev default value should control via CMS
 export const statePlayback = atom(false);
-export const stateSlideshowZoom = atom(true);
+export const stateSlideshowZoom = atom(false);
+export const stateSlideshowZoom2 = atom(0);
 export const slideshowAutoPlayInterval = atom();
 
 // ----------------------------------------------

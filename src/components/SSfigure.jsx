@@ -15,6 +15,7 @@ import {
   slideshowAutoPlayInterval,
   stateSlideshowZoom,
   stateModal,
+  stateSlideshowZoom2,
 } from "../states.jsx";
 
 function SSfigure(props) {
@@ -101,6 +102,9 @@ function SSfigure(props) {
   const zToggle = useStore(stateSlideshowZoom);
   const setZoomToggle = () => {
     stateSlideshowZoom.set(!zToggle);
+    if (zToggle) {
+      stateSlideshowZoom2.set(0);
+    }
   };
 
   // change Controls color on Plan/Picture Toggle
@@ -210,7 +214,7 @@ function SSfigure(props) {
   return (
     <>
       <motion.figure
-        className="slideshow_fig"
+        className="slideshow"
         // variants={animate_stoggle}
         key={sToggle}
         initial="i"
