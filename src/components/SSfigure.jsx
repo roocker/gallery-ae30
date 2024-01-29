@@ -16,7 +16,7 @@ import {
   stateSlideshowZoom,
   stateModal,
   stateSlideshowZoom2,
-} from "../states.jsx";
+} from "../states";
 
 function SSfigure(props) {
   const children = props.children;

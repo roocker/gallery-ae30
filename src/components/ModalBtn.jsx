@@ -1,6 +1,6 @@
 import React from "react";
 import { useStore } from "@nanostores/react";
-import { stateModal, statePlayback } from "../states.jsx";
+import { stateModal, statePlayback } from "../states";
 import Tooltip from "./Tooltip";
 import "../styles/btn.css";
 

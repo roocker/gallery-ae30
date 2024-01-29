@@ -93,3 +93,22 @@
 .summary_block::after {
   transform: rotate(-45deg);
 } */
+
+/* ----------------------------- */
+/* SLIDESHOW */
+/* ----------------------------- */
+
+figure.slideshow {
+  height: 100lvh;
+  width: 100lvw;
+
+  background: lightgreen;
+  position: relative;
+
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  vertical-align: center;
+}
