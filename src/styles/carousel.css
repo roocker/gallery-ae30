@@ -39,7 +39,7 @@
   position: relative;
 
   /* background: cyan; */
-  border: 4px dashed lime;
+  /* border: 4px dashed lime; */
 }
 #image-carousel {
   display: flex;

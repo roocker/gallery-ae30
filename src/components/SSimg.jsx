@@ -1,6 +1,6 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import "../styles/slideshow.css";
+// import "../styles/slideshow.css"; // don't need cause SSfig already imports it
 
 const animation_zoom = {
   i: {
