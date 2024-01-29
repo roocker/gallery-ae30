@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 // import BasicScripts from '../components/basicScripts.astro';
 import TextBlockModal from "../components/TextBlockModal";
-import SScarousel from "../components/SScarousel";
+import Carousel from "../components/carousel";
 import ProjectSummary from "../components/ProjectSummary";
 import SlideshowCounter from "../components/SlideshowCounter";
 import SlideshowAlt from "../components/SlideshowAlt";
@@ -128,7 +128,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     aria-label={`Projekt ${p.title} Presentation`}
   >
     <article class="project">
-      <SScarousel
+      <Carousel
         client:only
         pictures={optSSPictures}
         pictureTitles={rawSSPicturesAlts}

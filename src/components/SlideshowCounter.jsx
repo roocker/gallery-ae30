@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useStore } from "@nanostores/react";
-import { slideshow_length, stateSlideshowIndex } from "../states.jsx";
+import { slideshow_length, stateSlideshowIndex } from "../states";
 import {
   AnimatePresence,
   motion,

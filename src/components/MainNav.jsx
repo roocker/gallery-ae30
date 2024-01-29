@@ -43,7 +43,7 @@ function MainNav(props) {
 console.log("isMenuWide:", isMenuWide); */
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    const handleKeyDown = event => {
       switch (event.key) {
         case "m":
           toggleMenu();

@@ -11,12 +11,13 @@ import {
   stateSlideshow,
   stateSlideshowIndex,
   stateSlideshowZoom2,
-} from "../states.jsx";
+} from "../states";
 
 import "../styles/carousel.css";
 import SSfigure from "./SSfigure.jsx";
+import Fig from "./carousel/fig";
 
-export default function SScarousel({
+export default function Carousel({
   title,
   pictures,
   pictureTitles,
@@ -32,14 +33,15 @@ export default function SScarousel({
   const index = useStore(stateSlideshowIndex);
 
   const zoom = useStore(stateSlideshowZoom2);
+  console.log("zoom", zoom);
 
-  const zoomIn = (i: Number) => {
+  const zoomIng = (i: number) => {
     stateSlideshowZoom2.set(1);
+    stateSlideshowIndex.set(i);
     console.log("requested zoom index:", i, "- status:", zoom);
-  };
-
-  const zoomOut = () => {
-    stateSlideshowZoom2.set(0);
+    if (zoom === 1) {
+      stateSlideshowZoom2.set(0);
+    }
   };
   // console.log("zoom", zoom);
 
@@ -86,21 +88,11 @@ export default function SScarousel({
 
   // useEffect(() => move.on("change", latest => console.log(latest)), [move]);
 
-  /* useEffect(
-    () =>
-      move.on("change", latest => {
-        console.log(latest);
-        // const newIndex = calculateIndex(latest, images.length + 1);
-        // console.log("newIndex", newIndex);
-        // stateSlideshowIndex.set(newIndex);
-      }),
-    [percentage, move]
-  ); */
-
   const move_carousel = {
     i: { x: 0, y: "-50%" },
     a: {
       x: percentage + "%",
+      y: "-50%",
       transition: {
         x: {
           duration: 2,
@@ -109,6 +101,7 @@ export default function SScarousel({
       },
     },
   };
+
   const move_image = {
     i: { objectPosition: "0% center" },
     a: {
@@ -122,10 +115,18 @@ export default function SScarousel({
     },
   };
 
-  const anim_Zoom1 = {
-    i: { height: "auto" },
 
-    a: { height: "100%" },
+  const anim_Zoom1 = {
+    // i: { height: "auto" },
+
+    // a: { height: "100lvh"  },
+    a: {
+
+      scale: 3,
+      originX: 
+
+    },
+    e: { scale: 0}
   };
 
   useEffect(() => {
@@ -186,10 +187,11 @@ export default function SScarousel({
       onMouseUp={handleOnUp}
       onMouseMove={handleOnMove}
     >
-      <AnimatePresence initial={true}>
-        <div className="crosshair" />
+      <div key="crosshair" className="crosshair" />
+      <AnimatePresence initial={false}>
         {zoom === 0 && (
           <motion.div
+            key="image-carousel"
             id="image-carousel"
             data-mouse-down-at="0"
             data-prev-percentage="0"
@@ -197,37 +199,42 @@ export default function SScarousel({
             variants={move_carousel}
             animate="a"
             initial="i"
+            exit="e"
           >
             {children}
             {images.map((img, i) => (
-              <figure key={`carouselfig_${alts[i]}`}>
-                <a
-                  onClick={() => {
-                    zoomIn(i);
-                  }}
-                >
-                  <motion.img
-                    src={img.src}
-                    alt={alts[i]}
-                    variants={move_image}
-                    animate="a"
-                    draggable="false"
-                  />
-                </a>
-                {/*
-              rechts unten? ==> Slideshow_alt update
-
-            <figcaption>{alts[i]}</figcaption> */}
-              </figure>
-            ))}
+                <Fig
+                  key={i.toString()}
+                  index={i}
+                  src={img.src}
+                  title={alts[i]}
+                  animation={move_image}
+                  onclick={zoomIng}
+                  classname=""
+                />
+              ))}
 
             <div className="summary_block">{title}</div>
           </motion.div>
         )}
 
         {zoom === 1 && (
-          <motion.div variants={anim_Zoom1} animate="a" initial="i" exit="e">
-            <SSfigure
+          <Fig
+            classname="slideshow"
+            key={index}
+            index={index}
+            src={images[index].src}
+            title={alts[index]}
+            onclick={zoomIng}
+            animation={anim_Zoom1}
+          />
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/* <SSfigure
               pictures={pictures}
               pictureTitles={pictureTitles}
               plans={plans}
@@ -235,10 +242,4 @@ export default function SScarousel({
               autoPlayInterval={autoPlayInterval}
             >
               test
-            </SSfigure>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
+            </SSfigure> */

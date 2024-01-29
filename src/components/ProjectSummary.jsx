@@ -3,7 +3,7 @@ import {
   stateSlideshow,
   stateModal,
   slideshowCurrentAlt,
-} from "../states.jsx";
+} from "../states";
 import SimilarProjects from "./SimilarProjects.jsx";
 import "../styles/summary.css";
 

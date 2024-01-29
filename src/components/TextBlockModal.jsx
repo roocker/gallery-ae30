@@ -1,5 +1,5 @@
 import { useStore } from "@nanostores/react";
-import { stateModal } from "../states.jsx";
+import { stateModal } from "../states";
 import Backdrop from "./Backdrop.jsx";
 import "../styles/modal.css";
 import React, { useEffect } from "react";
