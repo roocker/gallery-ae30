@@ -33,7 +33,6 @@ export default function Carousel({
   const index = useStore(stateSlideshowIndex);
 
   const zoom = useStore(stateSlideshowZoom2);
-  console.log("zoom", zoom);
 
   const zoomIng = (i: number) => {
     stateSlideshowZoom2.set(1);
@@ -88,6 +87,50 @@ export default function Carousel({
 
   // useEffect(() => move.on("change", latest => console.log(latest)), [move]);
 
+  useEffect(() => {
+    const smallerVS = //calculate 30vmin / 2
+      window.innerWidth < window.innerHeight
+        ? window.innerWidth
+        : window.innerHeight;
+
+    const img_width = (smallerVS / 100) * 30;
+    const half_img_width = img_width / 2;
+
+    const gap_width = 16;
+
+    const carouselwidth =
+      img_width * (images.length + 1) + gap_width * images.length;
+
+    const addthis = index * (img_width + gap_width) + half_img_width;
+    const addthis_perc = (100 / carouselwidth) * addthis;
+
+    const imgAtPos = addthis_perc * -1;
+
+    setPercentage(imgAtPos);
+
+    /* console.log(
+      "index changed",
+      index + 1,
+      "/",
+      images.length + 1,
+      "=>",
+      imgAtPos
+    ); */
+    return () => { addthis }
+  }, [index]);
+
+  const calculateIndex = (percentage, len) => {
+    return Math.floor((len * percentage) / -100);
+  };
+
+  useEffect(() => {
+    // const currentPercentage = move.get();
+    // console.log("currentPercentage", currentPercentage);
+    // const newIndex = calculateIndex(percentage, images.length + 1);
+    // console.log("newIndex", newIndex);
+    // stateSlideshowIndex.set(newIndex);
+  }, [percentage]);
+
   const move_carousel = {
     i: { x: 0, y: "-50%" },
     a: {
@@ -123,56 +166,16 @@ export default function Carousel({
     a: {
 
       scale: 3,
-      originX: 
+      originX: addthis  
 
     },
     e: { scale: 0}
   };
 
-  useEffect(() => {
-    const smallerVS = //calculate 30vmin / 2
-      window.innerWidth < window.innerHeight
-        ? window.innerWidth
-        : window.innerHeight;
-
-    const img_width = (smallerVS / 100) * 30;
-    const half_img_width = img_width / 2;
-
-    const gap_width = 16;
-
-    const carouselwidth =
-      img_width * (images.length + 1) + gap_width * images.length;
-
-    const addthis = index * (img_width + gap_width) + half_img_width;
-    const addthis_perc = (100 / carouselwidth) * addthis;
-
-    const imgAtPos = addthis_perc * -1;
-
-    setPercentage(imgAtPos);
-
-    /* console.log(
-      "index changed",
-      index + 1,
-      "/",
-      images.length + 1,
-      "=>",
-      imgAtPos
-    ); */
-  }, [index]);
 
   // update index according to percentage:
 
-  const calculateIndex = (percentage, len) => {
-    return Math.floor((len * percentage) / -100);
-  };
 
-  useEffect(() => {
-    // const currentPercentage = move.get();
-    // console.log("currentPercentage", currentPercentage);
-    // const newIndex = calculateIndex(percentage, images.length + 1);
-    // console.log("newIndex", newIndex);
-    // stateSlideshowIndex.set(newIndex);
-  }, [percentage]);
 
   // -------
   const exportToStates = () => {
