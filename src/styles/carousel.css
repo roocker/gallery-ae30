@@ -43,7 +43,7 @@
   position: relative;
   /* overflow-x: auto; */
 
-  background: cyan;
+  /* background: cyan; */
   /* border: 4px dashed lime; */
 }
 #image-carousel {
@@ -110,7 +110,7 @@ figure.slideshow {
 
   position: absolute;
 
-  background: lightgreen;
+  /* background: lightgreen; */
 
   /* overflow: hidden; */
 

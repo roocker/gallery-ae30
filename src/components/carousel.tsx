@@ -50,7 +50,7 @@ export default function Carousel({
   // console.log("zoom", zoom);
 
   // ----------------------------------------------------
-  // carousel ----
+  // carousel
   // ----------------------------------------------------
 
   const carousel = useRef<HTMLDivElement>(null);
@@ -70,7 +70,7 @@ export default function Carousel({
     if (carousel.current) {
       setCarouselWidth(carousel.current.offsetWidth); // update on resizing of window!
       setCarouselElements(carousel.current.children);
-      console.log(
+      /* console.log(
         "carousel",
         carousel,
         "carouselWidth",
@@ -79,7 +79,7 @@ export default function Carousel({
         carouselElements,
         "carousel_element_width",
         carousel_element_width
-      );
+      ); */
     } else {
       // throw new Error("carousel not found");
     }
@@ -107,6 +107,8 @@ export default function Carousel({
     console.log("nearest index:", nearestIndex, "segmentWidth:", segmentWidth);
   }; */
 
+  const [elementOrigin, setElementOrigin] = useState([]);
+
   useEffect(
     () =>
       move_carousel.on("change", latest => {
@@ -118,7 +120,7 @@ export default function Carousel({
           moveImage.get()
         ); */
       }),
-    [move_carousel]
+    [move_carousel, images]
   );
 
   const transition = {
@@ -127,24 +129,41 @@ export default function Carousel({
     damping: 20,
   };
 
-  useEffect(() => {
-    const calc_carousel_element_mid = i => {
-      return (
-        (-1 * carousel_element_width - gap_width) * i -
-        carousel_element_width / 2
-      );
-    };
-    const move_carousel_to_index = calc_carousel_element_mid(index);
+  const calc_carousel_element_mid = i => {
+    return (
+      (-1 * carousel_element_width - gap_width) * i - carousel_element_width / 2
+    );
+  };
 
+  const calc_carousel_element_rel_mid = i => {
+    // console.log("currentindex:", index , i)
+    if (i === index) {
+      return 0;
+    } else {
+      const deltaToI = i - index;
+      return carousel_element_width * deltaToI;
+    }
+  };
+  useEffect(() => {
+    const move_carousel_to_index = calc_carousel_element_mid(index);
     animate(move_carousel, move_carousel_to_index, transition);
+
+    const newElementOrigin = images.map((_, i) => {
+      return calc_carousel_element_rel_mid(i);
+    });
+
+    // Update the state with the new values
+    setElementOrigin(newElementOrigin);
 
     console.log(
       "requested index:",
-      index,
+      index, "origin", elementOrigin[index],
       "moving to:",
       move_carousel_to_index,
       "carousel_element_width:",
-      carousel_element_width
+      carousel_element_width,
+      "elementOrigin:",
+      elementOrigin
     );
   }, [index, stateSlideshowIndex]);
 
@@ -176,18 +195,17 @@ export default function Carousel({
   };
 
   return (
-    <AnimatePresence initial={true}>
-      <motion.div
-        onWheel={handleScroll}
-        ref={carouselContainer}
-        className="carousel"
-        onPointerDown={startDrag}
-        style={{ touchAction: "none" }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 2 }}
-      >
-        <div key="crosshair" className="crosshair" />
+    <motion.div
+      onWheel={handleScroll}
+      ref={carouselContainer}
+      className="carousel"
+      onPointerDown={startDrag}
+      style={{ touchAction: "none" }}
+      transition={{ duration: 2 }}
+    >
+      <div key="crosshair" className="crosshair" />
 
+      <AnimatePresence initial={true}>
         {zoom === 0 && (
           <motion.div
             key="carousel"
@@ -195,6 +213,10 @@ export default function Carousel({
             id="image-carousel"
             style={{ height: "45vmin", x: move_carousel, y: "-50%" }}
             drag="x"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, scale: 1 }}
             // onDragEnd={setNearestIndex}
             dragControls={dragControls}
             dragTransition={{
@@ -224,7 +246,6 @@ export default function Carousel({
             <div className="summary_block">{title}</div>
           </motion.div>
         )}
-
         {zoom === 1 && (
           <motion.div
             key="slideshow"
@@ -232,9 +253,9 @@ export default function Carousel({
             id="image-slideshow"
             // style={{ height: "45vmin" }}
             // initial={{ originX: picpos[i], scale: 0.5, opacity: 0 }}
-            initial={{ originX: 1, scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1, height: "100%" }}
-            exit={{ opacity: 0 }}
+            initial={{ originX: elementOrigin[index], scale: 0.1, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ originX: 0, opacity: 0, scale: 0.1 }}
             transition={{ duration: 2 }}
           >
             <Fig
@@ -249,7 +270,7 @@ export default function Carousel({
             />
           </motion.div>
         )}
-      </motion.div>
-    </AnimatePresence>
+      </AnimatePresence>
+    </motion.div>
   );
 }
