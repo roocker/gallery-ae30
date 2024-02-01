@@ -4,6 +4,7 @@ import {
   motion,
   useMotionValue,
   useTransform,
+  useAnimate,
 } from "framer-motion";
 import { useStore } from "@nanostores/react";
 import {
@@ -48,7 +49,9 @@ export default function Carousel({
   // carousel ----
   // ----------------------------------------------------
 
-  const carousel = useRef<HTMLDivElement>(null);
+  // const carousel = useRef<HTMLDivElement>(null);
+  const [carousel, animate] = useAnimate();
+
   const carousel_box = useRef<HTMLDivElement>(null);
 
   const [carouselWidth, setCarouselWidth] = useState(0);
@@ -83,6 +86,13 @@ export default function Carousel({
   // const carouselWidth = carousel.current?.offsetWidth;
 
   const move_carousel = useMotionValue(0);
+  const transition = {
+    type: "easeIn",
+    duration: 2,
+  };
+
+  // Create a custom motion value for the y position using useTransform
+  const dynamicY = useTransform(move_carousel, value => `-${value / 2}%`);
 
   const calc_carousel_element_mid = i => {
     return (
@@ -90,11 +100,11 @@ export default function Carousel({
     );
   };
 
-  const move_carousel_to_index = calc_carousel_element_mid(index);
+  const [moveToIndex, setMoveToIndex] = useState(0);
 
-  const inpt = [0, -1 * carouselWidth];
-  const out = [0, move_carousel_to_index];
-  useTransform(move_carousel, inpt, out);
+  // const inpt = [0, -1 * carouselWidth];
+  // const out = [0, move_carousel_to_index];
+  // useTransform(move_carousel, inpt, out);
 
   useEffect(
     () =>
@@ -107,16 +117,30 @@ export default function Carousel({
   useEffect(() => {
     const move_carousel_to_index = calc_carousel_element_mid(index);
     // move_carousel.set(move_carousel_to_index);
+    setMoveToIndex(move_carousel_to_index);
 
     console.log(
       "requested index:",
       index,
       "moving to:",
-      move_carousel_to_index,
+      moveToIndex,
       "carousel_element_width:",
       carousel_element_width
     );
   }, [index, move_carousel]);
+
+  /* const moveTo = {
+    i: { y: "-50%" },
+    a: {
+      x: moveToIndex,
+      transition: {
+        x: {
+          type: "easein",
+          duration: 2,
+        },
+      },
+    },
+  }; */
 
   const input = [0, -1 * carouselWidth];
   const output = [0, 1];
@@ -224,8 +248,12 @@ export default function Carousel({
         <motion.div
           ref={carousel}
           id="image-carousel"
-          style={{ y: "-50%", x: move_carousel }}
-          drag="x"
+          // style={{ y: "-50%", x: move_carousel }}
+          // drag="x"
+          // variants={moveTo}
+          style = {{ y: dynamicY}}
+          initial={{ x: moveToIndex}}
+          animate={{ x: moveToIndex}}
 
           // dragConstraints={carousel}
           // data-mouse-down-at="0"
