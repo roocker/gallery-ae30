@@ -33,13 +33,16 @@
 }
 
 .carousel {
-  width: 100%;
+  width: auto;
   height: 100%;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: left;
   position: relative;
 
   /* background: cyan; */
-  border: 4px dashed lime;
+  /* border: 4px dashed lime; */
 }
 #image-carousel {
   display: flex;
@@ -47,10 +50,11 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  /* transform: translate(0%, -50%); */
-  user-select: none;
+  height: 45vmin;
+  transform: translate(0%, -50%);
+  /* user-select: none; */
 
-  border: 2px solid red;
+  /* border: 2px solid red; */
   /* background: pink; */
 }
 .summary_block,
@@ -61,9 +65,9 @@
 #image-carousel img {
   display: block;
   width: 30vmin;
-  height: 45vmin;
+  height: 100%;
   object-fit: cover;
-  object-position: 100% center;
+  /* object-position: 100% center; */
 }
 .summary_block {
   display: flex;
