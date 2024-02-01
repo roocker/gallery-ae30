@@ -39,10 +39,25 @@ export default function Carousel({
 
   const zoom = useStore(stateSlideshowZoom2);
 
+  const [reqIndex, setReqIndex] = useState(0);
+
   const zoomIng = (i: number) => {
     stateSlideshowZoom2.set(1);
+    setReqIndex(i);
+
     stateSlideshowIndex.set(i);
-    console.log("requested zoom index:", i, "- status:", zoom);
+    console.log(
+      "requested zoom index:",
+      i,
+
+      "from currentIndex:",
+      index,
+      "- status:",
+      zoom,
+      "elementOrigin:",
+      elementOrigin[reqIndex]
+    );
+
     if (zoom === 1) {
       stateSlideshowZoom2.set(0);
     }
@@ -107,8 +122,6 @@ export default function Carousel({
     console.log("nearest index:", nearestIndex, "segmentWidth:", segmentWidth);
   }; */
 
-  const [elementOrigin, setElementOrigin] = useState([]);
-
   useEffect(
     () =>
       move_carousel.on("change", latest => {
@@ -137,13 +150,41 @@ export default function Carousel({
 
   const calc_carousel_element_rel_mid = i => {
     // console.log("currentindex:", index , i)
-    if (i === index) {
-      return 0;
+    if (index == i) {
+      return 0.5;
     } else {
       const deltaToI = i - index;
-      return carousel_element_width * deltaToI;
+      /* console.log(
+        "1% of window",
+        (100 / window.innerWidth) * window.innerWidth,
+        "deltaToI",
+        deltaToI,
+        "i",
+        i,
+        "carousel_element_width * deltaToI",
+        carousel_element_width * deltaToI
+      ); */
+      /* console.log(
+        "i",
+        i,
+        100,
+        "/",
+        window.innerWidth,
+        "*(",
+        deltaToI,
+        "*",
+        carousel_element_width,
+        ")"
+      ); */
+      return (
+        (100 / window.innerWidth) * (deltaToI * carousel_element_width) * 0.01 +
+        0.5
+      );
     }
   };
+
+  const [elementOrigin, setElementOrigin] = useState([]);
+
   useEffect(() => {
     const move_carousel_to_index = calc_carousel_element_mid(index);
     animate(move_carousel, move_carousel_to_index, transition);
@@ -152,20 +193,25 @@ export default function Carousel({
       return calc_carousel_element_rel_mid(i);
     });
 
-    // Update the state with the new values
     setElementOrigin(newElementOrigin);
 
-    console.log(
+    /* console.log(
       "requested index:",
-      index, "origin", elementOrigin[index],
+      index,
+      // "origin",
+      // elementOrigin[index],
       "moving to:",
       move_carousel_to_index,
       "carousel_element_width:",
-      carousel_element_width,
-      "elementOrigin:",
-      elementOrigin
-    );
+      carousel_element_width
+      // "elementOrigin:",
+      // elementOrigin
+    ); */
   }, [index, stateSlideshowIndex]);
+
+  useEffect(() => {
+    console.log("Updated elementOrigin:", elementOrigin, "for index:", index);
+  }, [elementOrigin]);
 
   // drag from wrapper div
   const dragControls = useDragControls();
@@ -204,7 +250,6 @@ export default function Carousel({
       transition={{ duration: 2 }}
     >
       <div key="crosshair" className="crosshair" />
-
       <AnimatePresence initial={true}>
         {zoom === 0 && (
           <motion.div
@@ -215,7 +260,7 @@ export default function Carousel({
             drag="x"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 2 }}
             exit={{ opacity: 0, scale: 1 }}
             // onDragEnd={setNearestIndex}
             dragControls={dragControls}
@@ -252,10 +297,14 @@ export default function Carousel({
             layout
             id="image-slideshow"
             // style={{ height: "45vmin" }}
-            // initial={{ originX: picpos[i], scale: 0.5, opacity: 0 }}
-            initial={{ originX: elementOrigin[index], scale: 0.1, opacity: 0 }}
+            initial={{
+              zIndex: 1111,
+              originX: elementOrigin[reqIndex],
+              scale: 0,
+              opacity: 0,
+            }}
             animate={{ scale: 1, opacity: 1 }}
-            exit={{ originX: 0, opacity: 0, scale: 0.1 }}
+            exit={{ originX: 0.5, opacity: 1, scale: 0 }}
             transition={{ duration: 2 }}
           >
             <Fig
