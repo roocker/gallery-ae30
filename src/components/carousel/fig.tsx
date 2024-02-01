@@ -1,27 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 
-export default function Fig({ index, src, title, animation, onclick, classname }) {
-
+export default function Fig({ index, src, title, onclick, classname, style }) {
   return (
-    <figure
-      className={classname}
-
-    >
+    <figure className={classname}>
       <a
         onClick={() => {
-          onclick(index)
+          onclick(index);
         }}
       >
-        <motion.img
-          src={src}
-          alt={title}
-          variants={animation}
-          animate="a"
-          initial="i"
-          exit="e"
-          draggable="false"
-        />
+        <motion.img src={src} alt={title} style={style} className="" />
       </a>
       {/*
               rechts unten? ==> Slideshow_alt update

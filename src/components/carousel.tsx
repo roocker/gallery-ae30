@@ -5,6 +5,9 @@ import {
   useMotionValue,
   useTransform,
   useAnimate,
+  useDragControls,
+  animate,
+  useMotionTemplate,
 } from "framer-motion";
 import { useStore } from "@nanostores/react";
 import {
@@ -49,10 +52,7 @@ export default function Carousel({
   // carousel ----
   // ----------------------------------------------------
 
-  // const carousel = useRef<HTMLDivElement>(null);
-  const [carousel, animate] = useAnimate();
-
-  const carousel_box = useRef<HTMLDivElement>(null);
+  const carousel = useRef<HTMLDivElement>(null);
 
   const [carouselWidth, setCarouselWidth] = useState(0);
   const [carouselElements, setCarouselElements] =
@@ -66,7 +66,7 @@ export default function Carousel({
 
   useEffect(() => {
     if (carousel.current) {
-      setCarouselWidth(carousel.current.offsetWidth);
+      setCarouselWidth(carousel.current.offsetWidth); // update on resizing of window!
       setCarouselElements(carousel.current.children);
       console.log(
         "carousel",
@@ -83,194 +83,100 @@ export default function Carousel({
     }
   }, []);
 
-  // const carouselWidth = carousel.current?.offsetWidth;
-
   const move_carousel = useMotionValue(0);
-  const transition = {
-    type: "easeIn",
-    duration: 2,
-  };
 
-  // Create a custom motion value for the y position using useTransform
-  const dynamicY = useTransform(move_carousel, value => `-${value / 2}%`);
+  const moveImagePer = useTransform(
+    move_carousel,
+    latest => (100 / carouselWidth) * latest * -1
+  );
 
-  const calc_carousel_element_mid = i => {
-    return (
-      (-1 * carousel_element_width - gap_width) * i - carousel_element_width / 2
-    );
-  };
-
-  const [moveToIndex, setMoveToIndex] = useState(0);
-
-  // const inpt = [0, -1 * carouselWidth];
-  // const out = [0, move_carousel_to_index];
-  // useTransform(move_carousel, inpt, out);
+  const moveImage = useMotionTemplate`${moveImagePer}% center`;
 
   useEffect(
     () =>
       move_carousel.on("change", latest => {
-        console.log("move_carousel:", latest);
+        console.log(
+          "move_carousel:",
+          latest,
+          "\n",
+          "move_image:",
+          moveImage.get()
+        );
       }),
     [move_carousel]
   );
 
   useEffect(() => {
+    const calc_carousel_element_mid = i => {
+      return (
+        (-1 * carousel_element_width - gap_width) * i -
+        carousel_element_width / 2
+      );
+    };
     const move_carousel_to_index = calc_carousel_element_mid(index);
-    // move_carousel.set(move_carousel_to_index);
-    setMoveToIndex(move_carousel_to_index);
+
+    animate(move_carousel, move_carousel_to_index, {
+      type: "spring",
+      stiffness: 50,
+      damping: 20,
+    });
 
     console.log(
       "requested index:",
       index,
       "moving to:",
-      moveToIndex,
+      move_carousel_to_index,
       "carousel_element_width:",
       carousel_element_width
     );
-  }, [index, move_carousel]);
+  }, [index]);
 
-  /* const moveTo = {
-    i: { y: "-50%" },
-    a: {
-      x: moveToIndex,
-      transition: {
-        x: {
-          type: "easein",
-          duration: 2,
-        },
-      },
-    },
-  }; */
+  // drag from wrapper div
+  const dragControls = useDragControls();
+  function startDrag(e) {
+    dragControls.start(e);
+  }
 
-  const input = [0, -1 * carouselWidth];
-  const output = [0, 1];
-  const opacity = useTransform(move_carousel, input, output);
-
-  const [mouseDownAt, setMouseDownAt] = useState(0);
-  const [percentage, setPercentage] = useState(0);
-  // const [nextPercentage, setNextPercentage] = useState(0);
-  const [prevPercentage, setPrevPercentage] = useState(0);
-
-  const handleOnDown = e => {
-    setMouseDownAt(e.clientX);
-  };
-
-  const handleOnUp = () => {
-    setMouseDownAt(0);
-    setPrevPercentage(percentage);
-  };
-
-  const handleOnMove = e => {
-    if (mouseDownAt === 0) return;
-
-    const mouseDelta = mouseDownAt - e.clientX;
-    const maxDelta = window.innerWidth / 1;
-    const percentage = (mouseDelta / maxDelta) * -100;
-
-    // ???
-    const nextPercentageUncronstrained = prevPercentage + percentage;
-    const nextPercentage = Math.max(
-      Math.min(nextPercentageUncronstrained, 0),
-      -100
-    );
-
-    setPercentage(nextPercentage);
-  };
-
-  /* useEffect(() => {
-    const addthis = index * (img_width + gap_width) + half_img_width;
-    const addthis_perc = (100 / carouselWidth) * addthis;
-
-    const imgAtPos = addthis_perc * -1;
-
-    setPercentage(imgAtPos);
-  }, [index]); */
-
-  /* const move_carousel = {
-    i: { x: 0, y: "-50%" },
-    a: {
-      x: percentage + "%",
-      y: "-50%",
-      transition: {
-        x: {
-          duration: 2,
-          fill: "forwards",
-        },
-      },
-    },
-  }; */
-
-  const move_image = {
-    i: { objectPosition: "0% center" },
-    a: {
-      objectPosition: `${100 + percentage}% center`,
-      transition: {
-        objectPosition: {
-          duration: 2,
-          fill: "forwards",
-        },
-      },
-    },
-  };
-
-  const anim_Zoom1 = {
-    // i: { height: "auto" },
-
-    // a: { height: "100lvh"  },
-    a: {
-      // scale: 3,
-      minHeight: "100%",
-      // originX: picpos,
-    },
-    e: {
-      minHeight: "25%",
-    },
-  };
-
-  // update index according to percentage:
-
-  // -------
   const exportToStates = () => {
     slideshow_length.set(images.length + 1);
     // slideshowCurrentAlt.set(alts[index]);
   };
   exportToStates();
+
   return (
     <AnimatePresence initial={true}>
       <motion.div
         className="carousel"
-        ref={carousel_box}
-        // onMouseDown={handleOnDown}
-        // onMouseUp={handleOnUp}
-        // onMouseMove={handleOnMove}
+        onPointerDown={startDrag}
+        style={{ touchAction: "none" }}
       >
         <div key="crosshair" className="crosshair" />
+
         <motion.div
           ref={carousel}
           id="image-carousel"
-          // style={{ y: "-50%", x: move_carousel }}
-          // drag="x"
-          // variants={moveTo}
-          style = {{ y: dynamicY}}
-          initial={{ x: moveToIndex}}
-          animate={{ x: moveToIndex}}
-
-          // dragConstraints={carousel}
-          // data-mouse-down-at="0"
-          // data-prev-percentage="0"
-          // variants={move_carousel}
-          // animate="a"
-          // initial="i"
-          // exit="e"
+          style={{ x: move_carousel, y: "-50%" }}
+          drag="x"
+          dragControls={dragControls}
+          dragConstraints={{
+            right: 0,
+            left: -1 * carouselWidth,
+          }}
+          dragTransition={{
+            bounceStiffness: 200,
+            bounceDamping: 10,
+          }}
+          dragElastic={0.2}
+          draggable={false}
         >
           {children}
           {images.map((img, i) => (
             <Fig
-              key={i.toString()}
+              key={i}
               index={i}
               src={img.src}
               title={alts[i]}
-              animation={move_image}
+              style={{ objectPosition: moveImage }}
               onclick={zoomIng}
               classname=""
             />
