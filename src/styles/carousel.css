@@ -39,9 +39,11 @@
   display: flex;
   align-items: center;
   justify-content: left;
-  position: relative;
 
-  /* background: cyan; */
+  position: relative;
+  /* overflow-x: auto; */
+
+  background: cyan;
   /* border: 4px dashed lime; */
 }
 #image-carousel {
@@ -106,10 +108,11 @@ figure.slideshow {
   height: 100lvh;
   width: 100lvw;
 
-  background: lightgreen;
-  position: relative;
+  position: absolute;
 
-  overflow: hidden;
+  background: lightgreen;
+
+  /* overflow: hidden; */
 
   display: flex;
   justify-content: center;

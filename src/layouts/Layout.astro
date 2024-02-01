@@ -355,15 +355,21 @@ const cfg = cblack;
   /* Scrollbar */
   ::-webkit-scrollbar {
     width: 0.5em;
+    height: 0.5em;
     border-radius: 0.5em;
     background: none;
   }
 
-  .content::-webkit-scrollbar-thumb {
+  ::-webkit-scrollbar-thumb {
     border-radius: 0.5em;
     background: var(--cblack20);
     -webkit-border-radius: 4ex;
   }
+  /* .content::-webkit-scrollbar-thumb {
+    border-radius: 0.5em;
+    background: var(--cblack20);
+    -webkit-border-radius: 4ex;
+  } */
   .content::-webkit-scrollbar-corner {
   }
 </style>

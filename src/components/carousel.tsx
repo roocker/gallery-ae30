@@ -8,6 +8,7 @@ import {
   useDragControls,
   animate,
   useMotionTemplate,
+  useScroll,
 } from "framer-motion";
 import { useStore } from "@nanostores/react";
 import {
@@ -53,6 +54,7 @@ export default function Carousel({
   // ----------------------------------------------------
 
   const carousel = useRef<HTMLDivElement>(null);
+  const carouselContainer = useRef<HTMLDivElement>(null);
 
   const [carouselWidth, setCarouselWidth] = useState(0);
   const [carouselElements, setCarouselElements] =
@@ -79,9 +81,14 @@ export default function Carousel({
         carousel_element_width
       );
     } else {
-      throw new Error("carousel not found");
+      // throw new Error("carousel not found");
     }
-  }, []);
+  }, [zoom]);
+
+  /* const { scrollY } = useScroll();
+  useEffect(() => {
+    console.log("scrollY", scrollY.get());
+  }, [scrollY]); */
 
   const move_carousel = useMotionValue(0);
 
@@ -89,22 +96,36 @@ export default function Carousel({
     move_carousel,
     latest => (100 / carouselWidth) * latest * -1
   );
-
   const moveImage = useMotionTemplate`${moveImagePer}% center`;
+
+  /* const setNearestIndex = e => {
+    const segmentWidth = (carouselWidth / (images.length + 1)) * -1;
+    const nearestIndex = Math.abs(
+      Math.floor(move_carousel.get() / segmentWidth)
+    );
+    stateSlideshowIndex.set(nearestIndex);
+    console.log("nearest index:", nearestIndex, "segmentWidth:", segmentWidth);
+  }; */
 
   useEffect(
     () =>
       move_carousel.on("change", latest => {
-        console.log(
+        /* console.log(
           "move_carousel:",
           latest,
           "\n",
           "move_image:",
           moveImage.get()
-        );
+        ); */
       }),
     [move_carousel]
   );
+
+  const transition = {
+    type: "spring" as "spring" | "keyframes" | "decay" | "tween" | "inertia",
+    stiffness: 50,
+    damping: 20,
+  };
 
   useEffect(() => {
     const calc_carousel_element_mid = i => {
@@ -115,11 +136,7 @@ export default function Carousel({
     };
     const move_carousel_to_index = calc_carousel_element_mid(index);
 
-    animate(move_carousel, move_carousel_to_index, {
-      type: "spring",
-      stiffness: 50,
-      damping: 20,
-    });
+    animate(move_carousel, move_carousel_to_index, transition);
 
     console.log(
       "requested index:",
@@ -129,7 +146,7 @@ export default function Carousel({
       "carousel_element_width:",
       carousel_element_width
     );
-  }, [index]);
+  }, [index, stateSlideshowIndex]);
 
   // drag from wrapper div
   const dragControls = useDragControls();
@@ -143,60 +160,96 @@ export default function Carousel({
   };
   exportToStates();
 
+  // scroll horizontally
+  const handleScroll = e => {
+    if (carouselContainer.current) {
+      const newValue = move_carousel.get() + e.deltaY * -2.5;
+      const minScrollright = 0;
+      const maxScrollleft = -1 * carouselWidth;
+
+      const restrictedValue = Math.min(
+        Math.max(newValue, maxScrollleft),
+        minScrollright
+      );
+      animate(move_carousel, restrictedValue, transition);
+    }
+  };
+
   return (
     <AnimatePresence initial={true}>
       <motion.div
+        onWheel={handleScroll}
+        ref={carouselContainer}
         className="carousel"
         onPointerDown={startDrag}
         style={{ touchAction: "none" }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 2 }}
       >
         <div key="crosshair" className="crosshair" />
 
-        <motion.div
-          ref={carousel}
-          id="image-carousel"
-          style={{ x: move_carousel, y: "-50%" }}
-          drag="x"
-          dragControls={dragControls}
-          dragConstraints={{
-            right: 0,
-            left: -1 * carouselWidth,
-          }}
-          dragTransition={{
-            bounceStiffness: 200,
-            bounceDamping: 10,
-          }}
-          dragElastic={0.2}
-          draggable={false}
-        >
-          {children}
-          {images.map((img, i) => (
-            <Fig
-              key={i}
-              index={i}
-              src={img.src}
-              title={alts[i]}
-              style={{ objectPosition: moveImage }}
-              onclick={zoomIng}
-              classname=""
-            />
-          ))}
+        {zoom === 0 && (
+          <motion.div
+            key="carousel"
+            ref={carousel}
+            id="image-carousel"
+            style={{ height: "45vmin", x: move_carousel, y: "-50%" }}
+            drag="x"
+            // onDragEnd={setNearestIndex}
+            dragControls={dragControls}
+            dragTransition={{
+              bounceStiffness: 50,
+              bounceDamping: 20,
+            }}
+            dragConstraints={{
+              right: 0,
+              left: -1 * carouselWidth,
+            }}
+            dragElastic={0.1}
+            draggable={false}
+          >
+            {children}
+            {images.map((img, i) => (
+              <Fig
+                key={i}
+                index={i}
+                src={img.src}
+                title={alts[i]}
+                style={{ objectPosition: moveImage }}
+                onclick={zoomIng}
+                classname=""
+              />
+            ))}
 
-          <div className="summary_block">{title}</div>
-        </motion.div>
+            <div className="summary_block">{title}</div>
+          </motion.div>
+        )}
+
+        {zoom === 1 && (
+          <motion.div
+            key="slideshow"
+            layout
+            id="image-slideshow"
+            // style={{ height: "45vmin" }}
+            // initial={{ originX: picpos[i], scale: 0.5, opacity: 0 }}
+            initial={{ originX: 1, scale: 0.5, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1, height: "100%" }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 2 }}
+          >
+            <Fig
+              classname="slideshow"
+              key={index}
+              index={index}
+              src={images[index].src}
+              title={alts[index]}
+              onclick={zoomIng}
+              style=""
+              // animation={anim_Zoom1}
+            />
+          </motion.div>
+        )}
       </motion.div>
     </AnimatePresence>
   );
 }
-
-/* {zoom === 1 && (
-          <Fig
-            classname="slideshow"
-            key={index}
-            index={index}
-            src={images[index].src}
-            title={alts[index]}
-            onclick={zoomIng}
-            animation={anim_Zoom1}
-          />
-        )} */
