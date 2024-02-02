@@ -31,45 +31,47 @@
   margin-left: calc(var(--thickness) / -2);
   /* margin-left: -4px; */
 }
-
+/* ---------------------- */
+/* Carousel wrapper */
+/* ---------------------- */
 .carousel {
   width: auto;
   height: 100%;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  justify-content: left;
-
   position: relative;
-  /* overflow-x: auto; */
-
-  /* background: cyan; */
-  /* border: 4px dashed lime; */
 }
 #image-carousel {
   display: flex;
+  align-items: center;
   gap: 1em;
   position: absolute;
   left: 50%;
   top: 50%;
-  height: 45vmin;
-  transform: translate(0%, -50%);
-  /* user-select: none; */
+  /* transform: translate(0%, -50%); */
 
-  /* border: 2px solid red; */
+  /* border: 6px dashed lightblue; */
   /* background: pink; */
 }
 .summary_block,
 #image-carousel figure {
-  /* background: lightblue; */
+  background: rgba(255, 255, 255, 0.5);
+  width: auto;
+  max-width: 100%;
+  height: 45vmin;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  border: 2px dashed lime;
 }
-.summary_block,
-#image-carousel img {
-  display: block;
+
+#image-carousel figure img {
+  /* width: auto; */
   width: 30vmin;
+  height: 45vmin;
   height: 100%;
   object-fit: cover;
-  /* object-position: 100% center; */
 }
 .summary_block {
   display: flex;
@@ -83,39 +85,33 @@
   font-weight: bold;
   background: var(--cgrey20);
 }
+/* ----------------------------- */
+/* ANIMATION zoom in on Img  */
+/* ----------------------------- */
+.zoom1 {
+}
+#image-carousel figure {
+}
 
-/* .summary_block::before,
-.summary_block::after {
-  z-index: 200;
-  content: "";
+#image-carousel figure[data-zoom="false"] {
+  /* z-index: 3; */
+}
+
+#image-carousel figure[data-zoom="true"] {
   position: absolute;
-  width: 2px;
-  height: 100%;
-  background: black;
-}
-.summary_block::before {
-  transform: rotate(45deg);
-}
-.summary_block::after {
-  transform: rotate(-45deg);
-} */
+  left: 0;
 
-/* ----------------------------- */
-/* SLIDESHOW */
-/* ----------------------------- */
+  z-index: 33;
+  border: 2px dashed red;
 
-figure.slideshow {
   height: 100lvh;
-  width: 100lvw;
-
-  position: absolute;
-
-  /* background: lightgreen; */
-
-  /* overflow: hidden; */
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  vertical-align: center;
+  /* width: 100lvw; */
+}
+#image-carousel figure[data-zoom="true"] img {
+  /* object-fit: contain !important; */
+  /* object-fit: unset !important; */
+  /* object-position: center !important; */
+  /* max-height: 100%; */
+  width: auto;
+  max-width: 100%;
 }

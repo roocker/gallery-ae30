@@ -8,11 +8,26 @@ export default function Fig({
   title,
   onclick,
   classname,
-  style,
-  initial,
+  figstyle,
+  figanimate,
+  imgstyle,
+  imganimate,
+  reqIndex,
+  datazoom,
+  transition,
+  layout,
 }) {
   return (
-    <figure key={index} className={classname}>
+    <motion.figure
+      layout={layout ? true : false}
+      key={index}
+      data-zoom={reqIndex === index && datazoom >= 1 ? true : false}
+      className={classname}
+      style={figstyle}
+      animate={figanimate}
+      transition={transition}
+      // exit={{ zIndex: 9999, opacity: 0, border: "3px solid pink" }}
+    >
       <a
         onClick={() => {
           onclick(index);
@@ -21,16 +36,18 @@ export default function Fig({
         <motion.img
           src={src}
           alt={title}
-          style={style}
-          // initial={initial}
-          // animation={{ height: "100lvh" }}
-          className=""
+          style={imgstyle}
+          exit={imganimate}
+          draggable={false}
+          // exit={{ objectFit: "cover", border: "3px solid yellow"}}
+          // initial={{ objectFit: "cover" }}
+          // animate={{ objectFit: "cover" }}
         />
       </a>
       {/*
               rechts unten? ==> Slideshow_alt update
 
             <figcaption>{alts[i]}</figcaption> */}
-    </figure>
+    </motion.figure>
   );
 }
