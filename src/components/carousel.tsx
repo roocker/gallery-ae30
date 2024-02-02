@@ -320,7 +320,7 @@ export default function Carousel({
                     reqIndex={reqIndex}
                     datazoom={zoom}
                     transition={{
-                      layout: { duration: 10 },
+                      layout: { duration: .3 },
                     }}
                     index={i}
                     src={img.src}

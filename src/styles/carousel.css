@@ -57,19 +57,17 @@
 .summary_block,
 #image-carousel figure {
   background: rgba(255, 255, 255, 0.5);
-  width: auto;
-  max-width: 100%;
+  width: 30vmin;
   height: 45vmin;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
-  border: 2px dashed lime;
+  /* border: 2px dashed lime; */
 }
 
 #image-carousel figure img {
-  /* width: auto; */
-  width: 30vmin;
-  height: 45vmin;
+  width: auto;
+  max-width: 100%;
   height: 100%;
   object-fit: cover;
 }
@@ -102,16 +100,15 @@
   left: 0;
 
   z-index: 33;
-  border: 2px dashed red;
+  /* border: 2px solid red; */
 
   height: 100lvh;
-  /* width: 100lvw; */
+  width: 100lvw;
 }
 #image-carousel figure[data-zoom="true"] img {
   /* object-fit: contain !important; */
   /* object-fit: unset !important; */
   /* object-position: center !important; */
   /* max-height: 100%; */
-  width: auto;
-  max-width: 100%;
+  /* width: auto; */
 }
