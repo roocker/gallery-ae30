@@ -3,7 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 // import BasicScripts from '../../components/basicScripts.astro';
 import TextBlockModal from "../../components/TextBlockModal";
-import SSfigure from "../../components/SSfigure";
+import Carousel from "../../components/carousel";
 import ProjectSummary from "../../components/ProjectSummary";
 import SlideshowCounter from "../../components/SlideshowCounter";
 import SlideshowAlt from "../../components/SlideshowAlt";
@@ -86,6 +86,15 @@ const htmlbodyshorted = htmlbody_lines.slice(0, 1);
 const summary = htmlbodyshorted.join("\n");
 // console.log("PROJ", proj);
 
+function cutString(inputString, maxLength) {
+  if (inputString.length > maxLength) {
+    return inputString.slice(0, maxLength - 3) + "";
+  } else {
+    return inputString;
+  }
+}
+const maxLenghTitle = cutString(p.title_l, 32);
+
 // need for cover optimization for summary
 let allProjects = await getCollection("projects");
 const orgTitleImgs = allProjects.map((proj, index) => ({
@@ -128,13 +137,14 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     aria-label={`Projekt ${p.title} Presentation`}
   >
     <article class="project">
-      <SSfigure
+      <Carousel
         client:only
         pictures={optSSPictures}
         pictureTitles={rawSSPicturesAlts}
         plans={optSSPlans}
         planTitles={rawSSPlansAlts}
         autoPlayInterval={autoPlayInterval}
+        title={p.title_l}
       >
         <ProjectSummary
           client:only
@@ -167,8 +177,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 
           <div class="summary_text text" set:html={summary} />
         </ProjectSummary>
-      </SSfigure>
-
+      </Carousel>
       <TextBlockModal client:load>
         <h1>{p.title_l}</h1>
         {p.title_zzl && <h3>{p.title_zzl}</h3>}
@@ -190,11 +199,6 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
           <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
 
           <dt>TYP:</dt><dd>{p.project_keys.tags.map(tag => tag + ", ")}</dd>
-          <!-- <dt>TYP:</dt>{p.project_keys.tags.map(tag => <dd key={tag}>{tag}</dd> )} -->
-          <!--
-          <dt>Typ:</dt><dd>Neubau, Erweiterung</dd>
-          <dt>Tags:</dt><dd>{p.subcategory}</dd>
-          -->
         </dl>
 
         <p><Content /></p>
@@ -207,14 +211,14 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
       </div>
 
       <div class="footer_line title_line">
-        <h3 class="footer_title">{p.title_l}</h3>
+        <h3 class="footer_title">{maxLenghTitle}</h3>
       </div>
 
       <div class="footer_line control_line">
         <SlideshowBtn dir="prev" client:load>Vorheriges Bild</SlideshowBtn>
         <ModalBtn client:load>Projekt Beschreibung</ModalBtn>
         <PlaybackBtn autoPlayInterval={autoPlayInterval} client:load>
-          Automatische Wiedergabe 
+          Automatische Wiedergabe
         </PlaybackBtn>
         {p.plans && <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>}
         <SlideshowBtn dir="next" client:load>Nächstes Bild</SlideshowBtn>
@@ -230,7 +234,6 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 <style is:global>
   .wrapper {
     margin: 0 !important;
-    /* background: lightblue !important; */
   }
   .slideshow_div {
   }
@@ -238,18 +241,14 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 
 <style>
   .project_presentation {
-    /* background: green; */
-    min-height: 100vh;
-
     display: flex;
     align-items: center; /* center vertically flexbox */
     justify-content: center; /* center horizontally flex */
   }
   article.project {
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-    /* background: lightblue;  */
+    height: 100vh;
+    width: 100vw;
+    /* background: lightgreen; */
   }
 
   article .pictures {

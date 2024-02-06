@@ -7,12 +7,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
   --thickness: 2px;
+  --bgColor: var(--cgrey);
 }
 .crosshair::before,
 .crosshair::after {
   content: "";
   position: absolute;
-  background-color: var(--cgrey);
+  background-color: var(--bgColor);
   top: 0;
   bottom: 0;
 }
@@ -59,8 +60,8 @@
 }
 .summary_block,
 #image-carousel figure {
-  background: rgba(255, 255, 255, 0.5);
-  /* background: white; */
+  /* background: rgba(255, 255, 255, 0.5); */
+  background: white;
   width: 30vmin;
   height: 45vmin;
   box-sizing: border-box;
@@ -69,7 +70,14 @@
   /* border: 2px dashed lime; */
 }
 
+.cursor {
+  color: #ffffff;
+}
 #image-carousel figure img {
+  cursor: url("../../../icons/plus.svg"), auto;
+}
+#image-carousel figure img {
+  /* cursor: -moz-zoom-in; */
   max-height: 100dvh;
   max-width: 100dvw;
   height: 100%;
@@ -77,16 +85,30 @@
   object-fit: cover;
 }
 .summary_block {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 1em;
   box-sizing: border-box;
-  text-align: center;
   text-transform: uppercase;
   font-family: var(--fsans2);
   font-weight: bold;
   background: var(--cgrey20);
+  transition: background 0.5s ease-in;
+}
+.summary_block:hover {
+  background: var(--cgrey60);
+}
+
+.summary_block a {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  /* background: red; */
+}
+.summary_block span {
 }
 /* ----------------------------- */
 /* ANIMATION zoom in on Img  */

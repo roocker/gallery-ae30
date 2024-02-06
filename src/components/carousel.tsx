@@ -14,6 +14,8 @@ import {
 import { useStore } from "@nanostores/react";
 import {
   slideshow_length,
+  slideshowAutoPlayInterval,
+  slideshowCurrentAlt,
   stateSlideshow,
   stateSlideshowIndex,
   stateSlideshowZoom2,
@@ -55,7 +57,7 @@ export default function Carousel({
     setZoomNow(i);
 
     stateSlideshowIndex.set(i);
-    /* console.log(
+    console.log(
       "requested zoom index:",
       i,
       "from currentIndex:",
@@ -68,7 +70,7 @@ export default function Carousel({
       zoomNow,
       "move_carousel:",
       move_carousel.get()
-    ); */
+    );
 
     if (zoom === 1) {
       stateSlideshowZoom2.set(0);
@@ -124,6 +126,7 @@ export default function Carousel({
     move_carousel,
     latest => (100 / carouselWidth) * latest * -1
   );
+
   const moveImage = useMotionTemplate`${moveImagePer}% center`;
 
   const resetZoomX = useTransform(
@@ -217,16 +220,18 @@ export default function Carousel({
   function startDrag(e) {
     dragControls.start(e);
   }
+  const slidesLength = useStore(slideshow_length) - 1;
 
   const exportToStates = () => {
     slideshow_length.set(images.length + 1);
-    // slideshowCurrentAlt.set(alts[index]);
+    slideshowCurrentAlt.set(alts[index]);
+    slideshowAutoPlayInterval.set(autoPlayInterval);
   };
   exportToStates();
 
-  // scroll horizontally
   const handleScroll = e => {
-    if (carouselContainer.current) {
+    // scroll horizontally
+    /* if (carouselContainer.current) {
       const newValue = move_carousel.get() + e.deltaY * -2.5;
       const minScrollright = 0;
       const maxScrollleft = -1 * carouselWidth;
@@ -236,10 +241,20 @@ export default function Carousel({
         minScrollright
       );
       animate(move_carousel, restrictedValue, transition);
-    }
+    } */
   };
 
-  const carousel_slideshow_toggle = useStore(stateZoomComplete);
+  const carousel_slideshow_toggle = useStore(stateZoomComplete); // toggles onLayoutAnimationComplete of image zoom 1
+
+  const setZoomComplete = () => {
+    if (zoom >= 1) {
+      stateZoomComplete.set(true);
+    } else {
+      stateZoomComplete.set(false);
+    }
+
+    // console.log("zoomAnimation:", zoomComplete);
+  };
 
   return (
     <motion.div
@@ -267,6 +282,7 @@ export default function Carousel({
           exit={{ opacity: 0 }}
           // onDragEnd={setNearestIndex}
           dragControls={dragControls}
+          dragPropagation
           dragTransition={{
             min: -1 * carouselWidth,
             max: 0,
@@ -290,12 +306,15 @@ export default function Carousel({
                   key={i}
                   reqIndex={reqIndex}
                   datazoom={zoom}
-                  transition={{
-                    layout: { duration: 0.3 },
-                  }}
+                  setZoomComplete={setZoomComplete}
                   index={i}
                   src={img.src}
                   title={alts[i]}
+                  onclick={zoomIng}
+                  classname=""
+                  transition={{
+                    layout: { duration: 0.3 },
+                  }}
                   figstyle={{
                     zIndex: reqIndex === i ? 999 : 0,
                     objectPosition: moveImage,
@@ -312,11 +331,13 @@ export default function Carousel({
                     objectPosition: moveImage,
                     // objectFit: "fill",
                   }}
-                  onclick={zoomIng}
-                  classname=""
                 />
               ))}
-              <div className="summary_block">{title}</div>
+              <div className="summary_block">
+                <a onClick={() => zoomIng(slidesLength)}>
+                  <span>{title}</span>
+                </a>
+              </div>
             </AnimatePresence>
           </LayoutGroup>
         </motion.div>
