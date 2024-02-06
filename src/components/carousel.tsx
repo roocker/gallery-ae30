@@ -334,7 +334,12 @@ export default function Carousel({
                 />
               ))}
               <div className="summary_block">
-                <a onClick={() => zoomIng(slidesLength)}>
+                <a
+                  onClick={() => {
+                    zoomIng(slidesLength);
+                    stateZoomComplete.set(true);
+                  }}
+                >
                   <span>{title}</span>
                 </a>
               </div>

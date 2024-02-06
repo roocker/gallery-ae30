@@ -226,8 +226,8 @@ function SSfigure(props) {
     };
   });
 
-  const pan_pos_x_per = useMotionValue(0);
-  const pan_pos_y_per = useMotionValue(0);
+  const pan_pos_x_per = useMotionValue(50);
+  const pan_pos_y_per = useMotionValue(50);
 
   function onPan(event, info) {
     const x = (100 / window.innerWidth) * info.point.x;

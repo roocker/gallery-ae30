@@ -35,7 +35,7 @@ export default function SimilarProjects(props) {
 
   // console.log("Similar projects:", similarProjects);
 
-  const test = similarProjects.map(p => p.proj.data.titleimg.img.src);
+  // const test = similarProjects.map(p => p.proj.data.titleimg.img.src);
   // console.log("test", test);
 
   return (
