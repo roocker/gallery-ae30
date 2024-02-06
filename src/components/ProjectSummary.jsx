@@ -3,6 +3,8 @@ import {
   stateSlideshow,
   stateModal,
   slideshowCurrentAlt,
+  stateSlideshowZoom2,
+  stateZoomComplete,
 } from "../states";
 import SimilarProjects from "./SimilarProjects.jsx";
 import "../styles/summary.css";
@@ -74,6 +76,17 @@ export default function ProjectSummary(props) {
       />
       <p className="link center">
         <a href="/">Kehre zur Galerie zurück</a>
+      </p>
+
+      <p className="link center">
+        <a
+          onClick={() => {
+            stateSlideshowZoom2.set(0);
+            stateZoomComplete.set(false);
+          }}
+        >
+          Projekt Übersicht
+        </a>
       </p>
     </div>
   );
