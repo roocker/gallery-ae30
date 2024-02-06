@@ -27,6 +27,7 @@ export const stateSlideshow = atom(true);
 export const statePlayback = atom(false);
 export const stateSlideshowZoom = atom(false);
 export const stateSlideshowZoom2 = atom(0);
+export const stateZoomComplete = atom(false);
 export const slideshowAutoPlayInterval = atom();
 
 // ----------------------------------------------

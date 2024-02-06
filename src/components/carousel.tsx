@@ -17,11 +17,13 @@ import {
   stateSlideshow,
   stateSlideshowIndex,
   stateSlideshowZoom2,
+  stateZoomComplete,
 } from "../states";
 
 import "../styles/carousel.css";
 // import SSfigure from "./SSfigure.jsx";
 import Fig from "./carousel/fig";
+import SSfigure from "./SSfigure";
 
 export default function Carousel({
   title,
@@ -47,13 +49,13 @@ export default function Carousel({
     stateSlideshowZoom2.set(1);
     // resetZoomX, 0, { duration: 1 };
 
-    console.log("resetX idst", resetZoomX.get());
+    // console.log("resetX idst", resetZoomX.get());
 
     setReqIndex(i);
     setZoomNow(i);
 
     stateSlideshowIndex.set(i);
-    console.log(
+    /* console.log(
       "requested zoom index:",
       i,
       "from currentIndex:",
@@ -66,7 +68,7 @@ export default function Carousel({
       zoomNow,
       "move_carousel:",
       move_carousel.get()
-    );
+    ); */
 
     if (zoom === 1) {
       stateSlideshowZoom2.set(0);
@@ -174,28 +176,8 @@ export default function Carousel({
       return 0.5;
     } else {
       const deltaToI = i - index;
-      /* console.log(
-        "1% of window",
-        (100 / window.innerWidth) * window.innerWidth,
-        "deltaToI",
-        deltaToI,
-        "i",
-        i,
-        "carousel_element_width * deltaToI",
-        carousel_element_width * deltaToI
-      ); */
-      /* console.log(
-        "i",
-        i,
-        100,
-        "/",
-        window.innerWidth,
-        "*(",
-        deltaToI,
-        "*",
-        carousel_element_width,
-        ")"
-      ); */
+      /* console.log( "1% of window", (100 / window.innerWidth) * window.innerWidth, "deltaToI", deltaToI, "i", i, "carousel_element_width * deltaToI", carousel_element_width * deltaToI); */
+      /* console.log( "i", i, 100, "/", window.innerWidth, "*(", deltaToI, "*", carousel_element_width, ")"); */
       return (
         (100 / window.innerWidth) * (deltaToI * carousel_element_width) * 0.01 +
         0.5
@@ -205,7 +187,7 @@ export default function Carousel({
 
   const [elementOrigin, setElementOrigin] = useState([]);
 
-// indexchange useEffect
+  // indexchange useEffect
   useEffect(() => {
     const move_carousel_to_index = calc_carousel_element_mid(index);
 
@@ -223,20 +205,7 @@ export default function Carousel({
 
     setElementOrigin(newElementOrigin);
 
-    /* console.log(
-      "index:",
-      index,
-      "origin",
-      elementOrigin[index],
-      "moving to:",
-      move_carousel_to_index,
-      "carousel_element_width:",
-      carousel_element_width,
-      "carouselWidth",
-      carouselWidth
-      // "elementOrigin:",
-      // elementOrigin
-    ); */
+    /* console.log( "index:", index, "origin", elementOrigin[index], "moving to:", move_carousel_to_index, "carousel_element_width:", carousel_element_width, "carouselWidth", carouselWidth "elementOrigin:", elementOrigin); */
   }, [index, stateSlideshowIndex, zoom]);
 
   /* useEffect(() => {
@@ -270,6 +239,8 @@ export default function Carousel({
     }
   };
 
+  const carousel_slideshow_toggle = useStore(stateZoomComplete);
+
   return (
     <motion.div
       onWheel={handleScroll}
@@ -281,117 +252,85 @@ export default function Carousel({
     >
       <div key="crosshair" className="crosshair" />
       <AnimatePresence initial={true}>
-        {zoom >= 0 && (
-          <motion.div
-            key="carousel"
-            ref={carousel}
-            id="image-carousel"
-            className={zoom === 1 ? "zoom1" : zoom === 2 ? "zoom2" : ""}
-            style={{
-              y: "-50%",
-              x: move_carousel,
-            }}
-            drag={zoom < 1 ? "x" : false}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            // onDragEnd={setNearestIndex}
-            dragControls={dragControls}
-            dragTransition={{
-              min: -1 * carouselWidth,
-              max: 0,
-              power: 0.3,
-              timeConstant: 700,
-              bounceStiffness: 50,
-              bounceDamping: 20,
-              // modifyTarget(v)
-            }}
-            dragConstraints={{
-              right: 0,
-              left: -1 * carouselWidth,
-            }}
-            dragElastic={0.1}
+        <motion.div
+          key="carousel"
+          ref={carousel}
+          id="image-carousel"
+          className={zoom === 1 ? "zoom1" : zoom === 2 ? "zoom2" : ""}
+          style={{
+            y: "-50%",
+            x: move_carousel,
+          }}
+          drag={zoom < 1 ? "x" : false}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: carousel_slideshow_toggle ? 0 : 1 }}
+          exit={{ opacity: 0 }}
+          // onDragEnd={setNearestIndex}
+          dragControls={dragControls}
+          dragTransition={{
+            min: -1 * carouselWidth,
+            max: 0,
+            power: 0.3,
+            timeConstant: 700,
+            bounceStiffness: 50,
+            bounceDamping: 20,
+            // modifyTarget(v)
+          }}
+          dragConstraints={{
+            right: 0,
+            left: -1 * carouselWidth,
+          }}
+          dragElastic={0.1}
+        >
+          <LayoutGroup>
+            <AnimatePresence>
+              {images.map((img, i) => (
+                <Fig
+                  layout
+                  key={i}
+                  reqIndex={reqIndex}
+                  datazoom={zoom}
+                  transition={{
+                    layout: { duration: 0.3 },
+                  }}
+                  index={i}
+                  src={img.src}
+                  title={alts[i]}
+                  figstyle={{
+                    zIndex: reqIndex === i ? 999 : 0,
+                    objectPosition: moveImage,
+
+                    // x: zoom > 0 ? resetZoomX : 0,
+                    left: zoom > 0 ? resetZoomX : "",
+                  }}
+                  figanimate={{}}
+                  imgstyle={{
+                    // objectFit: "cover",
+                    objectPosition: moveImage,
+                  }}
+                  imganimate={{
+                    objectPosition: moveImage,
+                    // objectFit: "fill",
+                  }}
+                  onclick={zoomIng}
+                  classname=""
+                />
+              ))}
+              <div className="summary_block">{title}</div>
+            </AnimatePresence>
+          </LayoutGroup>
+        </motion.div>
+
+        {carousel_slideshow_toggle && (
+          <SSfigure
+            pictures={pictures}
+            pictureTitles={pictureTitles}
+            plans={plans}
+            planTitles={planTitles}
+            autoPlayInterval={autoPlayInterval}
           >
             {children}
-            <LayoutGroup>
-              <AnimatePresence>
-                {images.map((img, i) => (
-                  <Fig
-                    layout
-                    key={i}
-                    reqIndex={reqIndex}
-                    datazoom={zoom}
-                    transition={{
-                      layout: { duration: .3 },
-                    }}
-                    index={i}
-                    src={img.src}
-                    title={alts[i]}
-                    figstyle={{
-                      zIndex: reqIndex === i  ? 999 : 0,
-                      objectPosition: moveImage,
-
-                      // x: zoom > 0 ? resetZoomX : 0,
-                      left: zoom > 0 ? resetZoomX : "",
-                    }}
-                    figanimate={{}}
-                    imgstyle={{
-                      // objectFit: "cover",
-                      objectPosition: moveImage,
-                    }}
-                    imganimate={{
-                      objectPosition: moveImage,
-                      // objectFit: "fill",
-                    }}
-                    onclick={zoomIng}
-                    classname=""
-                  />
-                ))}
-              </AnimatePresence>
-            </LayoutGroup>
-
-            <div className="summary_block">{title}</div>
-          </motion.div>
-        )}
-        {zoom >= 2 && (
-          <motion.div
-            key="slideshow"
-            layout
-            id="image-slideshow"
-            data-zoom={zoomNow}
-            initial={{
-              // zIndex: 1,
-              originX: elementOrigin[reqIndex],
-              x: elementOrigin[reqIndex],
-              //   height: "45vmin",
-              //   width: "30vmin",
-              // opacity: 0,
-            }}
-            animate={{
-              originX: 0.5,
-              //   height: "45vmin",
-              //   width: "30vmin",
-              // opacity: 1,
-            }}
-            exit={{
-              originX: 0.5,
-              // opacity: 1,
-              //   height: "45vmin",
-              //   width: "30vmin",
-            }}
-            transition={{ duration: 1, layout: { duration: 1 } }}
-          >
-            <Fig
-              classname="slideshow"
-              key={index}
-              index={index}
-              src={images[index].src}
-              title={alts[index]}
-              onclick={zoomIng}
-              style={{}}
-              // animation={anim_Zoom1}
-            />
-          </motion.div>
+          </SSfigure>
         )}
       </AnimatePresence>
     </motion.div>

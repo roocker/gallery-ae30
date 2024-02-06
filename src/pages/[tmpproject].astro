@@ -136,8 +136,39 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
         planTitles={rawSSPlansAlts}
         autoPlayInterval={autoPlayInterval}
         title={p.title}
-      />
+      >
+        <ProjectSummary
+          client:only
+          allProjects={allProjects}
+          pictureTitles={rawSSPicturesAlts}
+          currentProj={proj.slug}
+          planTitles={rawSSPlansAlts}
+        >
+          <h1>{p.title_l}</h1>
+          {p.title ? <h2 class="title_zzl">{p.title_zzl}</h2> : ""}
 
+          <dl class="">
+            {
+              p.project_keys.status ? (
+                <>
+                  <dt>Status:</dt>
+                  <dd>Status:{p.project_keys.status}</dd>
+                </>
+              ) : (
+                ""
+              )
+            }
+            <dt>Jahr:</dt><dd>
+              {p.project_keys.year} - {p.project_keys.year2}
+            </dd>
+            <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
+            <!-- <dt>Typ:</dt>{p.project_keys.tags.map(tag => <dd>tag</dd> + ", ")} -->
+            <dt>TYP:</dt><dd>{p.project_keys.tags.map(tag => tag + ", ")}</dd>
+          </dl>
+
+          <div class="summary_text text" set:html={summary} />
+        </ProjectSummary>
+      </Carousel>
       <TextBlockModal client:load>
         <h1>{p.title_l}</h1>
         {p.title_zzl && <h3>{p.title_zzl}</h3>}

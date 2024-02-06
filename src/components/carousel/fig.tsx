@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import { init } from "astro/virtual-modules/prefetch.js";
+import { stateZoomComplete } from "../../states";
+import { useStore } from "@nanostores/react";
 
 export default function Fig({
   index,
@@ -17,11 +19,28 @@ export default function Fig({
   transition,
   layout,
 }) {
+  const zoomComplete = useStore(stateZoomComplete);
+  const setZoomComplete = () => {
+    if ( datazoom >= 1 ) {
+      stateZoomComplete.set(true);
+    } else {
+    stateZoomComplete.set(false)
+  }
+
+    // console.log("zoomAnimation:", zoomComplete);
+  };
+
+  useEffect(() => {
+    console.log("zoomAnimation:", zoomComplete);
+  }, [zoomComplete])
+
+
   return (
     <motion.figure
       layout={layout ? true : false}
       key={index}
       data-zoom={reqIndex === index && datazoom >= 1 ? true : false}
+      onLayoutAnimationComplete={setZoomComplete}
       className={classname}
       style={figstyle}
       animate={figanimate}
