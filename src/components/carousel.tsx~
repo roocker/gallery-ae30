@@ -91,7 +91,6 @@ export default function Carousel({
 
   const gap_width = 16;
 
-  //initial useEffect
   useEffect(() => {
     if (carousel.current) {
       setCarouselWidth(carousel.current.offsetWidth); // update on resizing of window!
@@ -138,7 +137,7 @@ export default function Carousel({
     console.log("nearest index:", nearestIndex, "segmentWidth:", segmentWidth);
   }; */
 
-  // log onChange useEffect
+  // log move_carousel current position
   useEffect(
     () =>
       move_carousel.on("change", latest => {
@@ -205,7 +204,6 @@ export default function Carousel({
 
   const [elementOrigin, setElementOrigin] = useState([]);
 
-// indexchange useEffect
   useEffect(() => {
     const move_carousel_to_index = calc_carousel_element_mid(index);
 
@@ -322,7 +320,7 @@ export default function Carousel({
                     reqIndex={reqIndex}
                     datazoom={zoom}
                     transition={{
-                      layout: { duration: .3 },
+                      layout: { duration: 10 },
                     }}
                     index={i}
                     src={img.src}
