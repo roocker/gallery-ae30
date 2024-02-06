@@ -16,6 +16,7 @@ import {
   stateSlideshowZoom,
   stateModal,
   stateSlideshowZoom2,
+  stateZoomComplete,
 } from "../states";
 
 function SSfigure(props) {
@@ -100,10 +101,18 @@ function SSfigure(props) {
 
   //Toggle for Zoom
   const zToggle = useStore(stateSlideshowZoom);
+  const zoom = useStore(stateSlideshowZoom2);
+  // const carousel_slideshow_toggle = useStore(stateZoomComplete)
+
   const setZoomToggle = () => {
     stateSlideshowZoom.set(!zToggle);
-    if (zToggle) {
+    if (zoom === 1) {
+      stateSlideshowZoom2.set(2);
+    } else {
       stateSlideshowZoom2.set(0);
+      stateZoomComplete.set(false);
+
+      console.log("zoom:", zoom);
     }
   };
 
