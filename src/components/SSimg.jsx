@@ -1,5 +1,11 @@
-import React from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect, useRef } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useMotionValue,
+  useTransform,
+  useMotionTemplate,
+} from "framer-motion";
 // import "../styles/slideshow.css"; // don't need cause SSfig already imports it
 
 const animation_zoom = {
@@ -67,10 +73,16 @@ function SSimg(props) {
     }
   }; */
 
+  useEffect(() => {
+    console.log("img-pos from ssimg", props.panpos);
+  }, [props.panpos]);
+
   return (
     <AnimatePresence initial={true}>
       <motion.img
-        className=""
+        layout
+        className={zToggle ? "zoomed_in" : ""}
+        style={{ objectPosition: props.panpos }}
         id="img"
         src={images[index]}
         alt={alts[index]}
@@ -78,7 +90,8 @@ function SSimg(props) {
         exit="e"
         initial={zToggle ? "a" : "i"}
         animate={zToggle ? "a" : "i"}
-        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        // transition={{ type: "spring", stiffness: 200, damping: 20 }}
+        transition={{ duration: 0.3 }}
         onClick={props.onClick}
         // onMouseDown={zoomDragDown}
         // onMouseMove={zoomDragMove}

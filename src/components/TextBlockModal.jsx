@@ -93,7 +93,7 @@ function TextBlockModal({ children, fLmodal }) {
       initial={true}
       mode="wait"
       onExitComplete={() => {
-        console.log("Modal exit animation completed");
+        // console.log("Modal exit animation completed");
       }}
     >
       {isOpen && (

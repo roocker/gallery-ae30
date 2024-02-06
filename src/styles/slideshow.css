@@ -39,7 +39,15 @@ figure.slideshow {
 
   overflow: hidden;
   z-index: 0;
-  /* background: red; */
+
+  /* background: pink; */
+  /* border: 4px solid lightpink; */
+}
+figure.slideshow img {
+  cursor: url("../../../icons/plus.svg"), auto;
+}
+figure.slideshow .zoomed_in {
+  cursor: url("../../../icons/minus.svg"), auto !important;
 }
 figure.slideshow img {
   max-width: 100dvw;

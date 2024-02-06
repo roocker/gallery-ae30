@@ -1,5 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import {
+  AnimatePresence,
+  motion,
+  useDragControls,
+  useMotionTemplate,
+  useMotionValue,
+  useTransform,
+} from "framer-motion";
 import { useStore } from "@nanostores/react";
 import SSimg from "../components/SSimg";
 import ProjectSummary from "../components/ProjectSummary";
@@ -101,6 +108,7 @@ function SSfigure(props) {
 
   //Toggle for Zoom
   const zToggle = useStore(stateSlideshowZoom);
+
   const zoom = useStore(stateSlideshowZoom2);
   // const carousel_slideshow_toggle = useStore(stateZoomComplete)
 
@@ -111,7 +119,6 @@ function SSfigure(props) {
     } else {
       stateSlideshowZoom2.set(0);
       stateZoomComplete.set(false);
-
       console.log("zoom:", zoom);
     }
   };
@@ -134,6 +141,14 @@ function SSfigure(props) {
 
     const footerControls = document.querySelector(".controls");
     footerControls.style.color = bgIsDark ? "var(--cwhite)" : "var(--cgrey)";
+
+    // const crosshair = document.querySelector(".crosshair", "::after");
+    //
+    const crosshair = document.querySelector(".crosshair");
+    crosshair.style.setProperty(
+      "--bgColor",
+      bgIsDark ? "var(--cwhite)" : "var(--cgrey)"
+    );
   }, [sToggle, zToggle, mToggle, index]);
 
   // Slider Functions
@@ -211,14 +226,31 @@ function SSfigure(props) {
     };
   });
 
-  const exportToStates = () => {
-    slideshow_length.set(images.length + 1);
-    slideshowCurrentAlt.set(alts[index]);
-    slideshowAutoPlayInterval.set(props.autoPlayInterval);
-  };
-  exportToStates();
+  const pan_pos_x_per = useMotionValue(0);
+  const pan_pos_y_per = useMotionValue(0);
+
+  function onPan(event, info) {
+    const x = (100 / window.innerWidth) * info.point.x;
+    const y = (100 / window.innerWidth) * info.point.y;
+
+    pan_pos_x_per.set(x);
+    pan_pos_y_per.set(y);
+
+    return pan_pos_x_per, pan_pos_y_per;
+  }
+
+  const pan_pos = useMotionTemplate`${pan_pos_x_per}% ${pan_pos_y_per}%`;
+
+  /* useEffect(
+    () =>
+      pan_pos_x_per.on("change", latest => {
+        console.log("x", latest , "y", pan_pos_y_per.get());
+      }),
+    [pan_pos_x_per, pan_pos_y_per]
+  ); */
 
   // RETURN ----------------------------------------
+  console.log("index", index, "images.length", images.length);
 
   return (
     <>
@@ -233,6 +265,8 @@ function SSfigure(props) {
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             className="motiondiv"
+            // style={{ pan_pos_raw }}
+            onPan={onPan}
             key={index}
             custom={direction}
             variants={animate_slide}
@@ -244,6 +278,7 @@ function SSfigure(props) {
               <>{children}</>
             ) : (
               <SSimg
+                panpos={pan_pos}
                 images={imagesSrcs}
                 index={index}
                 alts={alts}

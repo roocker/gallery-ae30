@@ -1,24 +1,24 @@
 ---
-import Layout from "../layouts/Layout.astro";
+import Layout from "../../layouts/Layout.astro";
 import { CollectionEntry, getCollection } from "astro:content";
-// import BasicScripts from '../components/basicScripts.astro';
-import TextBlockModal from "../components/TextBlockModal";
-import Carousel from "../components/carousel";
-import ProjectSummary from "../components/ProjectSummary";
-import SlideshowCounter from "../components/SlideshowCounter";
-import SlideshowAlt from "../components/SlideshowAlt";
-import ModalBtn from "../components/ModalBtn";
-import PlanBtn from "../components/PlanBtn";
-import SlideshowBtn from "../components/SlideshowBtn";
-import PlaybackBtn from "../components/PlaybackBtn";
+// import BasicScripts from '../../components/basicScripts.astro';
+import TextBlockModal from "../../components/TextBlockModal";
+import SSfigure from "../../components/SSfigure";
+import ProjectSummary from "../../components/ProjectSummary";
+import SlideshowCounter from "../../components/SlideshowCounter";
+import SlideshowAlt from "../../components/SlideshowAlt";
+import ModalBtn from "../../components/ModalBtn";
+import PlanBtn from "../../components/PlanBtn";
+import SlideshowBtn from "../../components/SlideshowBtn";
+import PlaybackBtn from "../../components/PlaybackBtn";
 import { getImage } from "astro:assets";
 import { marked } from "marked";
-import "../styles/textbody.css";
+import "../../styles/textbody.css";
 
 export async function getStaticPaths() {
   const allProjects = await getCollection("projects");
   return allProjects.map(proj => ({
-    params: { tmpproject: proj.slug, cat: proj.data.category },
+    params: { project: proj.slug, cat: proj.data.category },
     props: proj,
   }));
 }
@@ -128,14 +128,13 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     aria-label={`Projekt ${p.title} Presentation`}
   >
     <article class="project">
-      <Carousel
+      <SSfigure
         client:only
         pictures={optSSPictures}
         pictureTitles={rawSSPicturesAlts}
         plans={optSSPlans}
         planTitles={rawSSPlansAlts}
         autoPlayInterval={autoPlayInterval}
-        title={p.title}
       >
         <ProjectSummary
           client:only
@@ -168,7 +167,8 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 
           <div class="summary_text text" set:html={summary} />
         </ProjectSummary>
-      </Carousel>
+      </SSfigure>
+
       <TextBlockModal client:load>
         <h1>{p.title_l}</h1>
         {p.title_zzl && <h3>{p.title_zzl}</h3>}
@@ -190,6 +190,11 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
           <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
 
           <dt>TYP:</dt><dd>{p.project_keys.tags.map(tag => tag + ", ")}</dd>
+          <!-- <dt>TYP:</dt>{p.project_keys.tags.map(tag => <dd key={tag}>{tag}</dd> )} -->
+          <!--
+          <dt>Typ:</dt><dd>Neubau, Erweiterung</dd>
+          <dt>Tags:</dt><dd>{p.subcategory}</dd>
+          -->
         </dl>
 
         <p><Content /></p>
@@ -209,7 +214,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
         <SlideshowBtn dir="prev" client:load>Vorheriges Bild</SlideshowBtn>
         <ModalBtn client:load>Projekt Beschreibung</ModalBtn>
         <PlaybackBtn autoPlayInterval={autoPlayInterval} client:load>
-          Automatische Wiedergabe
+          Automatische Wiedergabe 
         </PlaybackBtn>
         {p.plans && <PlanBtn client:load>Pläne ein-/ausblenden</PlanBtn>}
         <SlideshowBtn dir="next" client:load>Nächstes Bild</SlideshowBtn>
@@ -225,6 +230,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 <style is:global>
   .wrapper {
     margin: 0 !important;
+    /* background: lightblue !important; */
   }
   .slideshow_div {
   }
@@ -232,14 +238,18 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 
 <style>
   .project_presentation {
+    /* background: green; */
+    min-height: 100vh;
+
     display: flex;
     align-items: center; /* center vertically flexbox */
     justify-content: center; /* center horizontally flex */
   }
   article.project {
-    height: 100vh;
-    width: 100vw;
-    /* background: lightgreen; */
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    /* background: lightblue;  */
   }
 
   article .pictures {
