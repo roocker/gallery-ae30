@@ -97,7 +97,7 @@ allProjects = allProjects.map((proj, i) => {
 });
 
 // remove archived projects
-allProjects = allProjects.filter(proj => !proj.data.archived);
+allProjects = allProjects.filter(proj => !proj.data.display.archived);
 
 /* console.log( "allProjects from INDEX" , allProjects.map((proj,i) => (
   {
