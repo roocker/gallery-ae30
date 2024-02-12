@@ -54,7 +54,7 @@ export default defineConfig({
             folder: "src/content/projects",
             create: true,
             delete: true,
-            path: "{{slug}}/data",
+            path: "{{slug}}/index",
             media_folder: "",
             public_folder: "../{{slug}}",
             fields: [
@@ -71,48 +71,50 @@ export default defineConfig({
                 hint: "Dieser Title wird bei Textdarstellungen und im Plankopf genutzt",
               },
               {
-                name: "title_zzl",
-                label: "Zusatz Projekt Titel",
-                widget: "string",
-                required: false,
-                hint: "optional, Zusatztitel zb.: Science Center / Halle 227",
-              },
-              {
-                name: "archived",
-                widget: "boolean",
-                label: "Archiviern (ein = archiviert!)",
-                required: false,
-                hint: "Projekt erscheint nicht in der Gallerie, ist aber über URL aufrufbar (ae30.at/categorie/projekt) (ae30.at/arge/ba) & ae30.at/archiv ",
-              },
-              {
-                name: "widehigh",
-                widget: "select",
-                label: "Größe Startseite",
-                options: ["normal", "extra breit", "extra hoch"],
-                required: false,
-                hint: "",
-              },
-              /* {
-                  name: 'high',
-                  widget: 'boolean',
-                  label: 'high',
-                  required: false,
-                  hint: '',
-                }, */
-              /* {
+                name: "display",
+                label: "Darstellung (optional)",
+                hint: "Optionale Darstellungs Präferenzen",
+                widget: "object",
+                collapsed: true,
+                fields: [
+                  {
+                    name: "title_zzl",
+                    label: "Zusatz Projekt Titel",
+                    widget: "string",
+                    required: false,
+                    hint: "optional, Zusatztitel zb.: Science Center / Halle 227",
+                  },
+                  {
+                    name: "archived",
+                    widget: "boolean",
+                    label: "Archiviern (ein = archiviert!)",
+                    required: false,
+                    hint: "Projekt erscheint nicht in der Gallerie, ist aber über URL aufrufbar (ae30.at/categorie/projekt) (ae30.at/arge/ba) & ae30.at/archiv ",
+                  },
+                  {
+                    name: "publishDate",
+                    widget: "datetime",
+                    format: "DD MMM YYYY",
+                    date_format: "DD MMM YYYY",
+                    time_format: false,
+                    label: "Veröffentlichkeits Datum",
+                  },
+                  {
+                    name: "widehigh",
+                    widget: "select",
+                    label: "Größe Startseite",
+                    options: ["normal", "extra breit", "extra hoch"],
+                    required: false,
+                    hint: "",
+                  },
+                  /* {
                   name: 'share',
                   widget: 'boolean',
                   label: 'Teilen Option anzeigen ',
                   required: false,
                   hint: 'Teilen Option im Projekt anzeigen ein-/ausschalten',
                 }, */
-              {
-                name: "publishDate",
-                widget: "datetime",
-                format: "DD MMM YYYY",
-                date_format: "DD MMM YYYY",
-                time_format: false,
-                label: "Veröffentlichkeits Datum",
+                ],
               },
               {
                 name: "category",
@@ -144,23 +146,13 @@ export default defineConfig({
                   ] */
               },
 
-              /* {
-                  name: 'subcategory',
-                  widget: 'string',
-                  label: 'Subkategorie'
-                }, */
-
               {
                 name: "project_keys",
                 label: "Projekt Kennwerte",
                 widget: "object",
+                collapsed: true,
                 hint: "Projekt Kennwerte. Diese werden genutzt um die Projekte entsprechend auf der Startseite zu filtern. Diese entsprechen auch dem standard Block der Projekt/Textbeschreibung",
                 fields: [
-                  {
-                    name: "hid",
-                    label: "was",
-                    widget: "hidden",
-                  },
                   {
                     name: "status",
                     label: "status",
@@ -225,6 +217,7 @@ export default defineConfig({
               {
                 name: "titleimg",
                 widget: "object",
+                collapsed: true,
                 label: "Titelbild",
                 fields: [
                   {
@@ -237,6 +230,21 @@ export default defineConfig({
                     widget: "string",
                     label: "Bildtitel = Alternativtext",
                     hint: "Bildtitel sind wichtig für Suchmaschinen & wenn das Bild nicht geladen werden kann!",
+                  },
+                  {
+                    name: "source",
+                    widget: "string",
+                    required: false,
+                    label: "Quelle",
+                    hint: "Bildquellen Angabe falls vorhanden",
+                  },
+                  {
+                    name: "source_url",
+                    widget: "string",
+                    required: false,
+                    label: "Quelle URL",
+                    hint: "Bildquellen URL Angabe falls vorhanden",
+                    pattern: ["^https?://.*$", "URLs starten mit http"],
                   },
                 ],
               },
@@ -260,6 +268,20 @@ export default defineConfig({
                     label: "Bildtitel = Alternativtext",
                     hint: "Bildtitel sind wichtig für Suchmaschinen & wenn das Bild nicht geladen werden kann!",
                   },
+                  {
+                    name: "source",
+                    widget: "string",
+                    required: false,
+                    label: "Quelle",
+                    hint: "Bildquellen Angabe falls vorhanden",
+                  },
+                  {
+                    name: "source_url",
+                    widget: "string",
+                    required: false,
+                    label: "Quelle URL",
+                    hint: "Bildquellen URL Angabe falls vorhanden",
+                  },
                 ],
               },
 
@@ -282,6 +304,20 @@ export default defineConfig({
                     label: "Plantitel = Alternativtext",
                     hint: "Bild/Plantitel sind wichtig für Suchmaschinen & wenn das Bild nicht geladen werden kann!",
                   },
+                  {
+                    name: "source",
+                    widget: "string",
+                    required: false,
+                    label: "Quelle",
+                    hint: "Bildquellen Angabe falls vorhanden",
+                  },
+                  {
+                    name: "source_url",
+                    widget: "string",
+                    required: false,
+                    label: "Quelle URL",
+                    hint: "Bildquellen URL Angabe falls vorhanden",
+                  },
                 ],
               },
 
@@ -292,20 +328,40 @@ export default defineConfig({
                   hint: 'Kurztext Version, maximal X zeichen', //#rev
                   required: false,
                 }, */
+              /* {
+                widget: "object",
+                name: "descriptions",
+                label: "Texte",
+                collapsed: true,
+                fields: [ */
+              {
+                name: "description",
+                label: "Kurzbeschreibung",
+                hint: "Zwischen 10 und maximal 160 Zeichen. Die Anzahl ist optimiert auf Suchmaschinen. Diese 160 Zeichen sollten möglichst alle wichtigen Projekteigentschaften enthalten.",
+                widget: "text",
+                required: true,
+                pattern: [
+                  "^.{10,160}$",
+                  "Zwischen 10 und maximal 160 Zeichen. Die Anzahl ist optimiert auf Suchmaschinen. Diese 160 Zeichen sollten möglichst alle wichtigen Projekteigentschaften enthalten.",
+                ],
+              },
               {
                 name: "body",
                 label: "Langtext",
                 widget: "markdown",
-                required: false,
+                required: true,
+                pattern: [".{10,}", "Mindestens 10 Zeichen."],
               },
-              /* {
+            ],
+          },
+          /* {
                   name: 'map',
                   widget: 'map',
                   label: 'Karte',
                   required: false
                 } */
-            ],
-          },
+          /* ],
+          }, */
 
           // PAGES  -----------------------------------------------
           {

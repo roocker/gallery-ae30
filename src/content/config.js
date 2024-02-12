@@ -34,6 +34,7 @@ const teamCollection = defineCollection({
               message: "Member image must be at least 300 pixels wide!",
             })
             .optional(),
+
           mode: z
             .object({
               highlighted: z.boolean().optional(),
@@ -86,6 +87,9 @@ const projCollection = defineCollection({
           message: "Cover image must be at least 1080 pixels wide!",
         }),
         alt: z.string(),
+
+        source: z.string().optional(),
+        source_url: z.string().optional(),
       }),
 
       fotos: z
@@ -95,6 +99,8 @@ const projCollection = defineCollection({
               message: "Cover image must be at least 1080 pixels wide!",
             }),
             alt: z.string(),
+            source: z.string().optional(),
+            source_url: z.string().optional(),
           })
         )
         .optional(),
@@ -106,6 +112,8 @@ const projCollection = defineCollection({
               message: "Cover image must be at least 1080 pixels wide!",
             }),
             alt: z.string(),
+            source: z.string().optional(),
+            source_url: z.string().optional(),
           })
         )
         .optional(),
