@@ -63,10 +63,14 @@ const projCollection = defineCollection({
     z.object({
       title: z.string(),
       title_l: z.string(),
-      title_zzl: z.string().optional(),
-      archived: z.boolean().optional(),
-      widehigh: z.string().optional(),
-      publishDate: z.string().transform(string => new Date(string)),
+      display: z
+        .object({
+          title_zzl: z.string().optional(),
+          archived: z.boolean().optional(),
+          publishDate: z.string().transform(string => new Date(string)),
+          widehigh: z.string().optional(),
+        })
+        .optional(),
       category: z.string(),
       project_keys: z.object({
         status: z.string().optional(),
@@ -105,6 +109,7 @@ const projCollection = defineCollection({
           })
         )
         .optional(),
+      description: z.string(),
     }),
 });
 
