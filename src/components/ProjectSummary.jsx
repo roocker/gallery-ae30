@@ -37,11 +37,11 @@ export default function ProjectSummary(props) {
   return (
     <div className="project_summary">
       {children}
-      <p className="read_more link">
+      <button className="read_more link center">
         <a href="#" onClick={() => toggleModal()}>
           mehr lesen
         </a>
-      </p>
+      </button>
       <div className="project_navigation">
         <ol>
           <h3> Fotos </h3>
@@ -74,20 +74,21 @@ export default function ProjectSummary(props) {
         currentProj={props.currentProj}
         allProjects={props.allProjects}
       />
-      <p className="link center">
-        <a href="/">Kehre zur Galerie zurück</a>
-      </p>
-
-      <p className="link center">
-        <a
-          onClick={() => {
-            stateSlideshowZoom2.set(0);
-            stateZoomComplete.set(false);
-          }}
-        >
-          Projekt Übersicht
-        </a>
-      </p>
+      <div class="link_nav">
+        <button className="link ">
+          <a
+            onClick={() => {
+              stateSlideshowZoom2.set(0);
+              stateZoomComplete.set(false);
+            }}
+          >
+            Projekt Übersicht
+          </a>
+        </button>
+        <button className="link ">
+          <a href="/">Kehre zur Galerie zurück</a>
+        </button>
+      </div>
     </div>
   );
 }
