@@ -36,6 +36,23 @@ const rawSSPictures = [p.titleimg.img].concat(p.fotos.map(img => img.foto));
 
 const rawSSPicturesAlts = [p.titleimg.alt].concat(p.fotos.map(img => img.alt));
 
+const raw_sources = [p.titleimg.source].concat(p.fotos.map(img => img.source));
+const raw_sources_url = [p.titleimg.source].concat(
+  p.fotos.map(img => img.source)
+);
+
+console.log("raw", p);
+const raw_sources_plans = p.plans.map(plan => plan.source);
+const raw_sources_plans_url = p.plans.map(plan => plan.source);
+
+const sources = [raw_sources, raw_sources_url];
+const sources_plans = [raw_sources_plans, raw_sources_plans_url];
+
+console.log("hier", sources, sources_plans);
+
+// let source;
+// let source_url;
+
 let rawSSPlans;
 let rawSSPlansAlts;
 
@@ -80,11 +97,9 @@ const opts = {
   headerIds: false,
 };
 
-const htmlbody = marked.parse(proj.body, opts);
-const htmlbody_lines = htmlbody.split("\n");
-const htmlbodyshorted = htmlbody_lines.slice(0, 1);
-const summary = htmlbodyshorted.join("\n");
-// console.log("PROJ", proj);
+const summary = p.description;
+
+// console.log("PROJ", summary);
 
 function cutString(inputString, maxLength) {
   if (inputString.length > maxLength) {
@@ -160,14 +175,14 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
             {
               p.project_keys.status ? (
                 <>
-                  <dt>Status:</dt>
-                  <dd>Status:{p.project_keys.status}</dd>
+                  <dt class="status">Status:</dt>
+                  <dd>{p.project_keys.status}</dd>
                 </>
               ) : (
                 ""
               )
             }
-            <dt>Jahr:</dt><dd>
+            <dt class="jahr">Jahr:</dt><dd>
               {p.project_keys.year} - {p.project_keys.year2}
             </dd>
             <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
@@ -182,22 +197,22 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
         <h1>{p.title_l}</h1>
         {p.title_zzl && <h3>{p.title_zzl}</h3>}
 
-        <dl class="textmodal_ul">
+        <dl class="">
           {
             p.project_keys.status ? (
               <>
-                <dt>Status:</dt>
-                <dd>Status:{p.project_keys.status}</dd>
+                <dt class="status">Status:</dt>
+                <dd>{p.project_keys.status}</dd>
               </>
             ) : (
               ""
             )
           }
-          <dt>Jahr:</dt><dd>
+          <dt class="jahr">Jahr:</dt><dd>
             {p.project_keys.year} - {p.project_keys.year2}
           </dd>
           <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
-
+          <!-- <dt>Typ:</dt>{p.project_keys.tags.map(tag => <dd>tag</dd> + ", ")} -->
           <dt>TYP:</dt><dd>{p.project_keys.tags.map(tag => tag + ", ")}</dd>
         </dl>
 
@@ -207,7 +222,11 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 
     <section class="controls" aria-label="Plankopf Footer Controls">
       <div class="footer_line alt_line">
-        <SlideshowAlt client:load />
+        <SlideshowAlt
+          client:load
+          sources={sources}
+          sources_plans={sources_plans}
+        />
       </div>
 
       <div class="footer_line title_line">
@@ -384,13 +403,17 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     text-transform: uppercase;
     display: inline-block;
     font-weight: bold;
-    margin-right: 1.5em;
+    margin-right: 2.65em;
     float: left;
     /* display: none; */
     /* text-indent: -9999px; */
   }
-  dl dt:first-child {
-    margin-right: 0.9em;
+  dt.status {
+    margin-right: 1em;
+    /* background: red; */
+  }
+  dt.jahr {
+    margin-right: 2em;
     /* background: blue; */
   }
   dd {
