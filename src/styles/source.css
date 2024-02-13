@@ -1,3 +1,19 @@
+.slide_title {
+  /* background: red; */
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  /* position: absolute; */
+  width: 100%;
+}
 .source {
-  background: pink;
+  /* background: pink; */
+  /* font-family: var(--fsans3); */
+  color: var(--cgrey80);
+}
+.source a {
+  color: var(--cgrey80);
+}
+.source a:hover {
+  color: var(--cblack);
 }

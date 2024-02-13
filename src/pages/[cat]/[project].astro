@@ -37,18 +37,15 @@ const rawSSPictures = [p.titleimg.img].concat(p.fotos.map(img => img.foto));
 const rawSSPicturesAlts = [p.titleimg.alt].concat(p.fotos.map(img => img.alt));
 
 const raw_sources = [p.titleimg.source].concat(p.fotos.map(img => img.source));
-const raw_sources_url = [p.titleimg.source].concat(
-  p.fotos.map(img => img.source)
+const raw_sources_url = [p.titleimg.source_url].concat(
+  p.fotos.map(img => img.source_url)
 );
-
-console.log("raw", p);
 const raw_sources_plans = p.plans.map(plan => plan.source);
-const raw_sources_plans_url = p.plans.map(plan => plan.source);
-
+const raw_sources_plans_url = p.plans.map(plan => plan.source_url);
 const sources = [raw_sources, raw_sources_url];
 const sources_plans = [raw_sources_plans, raw_sources_plans_url];
 
-console.log("hier", sources, sources_plans);
+// console.log("hier", sources, sources_plans);
 
 // let source;
 // let source_url;
@@ -243,7 +240,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
         <SlideshowBtn dir="next" client:load>Nächstes Bild</SlideshowBtn>
       </div>
 
-      <div class="counter_line footer_line">
+      <div class="footer_line counter_line">
         <SlideshowCounter client:load />
       </div>
     </section>
@@ -290,7 +287,8 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     display: flex;
     flex-direction: column;
     text-align: center;
-    align-items: center;
+    /* align-items: flex-end; */
+    /* align-items: center; */
 
     color: var(--cgrey);
 
@@ -301,8 +299,8 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
   }
 
   .footer_line {
+    align-self: center;
     line-height: 2em;
-    height: 2em;
     backdrop-filter: blur(1px);
     /* border-radius: 50%; */
     /* background: lavender; */
@@ -321,6 +319,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     /* background: green; */
   }
   .title_line {
+    height: 2em;
     width: auto;
     border-radius: 1em;
     padding: 0 1em 0 1em;
@@ -333,6 +332,8 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     margin: 0 !important;
   }
   .alt_line {
+    align-self: flex-end !important;
+    /* align-self: self-start !important; */
     font-size: 1rem;
     border-radius: 1em;
     padding: 0 1em 0 1em;
@@ -340,6 +341,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
   }
   /* #rev counter_line vertical position from bot should be equal to gridlayout */
   .counter_line {
+    height: 2em;
     align-items: center;
     display: flex;
 
@@ -367,7 +369,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
       display: flex;
       flex-direction: row;
       /* margin: 0; */
-      align-items: center;
+      /* align-items: center; */
       justify-content: center;
       /* background: green; */
     }

@@ -57,7 +57,7 @@ export default function Carousel({
     setZoomNow(i);
 
     stateSlideshowIndex.set(i);
-    console.log(
+    /* console.log(
       "requested zoom index:",
       i,
       "from currentIndex:",
@@ -70,7 +70,7 @@ export default function Carousel({
       zoomNow,
       "move_carousel:",
       move_carousel.get()
-    );
+    ); */
 
     if (zoom === 1) {
       stateSlideshowZoom2.set(0);

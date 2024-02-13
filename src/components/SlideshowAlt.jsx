@@ -11,18 +11,29 @@ function SlideshowAlt({ sources, sources_plans }) {
   const index = useStore(stateSlideshowIndex);
   const pToggle = useStore(stateSlideshow);
 
+  const [source, sourceurl] = pToggle
+    ? [sources[0][index], sources[1][index]]
+    : [sources_plans[0][index], sources_plans[1][index]];
+
   return (
-    <>
-      {sources && (
+    <div className="slide_title">
+      {source && (
+        <span className="source">
+          {sourceurl && <a href={sourceurl}>© {source}</a>}
+          {!sourceurl && <>© {source}</>}
+        </span>
+      )}
+      <span className="">{alt}</span>
+    </div>
+  );
+}
+export default SlideshowAlt;
+
+/* {sources || sources_plans && (
         <span className="source">
           © {pToggle && <a href={sources[1][index]}>{sources[0][index]}</a>}
           {!pToggle && (
             <a href={sources_plans[1][index]}>{sources_plans[0][index]}</a>
           )}
         </span>
-      )}
-      <span className="slideshow_alt">{alt}</span>
-    </>
-  );
-}
-export default SlideshowAlt;
+      )} */
