@@ -119,7 +119,7 @@ function SSfigure(props) {
     } else {
       stateSlideshowZoom2.set(0);
       stateZoomComplete.set(false);
-      console.log("zoom:", zoom);
+      // console.log("zoom:", zoom);
     }
   };
 
@@ -250,7 +250,7 @@ function SSfigure(props) {
   ); */
 
   // RETURN ----------------------------------------
-  console.log("index", index, "images.length", images.length);
+  // console.log("index", index, "images.length", images.length);
 
   return (
     <>
