@@ -5,8 +5,10 @@
 export default function SimilarProjects(props) {
   let items = props.items;
   // let currentProj = props.currentProj;
-  const allProjects = props.allProjects;
+  let allProjects = props.allProjects;
   // console.log("allprojects ", allProjects);
+
+  allProjects = allProjects.filter(proj => !proj.data.display.archived);
 
   let currentProj = allProjects.find(p => p.slug === props.currentProj);
 

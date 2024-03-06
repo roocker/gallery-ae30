@@ -67,6 +67,7 @@ member:
   - name: Florian Schwegel
     mode:
       former: true
+      highlighted: false
   - name: Kevin Djavan
     details:
       - detail: Studentischer Mitarbeiter
