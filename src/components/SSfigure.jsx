@@ -232,6 +232,7 @@ function SSfigure(props) {
   function onPan(event, info) {
     const x = (100 / window.innerWidth) * info.point.x;
     const y = (100 / window.innerWidth) * info.point.y;
+    console.log(info.point.x, info.point.y);
 
     pan_pos_x_per.set(x);
     pan_pos_y_per.set(y);
@@ -267,6 +268,9 @@ function SSfigure(props) {
             className="motiondiv"
             // style={{ pan_pos_raw }}
             onPan={onPan}
+            // onMouseMove={onPan}
+            //https://codesandbox.io/p/sandbox/framer-motion-mouse-position-2b4sd?file=%2Fsrc%2FApp.js%3A75%2C31
+            // onPointerMove={onPan}
             key={index}
             custom={direction}
             variants={animate_slide}
