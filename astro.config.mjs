@@ -9,6 +9,7 @@ import react from "@astrojs/react";
 // https://decapcms.org/docs/beta-features/#folder-collections-media-and-public-folder
 export default defineConfig({
   site: "https://ae30.at",
+  output: "hybrid",
   image: {
     service: sharpImageService(),
   },
