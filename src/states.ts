@@ -1,7 +1,7 @@
 import { atom } from "nanostores";
 
 import { CURRENTYEAR } from "./consts";
-export const stateMainNav = atom(false);
+export const stateMainNav = atom(true);
 
 export const stateSelectedCat = atom("all");
 export const stateSelectedTag = atom("all");
