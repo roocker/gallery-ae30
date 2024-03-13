@@ -1,6 +1,6 @@
-import React from "react";
 import { useStore } from "@nanostores/react";
 import {
+  stateModal,
   stateSlideshow,
   stateSlideshowIndex,
   stateSlideshowZoom,
@@ -13,6 +13,7 @@ function PlanBtn({ children }) {
   const zToggle = useStore(stateSlideshowZoom);
   const sToggle = useStore(stateSlideshow);
   const setToggle = () => {
+    stateModal.set(false);
     stateSlideshow.set(!sToggle);
     stateSlideshowIndex.set(0);
     stateSlideshowZoom.set(false);
