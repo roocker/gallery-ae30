@@ -88,15 +88,6 @@ h2.title_zzl {
   margin: 1em 0 1em 0;
   display: none;
 }
-.alt_line {
-  display: none;
-}
-
-@media only screen and (min-width: 48em) {
-  .alt_line {
-    display: inline;
-  }
-}
 
 @media only screen and (min-width: 37.5em) and (min-height: 820px) {
   .read_more {

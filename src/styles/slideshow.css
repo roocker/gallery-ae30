@@ -145,3 +145,15 @@ button.slideshow_btn > span {
   /* background-color: pink; */
   /* transform: translate(25%, 0%) rotate(0) scale(0.5); */
 }
+
+.alt_line {
+  display: none;
+  /* background: green; */
+  /* text-align: center; */
+}
+
+@media only screen and (min-width: 48em) {
+  .alt_line {
+    display: inline;
+  }
+}
