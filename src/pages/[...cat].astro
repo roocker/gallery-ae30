@@ -1,13 +1,13 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import GridProj from '../components/GridProj';
-import GridControlWrapper from '../components/GridControlWrapper';
-import { CollectionEntry, getCollection } from 'astro:content';
-import { CURRENTYEAR } from '../consts';
-import { getImage } from 'astro:assets';
+import Layout from "../layouts/Layout.astro";
+import GridProj from "../components/GridProj";
+import GridControlWrapper from "../components/GridControlWrapper";
+import { CollectionEntry, getCollection } from "astro:content";
+import { CURRENTYEAR } from "../consts";
+import { getImage } from "astro:assets";
 
-export async function getStaticPaths(){
-  const allProjects = await getCollection('projects');
+export async function getStaticPaths() {
+  const allProjects = await getCollection("projects");
 
   const projMappedtoCats = new Map();
 
@@ -23,27 +23,26 @@ export async function getStaticPaths(){
   // console.log(allProjects);
   // console.log(proj);
 
-
   return [...projMappedtoCats.entries()].map(([cat, proj]) => {
     return {
       params: { cat },
-      props: { cat, proj }
-    }
+      props: { cat, proj },
+    };
   });
-} 
+}
 
-  const allProjects = await getCollection('projects');
+const allProjects = await getCollection("projects");
 
 // type Props = CollectionEntry<'projects'>;
-  const { cat } = Astro.params;
-  // console.log("Angefrage Kategorie:", cat);
-  const proj = Array.from(Astro.props.proj);
-  // console.log("catprojects:", proj);
+const { cat } = Astro.params;
+// console.log("Angefrage Kategorie:", cat);
+const proj = Array.from(Astro.props.proj);
+// console.log("catprojects:", proj);
 
-  // const titu = proj.map(proj => proj.data.title);
-  // console.log("HIER ALLE TITEL der CATEGORY:", titu);
+// const titu = proj.map(proj => proj.data.title);
+// console.log("HIER ALLE TITEL der CATEGORY:", titu);
 
-const settings = await getCollection('settings');
+const settings = await getCollection("settings");
 
 const settingsFilter = settings[0].data.filter;
 
@@ -51,15 +50,22 @@ const settingFilterCat = settingsFilter.cat;
 const settingFilterTag = settingsFilter.tag;
 const settingFilterYear = settingsFilter.year;
 const settingFilterSize = settingsFilter.size;
-const noFiltersActiveInCmsSettings = (!settingFilterCat && !settingFilterTag && !settingFilterYear && !settingFilterSize);
+const noFiltersActiveInCmsSettings =
+  !settingFilterCat &&
+  !settingFilterTag &&
+  !settingFilterYear &&
+  !settingFilterSize;
 
 const settingsPrioSort = settings[1].data.PrioList;
 // console.log("settingsPrioSort:", settingsPrioSort);
 
-
 const sortedProjects = proj.sort((a, b) => {
-  const aIndex = settingsPrioSort.findIndex(item => item['relation-proj'] === a.slug);
-  const bIndex = settingsPrioSort.findIndex(item => item['relation-proj'] === b.slug);
+  const aIndex = settingsPrioSort.findIndex(
+    item => item["relation-proj"] === a.slug
+  );
+  const bIndex = settingsPrioSort.findIndex(
+    item => item["relation-proj"] === b.slug
+  );
 
   if (aIndex === -1 && bIndex === -1) {
     return new Date(b.data.publishDate) - new Date(a.data.publishDate);
@@ -72,17 +78,19 @@ const sortedProjects = proj.sort((a, b) => {
   }
 });
 
-
 // Image Optimization
 // ------------------------------------------------
 
-const orgTitleImgs = proj.map((proj, index) => ({ img: proj.data.titleimg.img, index}));
+const orgTitleImgs = proj.map((proj, index) => ({
+  img: proj.data.titleimg.img,
+  index,
+}));
 
 const optTitleImgs = await Promise.all(
-  orgTitleImgs.map(async (covers) => {
+  orgTitleImgs.map(async covers => {
     const img = await getImage({
       src: covers.img,
-      format: 'webp',
+      format: "webp",
       width: 600,
     });
     return { img /* , imgIndex: covers.index */ };
@@ -91,15 +99,15 @@ const optTitleImgs = await Promise.all(
 
 // console.log( "proj from CAT" ,proj )
 
-const projWithOptCovers = proj.map((proj, i ) => {
-  return{
+const projWithOptCovers = proj.map((proj, i) => {
+  return {
     ...proj,
     data: {
       ...proj.data,
-      titleimg: optTitleImgs[i]
-    }
+      titleimg: optTitleImgs[i],
+    },
   };
-})
+});
 
 /* console.log( "projs from ...CAT" , projWithOptCovers.map((proj,i) => (
   {
@@ -109,50 +117,47 @@ const projWithOptCovers = proj.map((proj, i ) => {
   }
 ))); */
 
-
-
 ---
-<Layout title="AE30 - Kategorie - work in progress" description="Kategorie" image="">
-<section id="grid-gallery" aria-label="Gallery Grid Overview">
 
-    <GridProj
-    client:only
-    projects={projWithOptCovers}
-    />
+<Layout
+  title="AE30 - Kategorie - work in progress"
+  description="Kategorie"
+  image=""
+>
+  <section id="grid-gallery" aria-label="Gallery Grid Overview">
+    <GridProj client:only projects={projWithOptCovers} />
     <!-- covers={optTitleImgs} -->
 
-    {!noFiltersActiveInCmsSettings &&
-    <GridControlWrapper
-    client:load
-    projects={projWithOptCovers}
-    btnname="Filter Menü ein-/ausblenden"
-
-    defaultCat={cat}
-    defaultTag="all"
-    defaultYear1={1980}
-    defaultYear2={CURRENTYEAR}
-    defaultSize1={0}
-    defaultSize2={10000}
-    />
+    {
+      !noFiltersActiveInCmsSettings && (
+        <GridControlWrapper
+          client:load
+          projects={projWithOptCovers}
+          btnname="Filter Menü ein-/ausblenden"
+          defaultCat={cat}
+          defaultTag="all"
+          defaultYear1={1980}
+          defaultYear2={CURRENTYEAR}
+          defaultSize1={0}
+          defaultSize2={10000}
+        />
+      )
     }
-
   </section>
-
-
 </Layout>
 <style>
-  #grid-gallery{
+  #grid-gallery {
     display: grid;
     grid-template-columns: repeat(var(--gcolnum), 1fr);
     grid-auto-rows: min-content;
     grid-auto-flow: dense;
 
     align-items: flex-start;
-    gap: calc( 0.5 * var(--ggapspx));
+    gap: calc(0.5 * var(--ggapspx));
     margin-bottom: 10em;
   }
-  @media only screen and (min-width: 64em /* var(--vwS) */) { 
-    #grid-gallery{
+  @media only screen and (min-width: 64em /* var(--vwS) */) {
+    #grid-gallery {
       gap: var(--ggapspx);
     }
   }
