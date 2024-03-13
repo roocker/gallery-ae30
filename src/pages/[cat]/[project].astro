@@ -291,7 +291,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
 
     color: var(--cgrey);
 
-    /* background: green; */
+    /* background: yellow; */
   }
   .controls:nth-of-type(1) {
     /* background: orange; */
@@ -331,7 +331,6 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     margin: 0 !important;
   }
   .alt_line {
-    align-self: flex-end !important;
     /* align-self: self-start !important; */
     font-size: 1rem;
     border-radius: 1em;
@@ -359,6 +358,8 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
     }
     .alt_line {
       position: absolute;
+      text-align: right;
+      align-self: flex-end;
       right: 2em;
       z-index: 10;
     }
@@ -370,7 +371,6 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
       /* margin: 0; */
       /* align-items: center; */
       justify-content: center;
-      /* background: green; */
     }
     .control_line {
       position: absolute;
