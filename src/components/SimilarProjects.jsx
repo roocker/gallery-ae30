@@ -45,7 +45,7 @@ export default function SimilarProjects(props) {
       <ul>
         {similarProjects.map(p => (
           <li key={p.proj.slug}>
-            <a href={`../${p.proj.data.category}/${p.proj.slug}`}>
+            <a href={`../../${p.proj.data.category}/${p.proj.slug}`}>
               <figure>
                 <img src={p.proj.data.titleimg.img.src} />
                 <figcaption>{p.proj.data.title_l}</figcaption>
