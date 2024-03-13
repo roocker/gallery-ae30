@@ -117,7 +117,7 @@ function GridControlWrapper(props) {
 
       {tFilter && (
         <motion.div
-          className="motiondiv"
+          className="filter_motiondiv"
           onClick={handleToggleFilter}
           variants={slideUp}
           key={tFilter}

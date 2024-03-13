@@ -47,12 +47,12 @@ section.controls {
   background: var(--cwhite80);
 }
 
-.motiondiv {
+.filter_motiondiv {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: red;
+  /* background: red; */
 
   /* background: var(--cwhite80); */
 }
@@ -230,7 +230,7 @@ p.counter_p {
   }
 }
 @media only screen and (min-width: 64em) {
-  .motiondiv {
+  .filter_motiondiv {
     flex-direction: row;
   }
 

@@ -1,16 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
-const allProjects = await Astro.glob('../content/projects/*.md');
+const allProjects = await Astro.glob("../content/projects/*.md");
 ---
-<Layout title="AE30 - Project Archive - work in progress" description="Archive" image="">
-<section class="archive">
 
-  {allProjects.map((proj) => <li><a href={proj.url}>{proj.frontmatter.title}</a> - {proj.frontmatter.category}</li>)} 
-
-</section>
-
-
-
+<Layout
+  title="AE30 - Project Archive - work in progress"
+  description="Archive"
+  image=""
+>
+  <section class="archive">
+    {
+      allProjects.map(proj => (
+        <li>
+          <a href={proj.url}>{proj.frontmatter.title}</a> -{" "}
+          {proj.frontmatter.category}
+        </li>
+      ))
+    }
+  </section>
 </Layout>
-<style>
-</style>
