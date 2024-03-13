@@ -184,7 +184,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
             </dd>
             <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
             <!-- <dt>Typ:</dt>{p.project_keys.tags.map(tag => <dd>tag</dd> + ", ")} -->
-            <dt>TYP:</dt><dd>{p.project_keys.tags.map(tag => tag + ", ")}</dd>
+            <dt>TYP:</dt><dd>{p.project_keys.tags.join(", ")}</dd>
           </dl>
 
           <div class="summary_text text" set:html={summary} />
@@ -209,8 +209,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
             {p.project_keys.year} - {p.project_keys.year2}
           </dd>
           <dt>NFL:</dt><dd>{p.project_keys.area} m²</dd>
-          <!-- <dt>Typ:</dt>{p.project_keys.tags.map(tag => <dd>tag</dd> + ", ")} -->
-          <dt>TYP:</dt><dd>{p.project_keys.tags.map(tag => tag + ", ")}</dd>
+          <dt>TYP:</dt><dd>{p.project_keys.tags.join(", ")}</dd>
         </dl>
 
         <p><Content /></p>

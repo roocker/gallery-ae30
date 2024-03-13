@@ -44,20 +44,22 @@ export default function Carousel({
 
   const zoom = useStore(stateSlideshowZoom2);
 
+  const [isDrag, setIsDrag] = useState(false);
   const [reqIndex, setReqIndex] = useState(-1);
   const [zoomNow, setZoomNow] = useState(0);
 
   const zoomIng = (i: number) => {
-    stateSlideshowZoom2.set(1);
-    // resetZoomX, 0, { duration: 1 };
+    if (!isDrag) {
+      stateSlideshowZoom2.set(1);
+      // resetZoomX, 0, { duration: 1 };
 
-    // console.log("resetX idst", resetZoomX.get());
+      // console.log("resetX idst", resetZoomX.get());
 
-    setReqIndex(i);
-    setZoomNow(i);
+      setReqIndex(i);
+      setZoomNow(i);
 
-    stateSlideshowIndex.set(i);
-    /* console.log(
+      stateSlideshowIndex.set(i);
+      /* console.log(
       "requested zoom index:",
       i,
       "from currentIndex:",
@@ -72,8 +74,9 @@ export default function Carousel({
       move_carousel.get()
     ); */
 
-    if (zoom === 1) {
-      stateSlideshowZoom2.set(0);
+      if (zoom === 1) {
+        stateSlideshowZoom2.set(0);
+      }
     }
   };
   // console.log("zoom", zoom);
@@ -281,6 +284,8 @@ export default function Carousel({
           animate={{ opacity: carousel_slideshow_toggle ? 0 : 1 }}
           exit={{ opacity: 0 }}
           // onDragEnd={setNearestIndex}
+          onDragStart={() => setIsDrag(true)}
+          onDragEnd={() => setIsDrag(false)}
           dragControls={dragControls}
           dragPropagation
           dragTransition={{
