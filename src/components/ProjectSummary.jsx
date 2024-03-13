@@ -74,7 +74,7 @@ export default function ProjectSummary(props) {
         currentProj={props.currentProj}
         allProjects={props.allProjects}
       />
-      <div class="link_nav">
+      <div className="link_nav">
         <button className="link ">
           <a
             onClick={() => {
