@@ -41,7 +41,7 @@ section.controls {
 
   justify-self: center;
 
-  background: green;
+  /* background: green; */
 }
 .controls.bgwhite {
   background: var(--cwhite80);
