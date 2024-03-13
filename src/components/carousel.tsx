@@ -16,7 +16,10 @@ import {
   slideshow_length,
   slideshowAutoPlayInterval,
   slideshowCurrentAlt,
+  stateModal,
+  statePlayback,
   stateSlideshow,
+  stateSlideshowDirection,
   stateSlideshowIndex,
   stateSlideshowZoom2,
   stateZoomComplete,
@@ -78,6 +81,11 @@ export default function Carousel({
         stateSlideshowZoom2.set(0);
       }
     }
+  };
+
+  const resetZoom = () => {
+    stateSlideshowZoom2.set(0);
+    stateZoomComplete.set(false);
   };
   // console.log("zoom", zoom);
 
@@ -266,10 +274,52 @@ export default function Carousel({
     // console.log("zoomAnimation:", zoomComplete);
   };
 
+  function nextSlide() {
+    stateSlideshowDirection.set(1);
+    if (index === images.length) {
+      stateSlideshowIndex.set(0);
+    } else {
+      stateSlideshowIndex.set(index + 1);
+    }
+  }
+  function prevSlide() {
+    stateSlideshowDirection.set(-1);
+    if (index === 0) {
+      stateSlideshowIndex.set(images.length);
+    } else {
+      stateSlideshowIndex.set(index - 1);
+    }
+  }
+  // Auto Playback
+
+  const pToggle = useStore(statePlayback);
+  const togglePlayback = () => {
+    statePlayback.set(!pToggle);
+  };
+
+  const autoPlayRef = useRef();
+
+  useEffect(() => {
+    autoPlayRef.current = nextSlide;
+  });
+
+  useEffect(() => {
+    const play = () => {
+      autoPlayRef.current();
+    };
+    if (autoPlayInterval > 0 && pToggle) {
+      const interval = setInterval(play, autoPlayInterval * 1000);
+      return () => clearInterval(interval);
+    }
+  }, [autoPlayInterval, pToggle]);
+
   // Keyboard Hotkeys/Shortcuts
-  /* useEffect(() => {
+  useEffect(() => {
     const handleKeyDown = event => {
       switch (event.key) {
+        case "Escape":
+          resetZoom();
+          break;
         case "ArrowLeft":
         case "h":
           prevSlide();
@@ -282,9 +332,6 @@ export default function Carousel({
         case "w":
           togglePlayback();
           break;
-        case "z":
-          setZoomToggle();
-          break;
         default:
           break;
       }
@@ -293,7 +340,7 @@ export default function Carousel({
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }); */
+  });
 
   return (
     <motion.div

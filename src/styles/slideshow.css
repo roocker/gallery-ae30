@@ -113,8 +113,8 @@ img {
 }
 .btn_close {
   position: absolute;
-  top: 4em;
-  left: 4em;
+  top: 2em;
+  left: 2em;
   z-index: 2;
   color: var(--cwhite);
 }

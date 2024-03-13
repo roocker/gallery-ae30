@@ -127,6 +127,7 @@ function SSfigure(props) {
     }
   };
 
+  // #rev delete here/import
   const resetZoom = () => {
     stateSlideshowZoom2.set(0);
     stateZoomComplete.set(false);
@@ -169,8 +170,7 @@ function SSfigure(props) {
     }
   }, [sToggle, zToggle, mToggle, index]);
 
-  // Slider Functions
-
+  // #rev remove here / import
   function nextSlide() {
     stateSlideshowDirection.set(1);
     if (index === images.length) {
@@ -188,64 +188,6 @@ function SSfigure(props) {
       stateSlideshowIndex.set(index - 1);
     }
   }
-
-  // Auto Playback
-
-  const pToggle = useStore(statePlayback);
-  const togglePlayback = () => {
-    statePlayback.set(!pToggle);
-  };
-
-  const autoPlayRef = useRef();
-
-  useEffect(() => {
-    autoPlayRef.current = nextSlide;
-  });
-
-  useEffect(() => {
-    const play = () => {
-      autoPlayRef.current();
-    };
-    if (props.autoPlayInterval > 0 && pToggle) {
-      const interval = setInterval(play, props.autoPlayInterval * 1000);
-      return () => clearInterval(interval);
-    }
-  }, [props.autoPlayInterval, pToggle]);
-
-  // Keyboard Hotkeys/Shortcuts
-  useEffect(() => {
-    const handleKeyDown = event => {
-      switch (event.key) {
-        case "Escape":
-          resetZoom();
-          break;
-        case "ArrowLeft":
-        case "h":
-          prevSlide();
-          break;
-        case "ArrowRight":
-        case "l":
-          nextSlide();
-          break;
-        /* case "p":
-          setSlidesToggle();
-          break; */
-        case " ":
-        case "w":
-          togglePlayback();
-          break;
-        case "z":
-          setZoomToggle();
-          break;
-        default:
-          break;
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  });
 
   const pan_pos_x_per = useMotionValue(50);
   const pan_pos_y_per = useMotionValue(50);
