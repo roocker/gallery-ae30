@@ -18,13 +18,12 @@ align-items: center !important;
 width: auto !important;
 } */
 
-section.controls{
-
+section.controls {
   z-index: 8 !important;
 
   position: fixed;
   bottom: 1em;
-  left:0;
+  left: 0;
   width: 100%;
 
   /* padding: 1em; */
@@ -35,256 +34,241 @@ section.controls{
   flex-direction: column;
   text-align: center;
   align-items: center;
-  justify-content: center; 
-
+  justify-content: center;
 
   font-family: var(--fsans2);
   color: var(--cgrey);
 
   justify-self: center;
 
-  /* background: green; */
+  background: green;
+}
+.controls.bgwhite {
+  background: var(--cwhite80);
+}
+
+.motiondiv {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* background: var(--cwhite80); */
+}
+.filterdiv {
+  padding: 3em 0 0.5em 0;
+
+  flex-direction: column;
+  align-items: end;
+  justify-content: center;
+  display: flex;
+
+  width: 85lvw;
+  max-width: 34em;
+  /* background: blue; */
+}
+
+.filter_toggle_btn {
+  width: auto !important;
+}
+.filter_close_btn {
+  position: absolute;
+  right: 2em;
+  top: 1em;
+  height: 1em;
+  color: black;
+  /* background: red; */
+}
+
+.line {
+  margin: 0;
+  margin-top: 0.5em;
+  width: 100%;
+
+  line-height: 3em;
+
+  /* border-bottom: 1px solid blue; */
+  /* backdrop-filter: blur(1px); */
+  /* background: orange; */
+}
+.counter_line {
+  /* background: lightgreen; */
+}
+.line label {
+  position: relative;
+  transform: translateY(20px);
+}
+
+p.counter_p {
+  font-family: var(--fsans3) !important;
+  font-size: 1.25rem;
+  display: inline-block;
+  padding: 0 1em 0 1em;
+  margin: 0;
+  /* width: auto; */
+  backdrop-filter: blur(2px);
+  border-radius: 50%;
+
+  /* background: yellow; */
+}
+
+.select_line {
+  backdrop-filter: unset !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1em;
+  height: 3em;
+}
+.select {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 1em;
+
+  background: var(--cwhite60);
+  backdrop-filter: blur(2px);
+
+  text-align: center;
+
+  /* font-weight: bold; */
+}
+
+/* ------------- */
+/* ReactSlider */
+/* ------------- */
+
+.horizontal-slider {
+  /* margin: .5em 0 .5em 0; */
+  /* max-width: 500px; */
+  width: 100%;
+  height: 3em;
+}
+
+.horizontal-slider .slider-thumb {
+  top: -2px;
+  width: 3em;
+  height: 100%;
+}
+
+.slider-thumb {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+
+  background: var(--cwhite60);
+  backdrop-filter: blur(2px);
+  color: var(--cgrey);
+  cursor: pointer;
+  /* border: 5px solid gray; */
+  /* box-sizing: border-box; */
+  border-radius: 50%;
+  padding: 2px;
+}
+.slider-thumb:hover,
+.slider-thumb:active {
+  padding: 0px;
+  border: 2px solid var(--cgrey) !important;
+  animation: buttonHoverZoom 0.2s ease-in-out forwards;
+}
+
+@keyframes buttonHoverZoom {
+  0% {
+    transform: scale(0.9);
   }
-  .controls.bgwhite{
-    background: var(--cwhite80);
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ------------------------ */
+/* VARIANTE2 (strich)
+/* ------------------------ */
+
+.horizontal-slider .slider-track {
+  top: calc(1.25em + 3px);
+  height: 1px;
+  backdrop-filter: blur(2px);
+}
+.slider-track.slider-track-0 {
+  /* background: var(--cgrey20); */
+  background: var(--cblack);
+}
+.slider-track.slider-track-1 {
+  background: var(--cblack);
+  height: 2px;
+  /* opacity: .6; */
+}
+.slider-track.slider-track-2 {
+  background: var(--cblack);
+}
+.horizontal-slider .slider-marks {
+  margin: 0px calc(26px);
+  bottom: calc(50% - 7px);
+}
+.slider-marks {
+  width: 2px;
+  height: 14px;
+  /* border: 2px solid var(--cblack); */
+  background-color: var(--cblack);
+  cursor: pointer;
+  /* border-radius: 50%; */
+  vertical-align: middle;
+}
+
+/* ------------------------ */
+/* Media Queries
+/* ------------------------ */
+
+@media only screen and (min-height: 200px) {
+} /* #rev phone landscape must have vertical sliders! */
+
+@media only screen and (min-width: 37.5em) {
+  .filterdiv {
+    /* width: 34em; */
+  }
+}
+@media only screen and (min-width: 64em) {
+  .motiondiv {
+    flex-direction: row;
   }
 
-  .motiondiv{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .filterdiv {
+    max-width: 100%;
+    width: calc(100% - calc(4em + 15px));
 
-    /* background: var(--cwhite80); */
+    flex-direction: row;
+    column-gap: 2em;
 
-  }
-  .filterdiv{
+    transform: translateX(-0.5em);
+    flex-direction: row;
 
-    padding: 3em 0 .5em 0;
-
-    flex-direction: column;
-    align-items: end;
-    justify-content: center;
-    display: flex;
-
-    width: 85lvw;
-    max-width: 34em;
     /* background: blue; */
   }
-
-  .filter_toggle_btn{
-    width: auto !important;
+  .line {
+    margin-top: 0;
+    /* flex: 1 0 100px; */
+    /* background: lavender; */
   }
-  .filter_close_btn{
-    position: absolute;
-    right: 2em;
-    top: 1em;
-    height: 1em;
-    color: black;
-    /* background: red; */
-
+  .counter_line {
+    /* flex-basis: auto; */
   }
-
-  .line{
-    margin:0;
-    margin-top: .5em;
-    width: 100%;
-
-    line-height: 3em;
-
-    /* border-bottom: 1px solid blue; */
-    /* backdrop-filter: blur(1px); */
-    /* background: orange; */
-
+  .filter_close_btn {
+    right: 1em;
+    /* top: 1em; */
   }
-  .counter_line{
+}
 
-    /* background: lightgreen; */
+@media only screen and (min-width: 85.375em) {
+  .filterdiv {
+    width: calc(100% - calc(8em + 15px)) !important;
   }
-  .line label{
-    position: relative;
-    transform: translateY(20px);
-  }
+}
 
-  p.counter_p {
-    font-family: var(--fsans3) !important;
-    font-size: 1.25rem;
-    display: inline-block;
-    padding: 0 1em 0 1em;
-    margin: 0;
-    /* width: auto; */
-    backdrop-filter: blur(2px);
-    border-radius: 50%;
-
-    /* background: yellow; */
-  }
-
-  .select_line{
-    backdrop-filter: unset !important;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 1em;
-    height: 3em;
-
-  }
-  .select{
-
-    width: 100%;
-    height: 100%;
-    border: none;
-    border-radius: 1em;
-
-    background: var(--cwhite60);
-    backdrop-filter: blur(2px);
-
-    text-align: center;
-
-    /* font-weight: bold; */
-  }
-
-  /* ------------- */
-  /* ReactSlider */
-  /* ------------- */
-
-  .horizontal-slider {
-    /* margin: .5em 0 .5em 0; */
-    /* max-width: 500px; */
-    width: 100%;
-    height: 3em;
-  }
-
-  .horizontal-slider .slider-thumb {
-    top: -2px;
-    width: 3em;
-    height: 100%;
-  }
-
-  .slider-thumb {
-    font-size: 1em;
-    font-weight: bold;
-    text-align: center;
-
-    background: var(--cwhite60);
-    backdrop-filter: blur(2px);
-    color: var(--cgrey);
-    cursor: pointer;
-    /* border: 5px solid gray; */
-    /* box-sizing: border-box; */
-    border-radius: 50%;
-    padding: 2px;
-  }
-  .slider-thumb:hover, .slider-thumb:active{
-
-    padding: 0px;
-    border: 2px solid var(--cgrey) !important;
-    animation: buttonHoverZoom 0.2s ease-in-out forwards;
-  }
-
-  @keyframes buttonHoverZoom{
-  0% { transform: scale(.9); }
-  100% { transform: scale(1); }
-  }
-
-  /* ------------------------ */
-  /* VARIANTE2 (strich)
 /* ------------------------ */
-
-  .horizontal-slider .slider-track {
-    top: calc(1.25em + 3px);
-    height: 1px;
-    backdrop-filter: blur(2px);
-  }
-  .slider-track.slider-track-0 {
-    /* background: var(--cgrey20); */
-    background: var(--cblack);
-  }
-  .slider-track.slider-track-1 {
-    background: var(--cblack);
-    height: 2px;
-    /* opacity: .6; */
-  }
-  .slider-track.slider-track-2 {
-    background: var(--cblack);
-  } 
-  .horizontal-slider .slider-marks {
-    margin: 0px calc(26px);
-    bottom: calc(50% - 7px);
-  }
-  .slider-marks {
-    width: 2px;
-    height: 14px;
-    /* border: 2px solid var(--cblack); */
-    background-color: var(--cblack);
-    cursor: pointer;
-    /* border-radius: 50%; */
-    vertical-align: middle;
-  }
-
-
-  /* ------------------------ */
-  /* Media Queries
+/* VARIANTE1 (balken)
 /* ------------------------ */
-
-
-  @media only screen and (min-height: 200px) { } /* #rev phone landscape must have vertical sliders! */
-
-  @media only screen and (min-width: 37.5em ) { 
-    .filterdiv{
-      /* width: 34em; */
-    }
-  }
-  @media only screen and (min-width: 64em ) {
-    .motiondiv{
-      flex-direction: row;
-    }
-
-    .filterdiv{
-      max-width: 100%;
-      width: calc(100% - calc(4em + 15px));
-
-      flex-direction: row;
-      column-gap: 2em;
-
-
-      transform: translateX(-.5em);
-      flex-direction: row;
-
-      /* background: blue; */
-    }
-    .line{
-      margin-top: 0;
-      /* flex: 1 0 100px; */
-      /* background: lavender; */
-    }
-    .counter_line{
-      /* flex-basis: auto; */
-    }
-    .filter_close_btn{
-      right: 1em;
-      /* top: 1em; */
-
-    }
-  } 
-
-
-  @media only screen and (min-width: 85.375em ) {
-
-    .filterdiv{
-      width: calc(100% - calc(8em + 15px)) !important;
-
-    }
-
-  }
-
-
-
-
-
-  /* ------------------------ */
-  /* VARIANTE1 (balken)
-/* ------------------------ */
-  /*
+/*
 .horizontal-slider .slider-track {
 top: calc(1.25em + 2px);
 height: .5em;
