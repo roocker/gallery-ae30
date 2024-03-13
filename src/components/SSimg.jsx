@@ -73,9 +73,9 @@ function SSimg(props) {
     }
   }; */
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log("img-pos from ssimg", props.panpos);
-  }, [props.panpos]);
+  }, [props.panpos]); */
 
   return (
     <AnimatePresence initial={true}>
@@ -93,9 +93,6 @@ function SSimg(props) {
         // transition={{ type: "spring", stiffness: 200, damping: 20 }}
         transition={{ duration: 0.3 }}
         onClick={props.onClick}
-        // onMouseDown={zoomDragDown}
-        // onMouseMove={zoomDragMove}
-        // onMouseUp={zoomDragUp}
         draggable={false}
       />
     </AnimatePresence>
