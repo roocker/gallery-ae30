@@ -206,9 +206,11 @@ export default function Carousel({
     }
 
     // console.log("zoom", zoom);
-    // console.log("altline", alt_line);
     const alt_line = document.querySelector(".alt_line");
-    alt_line.style.display = zoom ? "block" : "none";
+    const shouldShowAltLine =
+      zoom > 0 || window.innerWidth > 768 ? true : false;
+    // console.log("altline", shouldShowAltLine, alt_line);
+    alt_line.style.display = shouldShowAltLine ? "block" : "none";
 
     const newElementOrigin = images.map((_, i) => {
       return calc_carousel_element_rel_mid(i);
@@ -217,7 +219,7 @@ export default function Carousel({
     setElementOrigin(newElementOrigin);
 
     /* console.log( "index:", index, "origin", elementOrigin[index], "moving to:", move_carousel_to_index, "carousel_element_width:", carousel_element_width, "carouselWidth", carouselWidth "elementOrigin:", elementOrigin); */
-  }, [index, stateSlideshowIndex, zoom]);
+  }, [index, stateSlideshowIndex, zoom, window.innerWidth]);
 
   /* useEffect(() => {
     console.log("Updated elementOrigin:", elementOrigin, "for index:", index);
@@ -263,6 +265,35 @@ export default function Carousel({
 
     // console.log("zoomAnimation:", zoomComplete);
   };
+
+  // Keyboard Hotkeys/Shortcuts
+  /* useEffect(() => {
+    const handleKeyDown = event => {
+      switch (event.key) {
+        case "ArrowLeft":
+        case "h":
+          prevSlide();
+          break;
+        case "ArrowRight":
+        case "l":
+          nextSlide();
+          break;
+        case " ":
+        case "w":
+          togglePlayback();
+          break;
+        case "z":
+          setZoomToggle();
+          break;
+        default:
+          break;
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }); */
 
   return (
     <motion.div
