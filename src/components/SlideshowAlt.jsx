@@ -20,7 +20,7 @@ function SlideshowAlt({ sources, sources_plans }) {
       {source && (
         <span className="source">
           {sourceurl && (
-            <a href={sourceurl} target="_blank">
+            <a href={sourceurl} target="_blank" className="source_link">
               © {source}
             </a>
           )}

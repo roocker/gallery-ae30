@@ -111,6 +111,13 @@ img {
   -ms-user-select: none;
   user-select: none;
 }
+.btn_close {
+  position: absolute;
+  top: 4em;
+  left: 4em;
+  z-index: 2;
+  color: var(--cwhite);
+}
 button.slideshow_btn {
   border: none;
   opacity: 0.4;

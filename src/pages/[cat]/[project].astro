@@ -360,6 +360,7 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
       position: absolute;
       text-align: right;
       align-self: flex-end;
+      margin-bottom: 0.25em;
       right: 2em;
       z-index: 10;
     }
@@ -369,10 +370,11 @@ allProjects = allProjects.filter(proj => !proj.data.archived);
       display: flex;
       flex-direction: row;
       /* margin: 0; */
-      /* align-items: center; */
+      align-items: center;
       justify-content: center;
     }
     .control_line {
+      z-index: 10;
       position: absolute;
       bottom: 2.5em;
     }

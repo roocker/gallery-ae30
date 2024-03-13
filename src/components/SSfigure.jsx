@@ -127,6 +127,11 @@ function SSfigure(props) {
     }
   };
 
+  const resetZoom = () => {
+    stateSlideshowZoom2.set(0);
+    stateZoomComplete.set(false);
+  };
+
   // change Controls color on Plan/Picture Toggle
   const mToggle = useStore(stateModal);
 
@@ -146,13 +151,22 @@ function SSfigure(props) {
     const footerControls = document.querySelector(".controls");
     footerControls.style.color = bgIsDark ? "var(--cwhite)" : "var(--cgrey)";
 
+    const source_link = document.querySelector(".source_link");
+    if (source_link != null) {
+      source_link.style.color = bgIsDark ? "var(--cwhite)" : "var(--cgrey80)";
+    }
+    const close_btn = document.querySelector(".btn_close");
+    close_btn.style.color = bgIsDark ? "var(--cwhite)" : "var(--cgrey)";
+
     // const crosshair = document.querySelector(".crosshair", "::after");
     //
     const crosshair = document.querySelector(".crosshair");
-    crosshair.style.setProperty(
-      "--bgColor",
-      bgIsDark ? "var(--cwhite)" : "var(--cgrey)"
-    );
+    if (crosshair != null) {
+      crosshair.style.setProperty(
+        "--bgColor",
+        bgIsDark ? "var(--cwhite)" : "var(--cgrey)"
+      );
+    }
   }, [sToggle, zToggle, mToggle, index]);
 
   // Slider Functions
@@ -202,6 +216,9 @@ function SSfigure(props) {
   useEffect(() => {
     const handleKeyDown = event => {
       switch (event.key) {
+        case "Escape":
+          resetZoom();
+          break;
         case "ArrowLeft":
         case "h":
           prevSlide();
@@ -300,6 +317,10 @@ function SSfigure(props) {
         </AnimatePresence>
         <figcaption>{alts[index]}</figcaption>
       </motion.figure>
+
+      <button className="btn_close" onClick={resetZoom}>
+        <span className="material-symbols-rounded"> close</span>
+      </button>
 
       <button className="slideshow_btn btn_prev" onClick={prevSlide}>
         {/* ◀️ vorheriges Bild */}
