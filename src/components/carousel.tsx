@@ -205,6 +205,11 @@ export default function Carousel({
       // move_carousel.set(window.innerWidth / -2);
     }
 
+    // console.log("zoom", zoom);
+    // console.log("altline", alt_line);
+    const alt_line = document.querySelector(".alt_line");
+    alt_line.style.display = zoom ? "block" : "none";
+
     const newElementOrigin = images.map((_, i) => {
       return calc_carousel_element_rel_mid(i);
     });

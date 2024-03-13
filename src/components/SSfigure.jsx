@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   AnimatePresence,
   motion,
@@ -32,6 +32,8 @@ function SSfigure(props) {
 
   const index = useStore(stateSlideshowIndex);
   const direction = useStore(stateSlideshowDirection);
+
+  const [pan, setPan] = useState(false);
 
   const animate_stoggle = {
     i: {
@@ -113,13 +115,15 @@ function SSfigure(props) {
   // const carousel_slideshow_toggle = useStore(stateZoomComplete)
 
   const setZoomToggle = () => {
-    stateSlideshowZoom.set(!zToggle);
-    if (zoom === 1) {
-      stateSlideshowZoom2.set(2);
-    } else {
-      stateSlideshowZoom2.set(0);
-      stateZoomComplete.set(false);
-      // console.log("zoom:", zoom);
+    if (!pan) {
+      stateSlideshowZoom.set(!zToggle);
+      if (zoom === 1) {
+        stateSlideshowZoom2.set(2);
+      } else {
+        stateSlideshowZoom2.set(0);
+        stateZoomComplete.set(false);
+        // console.log("zoom:", zoom);
+      }
     }
   };
 
@@ -232,7 +236,7 @@ function SSfigure(props) {
   function onPan(event, info) {
     const x = (100 / window.innerWidth) * info.point.x;
     const y = (100 / window.innerWidth) * info.point.y;
-    console.log(info.point.x, info.point.y);
+    // console.log(info.point.x, info.point.y);
 
     pan_pos_x_per.set(x);
     pan_pos_y_per.set(y);
@@ -268,6 +272,8 @@ function SSfigure(props) {
             className="motiondiv"
             // style={{ pan_pos_raw }}
             onPan={onPan}
+            onPanStart={() => setPan(true)}
+            onPanEnd={() => setPan(false)}
             // onMouseMove={onPan}
             //https://codesandbox.io/p/sandbox/framer-motion-mouse-position-2b4sd?file=%2Fsrc%2FApp.js%3A75%2C31
             // onPointerMove={onPan}
