@@ -52,6 +52,7 @@ section.controls {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: red;
 
   /* background: var(--cwhite80); */
 }
