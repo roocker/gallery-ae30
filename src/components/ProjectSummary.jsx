@@ -80,6 +80,7 @@ export default function ProjectSummary(props) {
             onClick={() => {
               stateSlideshowZoom2.set(0);
               stateZoomComplete.set(false);
+              stateSlideshowIndex.set(0);
             }}
           >
             Projekt Übersicht
