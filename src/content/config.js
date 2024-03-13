@@ -88,8 +88,8 @@ const projCollection = defineCollection({
         }),
         alt: z.string(),
 
-        source: z.string().optional(),
-        source_url: z.string().optional(),
+        source: z.string().nullable().optional(),
+        source_url: z.string().nullable().optional(),
       }),
 
       fotos: z
@@ -99,8 +99,8 @@ const projCollection = defineCollection({
               message: "Cover image must be at least 1080 pixels wide!",
             }),
             alt: z.string(),
-            source: z.string().optional(),
-            source_url: z.string().optional(),
+            source: z.string().nullable().optional(),
+            source_url: z.string().nullable().optional(),
           })
         )
         .optional(),

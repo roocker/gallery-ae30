@@ -19,7 +19,11 @@ function SlideshowAlt({ sources, sources_plans }) {
     <div className="slide_title">
       {source && (
         <span className="source">
-          {sourceurl && <a href={sourceurl} target="_blank">© {source}</a>}
+          {sourceurl && (
+            <a href={sourceurl} target="_blank">
+              © {source}
+            </a>
+          )}
           {!sourceurl && <>© {source}</>}
         </span>
       )}

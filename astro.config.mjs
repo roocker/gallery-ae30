@@ -12,7 +12,7 @@ import netlify from "@astrojs/netlify";
 // https://astro.build/config
 export default defineConfig({
   site: "https://ae30.at",
-  output: "hybrid",
+  // output: "hybrid",
   image: {
     service: sharpImageService(),
   },
@@ -777,6 +777,6 @@ export default defineConfig({
     sitemap(),
     react(),
   ],
-  adapter: netlify({ edgeMiddleware: true }),
+  // adapter: netlify({ edgeMiddleware: true }),
 });
 
