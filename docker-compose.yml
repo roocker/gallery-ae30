@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  website:
+    restart: always
+    image: image.ae30.at
+    container_name: container.ae30.at
+    build: .
+    ports:
+      - "8091:8091"
+    environment:
+      - BASE_URL=/ae30
+      - HOST=0.0.0.0
+      - PORT=8091
