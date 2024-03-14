@@ -1,6 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
-const allProjects = await Astro.glob("../content/projects/*.md");
+// const allProjects = await Astro.glob("../content/projects/*.md");
+import { getCollection } from "astro:content";
+const allProjects = await getCollection("projects");
 ---
 
 <Layout
@@ -12,7 +14,7 @@ const allProjects = await Astro.glob("../content/projects/*.md");
     {
       allProjects.map(proj => (
         <li>
-          <a href={proj.url}>{proj.frontmatter.title}</a> -{" "}
+          <a href={proj.url}>{proj.frontmatter.title}</a> -
           {proj.frontmatter.category}
         </li>
       ))
