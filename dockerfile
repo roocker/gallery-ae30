@@ -16,18 +16,20 @@ RUN npm run build
 
 
 #  Run app
-FROM base AS runtime
+# FROM base AS runtime
+FROM httpd:2.4 AS runtime
 WORKDIR .
-COPY --from=prod-deps /app/node_modules ./node_modules
-COPY --from=build /app/dist ./dist
+# COPY --from=prod-deps /app/node_modules ./node_modules
+# COPY --from=build /app/dist ./dist
+COPY --from=build /app/dist /usr/local/apache2/htdocs/
 
-RUN addgroup --system --gid 12232 lukefileserva &&\
-adduser --system --uid 12232 lukefileserva &&\
-chown -R lukefileserva:lukefileserva /app 
+# RUN addgroup --system --gid 12232 lukefileserva &&\
+# adduser --system --uid 12232 lukefileserva &&\
+# chown -R lukefileserva:lukefileserva /app 
 
-USER lukefileserva:lukefileserva
+# USER lukefileserva:lukefileserva
 
-RUN id
+# RUN id
 
 # CMD node ./dist/server/entry.mjs
-CMD tail -f /dev/null
+# CMD tail -f /dev/null
