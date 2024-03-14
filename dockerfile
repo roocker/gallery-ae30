@@ -29,4 +29,5 @@ USER lukefileserva:lukefileserva
 
 RUN id
 
-CMD node ./dist/server/entry.mjs
+# CMD node ./dist/server/entry.mjs
+CMD tail -f /dev/null
