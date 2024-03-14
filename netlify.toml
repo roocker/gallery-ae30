@@ -1,0 +1,11 @@
+[[redirects]]
+from = "/*"
+force = true
+status = 200
+conditions = {Role = ["admin"]}
+
+[[redirects]]
+from = "/*"
+to = "/login.html"
+force = true
+status = 302
