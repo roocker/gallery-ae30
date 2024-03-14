@@ -2,9 +2,10 @@
 no database, markdown based, custom gallery website for architectural office in vienna.
 
 Work in progress.
-https://ae30-test.netlify.app/
+https://p.roocker.dev/ae30
 
 ## Powered by:
+
 - astro
 - react
 - framer-motion
