@@ -1,11 +1,8 @@
-[[redirects]]
-from = "/*"
-force = true
-status = 200
-conditions = {Role = ["admin"]}
+[[plugins]]
+  package = "netlify-plugin-password-protection"
 
-[[redirects]]
-from = "/*"
-to = "/login.html"
-force = true
-status = 302
+  [plugins.inputs]
+    fileFilter = "*.html" # default
+    directoryFilter = ["!node_modules", "!admin", "!plugins"] # default
+    title = "AE30 - Website im Aufbau" # default
+    instructions = "Passwort Bitte" # default
