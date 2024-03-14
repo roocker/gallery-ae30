@@ -28,7 +28,6 @@ COPY --from=build /app/dist /usr/local/apache2/htdocs/
 # chown -R lukefileserva:lukefileserva /app 
 
 # USER lukefileserva:lukefileserva
-
 # RUN id
 
 # CMD node ./dist/server/entry.mjs
