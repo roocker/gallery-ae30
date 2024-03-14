@@ -7,12 +7,17 @@ import sitemap from "@astrojs/sitemap";
 import react from "@astrojs/react";
 
 // https://decapcms.org/docs/beta-features/#folder-collections-media-and-public-folder
-import netlify from "@astrojs/netlify";
+// import netlify from "@astrojs/netlify";
+// import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://ae30.at",
   // output: "hybrid",
+  // adapter: netlify({ edgeMiddleware: true }),
+  /* adapter: node({
+    mode: "standalone",
+  }), */
   image: {
     service: sharpImageService(),
   },
@@ -130,23 +135,23 @@ export default defineConfig({
                 display_fields: ["title"],
                 default: "ARGE",
                 /* options: [
-              {
-                label: 'ARGE',
-                value: 'arge'
-              },
-              {
-                label: 'Kratochwil Gerhard',
-                value: 'kg'
-              },
-              {
-                label: 'Waldbauer Peter',
-                value: 'wp'
-              },
-              {
-                label: 'Zeinitzer Klaus',
-                value: 'zk'
-              },
-            ] */
+          {
+          label: 'ARGE',
+          value: 'arge'
+          },
+          {
+          label: 'Kratochwil Gerhard',
+          value: 'kg'
+          },
+          {
+          label: 'Waldbauer Peter',
+          value: 'wp'
+          },
+          {
+          label: 'Zeinitzer Klaus',
+          value: 'zk'
+          },
+          ] */
               },
               {
                 name: "project_keys",
@@ -318,18 +323,18 @@ export default defineConfig({
                 ],
               },
               /* {
-            name: 'short',
-            widget: 'markdown',
-            label: 'Kurztext',
-            hint: 'Kurztext Version, maximal X zeichen', //#rev
-            required: false,
-          }, */
+        name: 'short',
+        widget: 'markdown',
+        label: 'Kurztext',
+        hint: 'Kurztext Version, maximal X zeichen', //#rev
+        required: false,
+        }, */
               /* {
-          widget: "object",
-          name: "descriptions",
-          label: "Texte",
-          collapsed: true,
-          fields: [ */
+        widget: "object",
+        name: "descriptions",
+        label: "Texte",
+        collapsed: true,
+        fields: [ */
               {
                 name: "description",
                 label: "Kurzbeschreibung",
@@ -351,11 +356,11 @@ export default defineConfig({
             ],
           },
           /* {
-              name: 'map',
-              widget: 'map',
-              label: 'Karte',
-              required: false
-            } */
+          name: 'map',
+          widget: 'map',
+          label: 'Karte',
+          required: false
+        } */
           /* ],
       }, */
 
@@ -423,10 +428,10 @@ export default defineConfig({
                     ],
                   },
                   /* {
-            name: "text",
-            widget: "markdown",
-            required: false,
-            label: "Team Text 1",
+          name: "text",
+          widget: "markdown",
+          required: false,
+          label: "Team Text 1",
           }, */
                   {
                     name: "heading_members_highlighted",
@@ -777,6 +782,5 @@ export default defineConfig({
     sitemap(),
     react(),
   ],
-  // adapter: netlify({ edgeMiddleware: true }),
 });
 

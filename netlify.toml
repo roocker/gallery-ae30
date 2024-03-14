@@ -1,8 +1,0 @@
-[[plugins]]
-  package = "netlify-plugin-password-protection"
-
-  [plugins.inputs]
-    fileFilter = "*.html" # default
-    directoryFilter = ["!node_modules", "!admin", "!plugins"] # default
-    title = "AE30 - Website im Aufbau" # default
-    instructions = "Passwort Bitte" # default
