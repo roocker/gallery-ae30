@@ -32,3 +32,4 @@ COPY --from=build /app/dist /usr/local/apache2/htdocs/
 
 # CMD node ./dist/server/entry.mjs
 # CMD tail -f /dev/null
+EXPOSE 80
