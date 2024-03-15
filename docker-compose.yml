@@ -11,3 +11,51 @@ services:
       - BASE_URL=/ae30
       - HOST=0.0.0.0
       - NODE_OPTIONS=--max_old_space_size=4096
+  oauth:
+    restart: always
+    build:
+      context: ./netlify-cms-github-oauth-provider/
+    ports:
+      - "8092:3000"
+# https://github.com/netlify/gotrue
+#https://github.com/decaporg/decap-cms/issues/6370
+# services:
+#   gotrue:
+#     image: hrueger/gotrue:1.0.1
+#     restart: unless-stopped
+#     environment:
+#       GOTRUE_JWT_SECRET: ${DOCS_CMS_JWT_SECRET}
+#       GOTRUE_JWT_EXP: 3600
+#       GOTRUE_JWT_AUD: localhost
+#       GOTRUE_DB_DRIVER: mariadb
+#       GOTRUE_JWT_DEFAULT_GROUP_NAME: editor
+#       DATABASE_URL: ${GOTRUE_DB_URL}
+#       GOTRUE_API_HOST: 0.0.0.0
+#       PORT: 8080
+#       GOTRUE_SITE_URL: https://docs-cms.glue.makepro-x.com/
+#       GOTRUE_LOG_LEVEL: DEBUG
+#       GOTRUE_OPERATOR_TOKEN: ${GOTRUE_OPERATOR_TOKEN}
+#       GOTRUE_DISABLE_SIGNUP: "false"
+#       GOTRUE_MAILER_AUTOCONFIRM: "true"
+#       GOTRUE_EXTERNAL_SAML_ENABLED: "true"
+#       GOTRUE_EXTERNAL_SAML_METADATA_URL: https://login.makepro-x.com/auth/realms/MPXCloud/protocol/saml/descriptor
+#       GOTRUE_EXTERNAL_SAML_API_BASE: https://docs-cms.glue.makepro-x.com/.netlify/identity/
+#       GOTRUE_EXTERNAL_SAML_NAME: MakePro X Login
+#       GOTRUE_EXTERNAL_SAML_SIGNING_CERT: ''
+#       GOTRUE_EXTERNAL_SAML_SIGNING_KEY: ''
+#       GOTRUE_EXTERNAL_LABELS: "{SAML: MakePro X Login}"
+#
+#
+#   git-gateway:
+#     image: hrueger/git-gateway:1.0.0
+#     restart: unless-stopped
+#     environment:
+#       GITGATEWAY_JWT_SECRET: ${DOCS_CMS_JWT_SECRET}
+#       GITGATEWAY_DB_DRIVER: mysql
+#       DATABASE_URL: ${GITGATEWAY_DB_URL}
+#       GITGATEWAY_API_HOST: 0.0.0.0
+#       PORT: 8080
+#       GITGATEWAY_GITHUB_ACCESS_TOKEN: ${GITGATEWAY_GITHUB_ACCESS_TOKEN}
+#       GITGATEWAY_GITHUB_REPO: "makeproaudio/glue-docs"
+#       GITGATEWAY_GITHUB_BRANCH: main
+#       # GITGATEWAY_ROLES: "editor"
