@@ -13,6 +13,8 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: "https://ae30.at",
+  // base: process.env.BASE_URL || "/",
+  base: "/ae30",
   // output: "hybrid",
   // adapter: netlify({ edgeMiddleware: true }),
   /* adapter: node({
@@ -783,4 +785,3 @@ export default defineConfig({
     react(),
   ],
 });
-
