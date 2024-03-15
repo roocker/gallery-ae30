@@ -14,7 +14,7 @@ services:
   oauth:
     restart: always
     build:
-      context: ./netlify-cms-github-oauth-provider/
+      context: ./netlify-cms-github-oauth-provider
     ports:
       - "8092:3000"
 # https://github.com/netlify/gotrue
