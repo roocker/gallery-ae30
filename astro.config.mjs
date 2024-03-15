@@ -32,8 +32,8 @@ export default defineConfig({
           name: "git-gateway",
           branch: "master",
         },
-        adminPath: "/a",
         /* #rev geht nicht */
+        adminPath: "/a",
         locale: "de",
         publish_mode: "editorial_workflow",
         media_folder: "/src/content/media/",
@@ -44,8 +44,8 @@ export default defineConfig({
           clean_accents: true,
           sanitize_replacement: "_",
         },
-        site_url: "https://ae30-test.netlify.app",
-        display_url: "https://ae30-test.netlify.app",
+        site_url: "https://ae30.roocker.dev",
+        display_url: "https://ae30.roocker.dev",
         logo_url: "/ae30-logo.svg",
         /* #rev looks good doen't work */
         load_config_file: false,
