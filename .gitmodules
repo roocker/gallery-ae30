@@ -1,0 +1,3 @@
+[submodule "github-oauth"]
+	path = github-oauth
+	url = https://github.com/vencax/netlify-cms-github-oauth-provider/
