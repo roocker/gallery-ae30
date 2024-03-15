@@ -13,10 +13,12 @@ services:
       - NODE_OPTIONS=--max_old_space_size=4096
   oauth:
     restart: always
+    image: image.ae30.auth
+    container_name: container.ae30.auth
     build:
-      context: ./netlify-cms-github-oauth-provider
+      context: ./github-oauth/
     ports:
-      - "8092:3000"
+      - "8092:6000"
 # https://github.com/netlify/gotrue
 #https://github.com/decaporg/decap-cms/issues/6370
 # services:
