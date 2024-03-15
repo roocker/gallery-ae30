@@ -17,7 +17,7 @@ import {
 } from "../states";
 
 import "../styles/grid.css";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 // Pictures Aspect Ratio
 // const width = 3;
@@ -165,7 +165,7 @@ function GridProj(props) {
             }
           }}
         >
-          <a href={`../${proj.data.category}/${proj.slug}`}>
+          <a href={`/${proj.data.category}/${proj.slug}`}>
             <AnimatePresence initial={true}>
               <figure>
                 <img
@@ -176,9 +176,7 @@ function GridProj(props) {
                   alt={proj.data.titleimg.alt}
                 />
 
-                <figcaption>
-                  {proj.data.title}
-                </figcaption>
+                <figcaption>{proj.data.title}</figcaption>
               </figure>
             </AnimatePresence>
           </a>
