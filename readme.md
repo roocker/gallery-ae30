@@ -3,9 +3,11 @@ no database, markdown based, custom gallery website for architectural office in 
 
 Work in progress.
 
-https://p.roocker.dev/ae30/
+Temporarily hosted:
+https://ae30.roocker.dev/
 
 ## Powered by:
+
 - astro
 - react
 - framer-motion
