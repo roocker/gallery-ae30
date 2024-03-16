@@ -4,7 +4,7 @@ title_l: demo_lang
 display:
   publishDate: 16 Mar 2024
   title_zzl: demo_zusatz
-  archived: true
+  archived: false
   widehigh: normal
 category: arge
 project_keys:
