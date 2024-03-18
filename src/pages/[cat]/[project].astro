@@ -40,12 +40,19 @@ const raw_sources = [p.titleimg.source].concat(p.fotos.map(img => img.source));
 const raw_sources_url = [p.titleimg.source_url].concat(
   p.fotos.map(img => img.source_url)
 );
+<<<<<<< HEAD
+const raw_sources_plans = p.plans.map(plan => plan.source);
+const raw_sources_plans_url = p.plans.map(plan => plan.source_url);
+const sources = [raw_sources, raw_sources_url];
+const sources_plans = [raw_sources_plans, raw_sources_plans_url];
+=======
 const raw_sources_plans = p.plans ? p.plans.map(plan => plan.source) : "";
 const raw_sources_plans_url = p.plans
   ? p.plans.map(plan => plan.source_url)
   : "";
 const sources = [raw_sources, raw_sources_url];
 const sources_plans = p.plans ? [raw_sources_plans, raw_sources_plans_url] : "";
+>>>>>>> 2087739e1903f11e6edfa40660db513456b3c834
 
 // console.log("hier", sources, sources_plans);
 
