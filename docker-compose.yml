@@ -1,22 +1,48 @@
 version: "3.9"
 services:
-  website:
+  webserver:
     restart: always
-    image: image.ae30.at
+    image: nginx:alpine
     container_name: container.ae30.at
-    build: .
-    ports:
-      - "8091:8080"
     environment:
-      - BASE_URL=/ae30
-      - HOST=0.0.0.0
-      - NODE_OPTIONS=--max_old_space_size=4096
+      - PORT=${PORT}
+    volumes:
+      - ./dist:/usr/share/nginx/html
+      - ./nginx:/etc/nginx
+
   # https://github.com/vencax/netlify-cms-github-oauth-provider/
   oauth:
     restart: always
-    image: image.ae30.auth
+    image: vencax/netlify-cms-github-oauth-provider
     container_name: container.ae30.auth
-    build:
-      context: ./github-oauth/
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - ORIGINS=${ORIGINS}
+      - OAUTH_CLIENT_ID=${OAUTH_CLIENT_ID}
+      - OAUTH_CLIENT_SECRET=${OAUTH_CLIENT_SECRET}
+      - PORT=${OAUTH_PORT}
+      - AUTH_TARGET=${AUTH_TARGET}
+      - BASE_URL=${BASE_URL}
     ports:
-      - "8092:6000"
+      - "8092:${OAUTH_PORT}"
+# OLD WITH DOCKERFILES
+# website:
+#   restart: always
+#   image: image.ae30.at
+#   container_name: container.ae30.at
+#   build: .
+#   ports:
+#     - "8091:8080"
+#   environment:
+#     - BASE_URL=/ae30
+#     - HOST=0.0.0.0
+#     - NODE_OPTIONS=--max_old_space_size=4096
+#
+# oauth:
+#   restart: always
+#   image: image.ae30.auth
+#   container_name: container.ae30.auth
+#   build:
+#     context: ./github-oauth/
+#   ports:
+#     - "8092:6000"

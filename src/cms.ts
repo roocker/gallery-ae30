@@ -1,10 +1,10 @@
 const cmsConfig = {
   backend: {
+    //rev read env variable
     name: "github",
     repo: "roocker/gallery-ae30",
     branch: "master",
-    base_url: "https://ae30.roocker.dev"
-  },
+    base_url: "https://ae30.roocker.dev"   },
   /* #rev geht nicht */
   locale: "de",
   publish_mode: "editorial_workflow",
