@@ -1,0 +1,57 @@
+
+      <button />
+
+      <button type="">prev</button>
+
+      <form id="searchForm">
+      <input type="text" id="searchInput" placeholder="Search..."/>
+      <button type="submit">Search</button>
+      </form>
+
+...
+
+
+      <select className="select_typ">
+      <option value="all">Typologie</option>
+      </select>
+
+      <select className="select_year">
+      <option value="all">Jahr</option>
+      </select>
+
+
+      <button type="">next</button>
+
+
+
+
+
+
+
+
+
+
+
+
+// selectedCat to stateSelCatIndex
+
+
+
+
+
+
+
+
+        /* const selCatIndex = allProjects
+          .map((proj, index) =>{
+            if(proj.data.category === selectedCat){
+              return index;
+            }
+            return null;
+          })
+          .filter((index) => index !== null);
+        stateSelectedCat.set(e.target.value);
+
+        stateSelCatIndex.set(selCatIndex);
+        // console.log("indexToNotCullfromSelCat",indexToNotCullfromSelCat)
+        // console.log("Selected category:", e.target.value); */
