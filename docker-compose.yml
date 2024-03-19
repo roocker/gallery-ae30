@@ -13,7 +13,7 @@ services:
   # https://github.com/vencax/netlify-cms-github-oauth-provider/
   oauth:
     restart: always
-    image: vencax/netlify-cms-github-oauth-provider
+    image: vencax/netlify-cms-github-oauth-provider:master
     container_name: container.ae30.auth
     environment:
       - NODE_ENV=${NODE_ENV}
