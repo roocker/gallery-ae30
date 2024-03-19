@@ -4,7 +4,8 @@ const cmsConfig = {
     name: "github",
     repo: "roocker/gallery-ae30",
     branch: "master",
-    base_url: "https://ae30.roocker.dev"   },
+    base_url: "https://ae30.roocker.dev",
+  },
   /* #rev geht nicht */
   locale: "de",
   publish_mode: "editorial_workflow",
@@ -22,6 +23,14 @@ const cmsConfig = {
   /* #rev looks good doen't work */
   load_config_file: false,
   show_preview_links: false,
+  commit_messages: {
+    create: "cms: Create {{collection}} “{{slug}}”",
+    update: "cms: Update {{collection}} “{{slug}}”",
+    delete: "cms: Delete {{collection}} “{{slug}}”",
+    uploadMedia: "cms: Upload “{{path}}”",
+    deleteMedia: "cms: Delete “{{path}}”",
+    openAuthoring: "cms: {{message}}",
+  },
   // https://github.com/decaporg/decap-cms/blob/master/dev-test/config.yml
   // https://cms-demo.netlify.com/#/collections/settings
 
