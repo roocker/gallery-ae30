@@ -1,12 +1,12 @@
 ---
-title: demo
+title: Demo
 title_l: demo_lang
 display:
   publishDate: 16 Mar 2024
   title_zzl: demo_zusatz
   archived: false
   widehigh: normal
-category: arge
+category: wp
 project_keys:
   status: in arbeit
   year: 2010
@@ -17,11 +17,13 @@ project_keys:
     - Universität
     - Wohnbau
 titleimg:
-  img: ../demo/17atelier.jpg
-  alt: Atelier
+  img: ../demo/1.jpg
+  alt: Atelier bei Nacht
   source_url: http://www.ernst-hiesmayr.at/gebautes/eroicagasse/
   source: Ernst Hiesmayr
 fotos:
+  - foto: ../demo/15.jpg
+    alt: Atelier Garten
   - foto: ../demo/black.png
     alt: bildtitel
     source: black
