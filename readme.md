@@ -2,7 +2,6 @@
 
 no database, markdown based, custom gallery website for architectural office in vienna.
 
-cleaned.
 Work in progress.
 
 Temporarily hosted:
