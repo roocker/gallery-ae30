@@ -18,13 +18,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - run: echo "We are trying to build and deploy sth now. This got triggered by ${{ github.event_name }}. good luck."
+      - run: echo "running on ${{ runner.os }}"
+      - run: echo "branch ${{ github.ref }} of repo ${{ github.repository }}"
+      - run: echo "status ${{ job.status }}"
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
+      - name: Install, build, and upload? your site
         uses: withastro/action@v2
-        # with:
+        with:
+          node-version: 18.18.2 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
         # path: . # The root location of your Astro project inside the repository. (optional)
-        node-version: 18.18.2 # The specific version of Node that should be used to build your site. Defaults to 20. (optional)
         # package-manager: pnpm@latest # The Node package manager that should be used to install dependencies and build your site. Automatically detected based on your lockfile. (optional)
 
   deploy:
@@ -36,12 +40,16 @@ jobs:
     steps:
       - name: Deploy to ae30.roocker.dev
         id: deployment
-        uses: appleboy/ssh-action@v1.0.3
+        # uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{secrets.HOST}}
-          port: ${{secrets.PORT}}
-          username: ${{secrets.USERNAME}}
-          password: ${{secrets.PASSWORD}}
-          key: ${{secrets.key}}
-          debug: true
-          script: whoami
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIV_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          source: dist/*
+          target: ${{ secrets.SSH_PATH }}
+          # debug: true
+          # script: |
+          # whoami
