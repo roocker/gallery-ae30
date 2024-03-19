@@ -1,0 +1,358 @@
+/*
+ 
+ 
+ 
+ 
+  wird nicht benutzt!
+
+ */
+
+
+/* ------------------------------------------------ */
+/* from Nav.astro */
+/* ------------------------------------------------ */
+/* Media Queries MENU  ---------------------------------*/
+
+  @media only screen and  (min-width: 32.5em /* var(--vwPl) */) {
+    nav{
+      max-width: 50%;
+      border-bottom-left-radius: 3em;
+    }
+  }
+ 
+
+  @media only screen and  (min-width: 48em /* var(--vwT) */) {
+    nav.hidden{
+      display: inline !important;
+    }
+    nav hr{display: none;}
+    nav{
+      background: none;
+      backdrop-filter: unset;
+      /* background: orange; */
+
+      /* max-width: 100%; */
+      /* width: auto; */
+
+      position: absolute;
+      left: 0;
+      /* width: 100%; */
+
+      max-width: calc(100% - calc(var(--gmodulem) * 12));
+      
+
+      padding: 0;
+      margin: 0;
+      margin-left: calc(var(--gmarginem) * 2);
+      /* padding-right: calc(var(--gmarginem) * 10); */
+      border-bottom-left-radius: 0;
+
+      /* padding-right: calc(var(--gmodulem) * 10); */
+    }
+    ul{ 
+      float: right;
+      display: flex;
+      width: auto;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+
+      /* background: yellow; */
+
+      gap: calc(var(--gmodulem)*2);
+      /* justify-content: center; */
+
+      /* text-align: left; */
+      /* align-items: center; */
+
+      /* opacity: .4; */
+    }
+    ul li{
+      /* background: red; */
+      padding: 0;
+
+      /* width: 100%; */
+      /* margin: 0; */
+    }
+    .menue-icons{
+      background: green;
+      display: none;
+    }
+     #icon-close{
+       display: none; 
+    }
+     .kontakt{
+       display: none;
+     }
+  }
+  @media only screen and  (min-width: 64em /* var(--vwS) */) {
+    nav{
+      height: calc(var(--gmodulem)*4);
+      /* background: blue; */
+      line-height: calc(var(--fline_height) * 2);
+      max-width: calc(100% - calc(var(--gmodulem) * 14));
+    }
+    ul{
+      display: flex;
+    }
+  }
+  @media only screen and  (min-width: 48em /* var(--vwT) */) {
+  nav{
+  }
+/* ------------------------------------------------ */
+/* layout */
+/* ------------------------------------------------ */
+
+  :root{
+    --num-cols-L: 12;
+    --gaps:32px; /* horizontal, vertical */
+    --lay-margin-L: 64px;/*  left, right */ 
+    /* --row-height-L: 16px; */
+    --img-proportion-gal-L: 1.5; 
+    --row-height-L: 16px;
+
+    --font1: Arial, sans-serif;
+    --font2: Inter, sans-serif;
+
+    --c1: #141414;
+    --c2: blue;
+    --cbg: white;
+
+
+    /* --lay-margin-M: 64px; */
+    /* --lay-margin-S: 64px; */
+    /* --lay-margin-T: 64px; */
+    /* --lay-margin-H: 16px; */
+  }
+  body{
+    font-family: var(--font1);
+    font-size: 16px;
+    color: var(--c1); 
+    background: var(--cbg);
+  }
+  a {
+    color: var(--c1);
+    text-decoration: none;
+  }
+  a:hover {
+    color: var(--c2);
+    /* border-bottom: 1px var(--ctext) solid;
+    padding-bottom: 16px; */
+  }
+
+  h1{color: var(--c1);}
+
+  h1,h2,h3,h4,h5,h6{
+    font-family: var(--font2);
+  }
+  h2{
+    font-size: 2rem;
+  }
+  h3, h4{
+    font-size: 1.5rem;
+  }
+  main{
+    margin-left: var(--lay-margin-L);
+    margin-right: var(--lay-margin-L);
+    /* height: calc( 100vh - calc(2* calc(var(--lay-margin-L) / 1.5))); */
+
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols-L), 1fr);
+    grid-template-rows: 15% 80% 5%;
+    gap: 32px; 
+  }
+  div{
+    grid-column: span 12;
+  }
+  /* .wrapper{
+     align-tems: baseline;
+     overflow: auto;
+     margin-top: calc(var(--lay-margin-L) / 1.5);
+     margin-bottom: calc(var(--lay-margin-L) / 1.5);
+  } */
+
+/* ------------------------------------------------ */
+/* nav */
+/* ------------------------------------------------ */
+
+  h1{
+    grid-column: 12;
+
+  }
+  h1 span{
+    display: none;
+    color: red;
+    text-indent: -9999px;
+  }
+  h1 img{
+    height: 100%;
+    width: 100%;
+    min-height: 32px;
+  }
+  nav{
+    grid-column: 1 / span 11;
+    grid-row-start: 1;
+    /* dispay: flex; */
+    margin-top: auto;
+  }
+  ul{
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    list-style-type: none;
+    gap: var(--gaps);
+  }
+
+  li{
+    /* margin-right: 32px; */
+  }
+/* ------------------------------------------------ */
+/* gallery */
+/* ------------------------------------------------ */
+
+  *{margin:0; padding:0;}
+  :root {
+    /* --accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%); */
+  }
+  figcaption{ 
+    display:none; /* #rev should be text-indent */
+  } 
+  .gallery{
+    grid-column: 1 / span var(--num-cols-L);
+    grid-row: 2 ;
+
+    height: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(var(--num-cols-L), 1fr);
+    grid-auto-rows: min-content;
+    /* grid-template-rows: repeat(4 , 1fr); */
+    gap: var(--gaps);
+    /* overflow: hidden; */
+    align-items: baseline;
+    /* background: green; */
+    /* display: flex;
+       flex-wrap: wrap; */
+  }
+  /* @media (min-aspect-ratio: 3/2){
+     .gallery{}
+  } */
+  .gallery article{ 
+    aspect-ratio:var(--img-proportion-gal-L) ; /* #rev fallback! */
+    /* padding-top:100%; */
+
+    grid-column: span 3;
+    grid-row: span 1;
+
+    background: red;
+    /* height: 25vh; */
+    /* grid-column: span 2; */
+    /* grid-row: span 3; */
+  }
+  figure, a, img{
+    height:100%;
+  }
+  .gallery img{ /* target img? */
+    width: 100%; 
+    object-fit: cover; /* maintain aspect ratio */
+  }
+  .vert{
+    /* grid-column: 1 / span 2 !important; */
+    /* grid-row: 1 / span 2 !important; */
+  }
+
+
+  /*
+/* ###########ref!!!111############ /
+
+
+
+@media only screen and (max-width: 600px) {
+  :root{
+    --gaps-L
+  }
+}
+
+        @media only screen and (max-width: 600px) {
+          :root {
+            --lay-margin-L: 16px;/*  left, right / 
+            --gaps-L:16px; /* horizontal, vertical /
+            }
+          .gallery li {
+            grid-column: span 12;
+          }
+          .wrapper{ /* #rev 2px zu wenig top margin on mobile! overflow scrollbar issues!
+/* margin-top: var(--gaps-L)!important; /
+/* margin-bottom: var(--gaps-L)!important; /
+/* overflow:auto; /
+}
+    .gallery{
+      /* max-height: calc( 100vh - calc(2* var(--gaps-L)) !important; /
+      }
+        }
+        /*  @media only screen and (min-width: 600px) {
+        :root {
+          --lay-margin-L: 32px;/*  left, right / 
+          --gaps-L:32px; /* horizontal, vertical /
+          }
+        .gallery li {
+          grid-column: span 6;
+        }
+
+        }
+        @media only screen and (min-width: 768px) {
+          :root {
+            --lay-margin-L: 64px;/*  left, right / 
+            --gaps-L:32px; /* horizontal, vertical /
+            }
+          .gallery li {
+            grid-column: span 4;
+          }
+        } 
+        @media only screen and (min-width: 992px) {
+          :root {
+            --lay-margin-L: 64px;/*  left, right / 
+            --gaps-L:32px; /* horizontal, vertical /
+            }
+          .gallery li {
+            grid-column: span 3;
+          }
+        }
+        @media only screen and (min-width: 1200px) {
+          .gallery li {
+            /* grid-column: span 3; /
+            }
+        }
+        @media only screen and (min-width: 1400px) {
+          .gallery li {
+            grid-column: span 2;
+          }
+        }
+        @media only screen and (min-width: 2000px) {
+          .gallery li {
+            grid-column: span 1;
+            grid-row: span 1 !important;
+          }
+        } */
+
+/* ------------------------------------------------ */
+/* category */
+/* ------------------------------------------------ */
+
+
+  .carousel{
+    /* grid-column: 1 / span var(--num-cols-L); */
+    height: 100%;
+
+    background: green;
+    display: flex;
+  }
+
+/* ------------------------------------------------ */
+/* archive */
+/* ------------------------------------------------ */
+  .archive{
+    grid-column: span 12;
+  }

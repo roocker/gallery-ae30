@@ -1,0 +1,137 @@
+---
+/* 
+TODO
+- [ ] figcaption visual bug when text wrap
+- [ ] Picture crop/resize position from CMS / Collection as optional attrib!
+https://docs.astro.build/en/guides/integrations-guide/image/#picture-
+https://sharp.pixelplumbing.com/api-resize
+- [ ] sharp image operation (color correction?)
+
+*/
+import { Picture } from '@astrojs/image/components';
+// import { getAspectRatio } from '@@sf/ssr/image';
+const { titleimg, titlealt, cat, subcat, title, short, link } = Astro.props;
+
+// Pictures Aspect Ratio
+const width = 3;
+const height = 2;
+---
+
+<article class="vert">
+  <a href={link}> 
+  <figure>
+      <!-- <img class="" src={titleimg} alt={titlealt} />  -->
+      <Picture 
+        src={titleimg}
+        alt={titlealt}
+        widths={[1024, 600, 500, 420, 128]} 
+        sizes="(min-width: 2560px) 1024px, (min-width:1920px) 420px, (min-width:1024px) 420px, (min-width:768px) 500px, (min-width: 600px) 600px, (min-width: 420px) 420px, 420px"
+        aspectRatio={`${width}:${height}`}
+        background={`white`}
+        position="attention"
+        fit="cover"
+        loading="lazy"
+        decoding="async"
+        class=""
+        /><!-- #rev 128px risky! --> 
+        <figcaption><!--<span>{cat}</span> -  -->{title}</figcaption>
+  </figure> 
+  </a> 
+</article>
+<style>
+  article {
+    aspect-ratio: 1.5 ; /* #rev fallback! */
+    grid-column: span 12;
+    grid-row: span 1;
+    /* background: yellow; */
+  }
+  @media only screen and (min-width: 37.5em/* var(--vwPl) */) {
+    article{
+      grid-column: span 6;
+    }
+  }
+  @media only screen and (min-width: 64em/* var(--vwT) */) {
+    article{
+      grid-column: span 4;
+    }
+  }
+  @media only screen and (min-width: 85.375em/* var(--vwM) */) {
+    article{
+      grid-column: span 3;
+    }
+  }
+  @media only screen and (min-width: 120em/* var(--vwM) */) {
+    article{
+      grid-column: span 2;
+    }
+  }
+  @media only screen and (min-width: 160em/* var(--vwM) */) {
+    article{
+      grid-column: span 1;
+    }
+  }
+  figure, img{
+    height: 100%;
+    width: 100%;
+  }
+  article, figure, a, img{
+    /* height:100%; */
+    /* width: 100%; */
+  }
+  img{ /* target img? */
+    object-fit: cover; /* maintain aspect ratio */
+    z-index:2;
+  }
+  a figure{
+    /* background: red;  */
+  }
+
+  figcaption{
+    z-index: 1;
+    /* opacity: .5; */
+    font-family: var(--fsans2);
+    font-size: .8em;
+    text-align: left;
+    /* text-transform: uppercase; */
+    color: var(--cwhite);
+    /* background: var(--cwhite30); */
+    backdrop-filter: blur(1px);
+    display: inline-flex;
+    /* border-radius: 8px; */
+
+    transform: translate(0, -3em ); /* #rev */
+
+    line-height: 1em;
+    height: 1em ;
+    margin-left: 0.5em;
+    padding: 0.5em;
+
+   border-radius: 1em;
+    /* margin-right: calc(var(--gmodulem) * 2 ); */
+    /* box-sizing: border-box; */
+    /* width: 100%; */
+    /* margin-top: -50px; */
+  }
+  figcaption p{}
+  figcaption span{
+    font-weight: bold;
+  }
+  .vert{
+    /* grid-column: 1 / span 2 !important; */
+    /* grid-row: 1 / span 2 !important; */
+  }
+
+  @media only screen and (min-width: 64em /* var(--vwS)  */ ){
+    article a figure > figcaption{
+      display:none;
+    }
+    article a:hover figure > figcaption{
+      display:inline-flex;
+    }
+
+  }
+
+
+</style>
+
+
