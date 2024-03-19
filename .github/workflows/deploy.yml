@@ -45,7 +45,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIV_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
-          source: dist/
+          source: "dist/,docker-compose.yml"
           target: ${{ secrets.SSH_PATH }}
           # debug: true
           # script: |
