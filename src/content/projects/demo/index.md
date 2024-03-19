@@ -1,6 +1,6 @@
 ---
 title: Demo
-title_l: demo_lang
+title_l: Demo Normaler Titel
 display:
   publishDate: 16 Mar 2024
   title_zzl: demo_zusatz
