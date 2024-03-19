@@ -3,6 +3,7 @@ title: test
 title_l: test lang
 display:
   publishDate: 19 Mar 2024
+  archived: true
 category: zk
 project_keys:
   year: 2012
