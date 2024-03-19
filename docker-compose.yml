@@ -5,10 +5,13 @@ services:
     image: nginx:alpine
     container_name: container.ae30.at
     environment:
-      - PORT=${PORT}
+      - PORT=${NGINX_PORT}
     volumes:
       - ./dist:/usr/share/nginx/html
-      - ./nginx:/etc/nginx
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/.htpasswd:/etc/nginx/.htpasswd
+    ports:
+      - EXPOSED_NGINX_PORT:${NGINX_PORT}"
 
   # https://github.com/vencax/netlify-cms-github-oauth-provider/
   oauth:
@@ -24,7 +27,7 @@ services:
       - AUTH_TARGET=${AUTH_TARGET}
       - BASE_URL=${BASE_URL}
     ports:
-      - "8092:${OAUTH_PORT}"
+      - "EXPOSED_OAUTH_PORT:${OAUTH_PORT}"
 # OLD WITH DOCKERFILES
 # website:
 #   restart: always
