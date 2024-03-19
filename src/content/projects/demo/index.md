@@ -3,10 +3,10 @@ title: Demo
 title_l: Demo Normaler Titel
 display:
   publishDate: 16 Mar 2024
-  title_zzl: demo_zusatz
-  archived: false
+  title_zzl: Demo oder auchTestprojekt
+  archived: true
   widehigh: normal
-category: wp
+category: arge
 project_keys:
   status: in arbeit
   year: 2010
