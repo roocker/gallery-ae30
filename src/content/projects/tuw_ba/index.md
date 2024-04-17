@@ -1,6 +1,6 @@
 ---
 title: TUW BA
-title_l: TU Wien - Bauteil BA
+title_l: TU Wien - Bauteil BAasdfasdf
 display:
   publishDate: 01 Jan 2024
   title_zzl: Plus-Energie Büro Hochhaus
